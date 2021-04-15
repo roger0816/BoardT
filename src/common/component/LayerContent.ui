@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LayerContent</class>
+ <widget class="QWidget" name="LayerContent">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>397</width>
+    <height>279</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QStackedWidget" name="stackedWidget">
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(211, 211, 211);
+
+</string>
+     </property>
+     <property name="currentIndex">
+      <number>9</number>
+     </property>
+     <widget class="ItemPic" name="wPic"/>
+     <widget class="ItemWebView" name="wWeb"/>
+     <widget class="ItemDateTime" name="wDateTime"/>
+     <widget class="QWidget" name="wVideo"/>
+     <widget class="ItemTicket" name="wTicket"/>
+     <widget class="ItemFunction" name="wFunction"/>
+     <widget class="ItemActionRun" name="wAction"/>
+     <widget class="ItemPicRun" name="wPicRun"/>
+     <widget class="ItemTxt" name="wTxt"/>
+     <widget class="ItemButton" name="wBtn"/>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ItemWebView</class>
+   <extends>QWidget</extends>
+   <header>ItemWebView.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ItemPicRun</class>
+   <extends>QWidget</extends>
+   <header>ItemPicRun.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ItemPic</class>
+   <extends>QWidget</extends>
+   <header>ItemPic.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ItemDateTime</class>
+   <extends>QWidget</extends>
+   <header>ItemDateTime.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ItemTicket</class>
+   <extends>QWidget</extends>
+   <header>ItemTicket.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ItemFunction</class>
+   <extends>QWidget</extends>
+   <header>ItemFunction.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ItemActionRun</class>
+   <extends>QWidget</extends>
+   <header>ItemActionRun.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ItemTxt</class>
+   <extends>QWidget</extends>
+   <header>ItemTxt.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ItemButton</class>
+   <extends>QWidget</extends>
+   <header>ItemButton.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
