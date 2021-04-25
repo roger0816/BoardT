@@ -532,6 +532,9 @@ void DisplayContent::slotFocus()
 
         ItemContent *item = dynamic_cast<ItemContent*>(sender());
 
+        if(item == m_currentItem)
+            return;
+
         m_currentItem = item;
 
        // editType(m_currentItem->m_iType);

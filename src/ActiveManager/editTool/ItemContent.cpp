@@ -65,6 +65,8 @@ void ItemContent::setBgColor(QColor color)
 
 void ItemContent::mousePressEvent(QMouseEvent *e)
 {
+    m_bMove = false;
+
     setRoll(true);
 
     if(e->x()>width()-10 && e->y() > height()-10)
@@ -83,11 +85,13 @@ void ItemContent::mousePressEvent(QMouseEvent *e)
 
 void ItemContent::mouseReleaseEvent(QMouseEvent *e)
 {
+    if(m_bMove)
     emit sendUpdate();
 }
 
 void ItemContent::mouseMoveEvent(QMouseEvent *e)
 {
+    m_bMove = true;
 
     QPoint move = e->pos()-m_preP;
 

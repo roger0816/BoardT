@@ -124,6 +124,8 @@ void StageEdit::on_btnOpen_clicked()
 
         m_wTarget->loadFile(m_sPath);
 
+        slotItemUpdate();
+
         ui->lbTitle->setText(m_sPath.split("/").last());
 
         ui->stackWidget0->setCurrentWidget(ui->page0);

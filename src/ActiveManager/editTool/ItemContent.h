@@ -58,6 +58,8 @@ private:
 
     bool m_bRoll = true;
 
+    bool m_bMove = false;
+
     QPoint m_preP;
 
     QSize m_preSize;
