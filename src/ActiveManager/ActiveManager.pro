@@ -20,7 +20,6 @@ SOURCES += \
 
 HEADERS += \
     DialogMsg.h \
-    VojData.h \
     widget.h
 
 FORMS += \
@@ -34,5 +33,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 include($$PWD/editTool/editTool.pri);
 
+include($$PWD/../common/cData/CData.pri);
+
+
 DISTFILES += \
+    ../common/cData/CData.pri \
+    ../common/cWidget/CWidget.pri \
     editTool/editTool.pri

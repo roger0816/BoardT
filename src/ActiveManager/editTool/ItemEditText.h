@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QFileDialog>
 #include <QDebug>
-#include "VojData.h"
+#include "CData.h"
 
 
 namespace Ui {

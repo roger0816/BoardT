@@ -6,6 +6,7 @@
 #include <QSettings>
 #include <QDir>
 #include <QResizeEvent>
+#include "CData.h"
 #include "ItemContent.h"
 namespace Ui {
 class DisplayContent;

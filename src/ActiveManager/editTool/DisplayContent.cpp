@@ -269,6 +269,7 @@ void DisplayContent::loadFile(QString sPath)
 {
     m_sPath = sPath;
 
+
     QFileInfo file(sPath);
 
     QString sDir = file.path();

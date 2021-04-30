@@ -5,7 +5,7 @@
 #include <QMouseEvent>
 #include <QDebug>
 #include <QLabel>
-#include "VojData.h"
+#include "CData.h"
 
 namespace Ui {
 class ItemContent;

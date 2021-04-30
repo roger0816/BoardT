@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "StageEdit.h"
+#include "CData.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -17,6 +18,8 @@ public:
     ~Widget();
 
     StageEdit *m_edit;
+
+
 
 private slots:
     void on_btnLayout_clicked();

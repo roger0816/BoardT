@@ -10,6 +10,8 @@ Widget::Widget(QWidget *parent)
     m_edit = new StageEdit();
 
     m_edit->hide();
+
+
 }
 
 Widget::~Widget()

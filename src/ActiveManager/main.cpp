@@ -8,8 +8,8 @@ int main(int argc, char *argv[])
     StageEdit w;
 
 
+    CDATA.load(QApplication::applicationDirPath()+"/data/layer");
 
-
-        w.show();
+    w.show();
     return a.exec();
 }
