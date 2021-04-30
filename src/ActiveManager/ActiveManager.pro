@@ -35,8 +35,7 @@ include($$PWD/editTool/editTool.pri);
 
 include($$PWD/../common/cData/CData.pri);
 
+include($$PWD/../common/cWidget/CWidget.pri );
 
-DISTFILES += \
-    ../common/cData/CData.pri \
-    ../common/cWidget/CWidget.pri \
-    editTool/editTool.pri
+
+
