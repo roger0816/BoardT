@@ -2,8 +2,11 @@
 #define WIDGET_H
 
 #include <QWidget>
-#include "StageEdit.h"
+
 #include "CData.h"
+#include "DisplayWidget.h"
+#include "LayerNewModel.h"
+#include <QColorDialog>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -17,12 +20,21 @@ public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
 
-    StageEdit *m_edit;
-
+    void loadModel(QString sPath);
 
 
 private slots:
-    void on_btnLayout_clicked();
+
+    void on_btnSelectModel_clicked();
+
+    void on_btnAddModel_clicked();
+
+    void on_btnAddLayer_clicked();
+
+public slots:
+    void slotSelector(QString sName);
+
+    void refreshSelector();
 
 private:
     Ui::Widget *ui;

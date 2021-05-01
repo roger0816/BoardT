@@ -11,6 +11,13 @@ void ObjData::setPath(QString sPath)
 
     m_sName = m_sObjPath.split("/").last();
 
+    if(m_sObjPath.length()>1)
+    {
+        m_sLayerName = m_sObjPath.split("/").at(m_sObjPath.split("/").length()-2);
+    }
+
+    typeMapping();
+
     qDebug()<<"obj : name : "<<m_sName<<" , path : "<<m_sObjPath;
 
     QSettings conf(m_sObjPath+"/conf.ini",QSettings::IniFormat);
@@ -29,6 +36,8 @@ void ObjData::setPath(QString sPath)
 
     int h = conf.value("Base/h").toInt();
 
+    qDebug()<<"x : "<<x<<" , y :"<<y<<" , w:"<<w<<" , h:"<<h;
+
     m_rect.setX(x);
 
     m_rect.setY(y);
@@ -36,6 +45,8 @@ void ObjData::setPath(QString sPath)
     m_rect.setWidth(w);
 
     m_rect.setHeight(h);
+
+    m_sType = sType;
 
     if(sType == E_TEXT)
     {
@@ -49,6 +60,8 @@ void ObjData::setPath(QString sPath)
         m_dataText.bIsCent = conf.value("Title/alignCenter").toBool();
 
         m_dataText.iPixSize = conf.value("Title/txtSize").toInt();
+
+        m_dataText.font.fromString(conf.value("Title/txtSize").toString());
 
         bool bOk;
 
@@ -89,7 +102,11 @@ void ObjData::setPath(QString sPath)
 
         }
 
-        m_dataText.sText = sTxt;
+        conf.setValue("Title/text",sTxt);
+
+        conf.sync();
+
+        m_dataText.sText = conf.value("Title/text").toString();
 
 
     }
@@ -99,4 +116,26 @@ void ObjData::setPath(QString sPath)
 
 
 }
+
+
+void ObjData::typeMapping()
+{
+    QSettings defin(m_sObjPath+"/../../define.ini",QSettings::IniFormat);
+
+    m_dDefine.clear();
+
+    QStringList listDefineKey= defin.allKeys();
+
+    for(int i=0; i < listDefineKey.length();i++)
+    {
+        QString sKey = listDefineKey.at(i);
+
+        int iValue = defin.value(sKey).toInt();
+
+        qDebug()<<sKey<<" , "<<iValue;
+
+        m_dDefine.insert(sKey,iValue);
+    }
+}
+
 

@@ -36,12 +36,11 @@ void LayerData::setPath(QString sPath)
 
             ObjData *obj = new ObjData(this);
 
-            obj->m_dDefine = m_dDefine;
+//            obj->m_dDefine = m_dDefine;
 
             obj->setPath(dir.filePath());
 
             m_listData.append(obj);
-
 
 
         }

@@ -1,6 +1,7 @@
 #ifndef VOJ_H
 #define VOJ_H
 
+#include <QColorDialog>
 #include <QList>
 #include <QString>
 #include <QColor>
@@ -9,6 +10,7 @@
 #include <QFileInfo>
 #include <QSettings>
 #include <QDir>
+#include <QFont>
 
 
 static QString E_TEXT = "text";
@@ -30,6 +32,8 @@ struct DataText
     QString sText="Label";
 
     int iPixSize=32;
+
+    QFont font;
 
     bool bIsCent=true;
 

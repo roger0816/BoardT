@@ -26,16 +26,22 @@ public:
 
     QString m_sName;
 
+    QString m_sLayerName;
+
     QRect m_rect;
 
-    int iType;
 
-    QMap<QString,int> m_dDefine;
+    QString m_sType;
 
-private:
 
     DataText m_dataText;
 
+
+private:
+
+    void typeMapping();
+
+    QMap<QString,int> m_dDefine;
 
 
 

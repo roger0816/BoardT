@@ -7,6 +7,9 @@
 
 #include "Voj.h"
 
+#include <QImage>
+#include <QPixmap>
+
 class LayerData : public QObject
 {
     Q_OBJECT
@@ -21,6 +24,7 @@ public:
 
     QString m_sBgPath;
 
+    QPixmap m_scaleImage;
 
 
     QList<ObjData*> m_listData;

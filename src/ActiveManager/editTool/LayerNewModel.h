@@ -5,6 +5,7 @@
 #include <QDialog>
 #include <QFileDialog>
 #include <QDir>
+#include <QDebug>
 
 namespace Ui {
 class LayerNewModel;
@@ -18,7 +19,7 @@ public:
     explicit LayerNewModel(QWidget *parent = nullptr);
     ~LayerNewModel();
 
-    void setPath(QString sPath);
+    void setPath(QString sTitle,QString sPath);
 
     QString m_sModelPath;
 

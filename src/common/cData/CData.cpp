@@ -11,12 +11,21 @@ CData &CData::Instance()
     return *m_pInstance;
 }
 
-void CData::load(QString sPath)
+void CData::readModel(QString sPath)
 {
+    qDebug()<<"read model : "<<sPath;
+
     m_sPath = sPath;
 
+    m_sModelName = m_sPath.split("/").last();
+
+    typeMapping();
+
+    qDeleteAll(m_dData);
 
     m_dData.clear();
+
+
 
     QFileInfoList listDir = QDir(sPath).entryInfoList(QDir::AllDirs);
 
@@ -46,6 +55,44 @@ void CData::load(QString sPath)
 
 
 }
+
+void CData::addLayer(QString sPath)
+{
+    LayerData *layer = new LayerData(this);
+
+    layer->m_dDefine = m_dDefine;
+
+    layer->setPath(sPath);
+
+    m_dData.insert(sPath.split("/").last(),layer);
+
+    qDebug()<<"add layer : "<<sPath<<" , data count : "<<m_dData.count();
+}
+
+ObjData *CData::getObj(QString layer, QString objName, bool &bOk)
+{
+    bOk = false;
+
+    if(m_dData.keys().indexOf(layer)>=0)
+    {
+        for(int i=0;i<m_dData[layer]->m_listData.length();i++)
+        {
+            if(m_dData[layer]->m_listData[i]->m_sName == objName)
+            {
+               bOk = true;
+
+               return m_dData[layer]->m_listData[i];
+            }
+
+        }
+
+    }
+
+
+    return new ObjData;
+
+}
+
 
 
 

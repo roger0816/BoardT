@@ -15,15 +15,23 @@ DESTDIR =$$PWD/../../bin/
 
 SOURCES += \
     DialogMsg.cpp \
+    LayerAddCompont.cpp \
+    LayerEditor.cpp \
+    LayerSelector.cpp \
     main.cpp \
     widget.cpp
 
 HEADERS += \
     DialogMsg.h \
+    LayerAddCompont.h \
+    LayerEditor.h \
+    LayerSelector.h \
     widget.h
 
 FORMS += \
     DialogMsg.ui \
+    LayerAddCompont.ui \
+    LayerEditor.ui \
     widget.ui
 
 # Default rules for deployment.
@@ -33,9 +41,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 include($$PWD/editTool/editTool.pri);
 
-include($$PWD/../common/cData/CData.pri);
 
-include($$PWD/../common/cWidget/CWidget.pri );
+include($$PWD/../common/Common.pri);
+
+
 
 
 

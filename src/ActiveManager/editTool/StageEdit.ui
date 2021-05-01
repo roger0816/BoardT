@@ -170,8 +170,8 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>195</width>
-                  <height>265</height>
+                  <width>196</width>
+                  <height>270</height>
                  </rect>
                 </property>
                 <property name="font">
@@ -275,8 +275,8 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>195</width>
-                  <height>265</height>
+                  <width>196</width>
+                  <height>270</height>
                  </rect>
                 </property>
                 <property name="font">
@@ -293,8 +293,8 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>195</width>
-                  <height>265</height>
+                  <width>196</width>
+                  <height>270</height>
                  </rect>
                 </property>
                 <attribute name="label">

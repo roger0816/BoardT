@@ -9,7 +9,7 @@ LayerNewModel::LayerNewModel(QWidget *parent) :
 
     QDir dir(QApplication::applicationDirPath()+"/data/layer/");
 
-    setPath(dir.path()+"/");
+    setPath("新增模組",dir.path()+"/");
 
     ui->btnSelect->hide();
 }
@@ -19,10 +19,20 @@ LayerNewModel::~LayerNewModel()
     delete ui;
 }
 
-void LayerNewModel::setPath(QString sPath)
+void LayerNewModel::setPath(QString sTitle, QString sPath)
 {
+
+    QString sLast = sPath.mid(sPath.length()-1,1);
+
+    if(sLast!="/")
+        sPath+="/";
+
+    ui->lbTitle->setText(sTitle);
+
     ui->lbPath->setText(sPath);
 }
+
+
 
 void LayerNewModel::on_btnCancel_clicked()
 {
@@ -38,7 +48,7 @@ void LayerNewModel::on_btnOk_clicked()
 
     if(ui->txtName->text().trimmed()=="")
     {
-        ui->lbMsg->setText("請輸入樣版名稱");
+        ui->lbMsg->setText("請輸入名稱");
         return ;
     }
 
@@ -47,7 +57,7 @@ void LayerNewModel::on_btnOk_clicked()
     {
 
 
-        ui->lbMsg->setText("樣版已經存在");
+        ui->lbMsg->setText("名稱已經存在");
 
        return;
 

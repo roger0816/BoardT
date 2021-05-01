@@ -21,11 +21,21 @@ public:
 
     static CData &Instance();
 
-    void load(QString sPath);
+    void readModel(QString sPath);
 
-    QMap < QString , LayerData* > m_dData;
+    void addLayer(QString sPath);
+
+
+    QMap < QString , LayerData*> m_dData;
 
     QString m_sPath;
+
+    QString m_sModelName;
+
+    QMap<QString,int> m_dDefine;
+
+    ObjData* getObj(QString layer, QString objName, bool &bOk);
+
 
 
 private:
@@ -35,7 +45,6 @@ private:
 
     void typeMapping();
 
-    QMap<QString,int> m_dDefine;
 
 
 

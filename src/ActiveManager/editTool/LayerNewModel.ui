@@ -12,7 +12,7 @@
   </property>
   <property name="font">
    <font>
-    <pointsize>14</pointsize>
+    <pointsize>16</pointsize>
    </font>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,12 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="lbTitle">
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
      <property name="text">
       <string>建立模型</string>
      </property>
@@ -61,7 +66,7 @@
       <item row="1" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>模型名稱:</string>
+         <string>名稱:</string>
         </property>
        </widget>
       </item>
