@@ -12,7 +12,7 @@ LayerSelector::LayerSelector(QWidget *parent) : QWidget(parent)
 void LayerSelector::setData(QMap<QString , QPixmap> dData)
 {
 
-    qDebug()<<"image count : "<<dData.count();
+    qDebug()<<"selector count : "<<dData.count();
 
     while(m_lay->count()>0)
     {

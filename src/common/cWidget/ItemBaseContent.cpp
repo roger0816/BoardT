@@ -81,6 +81,11 @@ void ItemBaseContent::setData(ObjData *obj, float diffSize)
     {
         itemLabel = new ItemPicCon(m_wBg);
     }
+    else
+    {
+        itemLabel = new ItemLabel(m_wBg);
+        m_sType == E_TEXT;
+    }
 
     itemLabel->m_diffSize = m_diffSize;
 

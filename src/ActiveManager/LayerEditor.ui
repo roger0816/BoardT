@@ -715,11 +715,14 @@
                  <pointsize>20</pointsize>
                 </font>
                </property>
+               <property name="minimum">
+                <number>3</number>
+               </property>
                <property name="maximum">
                 <number>999</number>
                </property>
                <property name="singleStep">
-                <number>3</number>
+                <number>1</number>
                </property>
               </widget>
              </item>

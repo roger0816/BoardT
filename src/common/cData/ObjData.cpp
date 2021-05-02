@@ -9,6 +9,7 @@ void ObjData::setPath(QString sPath)
 {
     m_sObjPath = sPath;
 
+
     m_sName = m_sObjPath.split("/").last();
 
     if(m_sObjPath.length()>1)
@@ -114,7 +115,53 @@ void ObjData::setPath(QString sPath)
 
     }
 
+    if(sType == E_PIC)
+    {
 
+        m_dataPic.iSec = conf.value("Pic/changeTimer",10).toInt();
+
+        m_dataPic.listPicName =conf.value("Pic/list","").toStringList();
+
+        qDebug()<<"AAAA0:"<<m_dataPic.listPicName.count();
+
+
+        qDebug()<<"AAAA0:"<<m_dataPic.listPicName;
+
+        QStringList listCantFind;
+
+        for(int i=0;i<m_dataPic.listPicName.length();i++)
+        {
+            QString sName = m_dataPic.listPicName.at(i);
+
+            QString sFilePath = m_sObjPath+"/"+sName;
+            qDebug()<<"AAAA1:"<<sFilePath;
+            if(QFileInfo(sFilePath).exists())
+            {
+                QPixmap p(sFilePath);
+                  qDebug()<<"AAAA2:"<<sFilePath;
+                m_dataPic.listPic.append(p);
+            }
+            else
+            {
+                listCantFind.append(sName);
+            }
+        }
+
+
+        foreach(QString sNoFind,listCantFind)
+        {
+            m_dataPic.listPicName.removeOne(sNoFind);
+        }
+
+
+        qDebug()<<" list Nmae : "<<m_dataPic.listPicName <<" , pic count : "<<m_dataPic.listPic;
+
+
+
+        m_dataPic.listPic.first().save("C:/work/tt.png");
+
+
+    }
 
 
 

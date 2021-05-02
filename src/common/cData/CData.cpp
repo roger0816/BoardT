@@ -203,6 +203,31 @@ void CData::writeObj(ObjData *item)
 
     }
 
+    else if(item->m_sType == E_PIC)
+    {
+
+        conf.setValue("Base/type",m_dDefine[E_PIC]);
+
+        QStringList listName = item->m_dataPic.listPicName;
+
+
+        conf.setValue("Pic/list",listName);
+
+
+        conf.setValue("Pic/changeTimer",item->m_dataPic.iSec);
+
+
+        for(int i=0;i<listName.length();i++)
+        {
+           QPixmap *p = & item->m_dataPic.listPic[i];
+
+           p->save(sItemPash+"/"+listName.at(i));
+        }
+
+
+
+    }
+
 
 
 
