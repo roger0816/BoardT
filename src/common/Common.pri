@@ -11,7 +11,8 @@ HEADERS += \
     $$PWD/cWidget/ItemBaseContent.h \
     $$PWD/cWidget/ItemBaseObj.h \
     $$PWD/cWidget/ItemLabel.h \
-    $$PWD/cWidget/ItemPicCon.h
+    $$PWD/cWidget/ItemPicCon.h \
+    $$PWD/cWidget/ItemVideoCon.h
 
 SOURCES += \
     $$PWD/cData/CData.cpp \
@@ -21,7 +22,8 @@ SOURCES += \
     $$PWD/cWidget/ItemBaseContent.cpp \
     $$PWD/cWidget/ItemBaseObj.cpp \
     $$PWD/cWidget/ItemLabel.cpp \
-    $$PWD/cWidget/ItemPicCon.cpp
+    $$PWD/cWidget/ItemPicCon.cpp \
+    $$PWD/cWidget/ItemVideoCon.cpp
 
 FORMS += \
     $$PWD/cWidget/DisplayWidget.ui \

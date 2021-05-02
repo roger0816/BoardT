@@ -38,6 +38,8 @@ public:
 
     DataPic m_dataPic;
 
+    DataVideo m_dataVideo;
+
 
 private:
 

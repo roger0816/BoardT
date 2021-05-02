@@ -305,8 +305,6 @@ void StageEdit::on_btnUpload_clicked()
     }
 
 
-
-
     msg.setInput("請輸入IP",m_sPreIp,QStringList()<<"取消"<<"確定");
 
     int iRe = msg.exec();

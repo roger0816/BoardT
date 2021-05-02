@@ -194,10 +194,6 @@ void CData::writeObj(ObjData *item)
         conf.setValue("Title/bgColor",sBgColor);
 
 
-
-
-
-
         conf.sync();
 
 
@@ -224,7 +220,16 @@ void CData::writeObj(ObjData *item)
            p->save(sItemPash+"/"+listName.at(i));
         }
 
+    }
 
+    else if(item->m_sType == E_VIDEO)
+    {
+
+        conf.setValue("Base/type",m_dDefine[E_VIDEO]);
+
+        QStringList listName = item->m_dataVideo.listName;
+
+        conf.setValue("Video/list",listName);
 
     }
 

@@ -13,6 +13,22 @@ OBJECTS_DIR =$$PWD/obj
 UI_DIR =$$PWD/obj
 DESTDIR =$$PWD/../../bin/
 
+
+
+win32{
+CONFIG+=DEVELOP
+}
+
+CONFIG(HALF) {
+DEFINES +=HALF
+}
+
+CONFIG(DEVELOP) {
+DEFINES +=DEVELOP
+QT += multimedia
+QT += multimediawidgets
+}
+
 SOURCES += \
     DialogMsg.cpp \
     LayerAddContent.cpp \
@@ -38,6 +54,12 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+
+
+include($$PWD/../lib/RpkLib/RpkPlayer.pri)
+
+
 
 include($$PWD/editTool/editTool.pri);
 

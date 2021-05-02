@@ -11,6 +11,7 @@
 #include "QGridLayout"
 #include <QResizeEvent>
 #include "ItemPicCon.h"
+#include "ItemVideoCon.h"
 
 namespace Ui {
 class ItemBaseContent;

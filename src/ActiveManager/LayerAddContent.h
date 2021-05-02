@@ -5,19 +5,14 @@
 #include <QPushButton>
 #include <QDebug>
 #include <QFileDialog>
+#include "Voj.h"
 
 namespace Ui {
 class LayerAddContent;
 }
 
 
-enum
-{
-    ADD_BTN_TEXT=0,
-    ADD_BTN_PIC,
-    ADD_BTN_VIDEO
 
-};
 
 class LayerAddContent : public QWidget
 {

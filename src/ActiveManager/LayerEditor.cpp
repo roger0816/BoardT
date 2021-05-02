@@ -104,6 +104,15 @@ void LayerEditor::refresh()
 
     }
 
+    else if(m_obj->m_sType == E_VIDEO)
+    {
+
+        ui->stackType->setCurrentWidget(ui->pageVideo);
+
+
+
+    }
+
     m_bLockCallUpdate =false;
 }
 
@@ -440,5 +449,27 @@ void LayerEditor::on_sbPicSec_valueChanged(int )
         return;
 
     data->m_dataPic.iSec = ui->sbPicSec->value();
+
+}
+
+void LayerEditor::on_btnVideoSet_clicked()
+{
+    bool bOk = false;
+
+    ObjData *data = CDATA.getObj(m_sLayerName,m_sObjName,bOk);
+
+    if(!bOk)
+        return;
+
+    QStringList listSelect =QFileDialog::getOpenFileNames(this,
+                             QStringLiteral("選取影片"),
+                            QApplication::applicationDirPath()+"/video",
+                             QStringLiteral("*.mp4"));
+
+
+
+    QStringList *listName = &data->m_dataVideo.listName;
+
+    listName->clear();
 
 }

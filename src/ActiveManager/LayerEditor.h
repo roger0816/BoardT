@@ -67,6 +67,8 @@ private slots:
 
     void on_sbPicSec_valueChanged(int);
 
+    void on_btnVideoSet_clicked();
+
 private:
     Ui::LayerEditor *ui;
 

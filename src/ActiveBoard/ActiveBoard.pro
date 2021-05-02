@@ -49,15 +49,15 @@ DEFINES +=VLC
 
 LIBS += -lwiringPi
 
-INCLUDEPATH +=$$PWD/lib/Pn532-nfc-hat-code/raspberrypi/c
+INCLUDEPATH +=$$PWD/../lib/Pn532-nfc-hat-code/raspberrypi/c
 
 HEADERS += \
-lib/Pn532-nfc-hat-code/raspberrypi/c/pn532.h \
-lib/Pn532-nfc-hat-code/raspberrypi/c/pn532_rpi.h \
+../lib/Pn532-nfc-hat-code/raspberrypi/c/pn532.h \
+../lib/Pn532-nfc-hat-code/raspberrypi/c/pn532_rpi.h \
 
 SOURCES += \
-lib/Pn532-nfc-hat-code/raspberrypi/c/pn532.c \
-lib/Pn532-nfc-hat-code/raspberrypi/c/pn532_rpi.c \
+../lib/Pn532-nfc-hat-code/raspberrypi/c/pn532.c \
+../lib/Pn532-nfc-hat-code/raspberrypi/c/pn532_rpi.c \
 
 
 }
@@ -65,11 +65,11 @@ lib/Pn532-nfc-hat-code/raspberrypi/c/pn532_rpi.c \
 
 
 INCLUDEPATH +=$$PWD/../bin/data
-INCLUDEPATH +=$$PWD/lib
+INCLUDEPATH +=$$PWD/../lib
 
 
 
-include($$PWD/lib/RpkLib/RpkPlayer.pri)
+include($$PWD/../lib/RpkLib/RpkPlayer.pri)
 
 
 
@@ -107,7 +107,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 
-include($$PWD/lib/RpkLib/qrencode/qrencode.pri)
-INCLUDEPATH+=$$PWD/lib/RpkLib/qrencode/
+include($$PWD/../lib/RpkLib/qrencode/qrencode.pri)
+INCLUDEPATH+=$$PWD/../lib/RpkLib/qrencode/
 
 include($$PWD/../common/component/Component.pri);
+include($$PWD/../common/Common.pri);
+

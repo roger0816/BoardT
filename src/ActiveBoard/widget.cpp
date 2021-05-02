@@ -51,6 +51,16 @@ Widget::~Widget()
 void Widget::loadConfig(QString sLayer)
 {
 
+    CDATA.readModel(QApplication::applicationDirPath()+"/data/model0");
+
+    ui->wDisplay->setLayer(QApplication::applicationDirPath()+"/data/model0/AAA");
+
+    ui->wDisplay->setEdit(true);
+
+    ui->stack->setCurrentWidget(ui->wDisplay);
+
+    return ;
+
     if(sLayer=="")
         return;
     QString sPath = QApplication::applicationDirPath()+"/../bin/data/layer/"+sLayer;
@@ -97,21 +107,18 @@ void Widget::loadConfig(QString sLayer)
 
     m_listDir.clear();
 
-    qDebug()<<"AA0";
 
     foreach(LayerContent *item,m_listContent)
     {
         item->hide();
     }
 
-    qDebug()<<"AA1" <<listDir.length();
 
     int iLen = m_listContent.length();
 
     for(int i=0;i<listDir.length();i++)
     {
-        qDebug()<<"AA1a : "<<i;
-        qDebug()<<"AA1b : "<<m_listContent.length();
+
         QFileInfo dir = listDir.at(i);
 
         if(dir.fileName()!="." && dir.fileName()!="..")
@@ -129,7 +136,6 @@ void Widget::loadConfig(QString sLayer)
             }
 
 
-            qDebug()<<"aa1c :"<<m_listContent.length()<<" i : "<<i;
             m_listContent[i]->setPath(dir.filePath(),m_dDefine);
 
             //  m_listContent[i]->show();
@@ -137,7 +143,6 @@ void Widget::loadConfig(QString sLayer)
     }
 
 
-    qDebug()<<"AA2";
 
     Global::Instance().m_dialogPop->setBg(sPath+"/popBg.png");
 

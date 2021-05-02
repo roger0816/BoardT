@@ -122,10 +122,6 @@ void ObjData::setPath(QString sPath)
 
         m_dataPic.listPicName =conf.value("Pic/list","").toStringList();
 
-        qDebug()<<"AAAA0:"<<m_dataPic.listPicName.count();
-
-
-        qDebug()<<"AAAA0:"<<m_dataPic.listPicName;
 
         QStringList listCantFind;
 
@@ -134,11 +130,11 @@ void ObjData::setPath(QString sPath)
             QString sName = m_dataPic.listPicName.at(i);
 
             QString sFilePath = m_sObjPath+"/"+sName;
-            qDebug()<<"AAAA1:"<<sFilePath;
+
             if(QFileInfo(sFilePath).exists())
             {
                 QPixmap p(sFilePath);
-                  qDebug()<<"AAAA2:"<<sFilePath;
+
                 m_dataPic.listPic.append(p);
             }
             else
@@ -160,6 +156,11 @@ void ObjData::setPath(QString sPath)
 
         m_dataPic.listPic.first().save("C:/work/tt.png");
 
+
+    }
+    if(sType == E_VIDEO)
+    {
+        m_dataVideo.listName =conf.value("Video/list","").toStringList();
 
     }
 

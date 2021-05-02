@@ -316,18 +316,6 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_3">
-                 <property name="font">
-                  <font>
-                   <pointsize>24</pointsize>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>PushButton</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
                 <spacer name="verticalSpacer">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -336,6 +324,31 @@
                   <size>
                    <width>20</width>
                    <height>497</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnUpload">
+                 <property name="font">
+                  <font>
+                   <pointsize>24</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>上傳</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_3">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
                   </size>
                  </property>
                 </spacer>
@@ -381,7 +394,7 @@ p, li { white-space: pre-wrap; }
                 </item>
                </layout>
               </widget>
-              <widget class="QWidget" name="wWork" native="true">
+              <widget class="QWidget" name="wWork">
                <layout class="QHBoxLayout" name="horizontalLayout_5">
                 <item>
                  <spacer name="horizontalSpacer_2">

@@ -2,7 +2,7 @@
 #define WIDGET_H
 
 #include <QWidget>
-
+#include <QDateTime>
 #include "CData.h"
 #include "DisplayWidget.h"
 #include "LayerNewModel.h"
@@ -23,7 +23,7 @@ public:
 
     void loadModel(QString sPath);
 
-
+    QString m_sPreIp="";
 private slots:
 
     void on_btnSelectModel_clicked();
@@ -34,6 +34,8 @@ private slots:
 
     void on_btnSave_clicked();
 
+    void on_btnUpload_clicked();
+
 public slots:
     void slotSelector(QString sName);
 
@@ -41,5 +43,7 @@ public slots:
 
 private:
     Ui::Widget *ui;
+
+    void upload(QString sIp, QString sTarget, QString sPath);
 };
 #endif // WIDGET_H

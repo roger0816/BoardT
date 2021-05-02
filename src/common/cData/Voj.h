@@ -27,6 +27,15 @@ static QString E_FUNCTION ="function";
 
 static QString E_VIDEO ="video";
 
+
+enum
+{
+    ADD_BTN_TEXT=0,
+    ADD_BTN_PIC,
+    ADD_BTN_VIDEO
+
+};
+
 struct DataText
 {
     DataText()
@@ -60,6 +69,16 @@ struct DataPic
     QList<QPixmap> listPic;
 
     QStringList listPicName;
+
+
+};
+
+struct DataVideo
+{
+   // int iSec = 10;
+
+
+    QStringList listName;
 
 
 };

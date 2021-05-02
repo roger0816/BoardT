@@ -273,6 +273,14 @@ void DisplayWidget::addItem(int iIdx)
 
     }
 
+    else if(iIdx == ADD_BTN_VIDEO)
+    {
+        obj->m_sType = E_VIDEO;
+
+        sTmp = "VIDEO_%1";
+
+    }
+
 
 
 

@@ -81,6 +81,11 @@ void ItemBaseContent::setData(ObjData *obj, float diffSize)
     {
         itemLabel = new ItemPicCon(m_wBg);
     }
+
+    else if(m_sType == E_VIDEO)
+    {
+        itemLabel = new ItemVideoCon(m_wBg);
+    }
     else
     {
         itemLabel = new ItemLabel(m_wBg);

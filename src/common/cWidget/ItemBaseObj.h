@@ -4,7 +4,9 @@
 #include <QWidget>
 #include <Voj.h>
 #include <QFont>
-#include "ObjData.h"
+//#include "ObjData.h"
+
+#include "cData/ObjData.h"
 
 
 class ItemBaseObj : public QWidget

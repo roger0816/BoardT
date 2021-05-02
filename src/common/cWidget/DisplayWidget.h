@@ -8,7 +8,6 @@
 #include "ItemBaseContent.h"
 #include <QResizeEvent>
 #include <QShowEvent>
-#include "LayerAddContent.h"
 
 namespace Ui {
 class DisplayWidget;

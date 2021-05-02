@@ -165,3 +165,64 @@ void Widget::on_btnSave_clicked()
     if(iRe == 1)
         CDATA.writeModel();
 }
+
+void Widget::on_btnUpload_clicked()
+{
+    DialogMsg msg;
+
+ if(ui->lbModel->text().trimmed()=="")
+ {
+     msg.setDialogInfo("請先開啟模組",QStringList()<<"OK");
+
+     msg.exec();
+
+     return ;
+
+ }
+
+
+
+
+ msg.setInput("請輸入IP",m_sPreIp,QStringList()<<"取消"<<"確定");
+
+ int iRe = msg.exec();
+
+ if(iRe==1)
+ {
+     m_sPreIp = msg.getInput();
+
+    QString sPath = CDATA.m_sPath;
+
+     QSettings conf(sPath+"/conf.ini",QSettings::IniFormat);
+
+     QDir dir(sPath);
+
+     conf.setValue("Target",dir.path().split("/").last());
+
+     conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
+
+     conf.sync();
+
+    // upload(m_sPreIp,sPath+"/conf.ini","/home/pi/work/bin/data/layer");
+
+    // upload(m_sPreIp,sPath+"/define.ini","/home/pi/work/bin/data/layer");
+
+
+     upload(m_sPreIp," -r "+sPath,"/home/pi/work/bin/data/");
+
+ }
+}
+
+void Widget::upload(QString sIp, QString sTarget, QString sPath)
+{
+   // QString sCmd = QApplication::applicationDirPath()+"/pscp.exe -P 22 -pw \"pi\" -r "+m_sPath+" pi@"+m_sPreIp+":/home/pi/work/bin/";
+
+    QString sCmd = QApplication::applicationDirPath()+"/pscp.exe -P 22 -pw \"pi\" %2 pi@%1:%3";
+
+    sCmd = sCmd.arg(sIp).arg(sTarget).arg(sPath);
+
+    qDebug()<<"scmd : "<<sCmd;
+
+    system(sCmd.toStdString().c_str());
+
+}
