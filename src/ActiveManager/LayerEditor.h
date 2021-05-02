@@ -6,6 +6,8 @@
 #include "ObjData.h"
 #include <QFileDialog>
 #include <QFontDialog>
+#include "DialogMsg.h"
+#include <QDebug>
 
 namespace Ui {
 class LayerEditor;
@@ -59,10 +61,20 @@ private slots:
 
     void on_btnSelectFont_clicked();
 
+    void on_btnDelete_clicked();
+
+    void on_btnSetPic_clicked();
+
+    void on_sbPicSec_valueChanged(int);
+
 private:
     Ui::LayerEditor *ui;
 
     QString m_sPath;
+
+    QString m_sLayerName;
+
+    QString m_sObjName;
 
     bool m_bFristBgColor = true;
 
@@ -74,6 +86,9 @@ private:
 
     bool m_bLockCallUpdate = false;
 
+    bool deleteDirectory(const QString &path);
+
+
 
 signals:
     void callUpdate();
@@ -81,6 +96,8 @@ signals:
     void callRaise(QString objPath);
 
     void callRename(QString sOldPath,QString sNewPash);
+
+    void callDelete(QString sPath);
 };
 
 #endif // LAYEREDITOR_H

@@ -10,6 +10,7 @@
 #include "ItemLabel.h"
 #include "QGridLayout"
 #include <QResizeEvent>
+#include "ItemPicCon.h"
 
 namespace Ui {
 class ItemBaseContent;
@@ -137,7 +138,8 @@ public:
 
     QWidget *m_wBg;
 
-    ItemLabel *itemLabel = nullptr;
+    ItemBaseObj *itemLabel = nullptr;
+
 
     ObjData *m_obj = nullptr;
 

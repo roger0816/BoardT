@@ -10,7 +10,7 @@ ItemBaseContent::ItemBaseContent(QWidget *parent) :
 
     m_wBg = ui->wBg;
 
-    m_wBg->setStyleSheet("background-color:red;");
+    // m_wBg->setStyleSheet("background-color:red;");
 
     m_lay = new QGridLayout;
 
@@ -63,29 +63,38 @@ void ItemBaseContent::setData(ObjData *obj, float diffSize)
 
     qDebug()<<"type : "<<obj->m_sType;
 
+
+    while(m_lay->count()>0)
+    {
+
+        m_lay->removeItem(m_lay->takeAt(0));
+
+    }
+
     if(m_sType == E_TEXT)
     {
 
-       while(m_lay->count()>0)
-        {
-
-           m_lay->removeItem(m_lay->takeAt(0));
-
-        }
-
-       itemLabel = new ItemLabel(m_wBg);
-
-       itemLabel->m_diffSize = m_diffSize;
-
-       itemLabel->setData(obj);
-
-       itemLabel->show();
-
-       m_lay->addWidget(itemLabel);
-
-       m_wBg->setLayout(m_lay);
-
+        itemLabel = new ItemLabel(m_wBg);
     }
+
+    else if(m_sType == E_PIC)
+    {
+        itemLabel = new ItemPicCon(m_wBg);
+    }
+
+    itemLabel->m_diffSize = m_diffSize;
+
+    itemLabel->setData(obj);
+
+    itemLabel->show();
+
+    m_lay->addWidget(itemLabel);
+
+    m_wBg->setLayout(m_lay);
+
+
+
+
 
 }
 
@@ -167,77 +176,77 @@ void ItemBaseContent::slotMouseEvent(QMouseEvent *e)
         //    if(!m_bEdit)
         //        return ;
 
-            m_bMove = false;
+        m_bMove = false;
 
-            setRoll(true);
+        setRoll(true);
 
-            if(e->x()>width()-16 && e->y() > height()-16)
-            {
-                m_bChangeSize = true;
-            }
-            else
-            {
-                m_bChangeSize = false;
-            }
+        if(e->x()>width()-16 && e->y() > height()-16)
+        {
+            m_bChangeSize = true;
+        }
+        else
+        {
+            m_bChangeSize = false;
+        }
 
-            m_preP = e->pos();
+        m_preP = e->pos();
 
-            m_preSize = size();
+        m_preSize = size();
     }
     else if(e->type() == QMouseEvent::MouseButtonRelease)
     {
-            if(m_bMove)
+        if(m_bMove)
+        {
+            QStringList listTmp = m_sPath.split("/");
+
+            if(listTmp.length()>2)
             {
-              QStringList listTmp = m_sPath.split("/");
+                listTmp.pop_back();
 
-              if(listTmp.length()>2)
-              {
-                  listTmp.pop_back();
-
-                  listTmp.pop_back();
-              }
+                listTmp.pop_back();
+            }
 
 
-              qDebug()<<"model : "<<m_sModelName<<" ,layer: "<<m_sLayerName<<" ,obj: "<<m_sName;
+            qDebug()<<"model : "<<m_sModelName<<" ,layer: "<<m_sLayerName<<" ,obj: "<<m_sName;
 
-              bool bOk = false;
+            bool bOk = false;
 
-             ObjData* obj = CDATA.getObj(m_sLayerName,m_sName,bOk);
+            ObjData* obj = CDATA.getObj(m_sLayerName,m_sName,bOk);
 
 
-             if(bOk)
-             {
+            if(bOk)
+            {
 
                 obj->m_rect = QRect(x()/m_diffSize,y()/m_diffSize,width()/m_diffSize,height()/m_diffSize);
 
-             }
+            }
 
             emit sendUpdate();
-            }
+        }
     }
 
     else if(e->type() == QMouseEvent::MouseMove)
     {
-            m_bMove = true;
+        m_bMove = true;
 
-            QPoint move = e->pos()-m_preP;
+        QPoint move = e->pos()-m_preP;
 
-            QPoint af = this->pos()+move;
+        QPoint af = this->pos()+move;
 
-            if(!m_bChangeSize)
-            {
-                this->move(af);
-            }
-            else
-            {
+        if(!m_bChangeSize)
+        {
+            this->move(af);
+        }
+        else
+        {
 
-                QSize t(m_preSize+QSize(move.x(),move.y()));
-                int iW = qBound(40,t.width(),this->parentWidget()->width()+10);
+            QSize t(m_preSize+QSize(move.x(),move.y()));
+            int iW = qBound(40,t.width(),this->parentWidget()->width()+10);
 
-                int iH = qBound(40,t.height(),this->parentWidget()->height()+10);
+            int iH = qBound(40,t.height(),this->parentWidget()->height()+10);
 
-                resize(iW,iH);
-            }
+            resize(iW,iH);
+        }
     }
 }
 

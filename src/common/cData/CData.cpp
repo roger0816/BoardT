@@ -56,6 +56,158 @@ void CData::readModel(QString sPath)
 
 }
 
+void CData::writeModel()
+{
+
+
+    if(!QDir(m_sPath).exists())
+    {
+        QDir().mkdir(m_sPath);
+    }
+
+    QSettings defin(m_sPath+"/define.ini",QSettings::IniFormat);
+
+    QStringList listDfKey = m_dDefine.keys();
+
+    for(int j=0;j<listDfKey.length();j++)
+    {
+        QString sKey = listDfKey.at(j);
+
+        defin.setValue(sKey,m_dDefine[sKey]);
+    }
+
+    defin.sync();
+
+    QSettings pro(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
+
+    QStringList listKey = m_dData.keys();
+
+    pro.setValue("defaultLayer",listKey.first());
+
+    pro.sync();
+
+
+    for(int i=0;i<listKey.length();i++)
+    {
+        LayerData *layerData = m_dData[listKey.at(i)];
+
+        QString sPath = layerData->m_sLayerPath;
+
+        QSettings conf(sPath+"/"+sPath.split("/").last()+".BDT",QSettings::IniFormat);
+
+        conf.setValue("Base/resumeTimer",15);
+
+        conf.sync();
+
+        if(layerData->m_sBgPath!="" && layerData->m_sBgPath !=sPath+"/bg.png")
+        {
+            QImage image(layerData->m_sBgPath);
+
+            image.save(sPath+"/bg.png");
+
+        }
+
+
+        foreach(ObjData *item ,layerData->m_listData)
+        {
+            writeObj(item);
+        }
+
+
+    }
+
+
+
+
+}
+
+void CData::writeObj(ObjData *item)
+{
+
+    QString sItemPash = item->m_sObjPath;
+
+    QDir().mkdir(sItemPash);
+
+
+    QSettings conf(sItemPash+"/conf.ini",   QSettings::IniFormat);
+
+
+    int  x = item->m_rect.x();
+
+    int y = item->m_rect.y();
+
+    int w = item->m_rect.width();
+
+    int h = item->m_rect.height();
+
+    conf.setValue("Base/x",x);
+
+    conf.setValue("Base/y",y);
+
+    conf.setValue("Base/w",w);
+
+    conf.setValue("Base/h",h);
+
+    conf.setValue("Base/changeTimer",5);
+
+    if(item->m_sType == E_TEXT)
+    {
+
+        conf.setValue("Base/type",m_dDefine[E_TEXT]);
+
+        if(item->m_dataText.m_sImagePath!="")
+        {
+            QImage image(item->m_dataText.m_sImagePath);
+
+            image.save(sItemPash+"/bg.png");
+
+
+            item->m_dataText.m_sImagePath = sItemPash+"/bg.png";
+        }
+        conf.setValue("Title/bgPath",item->m_dataText.m_sImagePath);
+
+        conf.setValue("Title/font",item->m_dataText.font.toString());
+
+        conf.setValue("Title/text",item->m_dataText.sText);
+
+        int iTemp = item->m_dataText.bIsCent;
+
+        conf.setValue("Title/alignCenter",iTemp);
+
+
+
+        QString sRgba("%1%2%3%4");
+
+
+        QString sTxtColor = sRgba.arg(item->m_dataText.textColor.red(),2,16,QLatin1Char( '0' ))
+                .arg(item->m_dataText.textColor.green(),2,16,QLatin1Char( '0' ))
+                .arg(item->m_dataText.textColor.blue(),2,16,QLatin1Char( '0' ))
+                .arg(item->m_dataText.textColor.alpha(),2,16,QLatin1Char( '0' ));
+
+        QString sBgColor = sRgba.arg(item->m_dataText.bgColor.red(),2,16,QLatin1Char( '0' ))
+                .arg(item->m_dataText.bgColor.green(),2,16,QLatin1Char( '0' ))
+                .arg(item->m_dataText.bgColor.blue(),2,16,QLatin1Char( '0' ))
+                .arg(item->m_dataText.bgColor.alpha(),2,16,QLatin1Char( '0' ));
+
+        conf.setValue("Title/txtColor",sTxtColor);
+
+        conf.setValue("Title/bgColor",sBgColor);
+
+
+
+
+
+
+        conf.sync();
+
+
+    }
+
+
+
+
+}
+
 void CData::addLayer(QString sPath)
 {
     LayerData *layer = new LayerData(this);
@@ -79,9 +231,9 @@ ObjData *CData::getObj(QString layer, QString objName, bool &bOk)
         {
             if(m_dData[layer]->m_listData[i]->m_sName == objName)
             {
-               bOk = true;
+                bOk = true;
 
-               return m_dData[layer]->m_listData[i];
+                return m_dData[layer]->m_listData[i];
             }
 
         }
@@ -120,4 +272,6 @@ void CData::typeMapping()
         m_dDefine.insert(sKey,iValue);
     }
 }
+
+
 

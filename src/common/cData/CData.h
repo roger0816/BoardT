@@ -23,6 +23,8 @@ public:
 
     void readModel(QString sPath);
 
+    void writeModel();
+
     void addLayer(QString sPath);
 
 
@@ -44,6 +46,8 @@ private:
 
 
     void typeMapping();
+
+    void writeObj(ObjData *item);
 
 
 

@@ -2,7 +2,7 @@
 
 ObjData::ObjData(QObject *parent) : QObject(parent)
 {
-
+    m_rect = QRect(10,10,300,180);
 }
 
 void ObjData::setPath(QString sPath)
@@ -57,54 +57,57 @@ void ObjData::setPath(QString sPath)
             m_dataText.m_sImagePath = m_sObjPath+"/bg.png";
         }
 
-        m_dataText.bIsCent = conf.value("Title/alignCenter").toBool();
+        m_dataText.bIsCent = conf.value("Title/alignCenter",1).toBool();
 
-        m_dataText.iPixSize = conf.value("Title/txtSize").toInt();
+        m_dataText.iPixSize = conf.value("Title/txtSize","30").toInt();
 
-        m_dataText.font.fromString(conf.value("Title/txtSize").toString());
+        QString sFontSt = conf.value("Title/font","Arial,24,-1,5,50,0,0,0,0,0,Regular").toString();
+
+        if(sFontSt!="" && sFontSt.split(",").length()>5)
+            m_dataText.font.fromString(sFontSt);
 
         bool bOk;
 
-        int iBgR = conf.value("Title/bgColor").toString().mid(0,2).toInt(&bOk,16);
+        int iBgR = conf.value("Title/bgColor","ff").toString().mid(0,2).toInt(&bOk,16);
 
-        int iBgG = conf.value("Title/bgColor").toString().mid(2,2).toInt(&bOk,16);
+        int iBgG = conf.value("Title/bgColor","ff").toString().mid(2,2).toInt(&bOk,16);
 
-        int iBgB = conf.value("Title/bgColor").toString().mid(4,2).toInt(&bOk,16);
+        int iBgB = conf.value("Title/bgColor","ff").toString().mid(4,2).toInt(&bOk,16);
 
-        int iBgA = conf.value("Title/bgColor").toString().mid(6,2).toInt(&bOk,16);
+        int iBgA = conf.value("Title/bgColor","ff").toString().mid(6,2).toInt(&bOk,16);
 
         m_dataText.bgColor = QColor(iBgR,iBgG,iBgB,iBgA);
 
-        int iTxR = conf.value("Title/txtColor").toString().mid(0,2).toInt(&bOk,16);
+        int iTxR = conf.value("Title/txtColor","00").toString().mid(0,2).toInt(&bOk,16);
 
-        int iTxG = conf.value("Title/txtColor").toString().mid(2,2).toInt(&bOk,16);
+        int iTxG = conf.value("Title/txtColor","00").toString().mid(2,2).toInt(&bOk,16);
 
-        int iTxB = conf.value("Title/txtColor").toString().mid(4,2).toInt(&bOk,16);
+        int iTxB = conf.value("Title/txtColor","00").toString().mid(4,2).toInt(&bOk,16);
 
-        int iTxA = conf.value("Title/txtColor").toString().mid(6,2).toInt(&bOk,16);
+        int iTxA = conf.value("Title/txtColor","ff").toString().mid(6,2).toInt(&bOk,16);
 
 
         m_dataText.textColor = QColor(iTxR,iTxG,iTxB,iTxA);
 
-        QFileInfoList listTxt = QDir(m_sObjPath).entryInfoList(QStringList()<<"*.txt");
+//        QFileInfoList listTxt = QDir(m_sObjPath).entryInfoList(QStringList()<<"*.txt");
 
-        qDebug()<<listTxt.first().filePath();
+//        qDebug()<<listTxt.first().filePath();
 
-        QString sTxt="";
+//        QString sTxt="";
 
-        QFile file(listTxt.first().filePath());
+//        QFile file(listTxt.first().filePath());
 
-        if(file.open(QIODevice::ReadOnly))
-        {
-            sTxt = file.readAll();
+//        if(file.open(QIODevice::ReadOnly))
+//        {
+//            sTxt = file.readAll();
 
-            file.close();
+//            file.close();
 
-        }
+//        }
 
-        conf.setValue("Title/text",sTxt);
+//        conf.setValue("Title/text",sTxt);
 
-        conf.sync();
+//        conf.sync();
 
         m_dataText.sText = conf.value("Title/text").toString();
 

@@ -2,7 +2,7 @@
 #include "ui_ItemLabel.h"
 
 ItemLabel::ItemLabel(QWidget *parent) :
-    QWidget(parent),
+    ItemBaseObj(parent),
     ui(new Ui::ItemLabel)
 {
     ui->setupUi(this);
@@ -14,12 +14,7 @@ ItemLabel::~ItemLabel()
 }
 
 
-void ItemLabel::setData(ObjData *obj)
-{
-    m_obj = obj;
 
-    updateItem();
-}
 
 void ItemLabel::updateItem()
 {
@@ -37,7 +32,15 @@ void ItemLabel::updateItem()
 
     if(m_data.m_sImagePath.trimmed()!="")
     {
-        ui->label->setStyleSheet("border-image:url("+m_data.m_sImagePath+");");
+        ui->label->setStyleSheet(sStyle.arg(m_data.textColor.red())
+                                 .arg(m_data.textColor.green())
+                                 .arg(m_data.textColor.blue())
+                                 .arg(m_data.textColor.alpha())
+                                 .arg(0)
+                                 .arg(0)
+                                 .arg(0)
+                                 .arg(0)
+                                 +" border-image:url("+m_data.m_sImagePath+");");
 
 
     }

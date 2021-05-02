@@ -2,15 +2,14 @@
 #define ITEMLABEL_H
 
 #include <QWidget>
-#include <Voj.h>
-#include <QFont>
-#include "ObjData.h"
+#include "ItemBaseObj.h"
+
 
 namespace Ui {
 class ItemLabel;
 }
 
-class ItemLabel : public QWidget
+class ItemLabel : public ItemBaseObj
 {
     Q_OBJECT
 
@@ -19,13 +18,9 @@ public:
     ~ItemLabel();
 
 
-    void setData(ObjData *obj);
 
     void updateItem();
 
-    float m_diffSize = 1.000;
-
-    ObjData* m_obj =nullptr;
 
 private:
     Ui::ItemLabel *ui;

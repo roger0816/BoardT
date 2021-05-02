@@ -7,6 +7,7 @@
 #include "DisplayWidget.h"
 #include "LayerNewModel.h"
 #include <QColorDialog>
+#include "LayerAddContent.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -30,6 +31,8 @@ private slots:
     void on_btnAddModel_clicked();
 
     void on_btnAddLayer_clicked();
+
+    void on_btnSave_clicked();
 
 public slots:
     void slotSelector(QString sName);

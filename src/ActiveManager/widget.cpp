@@ -21,6 +21,12 @@ Widget::Widget(QWidget *parent)
 
     connect(ui->wEditor,&LayerEditor::callRename,ui->wDisplay,&DisplayWidget::renameItem);
 
+    connect(ui->wEditor,&LayerEditor::callDelete,ui->wDisplay,&DisplayWidget::deleteItem);
+
+    connect(ui->wAdd,&LayerAddContent::btnAddClicked,ui->wDisplay,&DisplayWidget::addItem);
+
+    ui->wStackWork->setCurrentWidget(ui->page0);
+
 }
 
 Widget::~Widget()
@@ -97,6 +103,7 @@ void Widget::on_btnAddModel_clicked()
 
 void Widget::slotSelector(QString sName)
 {
+    ui->wStackWork->setCurrentWidget(ui->wWork);
 
     ui->wDisplay->setLayer(CDATA.m_sPath+"/"+sName);
 
@@ -107,7 +114,6 @@ void Widget::refreshSelector()
 {
     QStringList listKey = CDATA.m_dData.keys();
 
-    qDebug()<<"data keys : "<<CDATA.m_dData.keys();
 
     DisplayWidget w;
 
@@ -146,4 +152,16 @@ void Widget::on_btnAddLayer_clicked()
 
         refreshSelector();
     }
+}
+
+void Widget::on_btnSave_clicked()
+{
+    DialogMsg msg;
+
+    msg.setDialogInfo("確定要儲存嗎？",QStringList()<<"否"<<"是");
+
+    int iRe = msg.exec();
+
+    if(iRe == 1)
+        CDATA.writeModel();
 }

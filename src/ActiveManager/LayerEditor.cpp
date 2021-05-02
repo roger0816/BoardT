@@ -7,7 +7,7 @@ LayerEditor::LayerEditor(QWidget *parent) :
 {
     ui->setupUi(this);
 
-
+    ui->stackType->setCurrentWidget(ui->pageText);
 
 }
 
@@ -30,9 +30,11 @@ void LayerEditor::setTarget(QString sObjPath)
 
     bool bOk = false;
 
+    m_sLayerName = listTmp.at(listTmp.length()-2);
 
+    m_sObjName = listTmp.at(listTmp.length()-1);
 
-    ObjData *data = CDATA.getObj(listTmp.at(listTmp.length()-2),listTmp.at(listTmp.length()-1),bOk);
+    ObjData *data = CDATA.getObj(m_sLayerName,m_sObjName,bOk);
 
     if(!bOk)
         return;
@@ -55,7 +57,7 @@ void LayerEditor::refresh()
 
     qDebug()<<"refresh ";
 
-    qDebug()<<"AGC : "<<m_obj->m_sName;
+
     m_bLockCallUpdate = true;
 
     ui->txtName->setText(m_obj->m_sName);
@@ -71,7 +73,8 @@ void LayerEditor::refresh()
 
     if(m_obj->m_sType == E_TEXT)
     {
-        ui->cbType->setCurrentIndex(0);
+
+        ui->stackType->setCurrentWidget(ui->pageText);
 
         ui->txtText->setText(m_obj->m_dataText.sText);
 
@@ -90,6 +93,14 @@ void LayerEditor::refresh()
         ui->btnTxtColor->setStyleSheet(sStyle.arg(colorTxt.red()).arg(colorTxt.green())
                                        .arg(colorTxt.blue()).arg(colorTxt.alpha()));
 
+
+    }
+    else if(m_obj->m_sType == E_PIC)
+    {
+
+        ui->stackType->setCurrentWidget(ui->pagePic);
+
+        ui->sbPicSec->setValue(m_obj->m_dataPic.iSec);
 
     }
 
@@ -222,6 +233,27 @@ void LayerEditor::readyCallUpdate()
     emit callUpdate();
 }
 
+bool LayerEditor::deleteDirectory(const QString &path)
+{
+    if (path.isEmpty())
+        return false;
+
+    QDir dir(path);
+    if(!dir.exists())
+        return true;
+
+    dir.setFilter(QDir::AllEntries | QDir::NoDotAndDotDot);
+    QFileInfoList fileList = dir.entryInfoList();
+    foreach (QFileInfo fi, fileList)
+    {
+        if (fi.isFile())
+            fi.dir().remove(fi.fileName());
+        else
+            deleteDirectory(fi.absoluteFilePath());
+    }
+    return dir.rmpath(dir.absolutePath());
+}
+
 
 void LayerEditor::on_txtText_textChanged(const QString &)
 {
@@ -333,14 +365,80 @@ void LayerEditor::on_btnSelectFont_clicked()
     if (ok)
         ui->btnSelectFont->setFont(font);
 
-    QSettings conf("C:/work/test.ini",QSettings::IniFormat);
-
-    conf.setValue("font",font.toString());
-
-    conf.sync();
-
     m_obj->m_dataText.font = font;
 
     callUpdate();
     //font.toString()
+}
+
+void LayerEditor::on_btnDelete_clicked()
+{
+    DialogMsg msg;
+
+    msg.setDialogInfo("確定要刪除此元件嗎？",QStringList()<<"否"<<"是");
+
+    int iRe = msg.exec();
+
+    if(iRe==1)
+    {
+
+        emit callDelete(m_sPath);
+
+
+        deleteDirectory(m_sPath);
+    }
+
+
+}
+
+void LayerEditor::on_btnSetPic_clicked()
+{
+    QStringList listSelect =QFileDialog::getOpenFileNames(this,
+                             QStringLiteral("選取圖檔"),
+                            QApplication::applicationDirPath(),
+                             QStringLiteral("*.png"));
+
+
+    bool bOk = false;
+
+    ObjData *data = CDATA.getObj(m_sLayerName,m_sObjName,bOk);
+
+    if(!bOk)
+        return;
+
+    QList<QPixmap> *list = &data->m_dataPic.listPic;
+
+    QStringList *listName = &data->m_dataPic.listPicName;
+
+
+    list->clear();
+
+    listName->clear();
+
+
+    for(int i=0;i<listSelect.length();i++)
+    {
+
+        QPixmap p(listSelect.at(i));
+
+        list->append(p);
+
+        listName->append(listSelect.at(i).split("/").last());
+    }
+
+
+
+}
+
+void LayerEditor::on_sbPicSec_valueChanged(int )
+{
+    bool bOk = false;
+
+    ObjData *data = CDATA.getObj(m_sLayerName,m_sObjName,bOk);
+
+    if(!bOk)
+        return;
+
+    data->m_dataPic.iSec = ui->sbPicSec->value();
+
 }

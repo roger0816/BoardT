@@ -8,7 +8,7 @@
 #include "ItemBaseContent.h"
 #include <QResizeEvent>
 #include <QShowEvent>
-
+#include "LayerAddContent.h"
 
 namespace Ui {
 class DisplayWidget;
@@ -22,15 +22,17 @@ public:
     explicit DisplayWidget(QWidget *parent = nullptr);
     ~DisplayWidget();
 
-    QPixmap setLayer(QString m_sPath);
+    QPixmap setLayer(QString sPath);
 
     void setEdit(bool b);
-
-    LayerData *m_layerData = nullptr;
 
     float m_fDiff = 0.50;
 
     QList<ItemBaseContent*> m_listItem;
+
+    QString m_layerName;
+
+    QString m_sPath;
 
 private:
     Ui::DisplayWidget *ui;
@@ -42,6 +44,8 @@ private:
     void showEvent(QShowEvent *) override;
 
     void updateItemRect();
+
+    bool checkObjName(QString sObj);
 signals:
 
     void changeTarget(QString sPath);
@@ -55,6 +59,10 @@ public slots:
     void raiseItem(QString sPath);
 
     void renameItem(QString sOldPath,QString sNewPath);
+
+    void deleteItem(QString sPath);
+
+    void addItem(int iIdx);
 };
 
 #endif // DISPLAYWIDGET_H

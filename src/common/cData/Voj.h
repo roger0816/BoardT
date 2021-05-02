@@ -29,6 +29,11 @@ static QString E_VIDEO ="video";
 
 struct DataText
 {
+    DataText()
+    {
+        font.fromString("Arial,24,-1,5,50,0,0,0,0,0,Regular");
+    }
+
     QString sText="Label";
 
     int iPixSize=32;
@@ -44,6 +49,17 @@ struct DataText
     QString m_sImagePath;
 
     QString m_sCmdPath;
+
+
+};
+
+struct DataPic
+{
+    int iSec = 10;
+
+    QList<QPixmap> listPic;
+
+    QStringList listPicName;
 
 
 };

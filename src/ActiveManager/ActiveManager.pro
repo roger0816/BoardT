@@ -15,7 +15,7 @@ DESTDIR =$$PWD/../../bin/
 
 SOURCES += \
     DialogMsg.cpp \
-    LayerAddCompont.cpp \
+    LayerAddContent.cpp \
     LayerEditor.cpp \
     LayerSelector.cpp \
     main.cpp \
@@ -23,14 +23,14 @@ SOURCES += \
 
 HEADERS += \
     DialogMsg.h \
-    LayerAddCompont.h \
+    LayerAddContent.h \
     LayerEditor.h \
     LayerSelector.h \
     widget.h
 
 FORMS += \
     DialogMsg.ui \
-    LayerAddCompont.ui \
+    LayerAddContent.ui \
     LayerEditor.ui \
     widget.ui
 

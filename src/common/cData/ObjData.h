@@ -36,6 +36,8 @@ public:
 
     DataText m_dataText;
 
+    DataPic m_dataPic;
+
 
 private:
 
