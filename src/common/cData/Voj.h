@@ -32,7 +32,8 @@ enum
 {
     ADD_BTN_TEXT=0,
     ADD_BTN_PIC,
-    ADD_BTN_VIDEO
+    ADD_BTN_VIDEO,
+    ADD_BTN_BTN
 
 };
 
@@ -61,6 +62,8 @@ struct DataText
 
 
 };
+
+
 
 struct DataPic
 {

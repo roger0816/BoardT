@@ -71,7 +71,7 @@ void LayerEditor::refresh()
     ui->sbH->setValue(m_obj->m_rect.height());
 
 
-    if(m_obj->m_sType == E_TEXT)
+    if(m_obj->m_sType == E_TEXT || m_obj->m_sType == E_BUTTON)
     {
 
         ui->stackType->setCurrentWidget(ui->pageText);
@@ -92,7 +92,6 @@ void LayerEditor::refresh()
 
         ui->btnTxtColor->setStyleSheet(sStyle.arg(colorTxt.red()).arg(colorTxt.green())
                                        .arg(colorTxt.blue()).arg(colorTxt.alpha()));
-
 
     }
     else if(m_obj->m_sType == E_PIC)
@@ -403,9 +402,9 @@ void LayerEditor::on_btnDelete_clicked()
 void LayerEditor::on_btnSetPic_clicked()
 {
     QStringList listSelect =QFileDialog::getOpenFileNames(this,
-                             QStringLiteral("選取圖檔"),
-                            QApplication::applicationDirPath(),
-                             QStringLiteral("*.png"));
+                                                          QStringLiteral("選取圖檔"),
+                                                          QApplication::applicationDirPath(),
+                                                          QStringLiteral("*.png"));
 
 
     bool bOk = false;
@@ -462,14 +461,54 @@ void LayerEditor::on_btnVideoSet_clicked()
         return;
 
     QStringList listSelect =QFileDialog::getOpenFileNames(this,
-                             QStringLiteral("選取影片"),
-                            QApplication::applicationDirPath()+"/video",
-                             QStringLiteral("*.mp4"));
+                                                          QStringLiteral("選取影片"),
+                                                          QApplication::applicationDirPath()+"/video",
+                                                          QStringLiteral("*.mp4"));
 
 
-
+    qDebug()<<"listselect video : "<<listSelect;
     QStringList *listName = &data->m_dataVideo.listName;
 
-    listName->clear();
 
+
+}
+
+
+void LayerEditor::on_btnBgSet_clicked()
+{
+    if(CDATA.m_sCurrentLayerName == "")
+        return;
+
+    QString sTarget =CDATA.m_sCurrentLayerName;
+
+    if(CDATA.m_dData.keys().indexOf(sTarget)<0)
+        return ;
+
+    QString sPath = QFileDialog::getOpenFileName(this,"選擇版面背景圖",QApplication::applicationDirPath(),"*.png");
+
+    if(sPath != CDATA.m_dData[sTarget]->m_sBgPath)
+    {
+        CDATA.m_dData[sTarget]->m_sBgPath = sPath;
+
+        emit callUpdate();
+    }
+}
+
+void LayerEditor::on_btnClearLayerBg_clicked()
+{
+    if(CDATA.m_sCurrentLayerName == "")
+        return;
+
+    QString sTarget =CDATA.m_sCurrentLayerName;
+
+    if(CDATA.m_dData.keys().indexOf(sTarget)<0)
+        return ;
+
+
+    if(CDATA.m_dData[sTarget]->m_sBgPath != "")
+    {
+        CDATA.m_dData[sTarget]->m_sBgPath = "";
+
+        emit callUpdate();
+    }
 }

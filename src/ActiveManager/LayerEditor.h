@@ -69,6 +69,10 @@ private slots:
 
     void on_btnVideoSet_clicked();
 
+    void on_btnBgSet_clicked();
+
+    void on_btnClearLayerBg_clicked();
+
 private:
     Ui::LayerEditor *ui;
 

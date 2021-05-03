@@ -32,7 +32,12 @@ void ItemPicCon::timerEvent(QTimerEvent *)
             if(m_iIdx>= m_obj->m_dataPic.listPic.length())
                 m_iIdx = 0;
 
-            ui->label->setPixmap(m_obj->m_dataPic.listPic.at(m_iIdx));
+           // ui->label->setPixmap(m_obj->m_dataPic.listPic.at(m_iIdx));
+
+            QPixmap p =m_obj->m_dataPic.listPic.at(m_iIdx);
+
+
+            ui->label->setPixmap(p.scaled(ui->label->size()));
 
             m_iIdx++;
 
@@ -41,5 +46,15 @@ void ItemPicCon::timerEvent(QTimerEvent *)
 
 
     }
+
+}
+
+void ItemPicCon::resizeEvent(QResizeEvent *)
+{
+
+}
+
+void ItemPicCon::showEvent(QShowEvent *)
+{
 
 }

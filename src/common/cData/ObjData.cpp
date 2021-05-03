@@ -49,73 +49,58 @@ void ObjData::setPath(QString sPath)
 
     m_sType = sType;
 
-    if(sType == E_TEXT)
+    if(sType == E_TEXT || sType == E_BUTTON)
     {
 
+        QString sTitle= "Title";
+
+        if(sType == E_BUTTON)
+            sTitle ="Button";
 
         if(QFileInfo(m_sObjPath+"/bg.png").exists())
         {
             m_dataText.m_sImagePath = m_sObjPath+"/bg.png";
         }
 
-        m_dataText.bIsCent = conf.value("Title/alignCenter",1).toBool();
+        m_dataText.bIsCent = conf.value(sTitle+"/alignCenter",1).toBool();
 
-        m_dataText.iPixSize = conf.value("Title/txtSize","30").toInt();
+        m_dataText.iPixSize = conf.value(sTitle+"/txtSize","30").toInt();
 
-        QString sFontSt = conf.value("Title/font","Arial,24,-1,5,50,0,0,0,0,0,Regular").toString();
+        QString sFontSt = conf.value(sTitle+"/font","Arial,24,-1,5,50,0,0,0,0,0,Regular").toString();
 
         if(sFontSt!="" && sFontSt.split(",").length()>5)
             m_dataText.font.fromString(sFontSt);
 
         bool bOk;
 
-        int iBgR = conf.value("Title/bgColor","ff").toString().mid(0,2).toInt(&bOk,16);
+        int iBgR = conf.value(sTitle+"/bgColor","ff").toString().mid(0,2).toInt(&bOk,16);
 
-        int iBgG = conf.value("Title/bgColor","ff").toString().mid(2,2).toInt(&bOk,16);
+        int iBgG = conf.value(sTitle+"/bgColor","ff").toString().mid(2,2).toInt(&bOk,16);
 
-        int iBgB = conf.value("Title/bgColor","ff").toString().mid(4,2).toInt(&bOk,16);
+        int iBgB = conf.value(sTitle+"/bgColor","ff").toString().mid(4,2).toInt(&bOk,16);
 
-        int iBgA = conf.value("Title/bgColor","ff").toString().mid(6,2).toInt(&bOk,16);
+        int iBgA = conf.value(sTitle+"/bgColor","ff").toString().mid(6,2).toInt(&bOk,16);
 
         m_dataText.bgColor = QColor(iBgR,iBgG,iBgB,iBgA);
 
-        int iTxR = conf.value("Title/txtColor","00").toString().mid(0,2).toInt(&bOk,16);
+        int iTxR = conf.value(sTitle+"/txtColor","00").toString().mid(0,2).toInt(&bOk,16);
 
-        int iTxG = conf.value("Title/txtColor","00").toString().mid(2,2).toInt(&bOk,16);
+        int iTxG = conf.value(sTitle+"/txtColor","00").toString().mid(2,2).toInt(&bOk,16);
 
-        int iTxB = conf.value("Title/txtColor","00").toString().mid(4,2).toInt(&bOk,16);
+        int iTxB = conf.value(sTitle+"/txtColor","00").toString().mid(4,2).toInt(&bOk,16);
 
-        int iTxA = conf.value("Title/txtColor","ff").toString().mid(6,2).toInt(&bOk,16);
+        int iTxA = conf.value(sTitle+"/txtColor","ff").toString().mid(6,2).toInt(&bOk,16);
 
 
         m_dataText.textColor = QColor(iTxR,iTxG,iTxB,iTxA);
 
-//        QFileInfoList listTxt = QDir(m_sObjPath).entryInfoList(QStringList()<<"*.txt");
 
-//        qDebug()<<listTxt.first().filePath();
-
-//        QString sTxt="";
-
-//        QFile file(listTxt.first().filePath());
-
-//        if(file.open(QIODevice::ReadOnly))
-//        {
-//            sTxt = file.readAll();
-
-//            file.close();
-
-//        }
-
-//        conf.setValue("Title/text",sTxt);
-
-//        conf.sync();
-
-        m_dataText.sText = conf.value("Title/text").toString();
+        m_dataText.sText = conf.value(sTitle+"/text").toString();
 
 
     }
 
-    if(sType == E_PIC)
+    else if(sType == E_PIC)
     {
 
         m_dataPic.iSec = conf.value("Pic/changeTimer",10).toInt();
@@ -150,15 +135,8 @@ void ObjData::setPath(QString sPath)
         }
 
 
-        qDebug()<<" list Nmae : "<<m_dataPic.listPicName <<" , pic count : "<<m_dataPic.listPic;
-
-
-
-        m_dataPic.listPic.first().save("C:/work/tt.png");
-
-
     }
-    if(sType == E_VIDEO)
+    else if(sType == E_VIDEO)
     {
         m_dataVideo.listName =conf.value("Video/list","").toStringList();
 

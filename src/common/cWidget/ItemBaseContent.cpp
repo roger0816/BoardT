@@ -86,10 +86,16 @@ void ItemBaseContent::setData(ObjData *obj, float diffSize)
     {
         itemLabel = new ItemVideoCon(m_wBg);
     }
+
+    else if(m_sType == E_BUTTON)
+    {
+
+        itemLabel = new ItemBtnCon(m_wBg);
+    }
     else
     {
         itemLabel = new ItemLabel(m_wBg);
-        m_sType == E_TEXT;
+        m_sType = E_TEXT;
     }
 
     itemLabel->m_diffSize = m_diffSize;
@@ -156,7 +162,7 @@ void ItemBaseContent::updateItem()
     setGeometry(r);
 
 
-    if(m_sType == E_TEXT && itemLabel!=nullptr)
+    if(itemLabel!=nullptr)
     {
 
         itemLabel->m_diffSize = m_diffSize;

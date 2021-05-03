@@ -10,6 +10,7 @@ HEADERS += \
     $$PWD/cWidget/DisplayWidget.h \
     $$PWD/cWidget/ItemBaseContent.h \
     $$PWD/cWidget/ItemBaseObj.h \
+    $$PWD/cWidget/ItemBtnCon.h \
     $$PWD/cWidget/ItemLabel.h \
     $$PWD/cWidget/ItemPicCon.h \
     $$PWD/cWidget/ItemVideoCon.h
@@ -21,6 +22,7 @@ SOURCES += \
     $$PWD/cWidget/DisplayWidget.cpp \
     $$PWD/cWidget/ItemBaseContent.cpp \
     $$PWD/cWidget/ItemBaseObj.cpp \
+    $$PWD/cWidget/ItemBtnCon.cpp \
     $$PWD/cWidget/ItemLabel.cpp \
     $$PWD/cWidget/ItemPicCon.cpp \
     $$PWD/cWidget/ItemVideoCon.cpp
@@ -28,6 +30,7 @@ SOURCES += \
 FORMS += \
     $$PWD/cWidget/DisplayWidget.ui \
     $$PWD/cWidget/ItemBaseContent.ui \
+    $$PWD/cWidget/ItemBtnCon.ui \
     $$PWD/cWidget/ItemLabel.ui \
     $$PWD/cWidget/ItemPicCon.ui
 

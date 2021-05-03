@@ -99,13 +99,22 @@ void CData::writeModel()
 
         conf.sync();
 
-        if(layerData->m_sBgPath!="" && layerData->m_sBgPath !=sPath+"/bg.png")
+
+        if(layerData->m_sBgPath=="")
+        {
+            if(QFileInfo(sPath+"/bg.png").exists())
+            {
+                QFile(sPath+"/bg.png").remove();
+            }
+        }
+        else if(layerData->m_sBgPath!="" && layerData->m_sBgPath !=sPath+"/bg.png")
         {
             QImage image(layerData->m_sBgPath);
 
             image.save(sPath+"/bg.png");
 
         }
+
 
 
         foreach(ObjData *item ,layerData->m_listData)
@@ -150,10 +159,21 @@ void CData::writeObj(ObjData *item)
 
     conf.setValue("Base/changeTimer",5);
 
-    if(item->m_sType == E_TEXT)
+    if(item->m_sType == E_TEXT || item->m_sType == E_BUTTON)
     {
 
-        conf.setValue("Base/type",m_dDefine[E_TEXT]);
+        QString sTitle = "Title";
+
+        int iType =m_dDefine[E_TEXT];
+
+        if(item->m_sType == E_BUTTON)
+        {
+            iType =m_dDefine[E_BUTTON];
+
+            sTitle = "Button";
+        }
+
+        conf.setValue("Base/type",iType);
 
         if(item->m_dataText.m_sImagePath!="")
         {
@@ -164,15 +184,15 @@ void CData::writeObj(ObjData *item)
 
             item->m_dataText.m_sImagePath = sItemPash+"/bg.png";
         }
-        conf.setValue("Title/bgPath",item->m_dataText.m_sImagePath);
+        conf.setValue(sTitle+"/bgPath",item->m_dataText.m_sImagePath);
 
-        conf.setValue("Title/font",item->m_dataText.font.toString());
+        conf.setValue(sTitle+"/font",item->m_dataText.font.toString());
 
-        conf.setValue("Title/text",item->m_dataText.sText);
+        conf.setValue(sTitle+"/text",item->m_dataText.sText);
 
         int iTemp = item->m_dataText.bIsCent;
 
-        conf.setValue("Title/alignCenter",iTemp);
+        conf.setValue(sTitle+"/alignCenter",iTemp);
 
 
 
@@ -189,13 +209,9 @@ void CData::writeObj(ObjData *item)
                 .arg(item->m_dataText.bgColor.blue(),2,16,QLatin1Char( '0' ))
                 .arg(item->m_dataText.bgColor.alpha(),2,16,QLatin1Char( '0' ));
 
-        conf.setValue("Title/txtColor",sTxtColor);
+        conf.setValue(sTitle+"/txtColor",sTxtColor);
 
-        conf.setValue("Title/bgColor",sBgColor);
-
-
-        conf.sync();
-
+        conf.setValue(sTitle+"/bgColor",sBgColor);
 
     }
 
@@ -215,9 +231,9 @@ void CData::writeObj(ObjData *item)
 
         for(int i=0;i<listName.length();i++)
         {
-           QPixmap *p = & item->m_dataPic.listPic[i];
+            QPixmap *p = & item->m_dataPic.listPic[i];
 
-           p->save(sItemPash+"/"+listName.at(i));
+            p->save(sItemPash+"/"+listName.at(i));
         }
 
     }

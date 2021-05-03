@@ -27,6 +27,8 @@ Widget::Widget(QWidget *parent)
 
     ui->wStackWork->setCurrentWidget(ui->page0);
 
+    ui->wTop->hide();
+
 }
 
 Widget::~Widget()
@@ -103,6 +105,7 @@ void Widget::on_btnAddModel_clicked()
 
 void Widget::slotSelector(QString sName)
 {
+
     ui->wStackWork->setCurrentWidget(ui->wWork);
 
     ui->wDisplay->setLayer(CDATA.m_sPath+"/"+sName);
@@ -125,7 +128,7 @@ void Widget::refreshSelector()
 
     }
 
-    ui->wLayerSelector->setData(dPix);
+    ui->wLayerSelector->setData(dPix,CDATA.m_sPath);
 }
 
 void Widget::on_btnAddLayer_clicked()
@@ -197,7 +200,7 @@ void Widget::on_btnUpload_clicked()
 
      QDir dir(sPath);
 
-     conf.setValue("Target",dir.path().split("/").last());
+    // conf.setValue("Target",dir.path().split("/").last());
 
      conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
 

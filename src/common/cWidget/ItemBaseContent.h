@@ -12,7 +12,7 @@
 #include <QResizeEvent>
 #include "ItemPicCon.h"
 #include "ItemVideoCon.h"
-
+#include "ItemBtnCon.h"
 namespace Ui {
 class ItemBaseContent;
 }

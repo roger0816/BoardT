@@ -29,6 +29,8 @@ QPixmap DisplayWidget::setLayer(QString sPath)
 
     m_layerName = m_sPath.split("/").last();
 
+    CDATA.m_sCurrentLayerName = m_layerName;
+
     LayerData *layerData = CDATA.m_dData[m_layerName] ;
 
     qDeleteAll(m_listItem);
@@ -174,10 +176,22 @@ void DisplayWidget::slotUpdate()
 
 void DisplayWidget::refreshItem()
 {
+
+
     foreach(ItemBaseContent *item ,m_listItem)
     {
         item->updateItem();
     }
+
+
+
+    LayerData *layerData = CDATA.m_dData[m_layerName] ;
+
+    if(layerData==nullptr)
+        return ;
+
+    ui->wBg->setStyleSheet("QWidget#"+ui->wBg->objectName()+"{border-image:url("+layerData->m_sBgPath+");}");
+
 }
 
 void DisplayWidget::raiseItem(QString sPath)
@@ -278,6 +292,16 @@ void DisplayWidget::addItem(int iIdx)
         obj->m_sType = E_VIDEO;
 
         sTmp = "VIDEO_%1";
+
+    }
+
+    else if(iIdx == ADD_BTN_BTN)
+    {
+        obj->m_sType = E_BUTTON;
+
+        obj->m_dataText.sText="BUTTON";
+
+        sTmp = "BUTTON_%1";
 
     }
 

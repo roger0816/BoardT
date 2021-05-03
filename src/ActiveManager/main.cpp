@@ -11,11 +11,11 @@ int main(int argc, char *argv[])
     Widget w;
 
 
-    StageEdit w1;
+    //StageEdit w1;
 
     w.show();
 
 
-    w1.show();
+    //w1.show();
     return a.exec();
 }

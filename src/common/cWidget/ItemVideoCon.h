@@ -15,7 +15,7 @@ public:
     explicit ItemVideoCon(QWidget *parent = nullptr);
     ~ItemVideoCon();
 
-     void updateItem();
+     void updateItem() override;
 
 private:
 

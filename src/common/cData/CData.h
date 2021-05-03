@@ -34,6 +34,8 @@ public:
 
     QString m_sModelName;
 
+    QString m_sCurrentLayerName="";
+
     QMap<QString,int> m_dDefine;
 
     ObjData* getObj(QString layer, QString objName, bool &bOk);

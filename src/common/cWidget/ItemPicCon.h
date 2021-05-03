@@ -4,6 +4,8 @@
 #include <QWidget>
 #include "ItemBaseObj.h"
 #include <QTimerEvent>
+#include <QResizeEvent>
+#include <QShowEvent>
 
 namespace Ui {
 class ItemPicCon;
@@ -19,6 +21,12 @@ public:
 
 
     void timerEvent(QTimerEvent *) override;
+
+    void resizeEvent(QResizeEvent * ) override;
+
+    void showEvent(QShowEvent *) override;
+
+
 private:
     Ui::ItemPicCon *ui;
 

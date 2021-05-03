@@ -23,7 +23,7 @@ Widget::Widget(QWidget *parent) :
 
 
 
-    QSettings conf(QApplication::applicationDirPath()+"/../bin/data/layer/conf.ini",QSettings::IniFormat);
+    QSettings conf(QApplication::applicationDirPath()+"/../bin/data/model0/conf.ini",QSettings::IniFormat);
 
     m_sCurrentBoard =conf.value("Target").toString();
 
@@ -36,7 +36,7 @@ Widget::Widget(QWidget *parent) :
 
 
 
-
+    ui->wDisplay->setMinimumSize(1080,1920);
 }
 
 Widget::~Widget()
@@ -51,9 +51,9 @@ Widget::~Widget()
 void Widget::loadConfig(QString sLayer)
 {
 
-    CDATA.readModel(QApplication::applicationDirPath()+"/data/model0");
+    CDATA.readModel(QApplication::applicationDirPath()+"/../bin/data/model0");
 
-    ui->wDisplay->setLayer(QApplication::applicationDirPath()+"/data/model0/AAA");
+    ui->wDisplay->setLayer(sLayer);
 
     ui->wDisplay->setEdit(true);
 
@@ -206,9 +206,47 @@ void Widget::resizeEvent(QResizeEvent *)
 
 }
 
+void Widget::mousePressEvent(QMouseEvent *e)
+{
+    if(e->pos().x()> width()-50 && e->pos().y()> height()-50)
+    {
+        m_bIsPress = true;
+    }
+    else
+    {
+        m_bIsPress = false;
+
+        m_iPressTime = 0;
+
+    }
+
+    // ui->wDisplay->setEdit(false);
+}
+
+void Widget::mouseReleaseEvent(QMouseEvent *e)
+{
+    m_bIsPress = false;
+
+    m_iPressTime =0;
+}
+
 void Widget::slotTimer()
 {
-    QSettings conf(QApplication::applicationDirPath()+"/../bin/data/layer/conf.ini",QSettings::IniFormat);
+
+    if(m_bIsPress)
+    {
+        m_iPressTime++;
+
+        if(m_iPressTime>5)
+        {
+            ui->wDisplay->setEdit(true);
+
+            m_iPressTime = 0;
+        }
+    }
+
+
+    QSettings conf(QApplication::applicationDirPath()+"/../bin/data/model0/conf.ini",QSettings::IniFormat);
 
     QString board =conf.value("Target").toString();
 
@@ -219,7 +257,7 @@ void Widget::slotTimer()
         m_sCurrentBoard = board;
 
         m_sCurrentVerDateTime = sTime;
-
+        qDebug()<<"change board :  "<<m_sCurrentBoard;
         launch();
     }
 
@@ -242,7 +280,7 @@ void Widget::launch(int iIdx)
 
     m_timer.stop();
 
-    m_timer.start(3000);
+    m_timer.start(5000);
 
 
     loadConfig(m_sCurrentBoard);

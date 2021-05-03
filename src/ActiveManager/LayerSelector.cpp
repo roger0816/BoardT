@@ -9,10 +9,21 @@ LayerSelector::LayerSelector(QWidget *parent) : QWidget(parent)
 
 }
 
-void LayerSelector::setData(QMap<QString , QPixmap> dData)
+void LayerSelector::setData(QMap<QString , QPixmap> dData, QString sPath)
 {
 
     qDebug()<<"selector count : "<<dData.count();
+
+    m_sPath = sPath;
+
+    QSettings conf(sPath+"/conf.ini",QSettings::IniFormat);
+
+    if(dData.keys().length()>0)
+    {
+       conf.setValue("Target",dData.keys().first());
+
+    }
+
 
     while(m_lay->count()>0)
     {
@@ -32,21 +43,40 @@ void LayerSelector::setData(QMap<QString , QPixmap> dData)
         m_listBtn.append(btn);
     }
 
-    while(m_listLb.length()<dData.count())
+
+    while(m_listRadioBtn.length()<dData.count())
     {
+        QRadioButton *btn = new QRadioButton(this);
 
-        QLabel *lb = new QLabel(this);
+      //  lb->setAlignment(Qt::AlignHCenter);
 
-        lb->setAlignment(Qt::AlignHCenter);
+        connect(btn,&QRadioButton::clicked,this,&LayerSelector::slotClickedRadio);
+
         QFont f;
 
         f.setPixelSize(20);
 
-        lb->setFont(f);
+        btn->setFont(f);
 
 
-        m_listLb.append(lb);
+        m_listRadioBtn.append(btn);
     }
+
+//    while(m_listLb.length()<dData.count())
+//    {
+
+//        QLabel *lb = new QLabel(this);
+
+//        lb->setAlignment(Qt::AlignHCenter);
+//        QFont f;
+
+//        f.setPixelSize(20);
+
+//        lb->setFont(f);
+
+
+//        m_listLb.append(lb);
+//    }
 
     QStringList listKey = dData.keys();
 
@@ -63,16 +93,18 @@ void LayerSelector::setData(QMap<QString , QPixmap> dData)
 
 //            m_lay->addWidget(m_listBtn[i]);
 
-            m_listLb[i]->setText(listKey.at(i));
+       //     m_listLb[i]->setText(listKey.at(i));
 
-            m_listLb[i]->show();
+            m_listRadioBtn[i]->setText(listKey.at(i));
+
+            m_listRadioBtn[i]->show();
 
         }
         else
         {
             m_listBtn[i]->hide();
 
-            m_listLb[i]->hide();
+            m_listRadioBtn[i]->hide();
         }
 
 
@@ -116,7 +148,7 @@ void LayerSelector::setUiRect()
 
             m_listBtn[i]->setIconSize(m_listBtn[i]->size()*0.9);
 
-            m_listLb[i]->setGeometry(m_listBtn[i]->x(),iPicH,iPicW,24);
+            m_listRadioBtn[i]->setGeometry(m_listBtn[i]->x(),iPicH,iPicW,24);
 
             iCount++;
         }
@@ -145,6 +177,22 @@ void LayerSelector::slotClicked()
         m_listBtn[i]->setChecked(iIdx==i);
     }
 
-    emit sendSelectLayer(m_listLb.at(iIdx)->text());
+    emit sendSelectLayer(m_listRadioBtn.at(iIdx)->text());
+
+}
+
+void LayerSelector::slotClickedRadio()
+{
+    QRadioButton * target = dynamic_cast<QRadioButton*>(sender());
+
+  //  int iIdx = m_listRadioBtn.indexOf(target);
+
+    QSettings conf(m_sPath+"/conf.ini",QSettings::IniFormat);
+
+
+    conf.setValue("Target",target->text());
+
+    conf.sync();
+
 
 }

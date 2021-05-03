@@ -12,7 +12,7 @@
 #include "LayerContent.h"
 #include <QTimerEvent>
 #include <QResizeEvent>
-
+#include <QMouseEvent>
 static QString RDATA = "../bin/data";
 
 namespace Ui {
@@ -40,6 +40,16 @@ public:
     QString m_sTestModel="";
 
 private:
+
+    void mousePressEvent(QMouseEvent *e) override;
+
+    void mouseReleaseEvent(QMouseEvent *e ) override;
+
+    int m_iPressTime = 0 ;
+
+    bool m_bIsPress = false;
+
+
     QString m_sRegUuid="";
 
     QMap<QString ,int > m_dDefine;
