@@ -17,9 +17,9 @@ public:
     explicit ItemLabel(QWidget *parent = nullptr);
     ~ItemLabel();
 
+    void init() override;
 
-
-    void updateItem();
+    void updateItem()override;
 
 
 private:

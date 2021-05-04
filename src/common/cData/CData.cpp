@@ -11,6 +11,28 @@ CData &CData::Instance()
     return *m_pInstance;
 }
 
+void CData::createModel(QString sPath)
+{
+    m_sPath = sPath;
+
+  //  QSettings define(m_sPath+"/define.ini",QSettings::IniFormat);
+
+    QSettings pro(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
+
+    QStringList listKey = m_dData.keys();
+
+    pro.setValue("Target","layer0");
+
+    pro.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
+
+    pro.sync();
+
+    QDir().mkdir(m_sPath+"/layer0");
+
+
+
+}
+
 void CData::readModel(QString sPath)
 {
     qDebug()<<"read model : "<<sPath;
@@ -82,7 +104,6 @@ void CData::writeModel()
 
     QStringList listKey = m_dData.keys();
 
-    pro.setValue("defaultLayer",listKey.first());
 
     pro.sync();
 
@@ -127,6 +148,50 @@ void CData::writeModel()
 
 
 
+
+}
+
+void CData::checkDefine(QString sPath, QMap<QString, int> defData)
+{
+    QSettings define(sPath+"/define.ini",QSettings::IniFormat);
+
+    QStringList listDefineKey= define.allKeys();
+
+    QMap<QString,int> dData;
+
+    for(int i=0;i<listDefineKey.length();i++)
+    {
+        QString sKey = listDefineKey.at(i);
+
+        dData.insert(sKey, define.value(sKey).toInt());
+    }
+
+    QList<int> listValues = dData.values();
+
+
+
+    QStringList listTmp = defData.keys();
+
+    for(int j=0;j<listTmp.length();j++)
+    {
+
+        QString sTarget = listTmp.at(j);
+
+        int iIdx = defData.value(sTarget);
+
+
+        if(listDefineKey.indexOf(sTarget))
+        {
+            while(listValues.indexOf(iIdx)>=0)
+            {
+                ++iIdx;
+            }
+
+            define.setValue(sTarget,iIdx);
+        }
+
+    }
+    define.sync();
 
 }
 
@@ -296,7 +361,34 @@ ObjData *CData::getObj(QString layer, QString objName, bool &bOk)
 
 CData::CData(QObject *parent) : QObject(parent)
 {
+    QString sDef = QApplication::applicationDirPath()+"/data/model0";
 
+
+    QMap<QString, int > def;
+
+    def.insert("text",1);
+
+    def.insert("pic",2);
+
+    def.insert("button",3);
+
+    def.insert("dateTime",4);
+
+    def.insert("web",5);
+    def.insert("function",6);
+
+    def.insert("video",7);
+    def.insert("logo",8);
+
+    def.insert("ticket",9);
+    def.insert("active",10);
+
+    def.insert("onSale",14);
+    def.insert("mediaCent",17);
+
+    def.insert("marquee",21);
+
+    checkDefine(sDef,def);
 }
 
 void CData::typeMapping()

@@ -7,9 +7,11 @@ Widget::Widget(QWidget *parent)
 {
     ui->setupUi(this);
 
-    QString def = QApplication::applicationDirPath()+"/data/model0";
+    QString sDef = QApplication::applicationDirPath()+"/data/model0";
 
-    loadModel(def);
+    CDATA;
+
+    loadModel(sDef);
 
     connect(ui->wLayerSelector,&LayerSelector::sendSelectLayer,this,&Widget::slotSelector);
 
@@ -47,6 +49,11 @@ void Widget::loadModel(QString sPath)
     }
     else
     {
+
+        CDATA.createModel(sPath);
+
+        CDATA.readModel(sPath);
+
         qDebug()<<"model no found : "<<sPath;
     }
 
@@ -166,59 +173,67 @@ void Widget::on_btnSave_clicked()
     int iRe = msg.exec();
 
     if(iRe == 1)
+    {
         CDATA.writeModel();
+
+        refreshSelector();
+    }
 }
 
 void Widget::on_btnUpload_clicked()
 {
     DialogMsg msg;
 
- if(ui->lbModel->text().trimmed()=="")
- {
-     msg.setDialogInfo("請先開啟模組",QStringList()<<"OK");
+    if(ui->lbModel->text().trimmed()=="")
+    {
+        msg.setDialogInfo("請先開啟模組",QStringList()<<"OK");
 
-     msg.exec();
+        msg.exec();
 
-     return ;
+        return ;
 
- }
-
-
+    }
 
 
- msg.setInput("請輸入IP",m_sPreIp,QStringList()<<"取消"<<"確定");
-
- int iRe = msg.exec();
-
- if(iRe==1)
- {
-     m_sPreIp = msg.getInput();
-
-    QString sPath = CDATA.m_sPath;
-
-     QSettings conf(sPath+"/conf.ini",QSettings::IniFormat);
-
-     QDir dir(sPath);
-
-    // conf.setValue("Target",dir.path().split("/").last());
-
-     conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
-
-     conf.sync();
-
-    // upload(m_sPreIp,sPath+"/conf.ini","/home/pi/work/bin/data/layer");
-
-    // upload(m_sPreIp,sPath+"/define.ini","/home/pi/work/bin/data/layer");
 
 
-     upload(m_sPreIp," -r "+sPath,"/home/pi/work/bin/data/");
+    msg.setInput("請輸入IP",m_sPreIp,QStringList()<<"取消"<<"確定");
 
- }
+    int iRe = msg.exec();
+
+    if(iRe==1)
+    {
+        m_sPreIp = msg.getInput();
+
+        QString sPath = CDATA.m_sPath;
+
+        //     QSettings conf(sPath+"/conf.ini",QSettings::IniFormat);
+
+
+        QSettings conf(sPath+"/"+sPath.split("/").last()+".BDM",QSettings::IniFormat);
+
+
+        QDir dir(sPath);
+
+        // conf.setValue("Target",dir.path().split("/").last());
+
+        conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
+
+        conf.sync();
+
+        // upload(m_sPreIp,sPath+"/conf.ini","/home/pi/work/bin/data/layer");
+
+        // upload(m_sPreIp,sPath+"/define.ini","/home/pi/work/bin/data/layer");
+
+
+        upload(m_sPreIp," -r "+sPath,"/home/pi/work/bin/data/");
+
+    }
 }
 
 void Widget::upload(QString sIp, QString sTarget, QString sPath)
 {
-   // QString sCmd = QApplication::applicationDirPath()+"/pscp.exe -P 22 -pw \"pi\" -r "+m_sPath+" pi@"+m_sPreIp+":/home/pi/work/bin/";
+    // QString sCmd = QApplication::applicationDirPath()+"/pscp.exe -P 22 -pw \"pi\" -r "+m_sPath+" pi@"+m_sPreIp+":/home/pi/work/bin/";
 
     QString sCmd = QApplication::applicationDirPath()+"/pscp.exe -P 22 -pw \"pi\" %2 pi@%1:%3";
 
@@ -229,3 +244,5 @@ void Widget::upload(QString sIp, QString sTarget, QString sPath)
     system(sCmd.toStdString().c_str());
 
 }
+
+

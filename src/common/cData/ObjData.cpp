@@ -155,6 +155,10 @@ void ObjData::typeMapping()
 
     QStringList listDefineKey= defin.allKeys();
 
+    QString sMar ="marquee";
+
+
+
     for(int i=0; i < listDefineKey.length();i++)
     {
         QString sKey = listDefineKey.at(i);
@@ -166,5 +170,11 @@ void ObjData::typeMapping()
         m_dDefine.insert(sKey,iValue);
     }
 }
+
+void ObjData::checkMapping()
+{
+
+}
+
 
 

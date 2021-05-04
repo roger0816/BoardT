@@ -16,13 +16,27 @@ void LayerSelector::setData(QMap<QString , QPixmap> dData, QString sPath)
 
     m_sPath = sPath;
 
-    QSettings conf(sPath+"/conf.ini",QSettings::IniFormat);
+   // QSettings conf(sPath+"/conf.ini",QSettings::IniFormat);
 
-    if(dData.keys().length()>0)
+    QSettings conf(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
+
+    QString sTarget = conf.value("Target","").toString();
+
+    if(dData.keys().length() <= 0)
+        return;
+
+
+    if(sTarget=="")
     {
-       conf.setValue("Target",dData.keys().first());
 
+        sTarget = dData.keys().first();
+
+        conf.setValue("Target",sTarget);
     }
+
+    QStringList listKey = dData.keys();
+
+    int iIdxRadio = qBound(0,listKey.indexOf(sTarget),listKey.length()-1);
 
 
     while(m_lay->count()>0)
@@ -62,30 +76,12 @@ void LayerSelector::setData(QMap<QString , QPixmap> dData, QString sPath)
         m_listRadioBtn.append(btn);
     }
 
-//    while(m_listLb.length()<dData.count())
-//    {
-
-//        QLabel *lb = new QLabel(this);
-
-//        lb->setAlignment(Qt::AlignHCenter);
-//        QFont f;
-
-//        f.setPixelSize(20);
-
-//        lb->setFont(f);
-
-
-//        m_listLb.append(lb);
-//    }
-
-    QStringList listKey = dData.keys();
 
     for(int i=0;i<m_listBtn.length();i++)
     {
         // m_listBtn[i]->setStyleSheet("border-image:url("+list.)
         if(i<listKey.length())
         {
-
 
             m_listBtn[i]->setIcon(QIcon(dData[listKey.at(i)]));
 
@@ -96,6 +92,9 @@ void LayerSelector::setData(QMap<QString , QPixmap> dData, QString sPath)
        //     m_listLb[i]->setText(listKey.at(i));
 
             m_listRadioBtn[i]->setText(listKey.at(i));
+
+
+            m_listRadioBtn[i]->setChecked(i==iIdxRadio);
 
             m_listRadioBtn[i]->show();
 
@@ -159,6 +158,8 @@ void LayerSelector::setUiRect()
     setMinimumWidth((iPicW+iMargin)*iCount+10);
 }
 
+
+
 void LayerSelector::slotClicked()
 {
     QPushButton *btn = dynamic_cast<QPushButton*>(sender());
@@ -187,7 +188,10 @@ void LayerSelector::slotClickedRadio()
 
   //  int iIdx = m_listRadioBtn.indexOf(target);
 
-    QSettings conf(m_sPath+"/conf.ini",QSettings::IniFormat);
+   // QSettings conf(m_sPath+"/conf.ini",QSettings::IniFormat);
+
+
+    QSettings conf(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
 
 
     conf.setValue("Target",target->text());

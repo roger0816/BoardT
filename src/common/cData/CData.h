@@ -9,7 +9,8 @@
 #include <QFileInfo>
 #include <QFileInfoList>
 #include <QDir>
-
+#include <QApplication>
+#include <QDateTime>
 
 #define CDATA CData::Instance()
 
@@ -21,9 +22,13 @@ public:
 
     static CData &Instance();
 
+    void createModel(QString sPath);
+
     void readModel(QString sPath);
 
     void writeModel();
+
+    void checkDefine(QString sPath,QMap<QString ,int > defData);
 
     void addLayer(QString sPath);
 

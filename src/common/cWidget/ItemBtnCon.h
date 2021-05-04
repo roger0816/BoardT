@@ -14,7 +14,9 @@ class ItemBtnCon : public ItemBaseObj
 public:
     explicit ItemBtnCon(QWidget *parent = nullptr);
 
-    void updateItem();
+    void init() override;
+
+    void updateItem() override;
     ~ItemBtnCon();
 
 private:

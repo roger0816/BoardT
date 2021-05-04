@@ -7,7 +7,8 @@ LayerAddContent::LayerAddContent(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    m_listBtn<<ui->btnAddText<<ui->btnAddPic<<ui->btnAddVideo<<ui->btnAddBtn;
+    m_listBtn<<ui->btnAddText<<ui->btnAddPic<<ui->btnAddVideo<<ui->btnAddBtn
+            <<ui->btnAddMar<<ui->btnAddQr;
 
 
     foreach(QPushButton *btn,m_listBtn)

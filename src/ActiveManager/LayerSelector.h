@@ -19,6 +19,8 @@ public:
     explicit LayerSelector(QWidget *parent = nullptr);
 
     void setData(QMap<QString , QPixmap> dData,QString sPath);
+
+
 signals:
 
     void sendSelectLayer(QString sName);
@@ -39,7 +41,6 @@ private:
 
     void showEvent(QShowEvent *) override;
     void setUiRect();
-
 
 
 private slots:

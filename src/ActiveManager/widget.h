@@ -45,5 +45,7 @@ private:
     Ui::Widget *ui;
 
     void upload(QString sIp, QString sTarget, QString sPath);
+
+
 };
 #endif // WIDGET_H

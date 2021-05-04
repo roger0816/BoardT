@@ -45,6 +45,9 @@ private:
 
     void typeMapping();
 
+
+    void checkMapping();
+
     QMap<QString,int> m_dDefine;
 
 

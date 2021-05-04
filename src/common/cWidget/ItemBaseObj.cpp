@@ -9,5 +9,7 @@ void ItemBaseObj::setData(ObjData *obj)
 {
     m_obj = obj;
 
-    updateItem();
+
+    init();
+    //updateItem();
 }

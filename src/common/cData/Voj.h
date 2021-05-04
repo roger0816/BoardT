@@ -33,7 +33,8 @@ enum
     ADD_BTN_TEXT=0,
     ADD_BTN_PIC,
     ADD_BTN_VIDEO,
-    ADD_BTN_BTN
+    ADD_BTN_BTN,
+    ADD_BTN_MARQUEE
 
 };
 
@@ -59,6 +60,10 @@ struct DataText
     QString m_sImagePath;
 
     QString m_sCmdPath;
+
+    int m_sMarSpeed = 5;
+
+    QStringList sListText;
 
 
 };

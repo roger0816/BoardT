@@ -13,6 +13,11 @@ ItemLabel::~ItemLabel()
     delete ui;
 }
 
+void ItemLabel::init()
+{
+    updateItem();
+}
+
 
 
 

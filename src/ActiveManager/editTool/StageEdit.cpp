@@ -314,11 +314,13 @@ void StageEdit::on_btnUpload_clicked()
         m_sPreIp = msg.getInput();
 
 
-        QSettings conf(m_sPath+"/../conf.ini",QSettings::IniFormat);
+       // QSettings conf(m_sPath+"/../conf.ini",QSettings::IniFormat);
+
+
+        QSettings conf(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
+
 
         QDir dir(m_sPath);
-
-        conf.setValue("Target",dir.path().split("/").last());
 
         conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
 

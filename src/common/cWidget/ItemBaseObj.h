@@ -17,6 +17,8 @@ public:
 
     void setData(ObjData *obj);
 
+    virtual void init(){}
+
     virtual void updateItem(){}
 
     float m_diffSize = 1.000;

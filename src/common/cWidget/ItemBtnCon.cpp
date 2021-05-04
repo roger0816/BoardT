@@ -8,6 +8,11 @@ ItemBtnCon::ItemBtnCon(QWidget *parent) :
     ui->setupUi(this);
 }
 
+void ItemBtnCon::init()
+{
+    updateItem();
+}
+
 void ItemBtnCon::updateItem()
 {
     if(m_obj==nullptr)

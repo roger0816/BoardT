@@ -271,15 +271,9 @@ void DisplayWidget::addItem(int iIdx)
 
     QString sTmp = "TEXT_%1";
 
-    if(iIdx == ADD_BTN_TEXT)
-    {
-        obj->m_sType = E_TEXT;
 
-        sTmp = "TEXT_%1";
 
-    }
-
-    else if(iIdx == ADD_BTN_PIC)
+    if(iIdx == ADD_BTN_PIC)
     {
         obj->m_sType = E_PIC;
 
@@ -305,7 +299,21 @@ void DisplayWidget::addItem(int iIdx)
 
     }
 
+    else if(iIdx == ADD_BTN_MARQUEE)
+    {
+        obj->m_sType = E_BUTTON;
 
+        obj->m_dataText.sText="BUTTON";
+
+        sTmp = "MARQUEE%1";
+    }
+    else //(iIdx == ADD_BTN_TEXT)
+    {
+        obj->m_sType = E_TEXT;
+
+        sTmp = "TEXT_%1";
+
+    }
 
 
     bool b = false;

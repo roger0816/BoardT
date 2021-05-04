@@ -246,7 +246,12 @@ void Widget::slotTimer()
     }
 
 
-    QSettings conf(QApplication::applicationDirPath()+"/../bin/data/model0/conf.ini",QSettings::IniFormat);
+//    QSettings conf(QApplication::applicationDirPath()+"/../bin/data/model0/conf.ini",QSettings::IniFormat);
+        QSettings conf(QApplication::applicationDirPath()+"/../bin/data/model0/model0.BDM",QSettings::IniFormat);
+
+
+   // QSettings conf(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
+
 
     QString board =conf.value("Target").toString();
 
