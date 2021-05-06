@@ -20,7 +20,7 @@ ItemVideoCon::~ItemVideoCon()
     m_player->stop();
 }
 
-void ItemVideoCon::updateItem()
+void ItemVideoCon::init()
 {
     if(m_obj ==nullptr)
     {

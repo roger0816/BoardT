@@ -14,7 +14,7 @@ CData &CData::Instance()
 void CData::createModel(QString sPath)
 {
     m_sPath = sPath;
-
+    qDebug()<<"create model : "<<sPath;
   //  QSettings define(m_sPath+"/define.ini",QSettings::IniFormat);
 
     QSettings pro(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
@@ -155,42 +155,25 @@ void CData::checkDefine(QString sPath, QMap<QString, int> defData)
 {
     QSettings define(sPath+"/define.ini",QSettings::IniFormat);
 
-    QStringList listDefineKey= define.allKeys();
+    QStringList defKey = define.allKeys();
 
-    QMap<QString,int> dData;
+    QStringList checkKey = defData.keys();
 
-    for(int i=0;i<listDefineKey.length();i++)
+
+
+    for(int i=0;i<checkKey.length();i++)
     {
-        QString sKey = listDefineKey.at(i);
-
-        dData.insert(sKey, define.value(sKey).toInt());
-    }
-
-    QList<int> listValues = dData.values();
-
-
-
-    QStringList listTmp = defData.keys();
-
-    for(int j=0;j<listTmp.length();j++)
-    {
-
-        QString sTarget = listTmp.at(j);
-
-        int iIdx = defData.value(sTarget);
-
-
-        if(listDefineKey.indexOf(sTarget))
+        if(defKey.indexOf(checkKey[i])<0)
         {
-            while(listValues.indexOf(iIdx)>=0)
-            {
-                ++iIdx;
-            }
 
-            define.setValue(sTarget,iIdx);
+            define.setValue(checkKey[i],defData[checkKey[i]]);
         }
 
+
     }
+
+
+
     define.sync();
 
 }
@@ -310,7 +293,17 @@ void CData::writeObj(ObjData *item)
 
         QStringList listName = item->m_dataVideo.listName;
 
-        conf.setValue("Video/list",listName);
+        QStringList list;
+
+        foreach(QString st ,listName)
+        {
+            QString s ="/"+ st.split("bin").last();
+
+
+            list.append(s);
+        }
+
+        conf.setValue("Video/list",list);
 
     }
 

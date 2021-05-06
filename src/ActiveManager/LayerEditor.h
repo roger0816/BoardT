@@ -8,6 +8,7 @@
 #include <QFontDialog>
 #include "DialogMsg.h"
 #include <QDebug>
+#include <QLineEdit>
 
 namespace Ui {
 class LayerEditor;
@@ -73,6 +74,8 @@ private slots:
 
     void on_btnClearLayerBg_clicked();
 
+    void on_txtMar0_textChanged(const QString &arg1);
+
 private:
     Ui::LayerEditor *ui;
 
@@ -94,6 +97,8 @@ private:
 
     bool deleteDirectory(const QString &path);
 
+    QList<QLineEdit*> m_listMar;
+
 
 
 signals:
@@ -104,6 +109,10 @@ signals:
     void callRename(QString sOldPath,QString sNewPash);
 
     void callDelete(QString sPath);
+
+private slots:
+
+    void slotMarChange(const QString &);
 };
 
 #endif // LAYEREDITOR_H

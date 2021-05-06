@@ -122,8 +122,13 @@ void Widget::slotSelector(QString sName)
 
 void Widget::refreshSelector()
 {
+    qDebug()<<"re selector";
+
     QStringList listKey = CDATA.m_dData.keys();
 
+    qDebug()<<"listkey "<<listKey;
+
+    qDebug()<<CDATA.m_dData;
 
     DisplayWidget w;
 
@@ -131,6 +136,8 @@ void Widget::refreshSelector()
 
     for(int i=0;i<listKey.length();i++)
     {
+       qDebug()<<"AA:" <<CDATA.m_dData[listKey.at(i)]->m_sLayerPath;
+
         dPix.insert(listKey[i], w.setLayer(CDATA.m_dData[listKey.at(i)]->m_sLayerPath));
 
     }

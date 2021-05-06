@@ -11,5 +11,5 @@ void ItemBaseObj::setData(ObjData *obj)
 
 
     init();
-    //updateItem();
+    updateItem();
 }

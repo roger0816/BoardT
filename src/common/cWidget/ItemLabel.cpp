@@ -21,6 +21,7 @@ void ItemLabel::init()
 
 
 
+
 void ItemLabel::updateItem()
 {
     if(m_obj!=nullptr)

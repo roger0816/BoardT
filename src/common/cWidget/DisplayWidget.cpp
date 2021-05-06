@@ -9,6 +9,8 @@ DisplayWidget::DisplayWidget(QWidget *parent) :
 
     m_fDiff = 0.50;
 
+    ui->wBg->setObjectName("Display_wBg");
+
     QSize baseSize(1080,1920);
 
     this->resize(baseSize*m_fDiff);
@@ -23,9 +25,11 @@ DisplayWidget::~DisplayWidget()
 
 QPixmap DisplayWidget::setLayer(QString sPath)
 {
-    qDebug()<<"layer path : "<<m_sPath;
 
     m_sPath = sPath;
+
+    qDebug()<<"layer path : "<<m_sPath;
+
 
     m_layerName = m_sPath.split("/").last();
 
@@ -53,7 +57,6 @@ QPixmap DisplayWidget::setLayer(QString sPath)
         connect(item,&ItemBaseContent::sendFocus,this,&DisplayWidget::slotFocus);
 
         connect(item,&ItemBaseContent::sendUpdate,this,&DisplayWidget::slotUpdate);
-
 
         item->setData(listData[i],m_fDiff);
 

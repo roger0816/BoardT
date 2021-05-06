@@ -27,6 +27,8 @@ static QString E_FUNCTION ="function";
 
 static QString E_VIDEO ="video";
 
+static QString E_MARQUEE = "marquee";
+
 
 enum
 {
@@ -89,6 +91,13 @@ struct DataVideo
     QStringList listName;
 
 
+};
+
+struct DataMar
+{
+    QString listText;
+
+    int iSpeed;
 };
 
 

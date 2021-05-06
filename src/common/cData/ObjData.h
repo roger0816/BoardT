@@ -2,6 +2,7 @@
 #define OBJDATA_H
 
 #include <QObject>
+#include <QApplication>
 #include "Voj.h"
 #include <QDebug>
 #include <QSize>
@@ -40,15 +41,14 @@ public:
 
     DataVideo m_dataVideo;
 
+    DataMar m_dataMar;
+
+    QMap<QString,int> m_dDefine;
+
 
 private:
 
-    void typeMapping();
 
-
-    void checkMapping();
-
-    QMap<QString,int> m_dDefine;
 
 
 

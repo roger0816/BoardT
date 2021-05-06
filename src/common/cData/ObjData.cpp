@@ -17,13 +17,15 @@ void ObjData::setPath(QString sPath)
         m_sLayerName = m_sObjPath.split("/").at(m_sObjPath.split("/").length()-2);
     }
 
-    typeMapping();
 
     qDebug()<<"obj : name : "<<m_sName<<" , path : "<<m_sObjPath;
 
     QSettings conf(m_sObjPath+"/conf.ini",QSettings::IniFormat);
 
     QString sType = m_dDefine.key(conf.value("Base/type").toInt());
+
+    qDebug()<<"BB0:"<<m_dDefine;
+
 
     if(sType.trimmed() == "")
         return ;
@@ -138,41 +140,24 @@ void ObjData::setPath(QString sPath)
     }
     else if(sType == E_VIDEO)
     {
-        m_dataVideo.listName =conf.value("Video/list","").toStringList();
+       // m_dataVideo.listName =conf.value("Video/list","").toStringList();
+
+        //QStringList
+
+        m_dataVideo.listName.clear();
+
+        QStringList list = conf.value("Video/list","").toStringList();
+
+        foreach(QString st, list)
+        {
+            QString s = "/home/pi/work/bin"+st;
+
+            m_dataVideo.listName.append(s.replace("//","/"));
+        }
 
     }
 
 
-
-}
-
-
-void ObjData::typeMapping()
-{
-    QSettings defin(m_sObjPath+"/../../define.ini",QSettings::IniFormat);
-
-    m_dDefine.clear();
-
-    QStringList listDefineKey= defin.allKeys();
-
-    QString sMar ="marquee";
-
-
-
-    for(int i=0; i < listDefineKey.length();i++)
-    {
-        QString sKey = listDefineKey.at(i);
-
-        int iValue = defin.value(sKey).toInt();
-
-        qDebug()<<sKey<<" , "<<iValue;
-
-        m_dDefine.insert(sKey,iValue);
-    }
-}
-
-void ObjData::checkMapping()
-{
 
 }
 

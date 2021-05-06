@@ -9,6 +9,14 @@ LayerEditor::LayerEditor(QWidget *parent) :
 
     ui->stackType->setCurrentWidget(ui->pageText);
 
+    m_listMar<<ui->txtMar0<<ui->txtMar1<<ui->txtMar2<<ui->txtMar3<<ui->txtMar4<<ui->txtMar5<<ui->txtMar6<<ui->txtMar7;
+
+
+    foreach(QLineEdit *tar,m_listMar)
+    {
+        connect(tar,&QLineEdit::textChanged,this,&LayerEditor::slotMarChange);
+    }
+
 }
 
 LayerEditor::~LayerEditor()
@@ -108,7 +116,18 @@ void LayerEditor::refresh()
 
         ui->stackType->setCurrentWidget(ui->pageVideo);
 
+        ui->txtPlayList->clear();
 
+        for(int i=0;i<m_obj->m_dataVideo.listName.length();i++)
+        {
+            ui->txtPlayList->append(m_obj->m_dataVideo.listName[i]);
+        }
+
+    }
+
+    else if(m_obj->m_sType == E_MARQUEE)
+    {
+        ui->stackType->setCurrentWidget(ui->pageMar);
 
     }
 
@@ -260,6 +279,26 @@ bool LayerEditor::deleteDirectory(const QString &path)
             deleteDirectory(fi.absoluteFilePath());
     }
     return dir.rmpath(dir.absolutePath());
+}
+
+void LayerEditor::slotMarChange(const QString &)
+{
+
+    m_obj->m_dataMar.listText.clear();
+
+    for(int i=0;i<m_listMar.length();i++)
+    {
+        QString sText = m_obj->m_dataMar.listText.at(i);
+
+        if(sText.trimmed()!="")
+        {
+            m_obj->m_dataMar.listText.append(sText);
+        }
+
+    }
+
+
+
 }
 
 
@@ -469,6 +508,9 @@ void LayerEditor::on_btnVideoSet_clicked()
     qDebug()<<"listselect video : "<<listSelect;
     QStringList *listName = &data->m_dataVideo.listName;
 
+    listName->clear();
+
+    listName->append(listSelect);
 
 
 }
@@ -511,4 +553,9 @@ void LayerEditor::on_btnClearLayerBg_clicked()
 
         emit callUpdate();
     }
+}
+
+void LayerEditor::on_txtMar0_textChanged(const QString &arg1)
+{
+
 }
