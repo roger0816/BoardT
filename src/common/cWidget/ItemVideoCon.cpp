@@ -12,7 +12,7 @@ ItemVideoCon::ItemVideoCon(QWidget *parent) : ItemBaseObj(parent)
 
     m_player->setStyleSheet("background-color:rgb(177,177,177);");
 
-
+    m_player->show();
 }
 
 ItemVideoCon::~ItemVideoCon()
@@ -42,8 +42,22 @@ void ItemVideoCon::showEvent(QShowEvent *)
     reSize();
 }
 
+void ItemVideoCon::setPlayList(QStringList list)
+{
+    m_player->stop();
+
+    m_player->openList(list);
+}
+
 void ItemVideoCon::reSize()
 {
-    m_wBg->resize(size());
-    m_player->resize(m_wBg->size());
+    m_wBg->setMaximumSize(size());
+
+    m_wBg->setMinimumSize(size());
+
+    m_player->setMaximumSize(size());
+
+    m_player->setMinimumSize(size());
+
+
 }

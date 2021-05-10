@@ -21,17 +21,21 @@ private:
 
     void timerEvent(QTimerEvent *) override;
 
-    void resizeEvent(QResizeEvent *) override;
+    void reSetSize() override;
 
-    void showEvent(QShowEvent *) override;
+    void updateItem() override;
 
-    void reSetSize();
+    int m_iIdx=0;
 
-    int m_iIdx;
+    QStringList m_listData;
 
     QWidget *m_wBg;
 
     QLabel *m_lb;
+
+    int m_iSpeed = 5;
+
+    void setText(QString st);
 
 signals:
 

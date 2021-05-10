@@ -19,12 +19,10 @@ public:
     explicit ItemPicCon(QWidget *parent = nullptr);
     ~ItemPicCon();
 
+    void updateItem() override;
 
     void timerEvent(QTimerEvent *) override;
 
-    void resizeEvent(QResizeEvent * ) override;
-
-    void showEvent(QShowEvent *) override;
 
 
 private:

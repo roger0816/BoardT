@@ -16,6 +16,11 @@ ItemPicCon::~ItemPicCon()
     delete ui;
 }
 
+void ItemPicCon::updateItem()
+{
+    m_iSecCount = 9;
+}
+
 void ItemPicCon::timerEvent(QTimerEvent *)
 {
     m_iSecCount++;
@@ -49,12 +54,3 @@ void ItemPicCon::timerEvent(QTimerEvent *)
 
 }
 
-void ItemPicCon::resizeEvent(QResizeEvent *)
-{
-
-}
-
-void ItemPicCon::showEvent(QShowEvent *)
-{
-
-}

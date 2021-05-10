@@ -129,6 +129,27 @@ void LayerEditor::refresh()
     {
         ui->stackType->setCurrentWidget(ui->pageMar);
 
+        QStringList list = m_obj->m_dataMar.listText;
+
+        for(int i=0;i<m_listMar.length() && i <list.length() ;i++)
+        {
+            m_listMar[i]->setText(list[i]);
+        }
+
+
+         ui->sbMar->setValue(m_obj->m_dataMar.iSpeed);
+
+
+
+        emit callUpdate();
+    }
+
+    else if(m_obj->m_sType == E_QRCODE)
+    {
+        ui->stackType->setCurrentWidget(ui->pageQr);
+
+        ui->txQr->setText(m_obj->m_dataText.sText);
+
     }
 
     m_bLockCallUpdate =false;
@@ -165,13 +186,13 @@ void LayerEditor::on_btnTxtColor_clicked()
         m_bFristTxColor = false;
 
     }
-    QColor color = dialog.getColor(txColor); //,nullptr,"",QColorDialog::ShowAlphaChannel);
+    QColor color = dialog.getColor(txColor,nullptr,"",QColorDialog::ShowAlphaChannel);
 
-    QPushButton *btn = dynamic_cast<QPushButton*>(sender());
+//    QPushButton *btn = dynamic_cast<QPushButton*>(sender());
 
-    QString sStyle ="background-color:rgba(%1,%2,%3,%4);";
+//    QString sStyle ="background-color:rgba(%1,%2,%3,%4);";
 
-    btn->setStyleSheet(sStyle.arg(color.red()).arg(color.green()).arg(color.blue()).arg(color.alpha()));
+//    btn->setStyleSheet(sStyle.arg(color.red()).arg(color.green()).arg(color.blue()).arg(color.alpha()));
 
     data->m_dataText.textColor = color;
 
@@ -206,13 +227,13 @@ void LayerEditor::on_btnBgColor_clicked()
         m_bFristBgColor = false;
 
     }
-    QColor color = dialog.getColor(bgColor); //,nullptr,"",QColorDialog::ShowAlphaChannel);
+    QColor color = dialog.getColor(bgColor,nullptr,"",QColorDialog::ShowAlphaChannel);
 
-    QPushButton *btn = dynamic_cast<QPushButton*>(sender());
+//    QPushButton *btn = dynamic_cast<QPushButton*>(sender());
 
-    QString sStyle ="background-color:rgba(%1,%2,%3,%4);";
+//    QString sStyle ="background-color:rgba(%1,%2,%3,%4);";
 
-    btn->setStyleSheet(sStyle.arg(color.red()).arg(color.green()).arg(color.blue()).arg(color.alpha()));
+   // btn->setStyleSheet(sStyle.arg(color.red()).arg(color.green()).arg(color.blue()).arg(color.alpha()));
 
     data->m_dataText.bgColor = color;
 
@@ -286,19 +307,23 @@ void LayerEditor::slotMarChange(const QString &)
 
     m_obj->m_dataMar.listText.clear();
 
+
     for(int i=0;i<m_listMar.length();i++)
     {
-        QString sText = m_obj->m_dataMar.listText.at(i);
+        QString sText = m_listMar[i]->text();
 
         if(sText.trimmed()!="")
         {
             m_obj->m_dataMar.listText.append(sText);
+
+
+
         }
 
     }
 
 
-
+    emit callUpdate();
 }
 
 
@@ -409,8 +434,8 @@ void LayerEditor::on_btnSelectFont_clicked()
     QFont iniFont=ui->btnSelectFont->font();
     bool   ok=false;
     QFont font=QFontDialog::getFont(&ok,iniFont);
-    if (ok)
-        ui->btnSelectFont->setFont(font);
+//    if (ok)
+//        ui->btnSelectFont->setFont(font);
 
     m_obj->m_dataText.font = font;
 
@@ -555,7 +580,33 @@ void LayerEditor::on_btnClearLayerBg_clicked()
     }
 }
 
-void LayerEditor::on_txtMar0_textChanged(const QString &arg1)
+
+void LayerEditor::on_sbMar_valueChanged(int )
 {
 
+    m_obj->m_dataMar.iSpeed = ui->sbMar->value();
+
+    emit callUpdate();
+}
+
+void LayerEditor::on_btnMarTxColor_clicked()
+{
+    on_btnTxtColor_clicked();
+}
+
+void LayerEditor::on_btnMarBgColor_clicked()
+{
+    on_btnBgColor_clicked();
+}
+
+void LayerEditor::on_btnMarFont_clicked()
+{
+    on_btnSelectFont_clicked();
+}
+
+void LayerEditor::on_txQr_textChanged(const QString &arg1)
+{
+    m_obj->m_dataText.sText = ui->txQr->text();
+
+    emit callUpdate();
 }

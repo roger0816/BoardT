@@ -13,6 +13,8 @@
 #include "ItemPicCon.h"
 #include "ItemVideoCon.h"
 #include "ItemBtnCon.h"
+#include "ItemMarCon.h"
+#include "ItemQrCon.h"
 namespace Ui {
 class ItemBaseContent;
 }

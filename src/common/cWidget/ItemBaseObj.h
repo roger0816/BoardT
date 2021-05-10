@@ -21,6 +21,13 @@ public:
 
     virtual void updateItem(){}
 
+    void resizeEvent(QResizeEvent *) override{reSetSize();}
+
+    void showEvent(QShowEvent *) override{reSetSize();}
+
+    virtual void reSetSize(){}
+
+
     float m_diffSize = 1.000;
 
     ObjData* m_obj =nullptr;

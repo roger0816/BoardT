@@ -29,6 +29,8 @@ static QString E_VIDEO ="video";
 
 static QString E_MARQUEE = "marquee";
 
+static QString E_QRCODE = "qrcode";
+
 
 enum
 {
@@ -36,7 +38,8 @@ enum
     ADD_BTN_PIC,
     ADD_BTN_VIDEO,
     ADD_BTN_BTN,
-    ADD_BTN_MARQUEE
+    ADD_BTN_MARQUEE,
+    ADD_BTN_QR
 
 };
 
@@ -95,9 +98,9 @@ struct DataVideo
 
 struct DataMar
 {
-    QString listText;
+    QStringList listText;
 
-    int iSpeed;
+    int iSpeed = 3;
 };
 
 

@@ -304,11 +304,23 @@ void DisplayWidget::addItem(int iIdx)
 
     else if(iIdx == ADD_BTN_MARQUEE)
     {
-        obj->m_sType = E_BUTTON;
+        obj->m_sType = E_MARQUEE;
 
-        obj->m_dataText.sText="BUTTON";
+        obj->m_dataMar.listText=QStringList()<<"跑馬燈元件"<<"MARQUEE";
+
+        obj->m_dataMar.iSpeed=5;
+
+        obj->m_dataText.bgColor = QColor(255,255,255,0);
+
 
         sTmp = "MARQUEE%1";
+    }
+
+    else if(iIdx == ADD_BTN_QR)
+    {
+        obj->m_sType = E_QRCODE;
+
+         sTmp = "QRCODE_%1";
     }
     else //(iIdx == ADD_BTN_TEXT)
     {

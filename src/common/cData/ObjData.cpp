@@ -51,13 +51,11 @@ void ObjData::setPath(QString sPath)
 
     m_sType = sType;
 
-    if(sType == E_TEXT || sType == E_BUTTON)
+    if(sType == E_TEXT || sType == E_BUTTON || sType == E_MARQUEE || sType == E_QRCODE)
     {
 
-        QString sTitle= "Title";
+        QString sTitle= sType;
 
-        if(sType == E_BUTTON)
-            sTitle ="Button";
 
         if(QFileInfo(m_sObjPath+"/bg.png").exists())
         {
@@ -99,6 +97,15 @@ void ObjData::setPath(QString sPath)
 
         m_dataText.sText = conf.value(sTitle+"/text").toString();
 
+        if(sType == E_MARQUEE)
+        {
+            m_dataMar.listText =conf.value(sTitle+"/list","").toStringList();
+
+            m_dataMar.iSpeed = conf.value(sTitle+"/speed").toInt();
+
+
+
+        }
 
     }
 

@@ -2,6 +2,7 @@
 #include <QApplication>
 #include "Global.h"
 #include "DialogPainter.h"
+#include "ItemVideoCon.h"
 
 //#include <QtWebKitWidgets>
 #define GLOBAL Global::Instance();
@@ -11,6 +12,12 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+
+//    ItemVideoCon w;
+
+//    w.show();
+
+//      return a.exec();
 
 //    DialogPainter p;
 

@@ -25,6 +25,8 @@ private:
 
     void showEvent(QShowEvent* ) override;
 
+    void setPlayList(QStringList list);
+
     void reSize();
 
     QWidget *m_wBg;

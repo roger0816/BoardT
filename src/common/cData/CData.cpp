@@ -207,21 +207,14 @@ void CData::writeObj(ObjData *item)
 
     conf.setValue("Base/changeTimer",5);
 
-    if(item->m_sType == E_TEXT || item->m_sType == E_BUTTON)
+    if(item->m_sType == E_TEXT || item->m_sType == E_BUTTON
+            ||item->m_sType == E_MARQUEE || item->m_sType == E_QRCODE )
     {
 
-        QString sTitle = "Title";
+        QString sTitle = item->m_sType;
 
-        int iType =m_dDefine[E_TEXT];
 
-        if(item->m_sType == E_BUTTON)
-        {
-            iType =m_dDefine[E_BUTTON];
-
-            sTitle = "Button";
-        }
-
-        conf.setValue("Base/type",iType);
+        conf.setValue("Base/type",m_dDefine[item->m_sType]);
 
         if(item->m_dataText.m_sImagePath!="")
         {
@@ -260,6 +253,14 @@ void CData::writeObj(ObjData *item)
         conf.setValue(sTitle+"/txtColor",sTxtColor);
 
         conf.setValue(sTitle+"/bgColor",sBgColor);
+
+        if(item->m_sType == E_MARQUEE)
+        {
+            conf.setValue(sTitle+"/speed",item->m_dataMar.iSpeed);
+
+            conf.setValue(sTitle+"/list",item->m_dataMar.listText);
+        }
+
 
     }
 
@@ -375,6 +376,7 @@ CData::CData(QObject *parent) : QObject(parent)
 
     def.insert("ticket",9);
     def.insert("active",10);
+    def.insert("qrcode",11);
 
     def.insert("onSale",14);
     def.insert("mediaCent",17);

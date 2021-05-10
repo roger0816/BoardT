@@ -74,7 +74,6 @@ private slots:
 
     void on_btnClearLayerBg_clicked();
 
-    void on_txtMar0_textChanged(const QString &arg1);
 
 private:
     Ui::LayerEditor *ui;
@@ -113,6 +112,11 @@ signals:
 private slots:
 
     void slotMarChange(const QString &);
+    void on_sbMar_valueChanged(int);
+    void on_btnMarTxColor_clicked();
+    void on_btnMarBgColor_clicked();
+    void on_btnMarFont_clicked();
+    void on_txQr_textChanged(const QString &arg1);
 };
 
 #endif // LAYEREDITOR_H

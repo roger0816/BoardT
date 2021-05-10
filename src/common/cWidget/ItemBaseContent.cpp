@@ -92,6 +92,16 @@ void ItemBaseContent::setData(ObjData *obj, float diffSize)
 
         itemLabel = new ItemBtnCon(m_wBg);
     }
+    else if(m_sType == E_MARQUEE)
+    {
+
+        itemLabel = new ItemMarCon(m_wBg);
+    }
+    else if(m_sType == E_QRCODE)
+    {
+
+        itemLabel = new ItemQrCon(m_wBg);
+    }
     else
     {
         itemLabel = new ItemLabel(m_wBg);
