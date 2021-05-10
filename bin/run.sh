@@ -5,7 +5,7 @@
 #make clean
 #make
 
-cd /home/pi/work/bin
+cd /home/pi/BoardT/bin
 
 killall ActiveBoard
 

@@ -1,11 +1,11 @@
 #!/bin/bash
 
-cd /home/pi/work/src/ActiveBoard
+cd /home/pi/BoardT/src/ActiveBoard
 qmake ActiveBoard.pro
 #make clean
 make
 
-cd /home/pi/work/bin
+cd /home/pi/BoardT/bin
 
 killall ActiveBoard
 
