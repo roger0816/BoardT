@@ -20,6 +20,8 @@ public:
 
     CPlayer *m_player;
 
+    void setPlayList(QStringList list);
+
 private:
 
     QWidget *m_wBg;

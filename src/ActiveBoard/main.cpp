@@ -3,7 +3,7 @@
 #include "Global.h"
 #include "DialogPainter.h"
 #include "ItemVideoCon.h"
-
+#include "ItemVideo.h"
 //#include <QtWebKitWidgets>
 #define GLOBAL Global::Instance();
 
@@ -11,6 +11,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
 
 
 //    ItemVideoCon w;
@@ -25,6 +26,8 @@ int main(int argc, char *argv[])
 
     GLOBAL;
     Widget w;
+
+
     if(argc>=2)
     {
         w.m_sTestModel = QString(argv[1]);

@@ -12,7 +12,10 @@
 #include "LayerContent.h"
 #include <QTimerEvent>
 #include <QResizeEvent>
+#include <QShowEvent>
 #include <QMouseEvent>
+#include "DisplayWidget.h"
+#include "ItemVideoCon.h"
 static QString RDATA = "../bin/data";
 
 namespace Ui {
@@ -29,15 +32,18 @@ public:
 
     void loadConfig(QString sLayer);
 
-
+    DisplayWidget *m_wDisplay = nullptr;
     QFileInfoList m_listDir;
 
     QList<LayerContent*> m_listContent;
 
     void resizeEvent(QResizeEvent *) override;
 
+    void showEvent(QShowEvent *) override;
 
     QString m_sTestModel="";
+
+    ItemVideoCon *m_video =nullptr;
 
 private:
 

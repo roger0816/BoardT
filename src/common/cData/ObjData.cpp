@@ -157,7 +157,7 @@ void ObjData::setPath(QString sPath)
 
         foreach(QString st, list)
         {
-            QString s = "/home/pi/work/bin"+st;
+            QString s = QApplication::applicationDirPath()+st;
 
             m_dataVideo.listName.append(s.replace("//","/"));
         }

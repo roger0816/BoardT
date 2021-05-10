@@ -27,10 +27,14 @@ ItemVideo::~ItemVideo()
 bool ItemVideo::init()
 {
 
+   // m_player->openList(QStringList()<<"/home/pi/BoardT/bin/video/a.mp4");
+
+
    // getVideo(m_sPath+"/../../../video");
 
 
     QStringList list = QDir(m_sPath).entryList(QStringList()<<"*.mp4");
+
 
     m_listVideo.clear();
 
@@ -44,6 +48,14 @@ bool ItemVideo::init()
 
 
     return true;
+}
+
+void ItemVideo::setPlayList(QStringList list)
+{
+    m_listVideo = list;
+
+    m_player->openList(m_listVideo);
+
 }
 
 void ItemVideo::reSize()

@@ -52,7 +52,9 @@ QPixmap DisplayWidget::setLayer(QString sPath)
     for(int i=0;i<listData.length();i++)
     {
 
-        ItemBaseContent *item = new ItemBaseContent(ui->wBg);
+        ItemBaseContent *item;
+
+        item = new ItemBaseContent(ui->wBg);
 
         connect(item,&ItemBaseContent::sendFocus,this,&DisplayWidget::slotFocus);
 
@@ -67,6 +69,30 @@ QPixmap DisplayWidget::setLayer(QString sPath)
         item->show();
 
         m_listItem.append(item);
+
+        if(listData[i]->m_sType == E_VIDEO)
+        {
+
+
+            if(m_video == nullptr)
+            {
+                m_video = new ItemVideo(this);
+            }
+
+            m_video->show();
+
+            m_video->setPlayList(listData[i]->m_dataVideo.listName);
+
+            m_video->resize(item->size());
+
+            m_video->move(item->pos());
+
+
+        }
+
+
+
+
     }
 
 
@@ -320,7 +346,7 @@ void DisplayWidget::addItem(int iIdx)
     {
         obj->m_sType = E_QRCODE;
 
-         sTmp = "QRCODE_%1";
+        sTmp = "QRCODE_%1";
     }
     else //(iIdx == ADD_BTN_TEXT)
     {

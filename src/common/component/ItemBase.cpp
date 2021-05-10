@@ -8,10 +8,10 @@ ItemBase::ItemBase(QWidget *parent) : QWidget(parent)
 void ItemBase::setPath(QString sPath)
 {
     m_sPath= sPath;
-    qDebug()<<"BB3";
+
     init();
 
-    qDebug()<<"BB4";
+
 }
 
 void ItemBase::mousePressEvent(QMouseEvent *)

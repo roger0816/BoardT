@@ -15,11 +15,13 @@ public:
     explicit ItemVideoCon(QWidget *parent = nullptr);
     ~ItemVideoCon();
 
-     void init() override;
+     void updateItem() override;
+
+    QStringList m_listRes;
+
 
 private:
 
-    CPlayer *m_player;
 
     void resizeEvent(QResizeEvent *) override;
 

@@ -28,6 +28,25 @@ DEFINES +=DEVELOP
 QT += multimedia
 QT += multimediawidgets
 }
+else {
+QT       += webkitwidgets
+DEFINES +=WEB
+DEFINES +=VLC
+
+LIBS += -lwiringPi
+
+INCLUDEPATH +=$$PWD/../lib/Pn532-nfc-hat-code/raspberrypi/c
+
+HEADERS += \
+../lib/Pn532-nfc-hat-code/raspberrypi/c/pn532.h \
+../lib/Pn532-nfc-hat-code/raspberrypi/c/pn532_rpi.h \
+
+SOURCES += \
+../lib/Pn532-nfc-hat-code/raspberrypi/c/pn532.c \
+../lib/Pn532-nfc-hat-code/raspberrypi/c/pn532_rpi.c \
+
+
+}
 
 SOURCES += \
     DialogMsg.cpp \

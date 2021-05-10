@@ -23,7 +23,7 @@ Widget::Widget(QWidget *parent) :
 
 
 
-    QSettings conf(QApplication::applicationDirPath()+"/../bin/data/model0/conf.ini",QSettings::IniFormat);
+    QSettings conf(QApplication::applicationDirPath()+"/../bin/data/model0/model0.BDM",QSettings::IniFormat);
 
     m_sCurrentBoard =conf.value("Target").toString();
 
@@ -36,7 +36,7 @@ Widget::Widget(QWidget *parent) :
 
 
 
-    ui->wDisplay->setMinimumSize(1080,1920);
+   // ui->wDisplay->setMinimumSize(1080,1920);
 }
 
 Widget::~Widget()
@@ -51,13 +51,35 @@ Widget::~Widget()
 void Widget::loadConfig(QString sLayer)
 {
 
+    if(m_wDisplay == nullptr)
+        m_wDisplay = new DisplayWidget(ui->wBg);
+
+    m_wDisplay->show();
+
+//    if(m_video==nullptr)
+//        m_video = new ItemVideoCon(this);
+
+//    m_video->resize(400,300);
+
+//    m_video->raise();
+
     CDATA.readModel(QApplication::applicationDirPath()+"/../bin/data/model0");
 
-    ui->wDisplay->setLayer(sLayer);
+    m_wDisplay->setLayer(sLayer);
 
-    ui->wDisplay->setEdit(true);
+    m_wDisplay->setEdit(true);
 
-    ui->stack->setCurrentWidget(ui->wDisplay);
+    ui->stack->setCurrentWidget(ui->wBg);
+
+    QTimer::singleShot(3000,this,[=]
+    {
+        if(m_video==nullptr)
+            m_video = new ItemVideoCon(m_wDisplay);
+
+        m_video->resize(200,100);
+
+        m_video->raise();
+    });
 
     return ;
 
@@ -206,6 +228,12 @@ void Widget::resizeEvent(QResizeEvent *)
 
 }
 
+void Widget::showEvent(QShowEvent *)
+{
+    if(m_wDisplay!=nullptr)
+    m_wDisplay->resize(size());
+}
+
 void Widget::mousePressEvent(QMouseEvent *e)
 {
     if(e->pos().x()> width()-50 && e->pos().y()> height()-50)
@@ -239,7 +267,8 @@ void Widget::slotTimer()
 
         if(m_iPressTime>5)
         {
-            ui->wDisplay->setEdit(true);
+           if(m_wDisplay!=nullptr)
+            m_wDisplay->setEdit(true);
 
             m_iPressTime = 0;
         }
