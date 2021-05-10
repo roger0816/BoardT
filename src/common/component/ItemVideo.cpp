@@ -94,7 +94,6 @@ void ItemVideo::playing(QString sName)
 void ItemVideo::setPlayAdnPause(bool bPlay)
 {
 
-    qDebug()<<"  BBB  "<<bPlay;
 
     if(bPlay)
         m_player->play();

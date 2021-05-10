@@ -136,7 +136,6 @@ void Widget::refreshSelector()
 
     for(int i=0;i<listKey.length();i++)
     {
-       qDebug()<<"AA:" <<CDATA.m_dData[listKey.at(i)]->m_sLayerPath;
 
         dPix.insert(listKey[i], w.setLayer(CDATA.m_dData[listKey.at(i)]->m_sLayerPath));
 
@@ -228,12 +227,8 @@ void Widget::on_btnUpload_clicked()
 
         conf.sync();
 
-        // upload(m_sPreIp,sPath+"/conf.ini","/home/pi/work/bin/data/layer");
 
-        // upload(m_sPreIp,sPath+"/define.ini","/home/pi/work/bin/data/layer");
-
-
-        upload(m_sPreIp," -r "+sPath,"/home/pi/work/bin/data/");
+        upload(m_sPreIp," -r "+sPath,"/home/pi/BoardT/bin/data/");
 
     }
 }

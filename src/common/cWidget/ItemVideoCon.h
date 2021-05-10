@@ -7,6 +7,42 @@
 #include "ItemBaseObj.h"
 #include <QShowEvent>
 #include <QResizeEvent>
+#include <QLabel>
+
+
+
+class ItemPlayer : public QWidget
+{
+    Q_OBJECT
+public:
+    explicit ItemPlayer(QWidget *parent = nullptr);
+
+    ~ItemPlayer();
+
+    CPlayer *m_player;
+
+    void setPlayList(QStringList list);
+
+private:
+
+    QWidget *m_wBg;
+
+    QStringList m_listVideo;
+
+    void reSize();
+
+    void showEvent(QShowEvent* ) override;
+
+    void resizeEvent(QResizeEvent* ) override;
+
+    void getVideo(QString sPath);
+public slots:
+    void playing(QString sName);
+
+    void setPlayAdnPause(bool bPlay);
+
+};
+
 
 class ItemVideoCon : public ItemBaseObj
 {
@@ -31,7 +67,7 @@ private:
 
     void reSize();
 
-    QWidget *m_wBg;
+    QLabel *m_wBg;
 
 
 signals:

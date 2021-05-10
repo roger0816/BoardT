@@ -76,7 +76,7 @@ QPixmap DisplayWidget::setLayer(QString sPath)
 
             if(m_video == nullptr)
             {
-                m_video = new ItemVideo(this);
+                m_video = new ItemPlayer(this);
             }
 
             m_video->show();

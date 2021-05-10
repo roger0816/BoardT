@@ -56,13 +56,6 @@ void Widget::loadConfig(QString sLayer)
 
     m_wDisplay->show();
 
-//    if(m_video==nullptr)
-//        m_video = new ItemVideoCon(this);
-
-//    m_video->resize(400,300);
-
-//    m_video->raise();
-
     CDATA.readModel(QApplication::applicationDirPath()+"/../bin/data/model0");
 
     m_wDisplay->setLayer(sLayer);
@@ -70,16 +63,6 @@ void Widget::loadConfig(QString sLayer)
     m_wDisplay->setEdit(true);
 
     ui->stack->setCurrentWidget(ui->wBg);
-
-    QTimer::singleShot(3000,this,[=]
-    {
-        if(m_video==nullptr)
-            m_video = new ItemVideoCon(m_wDisplay);
-
-        m_video->resize(200,100);
-
-        m_video->raise();
-    });
 
     return ;
 

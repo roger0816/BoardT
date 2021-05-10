@@ -9,7 +9,6 @@
 #include <QResizeEvent>
 #include <QShowEvent>
 #include "ItemVideoCon.h"
-#include "ItemVideo.h"
 
 namespace Ui {
 class DisplayWidget;
@@ -48,7 +47,7 @@ private:
 
     bool checkObjName(QString sObj);
 
-    ItemVideo *m_video = nullptr;
+    ItemPlayer *m_video = nullptr;
 signals:
 
     void changeTarget(QString sPath);
