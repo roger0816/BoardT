@@ -87,7 +87,7 @@ QPixmap DisplayWidget::setLayer(QString sPath)
 
             m_video->move(item->pos());
 
-
+            m_video->setHidden(m_bEdit);
         }
 
 
@@ -106,6 +106,9 @@ QPixmap DisplayWidget::setLayer(QString sPath)
 void DisplayWidget::setEdit(bool b)
 {
     m_bEdit = b;
+
+    if(m_video!=nullptr)
+    m_video->setHidden(m_bEdit);
 
     foreach(ItemBaseContent *t,m_listItem)
     {

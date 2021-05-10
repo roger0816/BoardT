@@ -32,7 +32,7 @@ Widget::Widget(QWidget *parent) :
 
     connect(&m_timer,&QTimer::timeout,this,&Widget::slotTimer);
 
-    QTimer::singleShot(3000,this,SLOT(loadingLicense()));
+    QTimer::singleShot(1000,this,SLOT(loadingLicense()));
 
 
 
@@ -55,6 +55,8 @@ void Widget::loadConfig(QString sLayer)
         m_wDisplay = new DisplayWidget(ui->wBg);
 
     m_wDisplay->show();
+
+    m_wDisplay->resize(ui->wBg->size());
 
     CDATA.readModel(QApplication::applicationDirPath()+"/../bin/data/model0");
 
