@@ -39,6 +39,8 @@ private:
 
     bool m_bEdit = false;
 
+    int m_iBorderSize = 0;
+
     void resizeEvent(QResizeEvent *) override;
 
     void showEvent(QShowEvent *) override;
@@ -46,6 +48,8 @@ private:
     void updateItemRect();
 
     bool checkObjName(QString sObj);
+
+    void refreshBg();
 
     ItemPlayer *m_video = nullptr;
 signals:

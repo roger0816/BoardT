@@ -15,19 +15,27 @@ void CData::createModel(QString sPath)
 {
     m_sPath = sPath;
     qDebug()<<"create model : "<<sPath;
-  //  QSettings define(m_sPath+"/define.ini",QSettings::IniFormat);
+    //  QSettings define(m_sPath+"/define.ini",QSettings::IniFormat);
+
+    checkDefine();
 
     QSettings pro(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
 
     QStringList listKey = m_dData.keys();
 
-    pro.setValue("Target","layer0");
+
+    if(!QDir(sPath+"/def").exists())
+    {
+        addLayer(m_sPath+"/def");
+    }
+
+
+    pro.setValue("Target",DEF_LAYER_NAME);
 
     pro.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
 
     pro.sync();
 
-    QDir().mkdir(m_sPath+"/layer0");
 
 
 
@@ -39,6 +47,9 @@ void CData::readModel(QString sPath)
 
     m_sPath = sPath;
 
+    checkDefine();
+
+
     m_sModelName = m_sPath.split("/").last();
 
     typeMapping();
@@ -47,10 +58,7 @@ void CData::readModel(QString sPath)
 
     m_dData.clear();
 
-
-
     QFileInfoList listDir = QDir(sPath).entryInfoList(QDir::AllDirs);
-
 
 
     for(int i =0; i<listDir.length(); i++)
@@ -58,7 +66,7 @@ void CData::readModel(QString sPath)
 
         QFileInfo dir = listDir.at(i);
 
-        if(dir.fileName()!="." && dir.fileName()!="..")
+        if(dir.fileName()!="." && dir.fileName()!=".." && dir.fileName().toLower()!=BK_LAYER_NAME)
         {
 
             LayerData *layer = new LayerData(this);
@@ -76,9 +84,12 @@ void CData::readModel(QString sPath)
 
 
 
+
+
+
 }
 
-void CData::writeModel()
+void CData::writeModel(QString defLayer)
 {
 
 
@@ -102,10 +113,22 @@ void CData::writeModel()
 
     QSettings pro(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
 
+    QString sPre = pro.value("Target","").toString();
+
+    if(sPre != defLayer.split("/").last())
+    {
+        pro.setValue("Target",defLayer.split("/").last());
+    }
+    pro.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
+
+    pro.sync();
+
+
+
     QStringList listKey = m_dData.keys();
 
 
-    pro.sync();
+
 
 
     for(int i=0;i<listKey.length();i++)
@@ -151,8 +174,46 @@ void CData::writeModel()
 
 }
 
-void CData::checkDefine(QString sPath, QMap<QString, int> defData)
+void CData::checkDefine()
 {
+
+
+    QString sPath = QApplication::applicationDirPath()+"/data/model0";
+
+
+    QMap<QString, int > defData;
+
+    defData.insert("text",1);
+
+    defData.insert("pic",2);
+
+    defData.insert("button",3);
+
+    defData.insert("dateTime",4);
+
+    defData.insert("web",5);
+    defData.insert("function",6);
+
+    defData.insert("video",7);
+    defData.insert("logo",8);
+
+    defData.insert("ticket",9);
+    defData.insert("active",10);
+    defData.insert("qrcode",11);
+
+    defData.insert("onSale",14);
+    defData.insert("mediaCent",17);
+
+    defData.insert("marquee",21);
+
+
+    //
+
+
+
+
+
+
     QSettings define(sPath+"/define.ini",QSettings::IniFormat);
 
     QStringList defKey = define.allKeys();
@@ -313,8 +374,41 @@ void CData::writeObj(ObjData *item)
 
 }
 
+bool CData::deleteDirectory(const QString &path)
+{
+    if (path.isEmpty())
+        return false;
+
+    QDir dir(path);
+    if(!dir.exists())
+        return true;
+
+    dir.setFilter(QDir::AllEntries | QDir::NoDotAndDotDot);
+    QFileInfoList fileList = dir.entryInfoList();
+    foreach (QFileInfo fi, fileList)
+    {
+        if (fi.isFile())
+            fi.dir().remove(fi.fileName());
+        else
+            deleteDirectory(fi.absoluteFilePath());
+    }
+    return dir.rmpath(dir.absolutePath());
+
+}
+
 void CData::addLayer(QString sPath)
 {
+
+
+    QDir().mkdir(sPath);
+
+    QSettings def(sPath+"/"+sPath.split("/").last()+".BDT",QSettings::IniFormat);
+
+    def.setValue("Base/resumeTimer",15);
+
+    def.sync();
+
+
     LayerData *layer = new LayerData(this);
 
     layer->m_dDefine = m_dDefine;
@@ -324,6 +418,23 @@ void CData::addLayer(QString sPath)
     m_dData.insert(sPath.split("/").last(),layer);
 
     qDebug()<<"add layer : "<<sPath<<" , data count : "<<m_dData.count();
+}
+
+void CData::removeLayer(QString sPath)
+{
+
+    QString sKey = sPath.split("/").last();
+
+    m_dData.value(sKey)->deleteLater();
+
+    m_dData.remove(sKey);
+
+    QString sCmd ="rm -rf "+sPath;
+
+
+    deleteDirectory(sPath);
+
+    qDebug()<<"remove layer : "<<sPath<<" , data count : "<<m_dData.count();
 }
 
 ObjData *CData::getObj(QString layer, QString objName, bool &bOk)
@@ -355,35 +466,8 @@ ObjData *CData::getObj(QString layer, QString objName, bool &bOk)
 
 CData::CData(QObject *parent) : QObject(parent)
 {
-    QString sDef = QApplication::applicationDirPath()+"/data/model0";
 
 
-    QMap<QString, int > def;
-
-    def.insert("text",1);
-
-    def.insert("pic",2);
-
-    def.insert("button",3);
-
-    def.insert("dateTime",4);
-
-    def.insert("web",5);
-    def.insert("function",6);
-
-    def.insert("video",7);
-    def.insert("logo",8);
-
-    def.insert("ticket",9);
-    def.insert("active",10);
-    def.insert("qrcode",11);
-
-    def.insert("onSale",14);
-    def.insert("mediaCent",17);
-
-    def.insert("marquee",21);
-
-    checkDefine(sDef,def);
 }
 
 void CData::typeMapping()

@@ -8,6 +8,7 @@
 #include "LayerNewModel.h"
 #include <QColorDialog>
 #include "LayerAddContent.h"
+#include <QProcess>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -36,10 +37,20 @@ private slots:
 
     void on_btnUpload_clicked();
 
+    void on_btnTest_clicked();
+
+    void on_btnRemoveLayer_clicked();
+
+    void on_btnTry_clicked();
+
+    void on_btnLayerBg_clicked();
+
+    void on_btnDelLayerBg_clicked();
+
 public slots:
     void slotSelector(QString sName);
 
-    void refreshSelector();
+    void refreshSelector(bool bToDef = false);
 
 private:
     Ui::Widget *ui;

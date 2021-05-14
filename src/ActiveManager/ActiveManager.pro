@@ -50,6 +50,7 @@ SOURCES += \
 
 SOURCES += \
     DialogMsg.cpp \
+    LayerAction.cpp \
     LayerAddContent.cpp \
     LayerEditor.cpp \
     LayerSelector.cpp \
@@ -58,6 +59,7 @@ SOURCES += \
 
 HEADERS += \
     DialogMsg.h \
+    LayerAction.h \
     LayerAddContent.h \
     LayerEditor.h \
     LayerSelector.h \
@@ -65,6 +67,7 @@ HEADERS += \
 
 FORMS += \
     DialogMsg.ui \
+    LayerAction.ui \
     LayerAddContent.ui \
     LayerEditor.ui \
     widget.ui

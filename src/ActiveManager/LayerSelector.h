@@ -11,6 +11,8 @@
 #include <QLabel>
 #include <QRadioButton>
 #include <QSettings>
+#include <QDateTime>
+#include <QButtonGroup>
 
 class LayerSelector : public QWidget
 {
@@ -20,7 +22,13 @@ public:
 
     void setData(QMap<QString , QPixmap> dData,QString sPath);
 
+    void toDef();
 
+    //edit select focus
+    QString m_sCurrentPath="";
+
+    //defult layer select
+    QString m_sSetTargetPath = "def";
 signals:
 
     void sendSelectLayer(QString sName);
@@ -37,6 +45,7 @@ private:
 
     QList<QRadioButton*> m_listRadioBtn;
 
+
     void resizeEvent(QResizeEvent *) override;
 
     void showEvent(QShowEvent *) override;
@@ -48,6 +57,7 @@ private slots:
     void slotClicked();
 
     void slotClickedRadio();
+
 
 };
 

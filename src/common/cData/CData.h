@@ -12,6 +12,9 @@
 #include <QApplication>
 #include <QDateTime>
 
+static QString DEF_LAYER_NAME = "def";
+
+static QString BK_LAYER_NAME ="bk";
 #define CDATA CData::Instance()
 
 
@@ -26,12 +29,13 @@ public:
 
     void readModel(QString sPath);
 
-    void writeModel();
+    void writeModel(QString defLayer=DEF_LAYER_NAME);
 
-    void checkDefine(QString sPath,QMap<QString ,int > defData);
+    void checkDefine();
 
     void addLayer(QString sPath);
 
+    void removeLayer(QString sPath);
 
     QMap < QString , LayerData*> m_dData;
 
@@ -57,6 +61,7 @@ private:
     void writeObj(ObjData *item);
 
 
+    bool deleteDirectory(const QString &path);
 
 
 signals:

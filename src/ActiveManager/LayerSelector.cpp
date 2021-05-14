@@ -5,8 +5,6 @@ LayerSelector::LayerSelector(QWidget *parent) : QWidget(parent)
     m_lay =new QHBoxLayout;
 
 
-
-
 }
 
 void LayerSelector::setData(QMap<QString , QPixmap> dData, QString sPath)
@@ -16,7 +14,7 @@ void LayerSelector::setData(QMap<QString , QPixmap> dData, QString sPath)
 
     m_sPath = sPath;
 
-   // QSettings conf(sPath+"/conf.ini",QSettings::IniFormat);
+    // QSettings conf(sPath+"/conf.ini",QSettings::IniFormat);
 
     QSettings conf(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
 
@@ -31,10 +29,15 @@ void LayerSelector::setData(QMap<QString , QPixmap> dData, QString sPath)
 
         sTarget = dData.keys().first();
 
-        conf.setValue("Target",sTarget);
+        conf.setValue("Target","def");
     }
 
     QStringList listKey = dData.keys();
+
+    int iDef = listKey.indexOf("def");
+
+    if(iDef>=0 && iDef < listKey.length())
+        listKey.move(iDef,0);
 
     int iIdxRadio = qBound(0,listKey.indexOf(sTarget),listKey.length()-1);
 
@@ -62,7 +65,7 @@ void LayerSelector::setData(QMap<QString , QPixmap> dData, QString sPath)
     {
         QRadioButton *btn = new QRadioButton(this);
 
-      //  lb->setAlignment(Qt::AlignHCenter);
+        //  lb->setAlignment(Qt::AlignHCenter);
 
         connect(btn,&QRadioButton::clicked,this,&LayerSelector::slotClickedRadio);
 
@@ -77,6 +80,8 @@ void LayerSelector::setData(QMap<QString , QPixmap> dData, QString sPath)
     }
 
 
+
+
     for(int i=0;i<m_listBtn.length();i++)
     {
         // m_listBtn[i]->setStyleSheet("border-image:url("+list.)
@@ -87,9 +92,9 @@ void LayerSelector::setData(QMap<QString , QPixmap> dData, QString sPath)
 
             m_listBtn[i]->show();
 
-//            m_lay->addWidget(m_listBtn[i]);
+            //            m_lay->addWidget(m_listBtn[i]);
 
-       //     m_listLb[i]->setText(listKey.at(i));
+            //     m_listLb[i]->setText(listKey.at(i));
 
             m_listRadioBtn[i]->setText(listKey.at(i));
 
@@ -98,21 +103,41 @@ void LayerSelector::setData(QMap<QString , QPixmap> dData, QString sPath)
 
             m_listRadioBtn[i]->show();
 
+
+
         }
         else
         {
             m_listBtn[i]->hide();
 
             m_listRadioBtn[i]->hide();
+
+
         }
 
 
     }
 
+    m_sCurrentPath = m_sPath+"/"+m_listRadioBtn[qBound(0,iIdxRadio,m_listRadioBtn.length()-1)]->text();
+
+    emit m_listRadioBtn[iIdxRadio]->clicked();
+
     setUiRect();
 
-//        setLayout(m_lay);
+    //        setLayout(m_lay);
 
+}
+
+void LayerSelector::toDef()
+{
+    if(m_listBtn.length()>0)
+    {
+        emit m_listBtn.first()->click();
+
+
+        emit m_listRadioBtn.first()->click();
+
+    }
 }
 
 void LayerSelector::resizeEvent(QResizeEvent *)
@@ -127,7 +152,7 @@ void LayerSelector::showEvent(QShowEvent *)
 
 void LayerSelector::setUiRect()
 {
-    int iPicH = height()-24;
+    int iPicH = height()-50;
 
     int iPicW = iPicH*1080/1920;
 
@@ -141,19 +166,19 @@ void LayerSelector::setUiRect()
     {
         if(m_listBtn[i]->isVisible())
         {
-            m_listBtn[i]->setGeometry((iMargin+iPicW)*iCount,0,iPicW,iPicH);
 
-
+            m_listBtn[i]->setGeometry((iMargin+iPicW)*iCount,24,iPicW,iPicH);
 
             m_listBtn[i]->setIconSize(m_listBtn[i]->size()*0.9);
 
-            m_listRadioBtn[i]->setGeometry(m_listBtn[i]->x(),iPicH,iPicW,24);
+            m_listRadioBtn[i]->setGeometry(m_listBtn[i]->x(),0,iPicW,24);
 
             iCount++;
         }
 
 
     }
+
 
     setMinimumWidth((iPicW+iMargin)*iCount+10);
 }
@@ -180,23 +205,33 @@ void LayerSelector::slotClicked()
 
     emit sendSelectLayer(m_listRadioBtn.at(iIdx)->text());
 
+    m_sCurrentPath = m_sPath+"/"+m_listRadioBtn.at(iIdx)->text();
+
 }
 
 void LayerSelector::slotClickedRadio()
 {
     QRadioButton * target = dynamic_cast<QRadioButton*>(sender());
 
-  //  int iIdx = m_listRadioBtn.indexOf(target);
 
-   // QSettings conf(m_sPath+"/conf.ini",QSettings::IniFormat);
+    m_sSetTargetPath = m_sPath+"/"+target->text().trimmed();
 
-
-    QSettings conf(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
+//    QSettings conf(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
 
 
-    conf.setValue("Target",target->text());
+//    QString sPre = conf.value("Target","").toString();
 
-    conf.sync();
+//    if(sPre != target->text())
+//    {
+//        conf.setValue("Target",target->text());
 
+//        conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
+
+//        conf.sync();
+
+
+
+//    }
 
 }
+

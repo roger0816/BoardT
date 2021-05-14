@@ -76,6 +76,8 @@ void DisplayContent::setBgImage(QString sPath)
 {
     m_sBgPath = sPath;
 
+
+
     ui->wBg->setStyleSheet("QWidget#"+ui->wBg->objectName()+"{border-image:url("+sPath+");}");
 }
 

@@ -7,6 +7,8 @@ Widget::Widget(QWidget *parent)
 {
     ui->setupUi(this);
 
+
+
     QString sDef = QApplication::applicationDirPath()+"/data/model0";
 
     CDATA;
@@ -15,15 +17,15 @@ Widget::Widget(QWidget *parent)
 
     connect(ui->wLayerSelector,&LayerSelector::sendSelectLayer,this,&Widget::slotSelector);
 
-    connect(ui->wDisplay,&DisplayWidget::changeTarget,ui->wEditor,&LayerEditor::setTarget);
+    connect(ui->wDisplay,&DisplayWidget::changeTarget,ui->wStyle,&LayerEditor::setTarget);
 
-    connect(ui->wEditor,&LayerEditor::callUpdate,ui->wDisplay,&DisplayWidget::refreshItem);
+    connect(ui->wStyle,&LayerEditor::callUpdate,ui->wDisplay,&DisplayWidget::refreshItem);
 
-    connect(ui->wEditor,&LayerEditor::callRaise,ui->wDisplay,&DisplayWidget::raiseItem);
+    connect(ui->wStyle,&LayerEditor::callRaise,ui->wDisplay,&DisplayWidget::raiseItem);
 
-    connect(ui->wEditor,&LayerEditor::callRename,ui->wDisplay,&DisplayWidget::renameItem);
+    connect(ui->wStyle,&LayerEditor::callRename,ui->wDisplay,&DisplayWidget::renameItem);
 
-    connect(ui->wEditor,&LayerEditor::callDelete,ui->wDisplay,&DisplayWidget::deleteItem);
+    connect(ui->wStyle,&LayerEditor::callDelete,ui->wDisplay,&DisplayWidget::deleteItem);
 
     connect(ui->wAdd,&LayerAddContent::btnAddClicked,ui->wDisplay,&DisplayWidget::addItem);
 
@@ -41,7 +43,10 @@ Widget::~Widget()
 void Widget::loadModel(QString sPath)
 {
 
-    if(QDir().exists(sPath))
+
+    bool bHasModel = QDir().exists(sPath);
+
+    if(bHasModel)
     {
         CDATA.readModel(sPath);
 
@@ -59,6 +64,8 @@ void Widget::loadModel(QString sPath)
 
 
     refreshSelector();
+
+
 }
 
 
@@ -78,6 +85,7 @@ void Widget::on_btnSelectModel_clicked()
 
 void Widget::on_btnAddModel_clicked()
 {
+    /**
     LayerNewModel dialog;
 
     dialog.setPath("新增模組",QApplication::applicationDirPath()+"/data/");
@@ -108,6 +116,7 @@ void Widget::on_btnAddModel_clicked()
 
         loadModel(sTarget);
     }
+    **/
 }
 
 void Widget::slotSelector(QString sName)
@@ -120,7 +129,7 @@ void Widget::slotSelector(QString sName)
     ui->wDisplay->setEdit(true);
 }
 
-void Widget::refreshSelector()
+void Widget::refreshSelector(bool bToDef)
 {
     qDebug()<<"re selector";
 
@@ -142,6 +151,11 @@ void Widget::refreshSelector()
     }
 
     ui->wLayerSelector->setData(dPix,CDATA.m_sPath);
+
+    if(bToDef)
+    {
+        ui->wLayerSelector->toDef();
+    }
 }
 
 void Widget::on_btnAddLayer_clicked()
@@ -156,17 +170,51 @@ void Widget::on_btnAddLayer_clicked()
     {
         QString defLayer = newLay.m_sModelPath;
 
-        QDir().mkdir(defLayer);
-
-        QSettings def(defLayer+"/.BDT",QSettings::IniFormat);
-
-        def.setValue("Base/resumeTimer",15);
-
-        def.sync();
-
         CDATA.addLayer(defLayer);
 
         refreshSelector();
+    }
+}
+
+void Widget::on_btnRemoveLayer_clicked()
+{
+    DialogMsg msg;
+
+    QString sPath = ui->wLayerSelector->m_sCurrentPath;
+
+    QString sTarget = sPath.split("/").last();
+
+    if(sTarget==DEF_LAYER_NAME)
+    {
+        msg.setDialogInfo("預設樣版無法刪除，請選擇其它",QStringList()<<"ok");
+
+        msg.exec();
+
+        return;
+    }
+
+    else if(sTarget=="")
+    {
+        msg.setDialogInfo("請先選擇要刪除的樣版",QStringList()<<"ok");
+
+        msg.exec();
+
+        return;
+    }
+
+    QString sTmp ="確定要刪除' %1 '嗎？";
+
+    msg.setDialogInfo(sTmp.arg(sTarget),QStringList()<<"否"<<"是");
+
+    int iRe = msg.exec();
+
+    if(iRe == 1)
+    {
+        CDATA.removeLayer(sPath);
+
+        refreshSelector(true);
+
+
     }
 }
 
@@ -182,9 +230,24 @@ void Widget::on_btnSave_clicked()
     {
         CDATA.writeModel();
 
+        QString sPath = CDATA.m_sPath;
+
+        QSettings conf(sPath+"/"+sPath.split("/").last()+".BDM",QSettings::IniFormat);
+
+        QDir dir(sPath);
+
+        // conf.setValue("Target",dir.path().split("/").last());
+
+        conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
+
+        conf.sync();
+
+
         refreshSelector();
     }
 }
+
+
 
 void Widget::on_btnUpload_clicked()
 {
@@ -245,6 +308,87 @@ void Widget::upload(QString sIp, QString sTarget, QString sPath)
 
     system(sCmd.toStdString().c_str());
 
+
+//    QProcess p;
+
+//    p.start(sCmd.toStdString().c_str());
+
+//    p.waitForFinished();
 }
 
 
+
+void Widget::on_btnTest_clicked()
+{
+
+
+    QString sApp = QApplication::applicationDirPath()+"/ActiveBoard.exe ";
+
+   // QString sApp = QApplication::applicationDirPath()+"/ActiveTools.exe change ";
+  //  system(sApp.toStdString().c_str());
+
+
+    QProcess p;
+
+    p.setWorkingDirectory(QApplication::applicationDirPath());
+
+    p.startDetached(sApp);
+//p.start(sApp);
+}
+
+
+
+void Widget::on_btnTry_clicked()
+{
+   // QString sApp = QApplication::applicationDirPath()+"/ActiveBoard.exe ";
+
+    QString sApp = QApplication::applicationDirPath()+"/ActiveTools.exe change "+ui->wLayerSelector->m_sSetTargetPath;
+    system(sApp.toStdString().c_str());
+
+
+    //QProcess p;
+
+    //p.setWorkingDirectory(QApplication::applicationDirPath());
+
+    //p.startDetached(sApp);
+//p.start(sApp);
+}
+
+void Widget::on_btnLayerBg_clicked()
+{
+    if(CDATA.m_sCurrentLayerName == "")
+        return;
+
+    QString sTarget =CDATA.m_sCurrentLayerName;
+
+    if(CDATA.m_dData.keys().indexOf(sTarget)<0)
+        return ;
+
+    QString sPath = QFileDialog::getOpenFileName(this,"選擇版面背景圖",QApplication::applicationDirPath(),"*.png");
+
+    if(sPath != CDATA.m_dData[sTarget]->m_sBgPath)
+    {
+        CDATA.m_dData[sTarget]->m_sBgPath = sPath;
+
+        ui->wDisplay->refreshItem();
+    }
+}
+
+void Widget::on_btnDelLayerBg_clicked()
+{
+    if(CDATA.m_sCurrentLayerName == "")
+        return;
+
+    QString sTarget =CDATA.m_sCurrentLayerName;
+
+    if(CDATA.m_dData.keys().indexOf(sTarget)<0)
+        return ;
+
+
+    if(CDATA.m_dData[sTarget]->m_sBgPath != "")
+    {
+        CDATA.m_dData[sTarget]->m_sBgPath = "";
+
+        ui->wDisplay->refreshItem();
+    }
+}

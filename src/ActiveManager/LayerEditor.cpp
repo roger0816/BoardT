@@ -95,11 +95,7 @@ void LayerEditor::refresh()
 
         QString sStyle = "background-color:rgba(%1,%2,%3,%4);";
 
-        ui->btnBgColor->setStyleSheet(sStyle.arg(colorBg.red()).arg(colorBg.green())
-                                      .arg(colorBg.blue()).arg(colorBg.alpha()));
 
-        ui->btnTxtColor->setStyleSheet(sStyle.arg(colorTxt.red()).arg(colorTxt.green())
-                                       .arg(colorTxt.blue()).arg(colorTxt.alpha()));
 
     }
     else if(m_obj->m_sType == E_PIC)
@@ -541,44 +537,8 @@ void LayerEditor::on_btnVideoSet_clicked()
 }
 
 
-void LayerEditor::on_btnBgSet_clicked()
-{
-    if(CDATA.m_sCurrentLayerName == "")
-        return;
-
-    QString sTarget =CDATA.m_sCurrentLayerName;
-
-    if(CDATA.m_dData.keys().indexOf(sTarget)<0)
-        return ;
-
-    QString sPath = QFileDialog::getOpenFileName(this,"選擇版面背景圖",QApplication::applicationDirPath(),"*.png");
-
-    if(sPath != CDATA.m_dData[sTarget]->m_sBgPath)
-    {
-        CDATA.m_dData[sTarget]->m_sBgPath = sPath;
-
-        emit callUpdate();
-    }
-}
-
-void LayerEditor::on_btnClearLayerBg_clicked()
-{
-    if(CDATA.m_sCurrentLayerName == "")
-        return;
-
-    QString sTarget =CDATA.m_sCurrentLayerName;
-
-    if(CDATA.m_dData.keys().indexOf(sTarget)<0)
-        return ;
 
 
-    if(CDATA.m_dData[sTarget]->m_sBgPath != "")
-    {
-        CDATA.m_dData[sTarget]->m_sBgPath = "";
-
-        emit callUpdate();
-    }
-}
 
 
 void LayerEditor::on_sbMar_valueChanged(int )

@@ -28,6 +28,13 @@ ItemBaseContent::ItemBaseContent(QWidget *parent) :
 
     m_touch->hide();
 
+
+    m_click = new ItemClickTouch(this);
+
+    m_click->setObjectName("m_itemClick");
+
+    m_click->show();
+
 }
 
 ItemBaseContent::~ItemBaseContent()
@@ -148,6 +155,8 @@ void ItemBaseContent::setEdit(bool b)
     m_bEdit = b;
 
     m_touch->setVisible(b);
+
+    m_click->setVisible(!b);
 }
 
 void ItemBaseContent::updateItem()
@@ -193,6 +202,10 @@ void ItemBaseContent::resizeEvent(QResizeEvent *)
     m_touch->resize(size());
 
     m_touch->raise();
+
+    m_click->resize(size());
+
+    m_click->raise();
 }
 
 void ItemBaseContent::slotMouseEvent(QMouseEvent *e)

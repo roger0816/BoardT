@@ -10,11 +10,22 @@ void ItemQrCon::updateItem()
 {
     QString sText= m_obj->m_dataText.sText;
 
+    if(sText.trimmed().length()<1)
+    {
+        m_lb->setStyleSheet("background-color:gray;");
+
+        m_lb->setPixmap(QPixmap());
+
+        return ;
+
+    }
+
     QRecLevel level = QR_ECLEVEL_H;
 
     QRencodeMode mode = QR_MODE_8;
 
     QByteArray bsharecode = sText.toUtf8();
+
 
     QRcode *code = QRcode_encodeString(sText.toLatin1(), 7, level, mode, 1);
 

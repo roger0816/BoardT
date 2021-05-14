@@ -45,7 +45,7 @@ QPixmap DisplayWidget::setLayer(QString sPath)
         return QPixmap();
 
 
-    ui->wBg->setStyleSheet("QWidget#"+ui->wBg->objectName()+"{border-image:url("+layerData->m_sBgPath+");}");
+    refreshBg();
 
     QList<ObjData* > listData = layerData->m_listData;
 
@@ -114,6 +114,16 @@ void DisplayWidget::setEdit(bool b)
     {
         t->setEdit(b);
     }
+
+    if(m_bEdit)
+    m_iBorderSize = 2;
+    else
+        m_iBorderSize = 0;
+
+//{ border: 2px groove gray; border-style: outset;background-color: rgb(220, 220, 220);}
+
+    refreshBg();
+
 }
 
 void DisplayWidget::resizeEvent(QResizeEvent *)
@@ -170,6 +180,19 @@ bool DisplayWidget::checkObjName(QString sObj)
 
 }
 
+void DisplayWidget::refreshBg()
+{
+    LayerData *layerData = CDATA.m_dData[m_layerName] ;
+
+
+    if(layerData!=nullptr)
+    ui->wBg->setStyleSheet("QWidget#"+ui->wBg->objectName()+"{"
+                                                            "border-image:url("+layerData->m_sBgPath+");"
+                          " border: "+QString::number(m_iBorderSize)+"px groove gray; border-style: outset;background-color: rgba(0, 0, 0,0); "
+                                                                                                     "}");
+
+}
+
 void DisplayWidget::slotFocus()
 {
     if(!m_bEdit)
@@ -222,8 +245,9 @@ void DisplayWidget::refreshItem()
     if(layerData==nullptr)
         return ;
 
-    ui->wBg->setStyleSheet("QWidget#"+ui->wBg->objectName()+"{border-image:url("+layerData->m_sBgPath+");}");
+  //  ui->wBg->setStyleSheet("QWidget#"+ui->wBg->objectName()+"{border-image:url("+layerData->m_sBgPath+");}");
 
+    refreshBg();
 }
 
 void DisplayWidget::raiseItem(QString sPath)

@@ -19,7 +19,21 @@ namespace Ui {
 class ItemBaseContent;
 }
 
+class ItemClickTouch :public QWidget
+{
+    Q_OBJECT
+public:
+    explicit ItemClickTouch(QWidget *parent = nullptr):QWidget(parent){}
 
+    void mousePressEvent(QMouseEvent *e)  override{emit sendPress(e);}
+
+    void mouseReleaseEvent(QMouseEvent *e ) override{emit sendRelease(e);}
+
+signals:
+    void sendPress(QMouseEvent *);
+
+    void sendRelease(QMouseEvent *);
+};
 
 class ItemEditTouch :public QWidget
 {
@@ -51,15 +65,15 @@ public:
 
 
 
-//        QHBoxLayout * lay=  new QHBoxLayout(this);
+        //        QHBoxLayout * lay=  new QHBoxLayout(this);
 
-//        lay->setMargin(0);
+        //        lay->setMargin(0);
 
-//        lay->setSpacing(0);
+        //        lay->setSpacing(0);
 
-//        lay->addWidget(m_wBg);
+        //        lay->addWidget(m_wBg);
 
-//        setLayout(lay);
+        //        setLayout(lay);
 
         setRoll(false);
     }
@@ -157,6 +171,8 @@ private:
     QGridLayout *m_lay;
 
     ItemEditTouch *m_touch;
+
+    ItemClickTouch *m_click;
 
     bool m_bEdit = false;
 
