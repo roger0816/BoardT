@@ -18,6 +18,9 @@
   <property name="windowTitle">
    <string>Widget</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
     <number>0</number>
@@ -233,8 +236,11 @@
                       <pointsize>30</pointsize>
                      </font>
                     </property>
+                    <property name="styleSheet">
+                     <string notr="true">image: url(:/button/add.png);</string>
+                    </property>
                     <property name="text">
-                     <string>+</string>
+                     <string/>
                     </property>
                    </widget>
                   </item>
@@ -246,10 +252,10 @@
                      </font>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">color: rgb(255, 0, 0);</string>
+                     <string notr="true">color: rgb(255, 0, 0);image: url(:/button/remove.png);</string>
                     </property>
                     <property name="text">
-                     <string>-</string>
+                     <string/>
                     </property>
                    </widget>
                   </item>
@@ -319,19 +325,22 @@
               </property>
               <layout class="QVBoxLayout" name="verticalLayout">
                <item>
-                <widget class="QPushButton" name="pushButton">
+                <widget class="QPushButton" name="btnSetting">
                  <property name="font">
                   <font>
                    <pointsize>24</pointsize>
                   </font>
                  </property>
                  <property name="text">
-                  <string>樣板底圖</string>
+                  <string>裝置設定</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_3">
+                <widget class="QPushButton" name="btnEdit">
                  <property name="font">
                   <font>
                    <pointsize>24</pointsize>
@@ -340,10 +349,31 @@
                  <property name="text">
                   <string>元件編輯</string>
                  </property>
+                 <property name="checkable">
+                  <bool>true</bool>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_2">
+                <widget class="QPushButton" name="btnSchedule">
+                 <property name="font">
+                  <font>
+                   <pointsize>24</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>輪播排程</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnTimeSchedule">
                  <property name="font">
                   <font>
                    <pointsize>24</pointsize>
@@ -351,6 +381,9 @@
                  </property>
                  <property name="text">
                   <string>時間排程</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -366,6 +399,30 @@
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_8">
+                 <property name="font">
+                  <font>
+                   <pointsize>24</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>板型庫</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_6">
+                 <property name="font">
+                  <font>
+                   <pointsize>24</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>元件庫</string>
+                 </property>
+                </widget>
                </item>
                <item>
                 <widget class="Line" name="line_3">
@@ -470,7 +527,7 @@
                <string notr="true">QWidget#wContent{background-color: rgb(239, 239, 239);}</string>
               </property>
               <property name="currentIndex">
-               <number>1</number>
+               <number>4</number>
               </property>
               <widget class="QWidget" name="page0">
                <layout class="QGridLayout" name="gridLayout_2">
@@ -505,7 +562,190 @@ p, li { white-space: pre-wrap; }
                 </item>
                </layout>
               </widget>
-              <widget class="QWidget" name="wWork">
+              <widget class="QWidget" name="pageSetting">
+               <property name="font">
+                <font>
+                 <pointsize>20</pointsize>
+                </font>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_6">
+                <item row="0" column="0">
+                 <widget class="QWidget" name="wSettingBg" native="true">
+                  <property name="font">
+                   <font>
+                    <pointsize>20</pointsize>
+                   </font>
+                  </property>
+                  <widget class="QGroupBox" name="groupBox_2">
+                   <property name="geometry">
+                    <rect>
+                     <x>110</x>
+                     <y>30</y>
+                     <width>311</width>
+                     <height>221</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>20</pointsize>
+                    </font>
+                   </property>
+                   <property name="title">
+                    <string>排程播放</string>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_4">
+                    <item>
+                     <widget class="Line" name="line_4">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QRadioButton" name="radioButton">
+                      <property name="font">
+                       <font>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>不啟用</string>
+                      </property>
+                      <property name="checked">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QRadioButton" name="radioButton_2">
+                      <property name="font">
+                       <font>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>輪播式</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QRadioButton" name="radioButton_3">
+                      <property name="font">
+                       <font>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>時間式</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                  <widget class="QGroupBox" name="groupBox_3">
+                   <property name="geometry">
+                    <rect>
+                     <x>490</x>
+                     <y>60</y>
+                     <width>311</width>
+                     <height>251</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>20</pointsize>
+                    </font>
+                   </property>
+                   <property name="title">
+                    <string>機器休眠</string>
+                   </property>
+                   <layout class="QGridLayout" name="gridLayout_5">
+                    <item row="0" column="0">
+                     <widget class="Line" name="line_5">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="0">
+                     <widget class="QWidget" name="widget" native="true">
+                      <layout class="QGridLayout" name="gridLayout_7">
+                       <item row="1" column="1">
+                        <widget class="QTimeEdit" name="timeEdit_2">
+                         <property name="font">
+                          <font>
+                           <pointsize>20</pointsize>
+                          </font>
+                         </property>
+                         <property name="currentSection">
+                          <enum>QDateTimeEdit::HourSection</enum>
+                         </property>
+                         <property name="displayFormat">
+                          <string>hh:mm</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="0">
+                        <widget class="QLabel" name="label_3">
+                         <property name="font">
+                          <font>
+                           <pointsize>20</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>到:</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="1">
+                        <widget class="QTimeEdit" name="timeEdit">
+                         <property name="font">
+                          <font>
+                           <pointsize>20</pointsize>
+                          </font>
+                         </property>
+                         <property name="currentSection">
+                          <enum>QDateTimeEdit::HourSection</enum>
+                         </property>
+                         <property name="displayFormat">
+                          <string>hh:mm</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="0">
+                        <widget class="QLabel" name="label_2">
+                         <property name="font">
+                          <font>
+                           <pointsize>20</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>從:</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item row="1" column="0">
+                     <widget class="QCheckBox" name="checkBox">
+                      <property name="font">
+                       <font>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>啟用</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+              <widget class="QWidget" name="pageWork">
                <layout class="QGridLayout" name="gridLayout_4">
                 <item row="0" column="5" rowspan="2">
                  <widget class="QWidget" name="wEditArea" native="true">
@@ -537,7 +777,7 @@ p, li { white-space: pre-wrap; }
                        <string>屬性</string>
                       </attribute>
                      </widget>
-                     <widget class="QWidget" name="wAction">
+                     <widget class="LayerAction" name="wAction">
                       <attribute name="title">
                        <string>行為</string>
                       </attribute>
@@ -647,6 +887,172 @@ p, li { white-space: pre-wrap; }
                 </item>
                </layout>
               </widget>
+              <widget class="QWidget" name="pageSchedule"/>
+              <widget class="QWidget" name="pageTimeSchedule">
+               <layout class="QGridLayout" name="gridLayout_8">
+                <item row="0" column="0">
+                 <widget class="QWidget" name="wBgTime" native="true">
+                  <layout class="QGridLayout" name="gridLayout_9">
+                   <property name="spacing">
+                    <number>40</number>
+                   </property>
+                   <item row="3" column="2">
+                    <widget class="QTimeEdit" name="teFrom">
+                     <property name="font">
+                      <font>
+                       <pointsize>22</pointsize>
+                      </font>
+                     </property>
+                     <property name="currentSection">
+                      <enum>QDateTimeEdit::HourSection</enum>
+                     </property>
+                     <property name="displayFormat">
+                      <string>hh:mm:ss</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="1">
+                    <widget class="QComboBox" name="cbTimeDayOfWeek">
+                     <property name="font">
+                      <font>
+                       <pointsize>20</pointsize>
+                      </font>
+                     </property>
+                     <item>
+                      <property name="text">
+                       <string>星期一</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>星期二</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>星期三</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>星期四</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>星期五</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>星期六</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>星期日</string>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
+                   <item row="5" column="1" colspan="2">
+                    <widget class="QCheckBox" name="cbStopPreVideo">
+                     <property name="font">
+                      <font>
+                       <pointsize>20</pointsize>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>切換頁面中止先前影片播放</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="2">
+                    <widget class="QTimeEdit" name="teTo">
+                     <property name="font">
+                      <font>
+                       <pointsize>22</pointsize>
+                      </font>
+                     </property>
+                     <property name="currentSection">
+                      <enum>QDateTimeEdit::HourSection</enum>
+                     </property>
+                     <property name="displayFormat">
+                      <string>hh:mm:ss</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="3">
+                    <spacer name="horizontalSpacer_6">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="0" column="0" colspan="4">
+                    <widget class="QLabel" name="lbLayerNameForTime">
+                     <property name="font">
+                      <font>
+                       <pointsize>24</pointsize>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>樣板</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="1" colspan="2">
+                    <widget class="QLabel" name="label_5">
+                     <property name="font">
+                      <font>
+                       <pointsize>22</pointsize>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>在裝置設定打開啟用</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0">
+                    <spacer name="horizontalSpacer_5">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="7" column="2">
+                    <spacer name="verticalSpacer_3">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
              </widget>
             </item>
            </layout>
@@ -693,6 +1099,12 @@ p, li { white-space: pre-wrap; }
    <class>LayerAddContent</class>
    <extends>QWidget</extends>
    <header>LayerAddContent.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>LayerAction</class>
+   <extends>QWidget</extends>
+   <header>LayerAction.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

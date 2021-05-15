@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QLabel>
+#include <QApplication>
+#include <QProcess>
 #include <QDebug>
 #include "ObjData.h"
 #include "CData.h"
@@ -195,7 +197,9 @@ private:
 
     QColor m_bgColor=QColor(255,255,255,255);
 
+public slots:
 
+    void slotPress(QMouseEvent *e);
 
 
 

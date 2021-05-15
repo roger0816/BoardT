@@ -7,6 +7,13 @@ Widget::Widget(QWidget *parent)
 {
     ui->setupUi(this);
 
+    m_listButtonStack.addButton(ui->btnSetting,0);
+
+    m_listButtonStack.addButton(ui->btnEdit,1);
+
+    m_listButtonStack.addButton(ui->btnSchedule,2);
+
+    m_listButtonStack.addButton(ui->btnTimeSchedule,3);
 
 
     QString sDef = QApplication::applicationDirPath()+"/data/model0";
@@ -18,6 +25,8 @@ Widget::Widget(QWidget *parent)
     connect(ui->wLayerSelector,&LayerSelector::sendSelectLayer,this,&Widget::slotSelector);
 
     connect(ui->wDisplay,&DisplayWidget::changeTarget,ui->wStyle,&LayerEditor::setTarget);
+
+    connect(ui->wDisplay,&DisplayWidget::changeTarget,ui->wAction,&LayerAction::setTarget);
 
     connect(ui->wStyle,&LayerEditor::callUpdate,ui->wDisplay,&DisplayWidget::refreshItem);
 
@@ -32,6 +41,8 @@ Widget::Widget(QWidget *parent)
     ui->wStackWork->setCurrentWidget(ui->page0);
 
     ui->wTop->hide();
+
+    ui->tabWidget->setCurrentWidget(ui->wStyle);
 
 }
 
@@ -122,11 +133,41 @@ void Widget::on_btnAddModel_clicked()
 void Widget::slotSelector(QString sName)
 {
 
-    ui->wStackWork->setCurrentWidget(ui->wWork);
 
-    ui->wDisplay->setLayer(CDATA.m_sPath+"/"+sName);
 
-    ui->wDisplay->setEdit(true);
+    if(ui->btnEdit->isChecked())
+    {
+        ui->wStackWork->setCurrentWidget(ui->pageWork);
+
+        ui->wDisplay->setLayer(CDATA.m_sPath+"/"+sName);
+
+        ui->wDisplay->setEdit(true);
+
+    }
+    else if(ui->btnSetting->isChecked())
+    {
+        ui->wStackWork->setCurrentWidget(ui->pageSetting);
+    }
+
+    else if(ui->btnSchedule->isChecked())
+    {
+        ui->wStackWork->setCurrentWidget(ui->pageSchedule);
+    }
+
+    else if(ui->btnTimeSchedule->isChecked())
+    {
+        ui->wStackWork->setCurrentWidget(ui->pageTimeSchedule);
+
+
+        setTimeData(sName);
+
+    }
+
+
+
+
+
+
 }
 
 void Widget::refreshSelector(bool bToDef)
@@ -228,7 +269,7 @@ void Widget::on_btnSave_clicked()
 
     if(iRe == 1)
     {
-        CDATA.writeModel();
+        CDATA.writeModel(ui->wLayerSelector->m_sSetTargetPath);
 
         QString sPath = CDATA.m_sPath;
 
@@ -309,11 +350,65 @@ void Widget::upload(QString sIp, QString sTarget, QString sPath)
     system(sCmd.toStdString().c_str());
 
 
-//    QProcess p;
+    //    QProcess p;
 
-//    p.start(sCmd.toStdString().c_str());
+    //    p.start(sCmd.toStdString().c_str());
 
-//    p.waitForFinished();
+    //    p.waitForFinished();
+}
+
+void Widget::refreshTimeSchedule()
+{
+
+    if(m_bLockTimeSend)
+        return ;
+
+    qDebug()<<"AAA"<<CDATA.m_dData.keys()<<" , "<<ui->lbLayerNameForTime->text();
+
+
+    if(CDATA.m_dData[ui->lbLayerNameForTime->text()] == nullptr)
+    return;
+    LayerData *layer =CDATA.m_dData.value(ui->lbLayerNameForTime->text());
+
+   layer->m_dataLayer.timeScheduleFrom =  ui->teFrom->time();
+
+   qDebug()<<layer->m_dataLayer.timeScheduleFrom;
+
+   layer->m_dataLayer.timeScheduleTo = ui->teTo->time();
+
+    layer->m_dataLayer.dayOfWeek = ui->cbTimeDayOfWeek->currentIndex();
+
+    layer->m_dataLayer.bStopPreVideo = ui->cbStopPreVideo->isChecked();
+  //  layerData->
+
+
+}
+
+void Widget::setTimeData(QString sLayerName)
+{
+
+    ui->lbLayerNameForTime->setText(sLayerName);
+
+   if(CDATA.m_dData.value(sLayerName) == nullptr)
+       return ;
+
+
+    m_bLockTimeSend = true;
+
+
+    DataLayer data = CDATA.m_dData.value(sLayerName)->m_dataLayer;
+
+    qDebug()<<"scheduleFrom :" <<data.timeScheduleFrom;
+
+    ui->teFrom->setTime(data.timeScheduleFrom);
+
+    ui->teTo->setTime(data.timeScheduleTo);
+
+    ui->cbTimeDayOfWeek->setCurrentIndex(qBound(0,data.dayOfWeek-1,7));
+
+    ui->cbStopPreVideo->setChecked(data.bStopPreVideo);
+
+    m_bLockTimeSend = false;
 }
 
 
@@ -324,8 +419,8 @@ void Widget::on_btnTest_clicked()
 
     QString sApp = QApplication::applicationDirPath()+"/ActiveBoard.exe ";
 
-   // QString sApp = QApplication::applicationDirPath()+"/ActiveTools.exe change ";
-  //  system(sApp.toStdString().c_str());
+    // QString sApp = QApplication::applicationDirPath()+"/ActiveTools.exe change ";
+    //  system(sApp.toStdString().c_str());
 
 
     QProcess p;
@@ -333,14 +428,14 @@ void Widget::on_btnTest_clicked()
     p.setWorkingDirectory(QApplication::applicationDirPath());
 
     p.startDetached(sApp);
-//p.start(sApp);
+    //p.start(sApp);
 }
 
 
 
 void Widget::on_btnTry_clicked()
 {
-   // QString sApp = QApplication::applicationDirPath()+"/ActiveBoard.exe ";
+    // QString sApp = QApplication::applicationDirPath()+"/ActiveBoard.exe ";
 
     QString sApp = QApplication::applicationDirPath()+"/ActiveTools.exe change "+ui->wLayerSelector->m_sSetTargetPath;
     system(sApp.toStdString().c_str());
@@ -351,7 +446,7 @@ void Widget::on_btnTry_clicked()
     //p.setWorkingDirectory(QApplication::applicationDirPath());
 
     //p.startDetached(sApp);
-//p.start(sApp);
+    //p.start(sApp);
 }
 
 void Widget::on_btnLayerBg_clicked()
@@ -391,4 +486,71 @@ void Widget::on_btnDelLayerBg_clicked()
 
         ui->wDisplay->refreshItem();
     }
+}
+
+void Widget::on_btnEdit_clicked()
+{
+    if(ui->wLayerSelector->m_sCurrentPath=="")
+        ui->wStackWork->setCurrentWidget(ui->page0);
+    else
+    {
+        ui->wStackWork->setCurrentWidget(ui->pageWork);
+
+    }
+
+}
+
+void Widget::on_btnSetting_clicked()
+{
+    ui->wStackWork->setCurrentWidget(ui->pageSetting);
+}
+
+void Widget::on_btnSchedule_clicked()
+{
+    ui->wStackWork->setCurrentWidget(ui->pageSchedule);
+}
+
+void Widget::on_btnTimeSchedule_clicked()
+{
+
+    qDebug()<<ui->wLayerSelector->m_sCurrentPath;
+
+
+    if(ui->wLayerSelector->m_sCurrentPath=="")
+        ui->wStackWork->setCurrentWidget(ui->page0);
+    else
+    {
+        ui->wStackWork->setCurrentWidget(ui->pageTimeSchedule);
+
+        QString sLayerName = ui->wLayerSelector->m_sCurrentPath.split("/").last();
+
+        setTimeData(sLayerName);
+
+    }
+}
+
+
+void Widget::on_teFrom_userTimeChanged(const QTime &time)
+{
+
+}
+
+void Widget::on_cbTimeDayOfWeek_currentIndexChanged(int index)
+{
+    refreshTimeSchedule();
+}
+
+void Widget::on_teTo_userTimeChanged(const QTime &time)
+{
+    refreshTimeSchedule();
+}
+
+void Widget::on_cbStopPreVideo_clicked()
+{
+    refreshTimeSchedule();
+}
+
+void Widget::on_teFrom_timeChanged(const QTime &time)
+{
+     refreshTimeSchedule();
 }

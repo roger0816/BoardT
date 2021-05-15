@@ -14,7 +14,7 @@
 
 static QString DEF_LAYER_NAME = "def";
 
-static QString BK_LAYER_NAME ="bk";
+static QString OTHER_NOT_LAYER ="other";
 #define CDATA CData::Instance()
 
 
@@ -29,7 +29,7 @@ public:
 
     void readModel(QString sPath);
 
-    void writeModel(QString defLayer=DEF_LAYER_NAME);
+    void writeModel(QString defLayer="def");
 
     void checkDefine();
 
@@ -47,8 +47,11 @@ public:
 
     QMap<QString,int> m_dDefine;
 
+    ObjData* getObj(QString sPath);
+
     ObjData* getObj(QString layer, QString objName, bool &bOk);
 
+    DataModel m_dataModel;
 
 
 private:

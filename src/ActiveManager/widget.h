@@ -2,8 +2,10 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <QButtonGroup>
 #include <QDateTime>
 #include "CData.h"
+#include "LayerData.h"
 #include "DisplayWidget.h"
 #include "LayerNewModel.h"
 #include <QColorDialog>
@@ -47,6 +49,25 @@ private slots:
 
     void on_btnDelLayerBg_clicked();
 
+    void on_btnEdit_clicked();
+
+    void on_btnSetting_clicked();
+
+    void on_btnSchedule_clicked();
+
+    void on_btnTimeSchedule_clicked();
+
+
+    void on_teFrom_userTimeChanged(const QTime &time);
+
+    void on_cbTimeDayOfWeek_currentIndexChanged(int index);
+
+    void on_teTo_userTimeChanged(const QTime &time);
+
+    void on_cbStopPreVideo_clicked();
+
+    void on_teFrom_timeChanged(const QTime &time);
+
 public slots:
     void slotSelector(QString sName);
 
@@ -57,6 +78,13 @@ private:
 
     void upload(QString sIp, QString sTarget, QString sPath);
 
+    QButtonGroup m_listButtonStack;
+
+    bool m_bLockTimeSend = false;
+
+   void refreshTimeSchedule();
+
+   void setTimeData(QString sLayerName);
 
 };
 #endif // WIDGET_H

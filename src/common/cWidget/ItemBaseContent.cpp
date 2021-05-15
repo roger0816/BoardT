@@ -31,6 +31,9 @@ ItemBaseContent::ItemBaseContent(QWidget *parent) :
 
     m_click = new ItemClickTouch(this);
 
+    connect(m_click,&ItemClickTouch::sendPress,this,&ItemBaseContent::slotPress);
+
+
     m_click->setObjectName("m_itemClick");
 
     m_click->show();
@@ -287,5 +290,35 @@ void ItemBaseContent::slotMouseEvent(QMouseEvent *e)
             resize(iW,iH);
         }
     }
+}
+
+void ItemBaseContent::slotPress(QMouseEvent *e)
+{
+    if(m_obj == nullptr)
+        return;
+
+
+    QString sCmd = m_obj->m_dataCmd.sCmd;
+
+    QString sValue1 = m_obj->m_dataCmd.sValue1;
+
+    QString sValue2 = m_obj->m_dataCmd.sValue2;
+
+    if(sCmd == CMD_Page || sCmd == CMD_PageNoStop)
+    {
+
+        QString sApp = QApplication::applicationDirPath()+"/ActiveTools.exe "+CMD_Page+" "+sValue1+" "+sValue2;
+    //    system(sApp.toStdString().c_str());
+
+
+        QProcess p;
+
+        p.setWorkingDirectory(QApplication::applicationDirPath());
+
+        p.startDetached(sApp);
+   // p.start(sApp);
+
+    }
+
 }
 

@@ -43,6 +43,8 @@ public:
 
     DataMar m_dataMar;
 
+    DataCmd m_dataCmd;
+
     QMap<QString,int> m_dDefine;
 
 

@@ -58,6 +58,20 @@ void CData::readModel(QString sPath)
 
     m_dData.clear();
 
+
+
+    QSettings pro(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
+
+    m_dataModel.sTarget = pro.value("Target","").toString();
+
+    m_dataModel.updateDateTime = pro.value("DateTime",QDateTime::currentDateTime()).toDateTime().fromString("yyyyMMddhhmmss");
+
+    m_dataModel.sleepFrom = pro.value("SleepFrom","202001010200").toDateTime().fromString("yyyyMMddhhmmss");
+
+    m_dataModel.sleepTo = pro.value("SleepTo","202001010400").toDateTime().fromString("yyyyMMddhhmmss");
+
+    m_dataModel.bEnableSleepModel = pro.value("SleepMode",false).toBool();
+
     QFileInfoList listDir = QDir(sPath).entryInfoList(QDir::AllDirs);
 
 
@@ -66,7 +80,7 @@ void CData::readModel(QString sPath)
 
         QFileInfo dir = listDir.at(i);
 
-        if(dir.fileName()!="." && dir.fileName()!=".." && dir.fileName().toLower()!=BK_LAYER_NAME)
+        if(dir.fileName()!="." && dir.fileName()!=".." && dir.fileName().toLower()!=OTHER_NOT_LAYER)
         {
 
             LayerData *layer = new LayerData(this);
@@ -121,6 +135,12 @@ void CData::writeModel(QString defLayer)
     }
     pro.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
 
+    pro.setValue("SleepFrom",m_dataModel.sleepFrom.toString("yyyyMMddhhmmss"));
+
+    pro.setValue("SleepTo",m_dataModel.sleepTo.toString("yyyyMMddhhmmss"));
+
+    pro.setValue("SleepMode",m_dataModel.bEnableSleepModel);
+
     pro.sync();
 
 
@@ -140,6 +160,14 @@ void CData::writeModel(QString defLayer)
         QSettings conf(sPath+"/"+sPath.split("/").last()+".BDT",QSettings::IniFormat);
 
         conf.setValue("Base/resumeTimer",15);
+
+        conf.setValue("TimeSchedule/from",layerData->m_dataLayer.timeScheduleFrom.toString("hhmmss"));
+
+        conf.setValue("TimeSchedule/to",layerData->m_dataLayer.timeScheduleTo.toString("hhmmss"));
+
+        conf.setValue("TimeSchedule/stopPreVideo",layerData->m_dataLayer.bStopPreVideo);
+
+        conf.setValue("TimeSchedule/dayOfWeek",layerData->m_dataLayer.dayOfWeek);
 
         conf.sync();
 
@@ -267,6 +295,14 @@ void CData::writeObj(ObjData *item)
     conf.setValue("Base/h",h);
 
     conf.setValue("Base/changeTimer",5);
+
+    conf.setValue("Action/cmd",item->m_dataCmd.sCmd);
+
+    conf.setValue("Action/value1",item->m_dataCmd.sValue1);
+
+    conf.setValue("Action/value2",item->m_dataCmd.sValue2);
+
+
 
     if(item->m_sType == E_TEXT || item->m_sType == E_BUTTON
             ||item->m_sType == E_MARQUEE || item->m_sType == E_QRCODE )
@@ -435,6 +471,29 @@ void CData::removeLayer(QString sPath)
     deleteDirectory(sPath);
 
     qDebug()<<"remove layer : "<<sPath<<" , data count : "<<m_dData.count();
+}
+
+ObjData *CData::getObj(QString sPath)
+{
+    ObjData *obj = nullptr;
+
+    if(sPath.split("/").length()>2)
+    {
+        QStringList listTmp = sPath.split("/");
+
+        QString sLayerName = listTmp.at(listTmp.length()-2);
+
+
+        QString sObj = listTmp.last();
+
+        bool b;
+
+        return getObj(sLayerName,sObj,b);
+
+
+    }
+
+    return obj;
 }
 
 ObjData *CData::getObj(QString layer, QString objName, bool &bOk)

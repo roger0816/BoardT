@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "CData.h"
+#include <QColorDialog>
 #include "ObjData.h"
 #include <QFileDialog>
 #include <QFontDialog>

@@ -1,8 +1,9 @@
 #ifndef VOJ_H
 #define VOJ_H
 
-#include <QColorDialog>
+
 #include <QList>
+#include <QDateTime>
 #include <QString>
 #include <QColor>
 #include <QDebug>
@@ -11,6 +12,7 @@
 #include <QSettings>
 #include <QDir>
 #include <QFont>
+#include <QPixmap>
 
 
 static QString E_TEXT = "text";
@@ -32,6 +34,22 @@ static QString E_MARQUEE = "marquee";
 static QString E_QRCODE = "qrcode";
 
 
+// cmd
+static QString CMD_None ="";
+
+static QString CMD_Page = "page";
+
+static QString CMD_PageNoStop = "pageNoStopVideo";
+
+static QString CMD_Pop ="pop";
+
+static QString CMD_Change="change";
+
+static QString CMD_Gpio="gpio";
+
+static QString CMD_Script="script";
+
+
 enum
 {
     ADD_BTN_TEXT=0,
@@ -42,6 +60,38 @@ enum
     ADD_BTN_QR
 
 };
+
+
+struct DataLayer
+{
+    QTime timeScheduleFrom;
+
+    QTime timeScheduleTo;
+
+    int dayOfWeek = 1;
+
+    bool bStopPreVideo = true;
+
+};
+
+
+struct DataModel
+{
+    QString sTarget="def";
+
+    bool bStopVideoChange = false;
+
+    QDateTime updateDateTime;
+
+    QDateTime sleepFrom;
+
+    QDateTime sleepTo;
+
+    bool bEnableSleepModel = false;
+
+};
+
+
 
 struct DataText
 {
@@ -101,6 +151,17 @@ struct DataMar
     QStringList listText;
 
     int iSpeed = 3;
+};
+
+struct DataCmd
+{
+    QString sCmd="";
+
+    QString sValue1="";
+
+    QString sValue2="";
+
+
 };
 
 

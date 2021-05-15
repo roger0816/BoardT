@@ -60,9 +60,9 @@ void Widget::loadConfig(QString sLayer)
 
     CDATA.readModel(QApplication::applicationDirPath()+"/../bin/data/model0");
 
-    m_wDisplay->setLayer(sLayer);
+    m_wDisplay->setLayer(sLayer,m_bNoStopVideoToChange);
 
-    m_wDisplay->setEdit(true);
+    m_wDisplay->setEdit(false);
 
     ui->stack->setCurrentWidget(ui->wBg);
 
@@ -252,8 +252,8 @@ void Widget::slotTimer()
 
         if(m_iPressTime>5)
         {
-           if(m_wDisplay!=nullptr)
-            m_wDisplay->setEdit(true);
+//           if(m_wDisplay!=nullptr)
+//            m_wDisplay->setEdit(true);
 
             m_iPressTime = 0;
         }
@@ -270,6 +270,8 @@ void Widget::slotTimer()
     QString board =conf.value("Target").toString();
 
     QString sTime = conf.value("DateTime").toString();
+
+    m_bNoStopVideoToChange = conf.value("VideoStatus").toString()=="1";
 
     if(board!=m_sCurrentBoard || sTime != m_sCurrentVerDateTime)
     {

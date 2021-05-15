@@ -22,7 +22,7 @@ public:
     explicit DisplayWidget(QWidget *parent = nullptr);
     ~DisplayWidget();
 
-    QPixmap setLayer(QString sPath);
+    QPixmap setLayer(QString sPath , bool bNoStopVideo = false);
 
     void setEdit(bool b);
 

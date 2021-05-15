@@ -92,5 +92,10 @@ include($$PWD/../common/Common.pri);
 include($$PWD/../lib/RpkLib/qrencode/qrencode.pri)
 INCLUDEPATH+=$$PWD/../lib/RpkLib/qrencode/
 
+RESOURCES += \
+    res/res.qrc
+
+DISTFILES +=
+
 
 

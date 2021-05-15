@@ -23,12 +23,25 @@ DisplayWidget::~DisplayWidget()
     delete ui;
 }
 
-QPixmap DisplayWidget::setLayer(QString sPath)
+QPixmap DisplayWidget::setLayer(QString sPath, bool bNoStopVideo)
 {
 
     m_sPath = sPath;
 
     qDebug()<<"layer path : "<<m_sPath;
+
+    if(!bNoStopVideo)
+    {
+        if(m_video!=nullptr)
+        {
+
+            m_video->m_player->stop();
+
+
+            m_video->hide();
+        }
+
+    }
 
 
     m_layerName = m_sPath.split("/").last();

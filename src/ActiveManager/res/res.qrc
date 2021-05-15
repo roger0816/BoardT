@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/button">
+        <file>icons8-checked-radio-button-48.png</file>
+        <file>icons8-unchecked-radio-button-48.png</file>
+        <file>icons8-hoverchecked-radio-button-48.png</file>
+        <file>add.png</file>
+        <file>remove.png</file>
+        <file>checkBox.png</file>
+        <file>uncheckBox.png</file>
+        <file>hovercheckBox.gif</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>style.qss</file>
+    </qresource>
+</RCC>

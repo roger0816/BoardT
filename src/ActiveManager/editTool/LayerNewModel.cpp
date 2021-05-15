@@ -52,6 +52,12 @@ void LayerNewModel::on_btnOk_clicked()
         return ;
     }
 
+    else if(ui->txtName->text().trimmed()=="other")
+    {
+        ui->lbMsg->setText("請改用別的名稱");
+        return ;
+    }
+
 
     else if(d.exists())
     {

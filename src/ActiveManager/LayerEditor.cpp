@@ -27,9 +27,8 @@ LayerEditor::~LayerEditor()
 void LayerEditor::setTarget(QString sObjPath)
 {
     qDebug()<<"change focus : "<<sObjPath;
-    m_sPath = sObjPath;
 
-    QStringList listTmp = m_sPath.split("/");
+    QStringList listTmp = sObjPath.split("/");
 
 
 
@@ -49,6 +48,7 @@ void LayerEditor::setTarget(QString sObjPath)
 
     m_obj = data;
 
+    m_sPath = sObjPath;
 
     refresh();
 

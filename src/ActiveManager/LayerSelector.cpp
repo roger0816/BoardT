@@ -118,7 +118,7 @@ void LayerSelector::setData(QMap<QString , QPixmap> dData, QString sPath)
 
     }
 
-    m_sCurrentPath = m_sPath+"/"+m_listRadioBtn[qBound(0,iIdxRadio,m_listRadioBtn.length()-1)]->text();
+//    m_sCurrentPath = m_sPath+"/"+m_listRadioBtn[qBound(0,iIdxRadio,m_listRadioBtn.length()-1)]->text();
 
     emit m_listRadioBtn[iIdxRadio]->clicked();
 
@@ -152,7 +152,7 @@ void LayerSelector::showEvent(QShowEvent *)
 
 void LayerSelector::setUiRect()
 {
-    int iPicH = height()-50;
+    int iPicH = height()-48;
 
     int iPicW = iPicH*1080/1920;
 
@@ -167,11 +167,11 @@ void LayerSelector::setUiRect()
         if(m_listBtn[i]->isVisible())
         {
 
-            m_listBtn[i]->setGeometry((iMargin+iPicW)*iCount,24,iPicW,iPicH);
+            m_listBtn[i]->setGeometry((iMargin+iPicW)*iCount,28,iPicW,iPicH);
 
             m_listBtn[i]->setIconSize(m_listBtn[i]->size()*0.9);
 
-            m_listRadioBtn[i]->setGeometry(m_listBtn[i]->x(),0,iPicW,24);
+            m_listRadioBtn[i]->setGeometry(m_listBtn[i]->x(),0,iPicW,26);
 
             iCount++;
         }

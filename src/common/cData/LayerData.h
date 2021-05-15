@@ -31,6 +31,8 @@ public:
 
     QMap<QString,int> m_dDefine;
 
+    DataLayer m_dataLayer;
+
 
 private:
 

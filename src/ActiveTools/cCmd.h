@@ -10,14 +10,7 @@
 #include <QDebug>
 #include <QDateTime>
 
-enum CMD
-{
-    _CHANGE = 0,
-
-    _RAISE,
-
-    _TEST
-};
+#include "../common/cData/Voj.h"
 
 class cCmd : public QObject
 {

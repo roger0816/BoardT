@@ -66,6 +66,8 @@ private:
 
     QString m_sCurrentBoard="";
 
+    bool m_bNoStopVideoToChange = true;
+
     QTimer m_timer;
 
 private slots:

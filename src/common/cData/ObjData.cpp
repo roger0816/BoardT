@@ -51,6 +51,15 @@ void ObjData::setPath(QString sPath)
 
     m_sType = sType;
 
+
+
+    m_dataCmd.sCmd = conf.value("Action/cmd","").toString();
+
+    m_dataCmd.sValue1 = conf.value("Action/value1","").toString();
+
+    m_dataCmd.sValue2 = conf.value("Action/value2","").toString();
+
+
     if(sType == E_TEXT || sType == E_BUTTON || sType == E_MARQUEE || sType == E_QRCODE)
     {
 
