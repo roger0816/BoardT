@@ -76,28 +76,35 @@ void ItemMarCon::updateItem()
     if(m_obj == nullptr)
         return ;
 
-    qDebug()<<"update item : mar";
 
-    if(m_obj->m_dataMar.listText.length()<=0)
-        return ;
 
-    QColor bgColor = m_obj->m_dataText.bgColor;
+    //return ;
+    m_data = m_obj->m_data;
 
-    QColor txtColor = m_obj->m_dataText.textColor;
+    m_listData = m_obj->m_data.value(Marquee::listText,QStringList()<<"跑馬燈").toStringList();
+
+    m_iSpeed = m_obj->m_data.value(Marquee::speed,"3").toInt();
+
+    QColor bgColor = m_data.value(Label::bgColor,"#ffffffff").toString();
+
+
+    QColor txtColor = m_data.value(Label::text,"#ff000000").toString();
+
+    QString sImagePath = m_data.value(Label::imagePath,"").toString().trimmed();
 
 
     QString sStyle = "color:rgba(%1,%2,%3,%4);"
                      "background-color:rgba(%5,%6,%7,%8);border-color:rgba(0,0,0,0);";
 
 
-    DataText m_data = m_obj->m_dataText;;
 
-    if(m_data.m_sImagePath.trimmed()!="")
+
+    if(sImagePath!="")
     {
-        m_lb->setStyleSheet(sStyle.arg(m_data.textColor.red())
-                                 .arg(m_data.textColor.green())
-                                 .arg(m_data.textColor.blue())
-                                 .arg(m_data.textColor.alpha())
+        m_lb->setStyleSheet(sStyle.arg(txtColor.red())
+                                 .arg(txtColor.green())
+                                 .arg(txtColor.blue())
+                                 .arg(txtColor.alpha())
                                  .arg(0)
                                  .arg(0)
                                  .arg(0)
@@ -105,62 +112,55 @@ void ItemMarCon::updateItem()
                                 // +" border-image:url("+m_data.m_sImagePath
                                     +");");
 
-        m_wBg->setStyleSheet(sStyle.arg(m_data.textColor.red())
-                                 .arg(m_data.textColor.green())
-                                 .arg(m_data.textColor.blue())
-                                 .arg(m_data.textColor.alpha())
+        m_wBg->setStyleSheet(sStyle.arg(txtColor.red())
+                                 .arg(txtColor.green())
+                                 .arg(txtColor.blue())
+                                 .arg(txtColor.alpha())
                                  .arg(0)
                                  .arg(0)
                                  .arg(0)
                                  .arg(0)
-                                 +" border-image:url("+m_data.m_sImagePath+");");
+                                 +" border-image:url("+sImagePath+");");
 
 
     }
     else
     {
-    m_lb->setStyleSheet(sStyle.arg(m_data.textColor.red())
-                      .arg(m_data.textColor.green())
-                      .arg(m_data.textColor.blue())
-                      .arg(m_data.textColor.alpha())
-                      .arg(m_data.bgColor.red())
-                      .arg(m_data.bgColor.green())
-                      .arg(m_data.bgColor.blue())
+    m_lb->setStyleSheet(sStyle.arg(txtColor.red())
+                      .arg(txtColor.green())
+                      .arg(txtColor.blue())
+                      .arg(txtColor.alpha())
+                      .arg(bgColor.red())
+                      .arg(bgColor.green())
+                      .arg(bgColor.blue())
                       .arg(0)
                         );
 
 
-    m_wBg->setStyleSheet(sStyle.arg(m_data.textColor.red())
-                      .arg(m_data.textColor.green())
-                      .arg(m_data.textColor.blue())
-                      .arg(m_data.textColor.alpha())
-                      .arg(m_data.bgColor.red())
-                      .arg(m_data.bgColor.green())
-                      .arg(m_data.bgColor.blue())
-                      .arg(m_data.bgColor.alpha())
+    m_wBg->setStyleSheet(sStyle.arg(txtColor.red())
+                      .arg(txtColor.green())
+                      .arg(txtColor.blue())
+                      .arg(txtColor.alpha())
+                      .arg(bgColor.red())
+                      .arg(bgColor.green())
+                      .arg(bgColor.blue())
+                      .arg(bgColor.alpha())
                         );
     }
 
-    QFont f = m_data.font;
+    QFont f ;
+    f.fromString("Arial,24,-1,5,50,0,0,0,0,0,Regular");
+
+    QString sFont = m_data.value(Label::font,"Arial,24,-1,5,50,0,0,0,0,0,Regular").toString();
+
+    if(sFont!="" && sFont.split(",").length()>5)
+        f.fromString(sFont);
 
     f.setPixelSize(f.pixelSize()*m_diffSize);
 
     m_lb->setFont(f);
 
-//    m_lb->setText(m_data.sText);
-
-    if(m_data.bIsCent)
-        m_lb->setAlignment(Qt::AlignCenter);
-    else
-        m_lb->setAlignment(Qt::AlignLeading);
-
-
-
     qDebug()<<"update item : mar data";
-
-    m_iSpeed = m_obj->m_dataMar.iSpeed;
-
-    m_listData = m_obj->m_dataMar.listText;
 
     m_iIdx = 0;
 

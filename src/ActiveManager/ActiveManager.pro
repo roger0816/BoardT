@@ -53,7 +53,9 @@ SOURCES += \
     LayerAction.cpp \
     LayerAddContent.cpp \
     LayerEditor.cpp \
+    LayerSchedule.cpp \
     LayerSelector.cpp \
+    LayerTimeSchedule.cpp \
     main.cpp \
     widget.cpp
 
@@ -62,7 +64,9 @@ HEADERS += \
     LayerAction.h \
     LayerAddContent.h \
     LayerEditor.h \
+    LayerSchedule.h \
     LayerSelector.h \
+    LayerTimeSchedule.h \
     widget.h
 
 FORMS += \
@@ -70,6 +74,8 @@ FORMS += \
     LayerAction.ui \
     LayerAddContent.ui \
     LayerEditor.ui \
+    LayerSchedule.ui \
+    LayerTimeSchedule.ui \
     widget.ui
 
 # Default rules for deployment.

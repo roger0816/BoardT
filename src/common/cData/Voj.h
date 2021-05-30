@@ -33,6 +33,8 @@ static QString E_MARQUEE = "marquee";
 
 static QString E_QRCODE = "qrcode";
 
+static QString E_TXVALUE = "txValue";
+
 
 // cmd
 static QString CMD_None ="";
@@ -52,13 +54,32 @@ static QString CMD_Script="script";
 
 enum
 {
-    ADD_BTN_TEXT=0,
-    ADD_BTN_PIC,
-    ADD_BTN_VIDEO,
-    ADD_BTN_BTN,
-    ADD_BTN_MARQUEE,
-    ADD_BTN_QR
+    ADD_BASIC_TEXT =0,
+    ADD_BASIC_PIC,
+    ADD_BASIC_VIDEO,
+    ADD_BASIC_MARQUEE,
+    ADD_BASIC_DATETIME,
+    ADD_BASIC_URL,
+    ADD_BASIC_QR,
 
+
+    ADD_ADV_MEDIA,
+    ADD_ADV_BUTTON,
+    ADD_ADV_PIX_BUTTON,
+    ADD_ADV_964,
+    ADD_ADV_PAINTER,
+    ADD_ADV_TXT,
+    ADD_ADV_TICKET,
+    ADD_ADV_ORDER
+
+
+};
+
+enum _SCHEDULE_Mode
+{
+    SCHEDULE_OFF = 0,
+    SCHEDULE_ON =1,
+    SCHEDULE_TIME
 };
 
 
@@ -78,6 +99,9 @@ struct DataLayer
 struct DataModel
 {
     QString sTarget="def";
+
+    int iScheduleMode = SCHEDULE_OFF;
+
 
     bool bStopVideoChange = false;
 
@@ -138,7 +162,7 @@ struct DataPic
 
 struct DataVideo
 {
-   // int iSec = 10;
+    // int iSec = 10;
 
 
     QStringList listName;
@@ -163,6 +187,48 @@ struct DataCmd
 
 
 };
+
+//=====
+
+namespace Label {
+
+static QString font="font";
+
+static QString text="text";
+
+static QString alignCenter="alignCenter";
+
+static QString bgColor="bgColor";
+
+static QString txtColor="txtColor";
+
+static QString imagePath="imagePath";
+
+}
+
+namespace Marquee
+{
+static QString speed="speed";
+
+static QString listText ="listText";
+}
+
+namespace  TxtValue{
+
+static QString readSpeed="readSpeed";
+
+static QString playSpeed="playSpeed";
+
+static QString index="index";
+
+static QString min="min";
+
+static QString minMsg="minMsg";
+
+static QString max="max";
+static QString maxMsg="maxMsg";
+
+}
 
 
 #endif // VOJ_H

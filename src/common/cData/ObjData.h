@@ -21,7 +21,9 @@ class ObjData : public QObject
 public:
     explicit ObjData(QObject *parent = nullptr);
 
-    void setPath(QString sPath);
+    void readData(QString sPath);
+
+    QString m_sWaitRename = "";
 
     QString m_sObjPath;
 
@@ -31,17 +33,17 @@ public:
 
     QRect m_rect;
 
-
     QString m_sType;
 
+    QMap<QString,QVariant> m_data;
 
-    DataText m_dataText;
+   // DataText m_dataText;
 
     DataPic m_dataPic;
 
     DataVideo m_dataVideo;
 
-    DataMar m_dataMar;
+    //DataMar m_dataMar;
 
     DataCmd m_dataCmd;
 

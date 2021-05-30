@@ -3,6 +3,9 @@
 
 #include <QWidget>
 #include "ItemBaseObj.h"
+#include <QLabel>
+
+
 
 
 namespace Ui {
@@ -21,11 +24,11 @@ public:
 
     void updateItem()override;
 
-
+    QLabel *m_lb;
 private:
     Ui::ItemLabel *ui;
 
-    DataText m_data;
+   // DataText m_data;
 };
 
 #endif // ITEMLABEL_H

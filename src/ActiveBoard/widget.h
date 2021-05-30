@@ -66,7 +66,7 @@ private:
 
     QString m_sCurrentBoard="";
 
-    bool m_bNoStopVideoToChange = true;
+    int  m_iVideoStatus = 0;
 
     QTimer m_timer;
 

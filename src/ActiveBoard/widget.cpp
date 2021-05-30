@@ -60,7 +60,7 @@ void Widget::loadConfig(QString sLayer)
 
     CDATA.readModel(QApplication::applicationDirPath()+"/../bin/data/model0");
 
-    m_wDisplay->setLayer(sLayer,m_bNoStopVideoToChange);
+    m_wDisplay->setLayer(sLayer,m_iVideoStatus);
 
     m_wDisplay->setEdit(false);
 
@@ -261,17 +261,13 @@ void Widget::slotTimer()
 
 
 //    QSettings conf(QApplication::applicationDirPath()+"/../bin/data/model0/conf.ini",QSettings::IniFormat);
-        QSettings conf(QApplication::applicationDirPath()+"/../bin/data/model0/model0.BDM",QSettings::IniFormat);
-
-
-   // QSettings conf(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
-
+    QSettings conf(QApplication::applicationDirPath()+"/../bin/data/model0/model0.BDM",QSettings::IniFormat);
 
     QString board =conf.value("Target").toString();
 
     QString sTime = conf.value("DateTime").toString();
 
-    m_bNoStopVideoToChange = conf.value("VideoStatus").toString()=="1";
+    m_iVideoStatus = conf.value("VideoStatus").toInt();
 
     if(board!=m_sCurrentBoard || sTime != m_sCurrentVerDateTime)
     {
@@ -301,7 +297,7 @@ void Widget::launch(int iIdx)
 
     m_timer.stop();
 
-    m_timer.start(5000);
+    m_timer.start(1000);
 
 
     loadConfig(m_sCurrentBoard);

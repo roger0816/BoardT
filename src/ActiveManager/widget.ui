@@ -313,7 +313,7 @@
              <widget class="QWidget" name="widget_3" native="true">
               <property name="minimumSize">
                <size>
-                <width>160</width>
+                <width>200</width>
                 <height>0</height>
                </size>
               </property>
@@ -480,13 +480,6 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="btnTry">
-                 <property name="text">
-                  <string>TEST</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
                 <spacer name="verticalSpacer">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -527,7 +520,7 @@
                <string notr="true">QWidget#wContent{background-color: rgb(239, 239, 239);}</string>
               </property>
               <property name="currentIndex">
-               <number>4</number>
+               <number>2</number>
               </property>
               <widget class="QWidget" name="page0">
                <layout class="QGridLayout" name="gridLayout_2">
@@ -602,7 +595,7 @@ p, li { white-space: pre-wrap; }
                      </widget>
                     </item>
                     <item>
-                     <widget class="QRadioButton" name="radioButton">
+                     <widget class="QRadioButton" name="rdNoneSchedule">
                       <property name="font">
                        <font>
                         <pointsize>20</pointsize>
@@ -617,7 +610,7 @@ p, li { white-space: pre-wrap; }
                      </widget>
                     </item>
                     <item>
-                     <widget class="QRadioButton" name="radioButton_2">
+                     <widget class="QRadioButton" name="rdSchedule">
                       <property name="font">
                        <font>
                         <pointsize>20</pointsize>
@@ -629,7 +622,7 @@ p, li { white-space: pre-wrap; }
                      </widget>
                     </item>
                     <item>
-                     <widget class="QRadioButton" name="radioButton_3">
+                     <widget class="QRadioButton" name="rdTimeSchedule">
                       <property name="font">
                        <font>
                         <pointsize>20</pointsize>
@@ -746,31 +739,97 @@ p, li { white-space: pre-wrap; }
                </layout>
               </widget>
               <widget class="QWidget" name="pageWork">
+               <property name="styleSheet">
+                <string notr="true">QWidget#pageWork{background-color: rgb(242, 242, 242);}</string>
+               </property>
                <layout class="QGridLayout" name="gridLayout_4">
-                <item row="0" column="5" rowspan="2">
+                <item row="2" column="1">
+                 <widget class="QWidget" name="widget_5" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_5">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="btnLayerBg">
+                     <property name="font">
+                      <font>
+                       <pointsize>16</pointsize>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>底圖</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="btnDelLayerBg">
+                     <property name="font">
+                      <font>
+                       <pointsize>16</pointsize>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>清除底圖</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="0" column="5" rowspan="3">
                  <widget class="QWidget" name="wEditArea" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="minimumSize">
                    <size>
-                    <width>400</width>
+                    <width>200</width>
                     <height>100</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>250</width>
+                    <width>16777215</width>
                     <height>16777215</height>
                    </size>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_3">
-                   <item row="1" column="0">
+                   <item row="0" column="0">
                     <widget class="QTabWidget" name="tabWidget">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
                      <property name="font">
                       <font>
                        <pointsize>22</pointsize>
                       </font>
                      </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgba(195, 75, 0,0);</string>
+                     </property>
                      <property name="currentIndex">
-                      <number>1</number>
+                      <number>0</number>
                      </property>
                      <widget class="LayerEditor" name="wStyle">
                       <attribute name="title">
@@ -784,36 +843,8 @@ p, li { white-space: pre-wrap; }
                      </widget>
                     </widget>
                    </item>
-                   <item row="0" column="0">
-                    <widget class="QLabel" name="label">
-                     <property name="font">
-                      <font>
-                       <pointsize>24</pointsize>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>元件設定</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignCenter</set>
-                     </property>
-                    </widget>
-                   </item>
                   </layout>
                  </widget>
-                </item>
-                <item row="0" column="2">
-                 <spacer name="horizontalSpacer_4">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
                 </item>
                 <item row="0" column="7">
                  <spacer name="horizontalSpacer_3">
@@ -841,19 +872,7 @@ p, li { white-space: pre-wrap; }
                   </property>
                  </spacer>
                 </item>
-                <item row="1" column="3">
-                 <widget class="QPushButton" name="btnLayerBg">
-                  <property name="font">
-                   <font>
-                    <pointsize>20</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>樣板底圖</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1" rowspan="2">
+                <item row="0" column="2" rowspan="3">
                  <widget class="DisplayWidget" name="wDisplay" native="true">
                   <property name="minimumSize">
                    <size>
@@ -863,19 +882,7 @@ p, li { white-space: pre-wrap; }
                   </property>
                  </widget>
                 </item>
-                <item row="1" column="4">
-                 <widget class="QPushButton" name="btnDelLayerBg">
-                  <property name="font">
-                   <font>
-                    <pointsize>20</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>清除底圖</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="3" colspan="2">
+                <item row="0" column="1" rowspan="2">
                  <widget class="LayerAddContent" name="wAdd" native="true">
                   <property name="minimumSize">
                    <size>
@@ -883,175 +890,19 @@ p, li { white-space: pre-wrap; }
                     <height>0</height>
                    </size>
                   </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>200</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
                  </widget>
                 </item>
                </layout>
               </widget>
-              <widget class="QWidget" name="pageSchedule"/>
-              <widget class="QWidget" name="pageTimeSchedule">
-               <layout class="QGridLayout" name="gridLayout_8">
-                <item row="0" column="0">
-                 <widget class="QWidget" name="wBgTime" native="true">
-                  <layout class="QGridLayout" name="gridLayout_9">
-                   <property name="spacing">
-                    <number>40</number>
-                   </property>
-                   <item row="3" column="2">
-                    <widget class="QTimeEdit" name="teFrom">
-                     <property name="font">
-                      <font>
-                       <pointsize>22</pointsize>
-                      </font>
-                     </property>
-                     <property name="currentSection">
-                      <enum>QDateTimeEdit::HourSection</enum>
-                     </property>
-                     <property name="displayFormat">
-                      <string>hh:mm:ss</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="3" column="1">
-                    <widget class="QComboBox" name="cbTimeDayOfWeek">
-                     <property name="font">
-                      <font>
-                       <pointsize>20</pointsize>
-                      </font>
-                     </property>
-                     <item>
-                      <property name="text">
-                       <string>星期一</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>星期二</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>星期三</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>星期四</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>星期五</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>星期六</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>星期日</string>
-                      </property>
-                     </item>
-                    </widget>
-                   </item>
-                   <item row="5" column="1" colspan="2">
-                    <widget class="QCheckBox" name="cbStopPreVideo">
-                     <property name="font">
-                      <font>
-                       <pointsize>20</pointsize>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>切換頁面中止先前影片播放</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="4" column="2">
-                    <widget class="QTimeEdit" name="teTo">
-                     <property name="font">
-                      <font>
-                       <pointsize>22</pointsize>
-                      </font>
-                     </property>
-                     <property name="currentSection">
-                      <enum>QDateTimeEdit::HourSection</enum>
-                     </property>
-                     <property name="displayFormat">
-                      <string>hh:mm:ss</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="3">
-                    <spacer name="horizontalSpacer_6">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>40</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                   <item row="0" column="0" colspan="4">
-                    <widget class="QLabel" name="lbLayerNameForTime">
-                     <property name="font">
-                      <font>
-                       <pointsize>24</pointsize>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>樣板</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignCenter</set>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="1" colspan="2">
-                    <widget class="QLabel" name="label_5">
-                     <property name="font">
-                      <font>
-                       <pointsize>22</pointsize>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>在裝置設定打開啟用</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="0">
-                    <spacer name="horizontalSpacer_5">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>40</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                   <item row="7" column="2">
-                    <spacer name="verticalSpacer_3">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>40</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
-               </layout>
+              <widget class="LayerSchedule" name="pageSchedule"/>
+              <widget class="LayerTimeSchedule" name="pageTimeSchedule">
+               <layout class="QGridLayout" name="gridLayout_8"/>
               </widget>
              </widget>
             </item>
@@ -1105,6 +956,18 @@ p, li { white-space: pre-wrap; }
    <class>LayerAction</class>
    <extends>QWidget</extends>
    <header>LayerAction.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>LayerSchedule</class>
+   <extends>QWidget</extends>
+   <header>LayerSchedule.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>LayerTimeSchedule</class>
+   <extends>QWidget</extends>
+   <header>LayerTimeSchedule.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

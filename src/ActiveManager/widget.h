@@ -58,15 +58,13 @@ private slots:
     void on_btnTimeSchedule_clicked();
 
 
-    void on_teFrom_userTimeChanged(const QTime &time);
 
-    void on_cbTimeDayOfWeek_currentIndexChanged(int index);
 
-    void on_teTo_userTimeChanged(const QTime &time);
+    void on_rdNoneSchedule_clicked();
 
-    void on_cbStopPreVideo_clicked();
+    void on_rdSchedule_clicked();
 
-    void on_teFrom_timeChanged(const QTime &time);
+    void on_rdTimeSchedule_clicked();
 
 public slots:
     void slotSelector(QString sName);
@@ -80,11 +78,11 @@ private:
 
     QButtonGroup m_listButtonStack;
 
-    bool m_bLockTimeSend = false;
+    void rename(QString sOld,QString sNew);
 
-   void refreshTimeSchedule();
 
-   void setTimeData(QString sLayerName);
+ //  void refreshTimeSchedule();
+
 
 };
 #endif // WIDGET_H

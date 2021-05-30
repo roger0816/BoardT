@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QPushButton>
+#include <QButtonGroup>
 #include <QDebug>
 #include <QFileDialog>
 #include "Voj.h"
@@ -10,8 +11,6 @@
 namespace Ui {
 class LayerAddContent;
 }
-
-
 
 
 class LayerAddContent : public QWidget
@@ -27,9 +26,12 @@ private:
 
     QList<QPushButton*> m_listBtn;
 
+    QButtonGroup m_btns;
+
 private slots:
 
     void slotClicked();
+
 
 signals:
     void btnAddClicked(int iIdx);

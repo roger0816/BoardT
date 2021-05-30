@@ -9,7 +9,7 @@ LayerEditor::LayerEditor(QWidget *parent) :
 
     ui->stackType->setCurrentWidget(ui->pageText);
 
-    m_listMar<<ui->txtMar0<<ui->txtMar1<<ui->txtMar2<<ui->txtMar3<<ui->txtMar4<<ui->txtMar5<<ui->txtMar6<<ui->txtMar7;
+    m_listMar<<ui->txtMar0<<ui->txtMar1<<ui->txtMar2<<ui->txtMar3<<ui->txtMar4;
 
 
     foreach(QLineEdit *tar,m_listMar)
@@ -81,7 +81,18 @@ void LayerEditor::refresh()
 
     if(m_obj->m_sType == E_TEXT || m_obj->m_sType == E_BUTTON)
     {
+        ui->stackType->setCurrentWidget(ui->pageText);
 
+        ui->txtText->setText(m_obj->m_data.value(Label::text).toString());
+
+        ui->chCent->setChecked(m_obj->m_data.value(Label::alignCenter).toInt());
+
+        QColor colorBg = m_obj->m_data.value(Label::bgColor).toString();
+
+        QColor colorTxt = m_obj->m_data.value(Label::txtColor).toString();
+
+        QString sStyle = "background-color:rgba(%1,%2,%3,%4);";
+        /**
         ui->stackType->setCurrentWidget(ui->pageText);
 
         ui->txtText->setText(m_obj->m_dataText.sText);
@@ -94,7 +105,7 @@ void LayerEditor::refresh()
         QColor colorTxt = m_obj->m_dataText.textColor;
 
         QString sStyle = "background-color:rgba(%1,%2,%3,%4);";
-
+*/
 
 
     }
@@ -125,7 +136,7 @@ void LayerEditor::refresh()
     {
         ui->stackType->setCurrentWidget(ui->pageMar);
 
-        QStringList list = m_obj->m_dataMar.listText;
+        QStringList list = m_obj->m_data.value(Marquee::listText).toStringList();
 
         for(int i=0;i<m_listMar.length() && i <list.length() ;i++)
         {
@@ -133,7 +144,7 @@ void LayerEditor::refresh()
         }
 
 
-         ui->sbMar->setValue(m_obj->m_dataMar.iSpeed);
+         ui->sbMar->setValue(m_obj->m_data.value(Marquee::speed).toInt());
 
 
 
@@ -144,7 +155,64 @@ void LayerEditor::refresh()
     {
         ui->stackType->setCurrentWidget(ui->pageQr);
 
-        ui->txQr->setText(m_obj->m_dataText.sText);
+        ui->txQr->setText(m_obj->m_data.value(Label::text).toString());
+
+    }
+
+    else if(m_obj->m_sType == E_TXVALUE)
+    {
+        ui->stackType->setCurrentWidget(ui->pageTxValue);
+
+        QFile file(QApplication::applicationDirPath()+"/input.txt");
+
+        if(file.open(QIODevice::ReadOnly))
+        {
+            QByteArray data = file.readAll();
+
+            QString st(data);
+
+            ui->cbTxValue->clear();
+
+            QStringList list ;
+
+            while(list.length()< st.split(",").length())
+            {
+                list.append(QString::number(list.length()));
+            }
+
+            ui->cbTxValue->addItems(list);
+
+
+        }
+
+        file.close();
+
+
+        if(m_obj!=nullptr)
+        {
+
+            int iIdx = m_obj->m_data[TxtValue::index].toInt();
+
+            if(ui->cbTxValue->count()>0 &&  iIdx < ui->cbTxValue->count())
+            ui->cbTxValue->setCurrentIndex(iIdx);
+
+            ui->sbMin->setValue(m_obj->m_data.value(TxtValue::min).toInt());
+
+
+            ui->sbMax->setValue(m_obj->m_data.value(TxtValue::max).toInt());
+
+            ui->txTxValueMinMsg->setText(m_obj->m_data.value(TxtValue::minMsg).toString());
+
+
+
+            ui->txTxValueMaxMsg->setText(m_obj->m_data.value(TxtValue::maxMsg).toString());
+
+
+        }
+
+
+        ui->chCent2->setChecked(m_obj->m_data.value(Label::alignCenter).toInt());
+
 
     }
 
@@ -165,9 +233,10 @@ void LayerEditor::on_btnTxtColor_clicked()
 
     if(!bOk)
         return;
-
+/*
     QColor txColor = data->m_dataText.textColor;
-
+*/
+    QColor txColor = data->m_data.value(Label::txtColor).toString();
 
 
 
@@ -184,13 +253,14 @@ void LayerEditor::on_btnTxtColor_clicked()
     }
     QColor color = dialog.getColor(txColor,nullptr,"",QColorDialog::ShowAlphaChannel);
 
-//    QPushButton *btn = dynamic_cast<QPushButton*>(sender());
-
-//    QString sStyle ="background-color:rgba(%1,%2,%3,%4);";
-
-//    btn->setStyleSheet(sStyle.arg(color.red()).arg(color.green()).arg(color.blue()).arg(color.alpha()));
-
+/*
     data->m_dataText.textColor = color;
+*/
+
+
+    data->m_data[Label::txtColor] = color.name(QColor::HexArgb);
+
+
 
     emit callUpdate();
 }
@@ -209,7 +279,7 @@ void LayerEditor::on_btnBgColor_clicked()
     if(!bOk)
         return;
 
-    QColor bgColor = data->m_dataText.bgColor;
+    QColor bgColor = data->m_data.value(Label::bgColor).toString();
 
 
     QColorDialog dialog;
@@ -231,7 +301,7 @@ void LayerEditor::on_btnBgColor_clicked()
 
    // btn->setStyleSheet(sStyle.arg(color.red()).arg(color.green()).arg(color.blue()).arg(color.alpha()));
 
-    data->m_dataText.bgColor = color;
+    data->m_data[Label::bgColor] = color.name(QColor::HexArgb);
 
     emit callUpdate();
 }
@@ -270,9 +340,9 @@ void LayerEditor::readyCallUpdate()
 
     m_obj->m_rect.setHeight(ui->sbH->value());
 
-    m_obj->m_dataText.sText = ui->txtText->text();
+    m_obj->m_data[Label::text] = ui->txtText->text();
 
-    m_obj->m_dataText.bIsCent = ui->chCent->isChecked();
+    m_obj->m_data[Label::alignCenter] = ui->chCent->isChecked();
 
     emit callUpdate();
 }
@@ -298,11 +368,13 @@ bool LayerEditor::deleteDirectory(const QString &path)
     return dir.rmpath(dir.absolutePath());
 }
 
+
 void LayerEditor::slotMarChange(const QString &)
 {
 
-    m_obj->m_dataMar.listText.clear();
 
+
+    QStringList list ;
 
     for(int i=0;i<m_listMar.length();i++)
     {
@@ -310,13 +382,13 @@ void LayerEditor::slotMarChange(const QString &)
 
         if(sText.trimmed()!="")
         {
-            m_obj->m_dataMar.listText.append(sText);
-
-
+            list.append(sText);
 
         }
 
     }
+
+    m_obj->m_data[Marquee::listText]=list;
 
 
     emit callUpdate();
@@ -390,9 +462,9 @@ void LayerEditor::on_btnBgImage_clicked()
 
     QString sPath = QFileDialog::getOpenFileName(this,"選擇元件背景圖",QApplication::applicationDirPath(),"*.png");
 
-    if(m_obj->m_dataText.m_sImagePath!= sPath)
+    if(m_obj->m_data.value(Label::imagePath)!= sPath)
     {
-        m_obj->m_dataText.m_sImagePath=sPath;
+        m_obj->m_data[Label::imagePath] = sPath;
 
         emit callUpdate();
     }
@@ -413,9 +485,9 @@ void LayerEditor::on_btnClearBg_clicked()
     if(m_obj==nullptr)
         return;
 
-    if(m_obj->m_dataText.m_sImagePath!="")
+    if(m_obj->m_data.value(Label::imagePath).toString()!="")
     {
-        m_obj->m_dataText.m_sImagePath="";
+        m_obj->m_data[Label::imagePath] = "";
 
         emit callUpdate();
     }
@@ -433,7 +505,7 @@ void LayerEditor::on_btnSelectFont_clicked()
 //    if (ok)
 //        ui->btnSelectFont->setFont(font);
 
-    m_obj->m_dataText.font = font;
+    m_obj->m_data[Label::font] = font;
 
     callUpdate();
     //font.toString()
@@ -543,8 +615,9 @@ void LayerEditor::on_btnVideoSet_clicked()
 
 void LayerEditor::on_sbMar_valueChanged(int )
 {
-
-    m_obj->m_dataMar.iSpeed = ui->sbMar->value();
+    if(m_obj == nullptr)
+        return ;
+    m_obj->m_data[Marquee::speed] = ui->sbMar->value();
 
     emit callUpdate();
 }
@@ -566,7 +639,109 @@ void LayerEditor::on_btnMarFont_clicked()
 
 void LayerEditor::on_txQr_textChanged(const QString &arg1)
 {
-    m_obj->m_dataText.sText = ui->txQr->text();
+    m_obj->m_data[Label::text]= ui->txQr->text();
 
     emit callUpdate();
+}
+
+void LayerEditor::on_btnBgColor_2_clicked()
+{
+    on_btnBgColor_clicked();
+}
+
+void LayerEditor::on_btnTxtColor_2_clicked()
+{
+    on_btnTxtColor_clicked();
+}
+
+void LayerEditor::on_btnBgImage_2_clicked()
+{
+    on_btnBgImage_clicked();
+}
+
+void LayerEditor::on_btnClearBg_2_clicked()
+{
+    on_btnClearBg_clicked();
+}
+
+void LayerEditor::on_btnSelectFont2_clicked()
+{
+    on_btnSelectFont_clicked();
+}
+
+
+
+
+
+
+void LayerEditor::on_txTxValueMinMsg_textChanged(const QString &arg1)
+{
+
+   updateTxValue();
+}
+
+
+
+void LayerEditor::on_txTxValueMaxMsg_textChanged(const QString &arg1)
+{
+
+    updateTxValue();
+}
+
+void LayerEditor::on_sbTxValueRead_valueChanged(int arg1)
+{
+
+    updateTxValue();
+}
+
+void LayerEditor::on_sbTxValueDisplay_valueChanged(int arg1)
+{
+    updateTxValue();
+}
+
+
+void LayerEditor::updateTxValue()
+{
+
+    if(m_obj ==nullptr || m_bLockCallUpdate )
+        return ;
+
+
+    m_obj->m_data[TxtValue::index] = ui->cbTxValue->currentIndex();
+
+
+    m_obj->m_data[TxtValue::playSpeed]= ui->sbTxValueDisplay->value();
+
+    m_obj->m_data[TxtValue::readSpeed]= ui->sbTxValueRead->value();
+
+    m_obj->m_data[TxtValue::min] = ui->sbMin->value();
+
+    m_obj->m_data[TxtValue::max] = ui->sbMax->value();
+
+    m_obj->m_data[TxtValue::minMsg] = ui->txTxValueMinMsg->text();
+
+    m_obj->m_data[TxtValue::maxMsg] = ui->txTxValueMaxMsg->text();
+
+
+
+    emit callUpdate();
+
+
+}
+
+
+
+void LayerEditor::on_cbTxValue_currentIndexChanged(int index)
+{
+    updateTxValue();
+}
+
+void LayerEditor::on_sbMin_valueChanged(int arg1)
+{
+     updateTxValue();
+}
+
+void LayerEditor::on_sbMax_valueChanged(int arg1)
+{
+     updateTxValue();
 }

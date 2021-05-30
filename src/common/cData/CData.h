@@ -37,6 +37,7 @@ public:
 
     void removeLayer(QString sPath);
 
+
     QMap < QString , LayerData*> m_dData;
 
     QString m_sPath;
@@ -52,6 +53,8 @@ public:
     ObjData* getObj(QString layer, QString objName, bool &bOk);
 
     DataModel m_dataModel;
+
+
 
 
 private:

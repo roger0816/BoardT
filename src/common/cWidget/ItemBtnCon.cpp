@@ -12,57 +12,65 @@ ItemBtnCon::ItemBtnCon(QWidget *parent) :
 
 void ItemBtnCon::updateItem()
 {
-    if(m_obj==nullptr)
-        return;
 
-    qDebug()<<"update btn item";
-
-    DataText m_data;
-        m_data = m_obj->m_dataText;
-
-    QColor bgColor = m_data.bgColor;
-
-    QColor txtColor = m_data.textColor;
+      if(m_obj!=nullptr)
+          m_data = m_obj->m_data;
 
 
-    QString sStyle = "color:rgba(%1,%2,%3,%4);"
-                     "background-color:rgba(%5,%6,%7,%8);";
+
+      QColor bgColor = m_data.value(Label::bgColor,"#ffffffff").toString();
+      //bgColor.name(QColor::HexArgb)
 
 
-    if(m_data.m_sImagePath.trimmed()!="")
-    {
-        ui->btn->setStyleSheet(sStyle.arg(m_data.textColor.red())
-                                 .arg(m_data.textColor.green())
-                                 .arg(m_data.textColor.blue())
-                                 .arg(m_data.textColor.alpha())
-                                 .arg(0)
-                                 .arg(0)
-                                 .arg(0)
-                                 .arg(0)
-                                 +" border-image:url("+m_data.m_sImagePath+");");
+      QColor txtColor = m_data.value(Label::txtColor,"#ff000000").toString();
+
+    QString sImagePath = m_data.value(Label::imagePath).toString();
+
+      QString sStyle = "color:rgba(%1,%2,%3,%4);"
+                       "background-color:rgba(%5,%6,%7,%8);";
+
+      if(sImagePath.trimmed()!="")
+      {
+          ui->btn->setStyleSheet(sStyle.arg(txtColor.red())
+                                   .arg(txtColor.green())
+                                   .arg(txtColor.blue())
+                                   .arg(txtColor.alpha())
+                                   .arg(0)
+                                   .arg(0)
+                                   .arg(0)
+                                   .arg(0)
+                                   +" border-image:url("+sImagePath+");");
 
 
-    }
-    else
-    {
-    ui->btn->setStyleSheet(sStyle.arg(m_data.textColor.red())
-                      .arg(m_data.textColor.green())
-                      .arg(m_data.textColor.blue())
-                      .arg(m_data.textColor.alpha())
-                      .arg(m_data.bgColor.red())
-                      .arg(m_data.bgColor.green())
-                      .arg(m_data.bgColor.blue())
-                      .arg(m_data.bgColor.alpha())
-                        );
-    }
+      }
+      else
+      {
+      ui->btn->setStyleSheet(sStyle.arg(txtColor.red())
+                        .arg(txtColor.green())
+                        .arg(txtColor.blue())
+                        .arg(txtColor.alpha())
+                        .arg(bgColor.red())
+                        .arg(bgColor.green())
+                        .arg(bgColor.blue())
+                        .arg(bgColor.alpha())
+                          );
+      }
 
-    QFont f = m_data.font;
 
-    f.setPixelSize(f.pixelSize()*m_diffSize);
 
-    ui->btn->setFont(f);
+      QFont f ;
+      f.fromString("Arial,24,-1,5,50,0,0,0,0,0,Regular");
 
-    ui->btn->setText(m_data.sText);
+      QString sFont = m_data.value(Label::font,"Arial,24,-1,5,50,0,0,0,0,0,Regular").toString();
+
+      f.fromString(sFont);
+
+     // f.setPixelSize(f.pixelSize()*m_diffSize);
+
+      ui->btn->setFont(f);
+
+
+    ui->btn->setText(m_data.value(Label::text).toString());
 
 //    if(m_data.bIsCent)
 //        ui->btn->setAlignment(Qt::AlignCenter);

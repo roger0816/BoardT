@@ -6,6 +6,8 @@ ItemLabel::ItemLabel(QWidget *parent) :
     ui(new Ui::ItemLabel)
 {
     ui->setupUi(this);
+
+    m_lb = ui->label;
 }
 
 ItemLabel::~ItemLabel()
@@ -24,56 +26,72 @@ void ItemLabel::init()
 
 void ItemLabel::updateItem()
 {
-    if(m_obj!=nullptr)
-        m_data = m_obj->m_dataText;
-
-    QColor bgColor = m_data.bgColor;
-
-    QColor txtColor = m_data.textColor;
 
 
-    QString sStyle = "color:rgba(%1,%2,%3,%4);"
-                     "background-color:rgba(%5,%6,%7,%8);";
+      if(m_obj!=nullptr)
+          m_data = m_obj->m_data;
 
 
-    if(m_data.m_sImagePath.trimmed()!="")
-    {
-        ui->label->setStyleSheet(sStyle.arg(m_data.textColor.red())
-                                 .arg(m_data.textColor.green())
-                                 .arg(m_data.textColor.blue())
-                                 .arg(m_data.textColor.alpha())
-                                 .arg(0)
-                                 .arg(0)
-                                 .arg(0)
-                                 .arg(0)
-                                 +" border-image:url("+m_data.m_sImagePath+");");
+
+      QColor bgColor = m_data.value(Label::bgColor,"#ffffffff").toString();
+      //bgColor.name(QColor::HexArgb)
 
 
-    }
-    else
-    {
-    ui->label->setStyleSheet(sStyle.arg(m_data.textColor.red())
-                      .arg(m_data.textColor.green())
-                      .arg(m_data.textColor.blue())
-                      .arg(m_data.textColor.alpha())
-                      .arg(m_data.bgColor.red())
-                      .arg(m_data.bgColor.green())
-                      .arg(m_data.bgColor.blue())
-                      .arg(m_data.bgColor.alpha())
-                        );
-    }
+      QColor txtColor = m_data.value(Label::txtColor,"#ff000000").toString();
 
-    QFont f = m_data.font;
+    QString sImagePath = m_data.value(Label::imagePath).toString();
 
-    f.setPixelSize(f.pixelSize()*m_diffSize);
+      QString sStyle = "color:rgba(%1,%2,%3,%4);"
+                       "background-color:rgba(%5,%6,%7,%8);";
 
-    ui->label->setFont(f);
+      if(sImagePath.trimmed()!="")
+      {
+          ui->label->setStyleSheet(sStyle.arg(txtColor.red())
+                                   .arg(txtColor.green())
+                                   .arg(txtColor.blue())
+                                   .arg(txtColor.alpha())
+                                   .arg(0)
+                                   .arg(0)
+                                   .arg(0)
+                                   .arg(0)
+                                   +" border-image:url("+sImagePath+");");
 
-    ui->label->setText(m_data.sText);
 
-    if(m_data.bIsCent)
-        ui->label->setAlignment(Qt::AlignCenter);
-    else
-        ui->label->setAlignment(Qt::AlignLeading);
+      }
+      else
+      {
+      ui->label->setStyleSheet(sStyle.arg(txtColor.red())
+                        .arg(txtColor.green())
+                        .arg(txtColor.blue())
+                        .arg(txtColor.alpha())
+                        .arg(bgColor.red())
+                        .arg(bgColor.green())
+                        .arg(bgColor.blue())
+                        .arg(bgColor.alpha())
+                          );
+      }
+
+
+
+      QFont f ;
+      f.fromString("Arial,24,-1,5,50,0,0,0,0,0,Regular");
+
+      QString sFont = m_data.value(Label::font,"Arial,24,-1,5,50,0,0,0,0,0,Regular").toString();
+
+      f.fromString(sFont);
+
+     // f.setPixelSize(f.pixelSize()*m_diffSize);
+
+      ui->label->setFont(f);
+
+
+      ui->label->setText(m_data.value(Label::text,"文字").toString());
+
+      if(m_data.value(Label::alignCenter).toInt(),1)
+          ui->label->setAlignment(Qt::AlignCenter);
+      else
+          ui->label->setAlignment(Qt::AlignLeading);
+
+
 
 }

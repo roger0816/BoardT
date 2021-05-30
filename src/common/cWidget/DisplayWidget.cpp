@@ -23,20 +23,19 @@ DisplayWidget::~DisplayWidget()
     delete ui;
 }
 
-QPixmap DisplayWidget::setLayer(QString sPath, bool bNoStopVideo)
+QPixmap DisplayWidget::setLayer(QString sPath, int iVideoStatus)
 {
 
     m_sPath = sPath;
 
-    qDebug()<<"layer path : "<<m_sPath;
+    qDebug()<<"layer path : "<<m_sPath<<",video status :  "<<iVideoStatus;
 
-    if(!bNoStopVideo)
+    if(iVideoStatus == 0)
     {
         if(m_video!=nullptr)
         {
 
             m_video->m_player->stop();
-
 
             m_video->hide();
         }
@@ -83,10 +82,10 @@ QPixmap DisplayWidget::setLayer(QString sPath, bool bNoStopVideo)
 
         m_listItem.append(item);
 
-        if(listData[i]->m_sType == E_VIDEO)
+        if(listData[i]->m_sType == E_VIDEO && iVideoStatus ==0)
         {
 
-
+            qDebug()<<"video set ";
             if(m_video == nullptr)
             {
                 m_video = new ItemPlayer(this);
@@ -109,6 +108,9 @@ QPixmap DisplayWidget::setLayer(QString sPath, bool bNoStopVideo)
     }
 
 
+    if(m_video != nullptr && m_video->isVisible())
+        m_video->raise();
+
 
     CDATA.m_dData[m_sPath.split("/").last()]->m_scaleImage = this->grab();
 
@@ -122,6 +124,7 @@ void DisplayWidget::setEdit(bool b)
 
     if(m_video!=nullptr)
     m_video->setHidden(m_bEdit);
+
 
     foreach(ItemBaseContent *t,m_listItem)
     {
@@ -201,7 +204,7 @@ void DisplayWidget::refreshBg()
     if(layerData!=nullptr)
     ui->wBg->setStyleSheet("QWidget#"+ui->wBg->objectName()+"{"
                                                             "border-image:url("+layerData->m_sBgPath+");"
-                          " border: "+QString::number(m_iBorderSize)+"px groove gray; border-style: outset;background-color: rgba(0, 0, 0,0); "
+                          " border: "+QString::number(m_iBorderSize)+"px #6ca5d9; border-style: solid;background-color: rgba(0, 0, 0,0); "
                                                                                                      "}");
 
 }
@@ -245,15 +248,17 @@ void DisplayWidget::slotUpdate()
 void DisplayWidget::refreshItem()
 {
 
-
+    qDebug()<<"base content count : "<<m_listItem.count();
     foreach(ItemBaseContent *item ,m_listItem)
     {
         item->updateItem();
     }
 
-
+    qDebug()<<"AAAAAA";
 
     LayerData *layerData = CDATA.m_dData[m_layerName] ;
+
+    qDebug()<<"AAAAA44";
 
     if(layerData==nullptr)
         return ;
@@ -261,6 +266,8 @@ void DisplayWidget::refreshItem()
   //  ui->wBg->setStyleSheet("QWidget#"+ui->wBg->objectName()+"{border-image:url("+layerData->m_sBgPath+");}");
 
     refreshBg();
+
+    qDebug()<<"AAAA5";
 }
 
 void DisplayWidget::raiseItem(QString sPath)
@@ -274,6 +281,7 @@ void DisplayWidget::raiseItem(QString sPath)
 
 void DisplayWidget::renameItem(QString sOldPath, QString sNewPath)
 {
+
     foreach(ItemBaseContent *item ,m_listItem)
     {
 
@@ -283,9 +291,14 @@ void DisplayWidget::renameItem(QString sOldPath, QString sNewPath)
 
             item->m_sName = sNewPath.split("/").last();
 
+
+
         }
         //
     }
+
+
+
 }
 
 void DisplayWidget::deleteItem(QString sPath)
@@ -342,7 +355,7 @@ void DisplayWidget::addItem(int iIdx)
 
 
 
-    if(iIdx == ADD_BTN_PIC)
+    if(iIdx == ADD_BASIC_PIC)
     {
         obj->m_sType = E_PIC;
 
@@ -350,7 +363,7 @@ void DisplayWidget::addItem(int iIdx)
 
     }
 
-    else if(iIdx == ADD_BTN_VIDEO)
+    else if(iIdx == ADD_BASIC_VIDEO)
     {
         obj->m_sType = E_VIDEO;
 
@@ -358,42 +371,53 @@ void DisplayWidget::addItem(int iIdx)
 
     }
 
-    else if(iIdx == ADD_BTN_BTN)
+    else if(iIdx == ADD_ADV_BUTTON)
     {
         obj->m_sType = E_BUTTON;
 
-        obj->m_dataText.sText="BUTTON";
+        obj->m_data[Label::txtColor] ="BUTTON";
 
         sTmp = "BUTTON_%1";
 
     }
 
-    else if(iIdx == ADD_BTN_MARQUEE)
+    else if(iIdx == ADD_BASIC_MARQUEE)
     {
         obj->m_sType = E_MARQUEE;
 
-        obj->m_dataMar.listText=QStringList()<<"跑馬燈元件"<<"MARQUEE";
+        obj->m_data[Marquee::listText]=QStringList()<<"跑馬燈元件"<<"MARQUEE";
 
-        obj->m_dataMar.iSpeed=5;
+        obj->m_data[Marquee::speed]=3;
 
-        obj->m_dataText.bgColor = QColor(255,255,255,0);
-
+        obj->m_data[Label::bgColor] = QColor(255,255,255,0).name(QColor::HexArgb);
 
         sTmp = "MARQUEE%1";
     }
 
-    else if(iIdx == ADD_BTN_QR)
+    else if(iIdx == ADD_BASIC_QR)
     {
         obj->m_sType = E_QRCODE;
 
         sTmp = "QRCODE_%1";
     }
-    else //(iIdx == ADD_BTN_TEXT)
+    else if(iIdx == ADD_BASIC_TEXT)
     {
         obj->m_sType = E_TEXT;
 
         sTmp = "TEXT_%1";
 
+    }
+
+    else if(iIdx == ADD_ADV_TXT)
+    {
+        obj->m_sType = E_TXVALUE;
+
+        sTmp = "TxValue_%1";
+
+    }
+    else
+    {
+        return ;
     }
 
 
@@ -421,7 +445,7 @@ void DisplayWidget::addItem(int iIdx)
     if(iRetryCount>=20)
         return ;
 
-    obj->setPath(m_sPath+"/"+sName);
+    obj->readData(m_sPath+"/"+sName);
 
     layerData->m_listData.append(obj);
 

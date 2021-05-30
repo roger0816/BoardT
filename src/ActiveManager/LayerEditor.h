@@ -11,6 +11,8 @@
 #include <QDebug>
 #include <QLineEdit>
 
+#include "Voj.h"
+
 namespace Ui {
 class LayerEditor;
 }
@@ -97,6 +99,7 @@ private:
 
     QList<QLineEdit*> m_listMar;
 
+    void updateTxValue();
 
 
 signals:
@@ -108,6 +111,8 @@ signals:
 
     void callDelete(QString sPath);
 
+
+
 private slots:
 
     void slotMarChange(const QString &);
@@ -116,6 +121,23 @@ private slots:
     void on_btnMarBgColor_clicked();
     void on_btnMarFont_clicked();
     void on_txQr_textChanged(const QString &arg1);
+    void on_btnBgColor_2_clicked();
+    void on_btnTxtColor_2_clicked();
+    void on_btnBgImage_2_clicked();
+    void on_btnClearBg_2_clicked();
+    void on_btnSelectFont2_clicked();
+
+    //tx value
+
+
+    void on_txTxValueMinMsg_textChanged(const QString &arg1);
+    void on_txTxValueMaxMsg_textChanged(const QString &arg1);
+    void on_sbTxValueRead_valueChanged(int arg1);
+    void on_sbTxValueDisplay_valueChanged(int arg1);
+
+    void on_cbTxValue_currentIndexChanged(int index);
+    void on_sbMin_valueChanged(int arg1);
+    void on_sbMax_valueChanged(int arg1);
 };
 
 #endif // LAYEREDITOR_H

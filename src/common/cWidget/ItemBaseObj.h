@@ -32,6 +32,8 @@ public:
 
     ObjData* m_obj =nullptr;
 
+    QMap<QString,QVariant> m_data;
+
 signals:
 
 };

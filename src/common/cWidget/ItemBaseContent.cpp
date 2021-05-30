@@ -71,7 +71,6 @@ void ItemBaseContent::setData(ObjData *obj, float diffSize)
 
     updateItem();
 
-    qDebug()<<"type : "<<obj->m_sType;
 
 
     while(m_lay->count()>0)
@@ -111,6 +110,12 @@ void ItemBaseContent::setData(ObjData *obj, float diffSize)
     {
 
         itemLabel = new ItemQrCon(m_wBg);
+    }
+
+    else if(m_sType == E_TXVALUE)
+    {
+
+        itemLabel = new ItemTxObjCon(m_wBg);
     }
     else
     {
@@ -249,7 +254,6 @@ void ItemBaseContent::slotMouseEvent(QMouseEvent *e)
             }
 
 
-            qDebug()<<"model : "<<m_sModelName<<" ,layer: "<<m_sLayerName<<" ,obj: "<<m_sName;
 
             bool bOk = false;
 

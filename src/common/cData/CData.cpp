@@ -64,6 +64,8 @@ void CData::readModel(QString sPath)
 
     m_dataModel.sTarget = pro.value("Target","").toString();
 
+    m_dataModel.iScheduleMode = pro.value("ScheduleMode",0).toInt();
+
     m_dataModel.updateDateTime = pro.value("DateTime",QDateTime::currentDateTime()).toDateTime().fromString("yyyyMMddhhmmss");
 
     m_dataModel.sleepFrom = pro.value("SleepFrom","202001010200").toDateTime().fromString("yyyyMMddhhmmss");
@@ -141,6 +143,8 @@ void CData::writeModel(QString defLayer)
 
     pro.setValue("SleepMode",m_dataModel.bEnableSleepModel);
 
+    pro.setValue("ScheduleMode",m_dataModel.iScheduleMode);
+
     pro.sync();
 
 
@@ -188,7 +192,6 @@ void CData::writeModel(QString defLayer)
         }
 
 
-
         foreach(ObjData *item ,layerData->m_listData)
         {
             writeObj(item);
@@ -230,6 +233,7 @@ void CData::checkDefine()
     defData.insert("qrcode",11);
 
     defData.insert("onSale",14);
+    defData.insert("txValue",15);
     defData.insert("mediaCent",17);
 
     defData.insert("marquee",21);
@@ -302,66 +306,18 @@ void CData::writeObj(ObjData *item)
 
     conf.setValue("Action/value2",item->m_dataCmd.sValue2);
 
-
-
-    if(item->m_sType == E_TEXT || item->m_sType == E_BUTTON
-            ||item->m_sType == E_MARQUEE || item->m_sType == E_QRCODE )
+    if(item->m_sWaitRename.trimmed()!="")
     {
+        deleteDirectory(item->m_sWaitRename);
 
-        QString sTitle = item->m_sType;
-
-
-        conf.setValue("Base/type",m_dDefine[item->m_sType]);
-
-        if(item->m_dataText.m_sImagePath!="")
-        {
-            QImage image(item->m_dataText.m_sImagePath);
-
-            image.save(sItemPash+"/bg.png");
-
-
-            item->m_dataText.m_sImagePath = sItemPash+"/bg.png";
-        }
-        conf.setValue(sTitle+"/bgPath",item->m_dataText.m_sImagePath);
-
-        conf.setValue(sTitle+"/font",item->m_dataText.font.toString());
-
-        conf.setValue(sTitle+"/text",item->m_dataText.sText);
-
-        int iTemp = item->m_dataText.bIsCent;
-
-        conf.setValue(sTitle+"/alignCenter",iTemp);
-
-
-
-        QString sRgba("%1%2%3%4");
-
-
-        QString sTxtColor = sRgba.arg(item->m_dataText.textColor.red(),2,16,QLatin1Char( '0' ))
-                .arg(item->m_dataText.textColor.green(),2,16,QLatin1Char( '0' ))
-                .arg(item->m_dataText.textColor.blue(),2,16,QLatin1Char( '0' ))
-                .arg(item->m_dataText.textColor.alpha(),2,16,QLatin1Char( '0' ));
-
-        QString sBgColor = sRgba.arg(item->m_dataText.bgColor.red(),2,16,QLatin1Char( '0' ))
-                .arg(item->m_dataText.bgColor.green(),2,16,QLatin1Char( '0' ))
-                .arg(item->m_dataText.bgColor.blue(),2,16,QLatin1Char( '0' ))
-                .arg(item->m_dataText.bgColor.alpha(),2,16,QLatin1Char( '0' ));
-
-        conf.setValue(sTitle+"/txtColor",sTxtColor);
-
-        conf.setValue(sTitle+"/bgColor",sBgColor);
-
-        if(item->m_sType == E_MARQUEE)
-        {
-            conf.setValue(sTitle+"/speed",item->m_dataMar.iSpeed);
-
-            conf.setValue(sTitle+"/list",item->m_dataMar.listText);
-        }
-
-
+        item->m_sWaitRename = "";
     }
 
-    else if(item->m_sType == E_PIC)
+   // if(item->m_sType == E_TEXT || item->m_sType == E_BUTTON
+    //        ||item->m_sType == E_MARQUEE || item->m_sType == E_QRCODE )
+
+
+    if(item->m_sType == E_PIC)
     {
 
         conf.setValue("Base/type",m_dDefine[E_PIC]);
@@ -402,6 +358,56 @@ void CData::writeObj(ObjData *item)
         }
 
         conf.setValue("Video/list",list);
+
+    }
+
+    else
+    {
+
+        QString sTitle = item->m_sType;
+
+
+        conf.setValue("Base/type",m_dDefine[item->m_sType]);
+
+        conf.sync();
+
+
+        //
+
+        QStringList listKey = item->m_data.keys();
+
+        conf.beginGroup("Items");
+
+
+        if(item->m_data[Label::imagePath].toString()!="")
+        {
+            qDebug()<<"GGGGGGG " <<item->m_data[Label::imagePath];
+
+            QImage image(item->m_data[Label::imagePath].toString());
+
+          //  image.save(sItemPash+"/bg.png");
+
+          //  item->m_data[Label::imagePath] = sItemPash+"/bg.png";
+        }
+
+        for(int i=0;i<listKey.length();i++)
+        {
+
+            QString sKey = listKey.at(i);
+
+
+            QString sValue = item->m_data[sKey].toString();
+
+            conf.setValue(sKey,sValue);
+
+        }
+
+
+
+        conf.endGroup();
+
+
+        qDebug()<<item->m_data;
 
     }
 
@@ -472,6 +478,8 @@ void CData::removeLayer(QString sPath)
 
     qDebug()<<"remove layer : "<<sPath<<" , data count : "<<m_dData.count();
 }
+
+
 
 ObjData *CData::getObj(QString sPath)
 {

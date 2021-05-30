@@ -17,6 +17,7 @@
 #include "ItemBtnCon.h"
 #include "ItemMarCon.h"
 #include "ItemQrCon.h"
+#include "ItemTxObjCon.h"
 namespace Ui {
 class ItemBaseContent;
 }
@@ -141,6 +142,7 @@ public:
     void setRoll(bool b);
 
     void setEdit(bool b);
+
 
     QString m_sPath;
 

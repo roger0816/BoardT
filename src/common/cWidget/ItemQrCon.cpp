@@ -8,7 +8,7 @@ ItemQrCon::ItemQrCon(QWidget *parent) : ItemBaseObj(parent)
 
 void ItemQrCon::updateItem()
 {
-    QString sText= m_obj->m_dataText.sText;
+    QString sText= m_obj->m_data.value(Label::text).toString();
 
     if(sText.trimmed().length()<1)
     {

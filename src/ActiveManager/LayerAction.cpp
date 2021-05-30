@@ -190,13 +190,13 @@ void LayerAction::writeData()
     {
         data.sValue1 = ui->cbLayer->currentText();
 
-        data.sValue2 = "0";
+        data.sValue2 = "1";
     }
     else if (m_iCurrentIdx ==_PAGE_NO_STOP)
     {
         data.sValue1 = ui->cbLayer->currentText();
 
-        data.sValue2 = "1";
+        data.sValue2 = "0";
     }
     else if (m_iCurrentIdx ==_CHANGE)
     {

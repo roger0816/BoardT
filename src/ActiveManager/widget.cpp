@@ -24,6 +24,8 @@ Widget::Widget(QWidget *parent)
 
     connect(ui->wLayerSelector,&LayerSelector::sendSelectLayer,this,&Widget::slotSelector);
 
+       connect(ui->wLayerSelector,&LayerSelector::sendSelectLayer,ui->pageSchedule,&LayerSchedule::slotSelector);
+
     connect(ui->wDisplay,&DisplayWidget::changeTarget,ui->wStyle,&LayerEditor::setTarget);
 
     connect(ui->wDisplay,&DisplayWidget::changeTarget,ui->wAction,&LayerAction::setTarget);
@@ -32,7 +34,9 @@ Widget::Widget(QWidget *parent)
 
     connect(ui->wStyle,&LayerEditor::callRaise,ui->wDisplay,&DisplayWidget::raiseItem);
 
-    connect(ui->wStyle,&LayerEditor::callRename,ui->wDisplay,&DisplayWidget::renameItem);
+    connect(ui->wStyle,&LayerEditor::callRename,this,&Widget::rename);
+
+
 
     connect(ui->wStyle,&LayerEditor::callDelete,ui->wDisplay,&DisplayWidget::deleteItem);
 
@@ -159,7 +163,7 @@ void Widget::slotSelector(QString sName)
         ui->wStackWork->setCurrentWidget(ui->pageTimeSchedule);
 
 
-        setTimeData(sName);
+        ui->pageTimeSchedule->setTimeData(sName);
 
     }
 
@@ -269,6 +273,23 @@ void Widget::on_btnSave_clicked()
 
     if(iRe == 1)
     {
+
+        ui->pageSchedule->saveSchedule();
+
+        int iScheduleStatus = SCHEDULE_OFF;
+
+        if(ui->rdSchedule->isChecked())
+        {
+            iScheduleStatus = SCHEDULE_ON;
+        }
+        else if(ui->rdTimeSchedule->isChecked())
+        {
+            iScheduleStatus = SCHEDULE_TIME;
+        }
+
+        CDATA.m_dataModel.iScheduleMode = iScheduleStatus;
+
+
         CDATA.writeModel(ui->wLayerSelector->m_sSetTargetPath);
 
         QString sPath = CDATA.m_sPath;
@@ -357,59 +378,41 @@ void Widget::upload(QString sIp, QString sTarget, QString sPath)
     //    p.waitForFinished();
 }
 
-void Widget::refreshTimeSchedule()
+void Widget::rename(QString sOld, QString sNew)
 {
 
-    if(m_bLockTimeSend)
-        return ;
+    CDATA.getObj(sOld)->m_sWaitRename = sOld;
 
-    qDebug()<<"AAA"<<CDATA.m_dData.keys()<<" , "<<ui->lbLayerNameForTime->text();
-
-
-    if(CDATA.m_dData[ui->lbLayerNameForTime->text()] == nullptr)
-    return;
-    LayerData *layer =CDATA.m_dData.value(ui->lbLayerNameForTime->text());
-
-   layer->m_dataLayer.timeScheduleFrom =  ui->teFrom->time();
-
-   qDebug()<<layer->m_dataLayer.timeScheduleFrom;
-
-   layer->m_dataLayer.timeScheduleTo = ui->teTo->time();
-
-    layer->m_dataLayer.dayOfWeek = ui->cbTimeDayOfWeek->currentIndex();
-
-    layer->m_dataLayer.bStopPreVideo = ui->cbStopPreVideo->isChecked();
-  //  layerData->
+    ui->wDisplay->renameItem(sOld,sNew);
 
 
 }
 
-void Widget::setTimeData(QString sLayerName)
-{
+//void Widget::refreshTimeSchedule()
+//{
 
-    ui->lbLayerNameForTime->setText(sLayerName);
-
-   if(CDATA.m_dData.value(sLayerName) == nullptr)
-       return ;
+//    if(m_bLockTimeSend)
+//        return ;
 
 
-    m_bLockTimeSend = true;
+//    if(CDATA.m_dData[ui->lbLayerNameForTime->text()] == nullptr)
+//    return;
+//    LayerData *layer =CDATA.m_dData.value(ui->lbLayerNameForTime->text());
+
+//   layer->m_dataLayer.timeScheduleFrom =  ui->teFrom->time();
+
+//   qDebug()<<layer->m_dataLayer.timeScheduleFrom;
+
+//   layer->m_dataLayer.timeScheduleTo = ui->teTo->time();
+
+//    layer->m_dataLayer.dayOfWeek = ui->cbTimeDayOfWeek->currentIndex();
+
+//    layer->m_dataLayer.bStopPreVideo = ui->cbStopPreVideo->isChecked();
+//  //  layerData->
 
 
-    DataLayer data = CDATA.m_dData.value(sLayerName)->m_dataLayer;
+//}
 
-    qDebug()<<"scheduleFrom :" <<data.timeScheduleFrom;
-
-    ui->teFrom->setTime(data.timeScheduleFrom);
-
-    ui->teTo->setTime(data.timeScheduleTo);
-
-    ui->cbTimeDayOfWeek->setCurrentIndex(qBound(0,data.dayOfWeek-1,7));
-
-    ui->cbStopPreVideo->setChecked(data.bStopPreVideo);
-
-    m_bLockTimeSend = false;
-}
 
 
 
@@ -502,6 +505,29 @@ void Widget::on_btnEdit_clicked()
 
 void Widget::on_btnSetting_clicked()
 {
+    int iStatus = CDATA.m_dataModel.iScheduleMode;
+
+    ui->rdNoneSchedule->setChecked(false);
+
+    ui->rdSchedule->setChecked(false);
+
+    ui->rdTimeSchedule->setChecked(false);
+
+
+    if(iStatus==SCHEDULE_TIME)
+    {
+        ui->rdTimeSchedule->setChecked(true);
+    }
+
+    else if(iStatus==SCHEDULE_ON)
+    {
+        ui->rdSchedule->setChecked(true);
+    }
+    else
+        ui->rdNoneSchedule->setChecked(true);
+
+
+
     ui->wStackWork->setCurrentWidget(ui->pageSetting);
 }
 
@@ -524,33 +550,26 @@ void Widget::on_btnTimeSchedule_clicked()
 
         QString sLayerName = ui->wLayerSelector->m_sCurrentPath.split("/").last();
 
-        setTimeData(sLayerName);
+        ui->pageTimeSchedule->setTimeData(sLayerName);
 
     }
 }
 
 
-void Widget::on_teFrom_userTimeChanged(const QTime &time)
+
+
+
+void Widget::on_rdNoneSchedule_clicked()
+{
+   // CDATA.m_dData
+}
+
+void Widget::on_rdSchedule_clicked()
 {
 
 }
 
-void Widget::on_cbTimeDayOfWeek_currentIndexChanged(int index)
+void Widget::on_rdTimeSchedule_clicked()
 {
-    refreshTimeSchedule();
-}
 
-void Widget::on_teTo_userTimeChanged(const QTime &time)
-{
-    refreshTimeSchedule();
-}
-
-void Widget::on_cbStopPreVideo_clicked()
-{
-    refreshTimeSchedule();
-}
-
-void Widget::on_teFrom_timeChanged(const QTime &time)
-{
-     refreshTimeSchedule();
 }

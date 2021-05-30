@@ -35,9 +35,6 @@ void LayerData::setPath(QString sPath)
     m_dataLayer.bStopPreVideo = conf.value("TimeSchedule/stopPreVideo").toBool();
 
 
-    qDebug()<<"DDD : "<< m_dataLayer.timeScheduleFrom ;
-
-    qDebug()<<"layer name : "<<m_sName<<" path : "<<m_sLayerPath;
 
     QFileInfoList listDir = QDir(sPath).entryInfoList(QDir::AllDirs);
 
@@ -53,7 +50,7 @@ void LayerData::setPath(QString sPath)
 
             obj->m_dDefine = m_dDefine;
 
-            obj->setPath(dir.filePath());
+            obj->readData(dir.filePath());
 
             m_listData.append(obj);
 

@@ -7,7 +7,6 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-
 //    QLocale locale = QLocale::Chinese;//指定英文显示
 
 //    QString st = QDateTime::currentDateTime().toString("yyyyMMdd,hh:mm:ss,dddd");

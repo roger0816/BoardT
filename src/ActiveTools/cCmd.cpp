@@ -23,11 +23,11 @@ void cCmd::callCmd(QString sCmd, QString sValue)
 
         conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
 
-        conf.setValue("VideoStatus","0");
+        conf.setValue("VideoStatus","1");
 
         if(sCmd ==CMD_PageNoStop)
         {
-            conf.setValue("VideoStatus","1");
+            conf.setValue("VideoStatus","0");
 
         }
 
