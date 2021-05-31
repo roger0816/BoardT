@@ -381,13 +381,12 @@ void CData::writeObj(ObjData *item)
 
         if(item->m_data[Label::imagePath].toString()!="")
         {
-            qDebug()<<"GGGGGGG " <<item->m_data[Label::imagePath];
 
             QImage image(item->m_data[Label::imagePath].toString());
 
-          //  image.save(sItemPash+"/bg.png");
+            image.save(sItemPash+"/bg.png");
 
-          //  item->m_data[Label::imagePath] = sItemPash+"/bg.png";
+            item->m_data[Label::imagePath] = sItemPash+"/bg.png";
         }
 
         for(int i=0;i<listKey.length();i++)
