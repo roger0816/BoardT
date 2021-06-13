@@ -254,11 +254,9 @@ void DisplayWidget::refreshItem()
         item->updateItem();
     }
 
-    qDebug()<<"AAAAAA";
 
     LayerData *layerData = CDATA.m_dData[m_layerName] ;
 
-    qDebug()<<"AAAAA44";
 
     if(layerData==nullptr)
         return ;
@@ -267,7 +265,7 @@ void DisplayWidget::refreshItem()
 
     refreshBg();
 
-    qDebug()<<"AAAA5";
+
 }
 
 void DisplayWidget::raiseItem(QString sPath)
@@ -444,6 +442,8 @@ void DisplayWidget::addItem(int iIdx)
 
     if(iRetryCount>=20)
         return ;
+
+    obj->m_dDefine = layerData->m_dDefine;
 
     obj->readData(m_sPath+"/"+sName);
 

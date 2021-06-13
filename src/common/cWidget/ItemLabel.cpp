@@ -87,7 +87,8 @@ void ItemLabel::updateItem()
 
       ui->label->setText(m_data.value(Label::text,"文字").toString());
 
-      if(m_data.value(Label::alignCenter).toInt(),1)
+      qDebug()<<"update alignCenter : "<<m_data.value(Label::alignCenter).toInt();
+      if(m_data.value(Label::alignCenter).toInt())
           ui->label->setAlignment(Qt::AlignCenter);
       else
           ui->label->setAlignment(Qt::AlignLeading);

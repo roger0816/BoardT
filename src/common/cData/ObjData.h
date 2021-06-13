@@ -23,6 +23,8 @@ public:
 
     void readData(QString sPath);
 
+    void writeData();
+
     QString m_sWaitRename = "";
 
     QString m_sObjPath;
@@ -52,6 +54,8 @@ public:
 
 private:
 
+
+    bool deleteDirectory(const QString &path);
 
 
 

@@ -64,7 +64,7 @@ private:
 
     void typeMapping();
 
-    void writeObj(ObjData *item);
+  //  void writeObj(ObjData *item);
 
 
     bool deleteDirectory(const QString &path);

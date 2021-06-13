@@ -22,7 +22,11 @@ void ItemTxObjCon::timerEvent(QTimerEvent *)
 
 void ItemTxObjCon::updateItem()
 {
-    ItemLabel::updateItem();
+   // ItemLabel::updateItem();
+
+    if(m_obj!=nullptr)
+        m_data = m_obj->m_data;
+
 
     m_iReadSpeed = m_obj->m_data.value(TxtValue::readSpeed,2).toInt();
 
@@ -30,16 +34,31 @@ void ItemTxObjCon::updateItem()
 
     m_iSelect = m_obj->m_data.value(TxtValue::index,0).toInt();
 
-    m_iLimitMin = m_obj->m_data.value(TxtValue::min,0).toInt();
+    m_iLimitMin = m_obj->m_data.value(TxtValue::min,0).toDouble();
 
-    m_iLimitMax = m_obj->m_data.value(TxtValue::max,99).toInt();
+    m_iLimitMax = m_obj->m_data.value(TxtValue::max,99).toDouble();
 
-    m_sMsg1 = m_obj->m_data.value(TxtValue::minMsg,"").toString();
+    QStringList listText = m_obj->m_data.value(TxtValue::msg,"").toStringList();
 
-    m_sMsg2 = m_obj->m_data.value(TxtValue::maxMsg,"").toString();
+    while(listText.length()<3)
+    {
+        listText.append("");
+    }
 
+    m_sMsgMin = listText.first();
+
+    m_sMsgMax = listText.last();
+
+    m_sMsg = listText.at(1);
 
     m_lb->setText(m_data.value(Label::text,"Txt文字").toString());
+
+    QColor bgColor = m_data.value(Label::bgColor,"#ffffffff").toString();
+    //bgColor.name(QColor::HexArgb)
+
+
+    QColor txtColor = m_data.value(Label::txtColor,"#ff000000").toString();
+
 
 
 }
@@ -48,7 +67,6 @@ void ItemTxObjCon::updateItem()
 void ItemTxObjCon::doRead()
 {
 
-    qDebug()<<"do read ";
 
     //  QFile f(QApplication::applicationDirPath()+"/input.txt");
     QFile *file = new QFile(QApplication::applicationDirPath()+"/input.txt");
@@ -58,17 +76,15 @@ void ItemTxObjCon::doRead()
 
         QString st = file->readAll();
 
-          qDebug()<<"readall : "<<st;
+
         QStringList list  = st.split(",");
 
-        qDebug()<<"iselect : "<<m_iSelect<<" listlen : "<<list.length();
 
         if( m_iSelect >=0  && list.length()>0 &&  m_iSelect < list.length() )
         {
 
             m_sCurrentValue = list.at(m_iSelect);
 
-            qDebug()<<"all value : "<<list<<"  ,  current value : "<<m_sCurrentValue;
         }
         file->close();
     }
@@ -86,17 +102,22 @@ void ItemTxObjCon::doChangeShow()
         return ;
     m_sCurrentMsg="";
 
-    if(m_sCurrentValue.toInt() <= m_iLimitMin)
+    qDebug()<<"current : "<<m_sCurrentValue.toDouble()<<" , "<<m_iLimitMin<<" , "<<m_iLimitMax;
+
+    if(m_sCurrentValue.toDouble() < m_iLimitMin)
     {
 
-        m_sCurrentMsg = m_sMsg1;
+        m_sCurrentMsg = m_sMsgMin;
     }
 
-    if(m_sCurrentValue.toInt() > m_iLimitMax)
+    else if(m_sCurrentValue.toDouble() > m_iLimitMax)
     {
 
-
-        m_sCurrentMsg = m_sMsg2;
+        m_sCurrentMsg = m_sMsgMax;
+    }
+    else
+    {
+        m_sCurrentMsg = m_sMsg;
     }
 
     QString sDisplay = m_sCurrentValue;
@@ -127,7 +148,6 @@ void ItemTxObjCon::slotTimer()
     if(m_iPlaySpeed <4)
         m_iPlaySpeed = 4;
 
-        qDebug()<<"timer : " <<m_iSec  ;
 
     if(m_iSec%m_iReadSpeed==0)
     {

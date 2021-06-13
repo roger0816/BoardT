@@ -30,15 +30,17 @@ public:
 
     bool m_bIsShowValue = true;
 
-    int m_iLimitMin=1;
+    double m_iLimitMin=1.00;
 
-    int m_iLimitMax=100;
+    double m_iLimitMax=100;
 
     int m_iSelect =0;
 
-    QString m_sMsg1="";
+    QString m_sMsgMin="";
 
-    QString m_sMsg2="";
+    QString m_sMsg="";
+
+    QString m_sMsgMax="";
 
     QString m_sCurrentValue;
 

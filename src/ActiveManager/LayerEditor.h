@@ -30,12 +30,6 @@ public slots:
     void refresh();
 
 private slots:
-    void on_btnTxtColor_clicked();
-
-    void on_btnBgColor_clicked();
-
-
-
 
     void on_sbX_valueChanged(int);
 
@@ -45,28 +39,16 @@ private slots:
 
     void on_sbH_valueChanged(int );
 
-    void on_txtText_textChanged(const QString &);
-
-    void on_spSize_valueChanged(int );
-
-    void on_chCent_clicked();
-
     void on_btnToTop_clicked();
 
     void on_btnRename_clicked();
 
-    void on_btnBgImage_clicked();
-
-    void on_btnCmd_clicked();
-
-    void on_txtBgImage_textChanged(const QString &arg1);
-
-    void on_btnClearBg_clicked();
-
-    void on_btnSelectFont_clicked();
-
     void on_btnDelete_clicked();
 
+
+
+
+    //
     void on_btnSetPic_clicked();
 
     void on_sbPicSec_valueChanged(int);
@@ -91,7 +73,7 @@ private:
 
     ObjData *m_obj =nullptr;
 
-    void readyCallUpdate();
+    void updateRect();
 
     bool m_bLockCallUpdate = false;
 
@@ -99,7 +81,6 @@ private:
 
     QList<QLineEdit*> m_listMar;
 
-    void updateTxValue();
 
 
 signals:
@@ -130,14 +111,7 @@ private slots:
     //tx value
 
 
-    void on_txTxValueMinMsg_textChanged(const QString &arg1);
-    void on_txTxValueMaxMsg_textChanged(const QString &arg1);
-    void on_sbTxValueRead_valueChanged(int arg1);
-    void on_sbTxValueDisplay_valueChanged(int arg1);
 
-    void on_cbTxValue_currentIndexChanged(int index);
-    void on_sbMin_valueChanged(int arg1);
-    void on_sbMax_valueChanged(int arg1);
 };
 
 #endif // LAYEREDITOR_H

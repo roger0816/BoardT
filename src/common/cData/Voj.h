@@ -221,12 +221,44 @@ static QString playSpeed="playSpeed";
 
 static QString index="index";
 
-static QString min="min";
-
-static QString minMsg="minMsg";
 
 static QString max="max";
-static QString maxMsg="maxMsg";
+
+
+static QString min="min";
+
+
+static QString msg="msg";
+
+static QString font="font";
+
+static QString alignCenter="alignCenter";
+
+static QString bgColor="bgColor";
+
+static QString txtColor="txtColor";
+
+static QString imagePath="imagePath";
+
+static QString fontMin="fontMin";
+
+static QString alignCenterMin="alignCenterMin";
+
+static QString bgColorMin="bgColorMin";
+
+static QString txtColorMin="txtColorMin";
+
+static QString imagePathMin="imagePathMin";
+
+static QString fontMax="fontMax";
+
+static QString alignCenterMax="alignCenterMax";
+
+static QString bgColorMax="bgColorMax";
+
+static QString txtColorMax="txtColorMax";
+
+static QString imagePathMax="imagePathMax";
 
 }
 

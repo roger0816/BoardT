@@ -192,9 +192,12 @@ void CData::writeModel(QString defLayer)
         }
 
 
+        qDebug()<<"obj count : "<<layerData->m_listData.count();
         foreach(ObjData *item ,layerData->m_listData)
         {
-            writeObj(item);
+            qDebug()<<"type : "<<item->m_sType;
+            item->writeData();
+          //  writeObj(item);
         }
 
 
@@ -271,149 +274,149 @@ void CData::checkDefine()
 
 }
 
-void CData::writeObj(ObjData *item)
-{
+//void CData::writeObj(ObjData *item)
+//{
 
-    QString sItemPash = item->m_sObjPath;
+//    QString sItemPash = item->m_sObjPath;
 
-    QDir().mkdir(sItemPash);
+//    QDir().mkdir(sItemPash);
 
 
-    QSettings conf(sItemPash+"/conf.ini",   QSettings::IniFormat);
+//    QSettings conf(sItemPash+"/conf.ini",   QSettings::IniFormat);
 
 
-    int  x = item->m_rect.x();
+//    int  x = item->m_rect.x();
 
-    int y = item->m_rect.y();
+//    int y = item->m_rect.y();
 
-    int w = item->m_rect.width();
+//    int w = item->m_rect.width();
 
-    int h = item->m_rect.height();
+//    int h = item->m_rect.height();
 
-    conf.setValue("Base/x",x);
+//    conf.setValue("Base/x",x);
 
-    conf.setValue("Base/y",y);
+//    conf.setValue("Base/y",y);
 
-    conf.setValue("Base/w",w);
+//    conf.setValue("Base/w",w);
 
-    conf.setValue("Base/h",h);
+//    conf.setValue("Base/h",h);
 
-    conf.setValue("Base/changeTimer",5);
+//    conf.setValue("Base/changeTimer",5);
 
-    conf.setValue("Action/cmd",item->m_dataCmd.sCmd);
+//    conf.setValue("Action/cmd",item->m_dataCmd.sCmd);
 
-    conf.setValue("Action/value1",item->m_dataCmd.sValue1);
+//    conf.setValue("Action/value1",item->m_dataCmd.sValue1);
 
-    conf.setValue("Action/value2",item->m_dataCmd.sValue2);
+//    conf.setValue("Action/value2",item->m_dataCmd.sValue2);
 
-    if(item->m_sWaitRename.trimmed()!="")
-    {
-        deleteDirectory(item->m_sWaitRename);
+//    if(item->m_sWaitRename.trimmed()!="")
+//    {
+//        deleteDirectory(item->m_sWaitRename);
 
-        item->m_sWaitRename = "";
-    }
+//        item->m_sWaitRename = "";
+//    }
 
-   // if(item->m_sType == E_TEXT || item->m_sType == E_BUTTON
-    //        ||item->m_sType == E_MARQUEE || item->m_sType == E_QRCODE )
+//   // if(item->m_sType == E_TEXT || item->m_sType == E_BUTTON
+//    //        ||item->m_sType == E_MARQUEE || item->m_sType == E_QRCODE )
 
 
-    if(item->m_sType == E_PIC)
-    {
+//    if(item->m_sType == E_PIC)
+//    {
 
-        conf.setValue("Base/type",m_dDefine[E_PIC]);
+//        conf.setValue("Base/type",m_dDefine[E_PIC]);
 
-        QStringList listName = item->m_dataPic.listPicName;
+//        QStringList listName = item->m_dataPic.listPicName;
 
 
-        conf.setValue("Pic/list",listName);
+//        conf.setValue("Pic/list",listName);
 
 
-        conf.setValue("Pic/changeTimer",item->m_dataPic.iSec);
+//        conf.setValue("Pic/changeTimer",item->m_dataPic.iSec);
 
 
-        for(int i=0;i<listName.length();i++)
-        {
-            QPixmap *p = & item->m_dataPic.listPic[i];
+//        for(int i=0;i<listName.length();i++)
+//        {
+//            QPixmap *p = & item->m_dataPic.listPic[i];
 
-            p->save(sItemPash+"/"+listName.at(i));
-        }
+//            p->save(sItemPash+"/"+listName.at(i));
+//        }
 
-    }
+//    }
 
-    else if(item->m_sType == E_VIDEO)
-    {
+//    else if(item->m_sType == E_VIDEO)
+//    {
 
-        conf.setValue("Base/type",m_dDefine[E_VIDEO]);
+//        conf.setValue("Base/type",m_dDefine[E_VIDEO]);
 
-        QStringList listName = item->m_dataVideo.listName;
+//        QStringList listName = item->m_dataVideo.listName;
 
-        QStringList list;
+//        QStringList list;
 
-        foreach(QString st ,listName)
-        {
-            QString s ="/"+ st.split("bin").last();
+//        foreach(QString st ,listName)
+//        {
+//            QString s ="/"+ st.split("bin").last();
 
 
-            list.append(s);
-        }
+//            list.append(s);
+//        }
 
-        conf.setValue("Video/list",list);
+//        conf.setValue("Video/list",list);
 
-    }
+//    }
 
-    else
-    {
+//    else
+//    {
 
-        QString sTitle = item->m_sType;
+//        QString sTitle = item->m_sType;
 
 
-        conf.setValue("Base/type",m_dDefine[item->m_sType]);
+//        conf.setValue("Base/type",m_dDefine[item->m_sType]);
 
-        conf.sync();
+//        conf.sync();
 
 
-        //
+//        //
 
-        QStringList listKey = item->m_data.keys();
+//        QStringList listKey = item->m_data.keys();
 
-        conf.beginGroup("Items");
+//        conf.beginGroup("Items");
 
 
-        if(item->m_data[Label::imagePath].toString()!="")
-        {
+//        if(item->m_data[Label::imagePath].toString()!="")
+//        {
 
-            QImage image(item->m_data[Label::imagePath].toString());
+//            QImage image(item->m_data[Label::imagePath].toString());
 
-            image.save(sItemPash+"/bg.png");
+//            image.save(sItemPash+"/bg.png");
 
-            item->m_data[Label::imagePath] = sItemPash+"/bg.png";
-        }
+//            item->m_data[Label::imagePath] = sItemPash+"/bg.png";
+//        }
 
-        for(int i=0;i<listKey.length();i++)
-        {
+//        for(int i=0;i<listKey.length();i++)
+//        {
 
-            QString sKey = listKey.at(i);
+//            QString sKey = listKey.at(i);
 
 
-            QString sValue = item->m_data[sKey].toString();
+//            QString sValue = item->m_data[sKey].toString();
 
-            conf.setValue(sKey,sValue);
+//            conf.setValue(sKey,sValue);
 
-        }
+//        }
 
 
 
-        conf.endGroup();
+//        conf.endGroup();
 
 
-        qDebug()<<item->m_data;
+//        qDebug()<<item->m_data;
 
-    }
+//    }
 
 
 
 
-}
+//}
 
 bool CData::deleteDirectory(const QString &path)
 {
