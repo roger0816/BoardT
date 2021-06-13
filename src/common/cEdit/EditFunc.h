@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QPushButton>
-#include "ObjData.h"
+#include "cData/ObjData.h"
 #include <QColorDialog>
 #include <QFileDialog>
 #include <QFontDialog>

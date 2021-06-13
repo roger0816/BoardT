@@ -125,6 +125,7 @@ void ObjData::readData(QString sPath)
 
         m_data.clear();
 
+
         conf.beginGroup("Items");
         QStringList keys = conf.childKeys();
         foreach (QString key, keys)
@@ -136,6 +137,8 @@ void ObjData::readData(QString sPath)
 
 
         conf.endGroup();
+
+            qDebug()<<"AAAAAA : "<<m_data;
 
 
 
