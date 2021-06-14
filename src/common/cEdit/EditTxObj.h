@@ -87,6 +87,18 @@ private slots:
 
     void on_btnClearBgMax_clicked();
 
+    void on_sbGpioMin_valueChanged(int arg1);
+
+    void on_spGpioValueMin_currentIndexChanged(int index);
+
+    void on_spGpio_valueChanged(int arg1);
+
+    void on_spGpioValue_currentIndexChanged(int index);
+
+    void on_spGpioMax_valueChanged(int arg1);
+
+    void on_spGpioValueMax_currentIndexChanged(int index);
+
 private:
     Ui::EditTxObj *ui;
 };

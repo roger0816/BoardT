@@ -8,6 +8,9 @@
 #include <QFile>
 #include <QTimer>
 
+
+
+
 class ItemTxObjCon : public ItemLabel
 {
     Q_OBJECT
@@ -18,9 +21,13 @@ public:
 
    void updateItem() override;
 
+   enum status{_MIN=0,_NORMAL,_MAX} ;
+
     int m_iPlaySpeed=5;
 
     int m_iReadSpeed=2;
+
+    int m_iGpioSpeed=2;
 
     int m_iSec=0;
 
@@ -50,6 +57,19 @@ public:
 
     QTimer m_timer;
 
+    void setStatusStyle(int i);
+
+    QList<int> m_listGpioPin;
+
+    QList<int> m_listGpioValue;
+
+    bool m_changeGpio = false;
+
+    void setGpio(int iPin);
+
+    void sendGpio(int iPin, int iValue);
+
+    int m_status=1;
 signals:
 
 public slots:

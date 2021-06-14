@@ -260,6 +260,20 @@ static QString txtColorMax="txtColorMax";
 
 static QString imagePathMax="imagePathMax";
 
+static QString gpioPin="gpioPin";
+
+static QString gpioPinMin="gpioPinMin";
+
+static QString gpioPinMax="gpioPinMax";
+
+static QString gpioValue="gpioValue";
+
+static QString gpioValueMin="gpioValueMin";
+
+static QString gpioValueMax="gpioValueMax";
+
+
+
 }
 
 

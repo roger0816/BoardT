@@ -340,3 +340,63 @@ void EditTxObj::on_btnClearBgMax_clicked()
 
     emit callUpdate();
 }
+
+void EditTxObj::on_sbGpioMin_valueChanged(int arg1)
+{
+    if(m_obj ==nullptr || m_bLockCallUpdate )
+        return ;
+
+    m_obj->m_data[TxtValue::gpioPinMin]=arg1;
+
+    emit callUpdate();
+}
+
+void EditTxObj::on_spGpioValueMin_currentIndexChanged(int index)
+{
+    if(m_obj ==nullptr || m_bLockCallUpdate )
+        return ;
+
+    m_obj->m_data[TxtValue::gpioValueMin]=index;
+
+    emit callUpdate();
+}
+
+void EditTxObj::on_spGpio_valueChanged(int arg1)
+{
+    if(m_obj ==nullptr || m_bLockCallUpdate )
+        return ;
+
+    m_obj->m_data[TxtValue::gpioPin]=arg1;
+
+    emit callUpdate();
+}
+
+void EditTxObj::on_spGpioValue_currentIndexChanged(int index)
+{
+    if(m_obj ==nullptr || m_bLockCallUpdate )
+        return ;
+
+    m_obj->m_data[TxtValue::gpioValue]=index;
+
+    emit callUpdate();
+}
+
+void EditTxObj::on_spGpioMax_valueChanged(int arg1)
+{
+    if(m_obj ==nullptr || m_bLockCallUpdate )
+        return ;
+
+    m_obj->m_data[TxtValue::gpioPinMax]=arg1;
+
+    emit callUpdate();
+}
+
+void EditTxObj::on_spGpioValueMax_currentIndexChanged(int index)
+{
+    if(m_obj ==nullptr || m_bLockCallUpdate )
+        return ;
+
+    m_obj->m_data[TxtValue::gpioValueMax]=index;
+
+    emit callUpdate();
+}
