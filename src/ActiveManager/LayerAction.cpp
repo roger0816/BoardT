@@ -124,12 +124,18 @@ void LayerAction::refresh()
 
     qDebug()<<"read idx : "<<iIdx;
 
+
+
     QStringList listCbKey = CDATA.m_dData.keys();
 
 
     ui->cbLayer->clear();
 
+
+
     ui->cbLayer->addItems(listCbKey);
+
+
 
     ui->cbChangeLayer->clear();
 
@@ -173,13 +179,16 @@ void LayerAction::refresh()
 
     }
 
-    m_buttonRb.button(iIdx)->setChecked(true);
+
+   // m_buttonRb.button(iIdx)->setChecked(true);
 
     slotRbClicked(iIdx);
 
     ui->groupBox->show();
 
     m_bLockSend = false;
+
+
 }
 
 void LayerAction::writeData()

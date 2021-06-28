@@ -30,7 +30,7 @@ private:
 
     QStringList m_listKeyMapping;
 
-    QButtonGroup m_buttonRb;
+  //  QButtonGroup m_buttonRb;
 
     QList<QRadioButton*> m_listBtn;
     QString m_sObjPath;
