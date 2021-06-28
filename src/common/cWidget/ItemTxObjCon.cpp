@@ -371,7 +371,7 @@ void ItemTxObjCon::slotTimer()
 
         int iValue =1;// = m_listGpioValue[m_status];
 
-        if(iPin != m_iPrePin)
+       // if(iPin != m_iPrePin)
         {
             iniGpio();
 
