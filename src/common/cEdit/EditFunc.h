@@ -15,9 +15,9 @@ class EditFunc : public QObject
 public:
     explicit EditFunc(QObject *parent = nullptr);
 
-    void setColor(ObjData *obj,QString sDataKey, QPushButton*btn =nullptr );
+    bool setColor(ObjData *obj,QString sDataKey, QPushButton*btn =nullptr );
 
-    QVariant setColor(QColor current);
+    bool setColor(QColor current, QVariant &var);
 
     void setFont(ObjData *obj,QString sDataKey, QPushButton*btn);
 

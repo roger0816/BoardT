@@ -5,37 +5,46 @@ EditFunc::EditFunc(QObject *parent) : QObject(parent)
 
 }
 
-void EditFunc::setColor(ObjData *obj, QString sDataKey, QPushButton *btn)
+bool EditFunc::setColor(ObjData *obj, QString sDataKey, QPushButton *btn)
 {
     Q_UNUSED(btn);
 
     if(obj == nullptr)
-        return;
+        return false;
 
     QColor txColor = obj->m_data.value(sDataKey).toString();
 
-    obj->m_data[sDataKey] = setColor(txColor);
+    QVariant var;
 
-//    QColorDialog dialog;
+    bool bRe = setColor(txColor,var);
 
-//    dialog.setOption(QColorDialog::ShowAlphaChannel);
+    if(bRe)
+    {
+         obj->m_data[sDataKey] = var;
+    }
 
-//    //    if(m_bFristTxColor)
-//    //    {
-//    //        txColor = Qt::white;
+    return bRe;
 
-//    //        m_bFristTxColor = false;
+    //    QColorDialog dialog;
 
-//    //    }
-//    QColor color = dialog.getColor(txColor,nullptr,"",QColorDialog::ShowAlphaChannel);
+    //    dialog.setOption(QColorDialog::ShowAlphaChannel);
+
+    //    //    if(m_bFristTxColor)
+    //    //    {
+    //    //        txColor = Qt::white;
+
+    //    //        m_bFristTxColor = false;
+
+    //    //    }
+    //    QColor color = dialog.getColor(txColor,nullptr,"",QColorDialog::ShowAlphaChannel);
 
 
 
-//    obj->m_data[sDataKey] = color.name(QColor::HexArgb);
+    //    obj->m_data[sDataKey] = color.name(QColor::HexArgb);
 
 }
 
-QVariant EditFunc::setColor(QColor current)
+bool EditFunc::setColor(QColor current, QVariant &var)
 {
 
     QColorDialog dialog;
@@ -49,11 +58,14 @@ QVariant EditFunc::setColor(QColor current)
     //        m_bFristTxColor = false;
 
     //    }
+
+    dialog.setCurrentColor(current);
+
     QColor color = dialog.getColor(current,nullptr,"",QColorDialog::ShowAlphaChannel);
 
+    var = QVariant(color.name(QColor::HexArgb));
 
-
-    return QVariant(color.name(QColor::HexArgb));
+    return color.isValid();
 
 }
 
@@ -75,21 +87,21 @@ void EditFunc::setFont(ObjData *obj, QString sDataKey, QPushButton *btn)
 
     obj->m_data[sDataKey] = iniFont;
 
-//    bool   ok=false;
-//    QFont font=QFontDialog::getFont(&ok,iniFont);
-//    if (ok)
-//    {
-//      //  btn->setFont(font);
-//        QString sTmp="字型\n%1,%2,%3";
-//        font.toString();
+    //    bool   ok=false;
+    //    QFont font=QFontDialog::getFont(&ok,iniFont);
+    //    if (ok)
+    //    {
+    //      //  btn->setFont(font);
+    //        QString sTmp="字型\n%1,%2,%3";
+    //        font.toString();
 
-//        QStringList listTmp  = font.toString().split(",");
+    //        QStringList listTmp  = font.toString().split(",");
 
-////        if(listTmp.length()>2)
-////            btn->setText(sTmp.arg(listTmp.first()).arg(listTmp.at(1)).arg(listTmp.last()));
+    ////        if(listTmp.length()>2)
+    ////            btn->setText(sTmp.arg(listTmp.first()).arg(listTmp.at(1)).arg(listTmp.last()));
 
-//        obj->m_data[sDataKey] = font;
-//    }
+    //        obj->m_data[sDataKey] = font;
+    //    }
 
     //font.toString()
 
@@ -101,14 +113,14 @@ bool EditFunc::setFont(QFont &current)
     QFont font=QFontDialog::getFont(&ok,current);
     if (ok)
     {
-      //  btn->setFont(font);
+        //  btn->setFont(font);
         QString sTmp="字型\n%1,%2,%3";
         font.toString();
 
         QStringList listTmp  = font.toString().split(",");
 
-//        if(listTmp.length()>2)
-//            btn->setText(sTmp.arg(listTmp.first()).arg(listTmp.at(1)).arg(listTmp.last()));
+        //        if(listTmp.length()>2)
+        //            btn->setText(sTmp.arg(listTmp.first()).arg(listTmp.at(1)).arg(listTmp.last()));
 
         current = font;
     }
