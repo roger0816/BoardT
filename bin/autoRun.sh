@@ -10,5 +10,5 @@ chmod a+x ActiveBoard
 
 #cp ActiveBoardNew ActiveBoard
 
-./ActiveBoard &
+./ActiveBoard & python IR_Temperature.py 0x52
 
