@@ -9,17 +9,14 @@ LayerEditor::LayerEditor(QWidget *parent) :
 
     ui->stackType->setCurrentWidget(ui->pageText);
 
-    m_listMar<<ui->txtMar0<<ui->txtMar1<<ui->txtMar2<<ui->txtMar3<<ui->txtMar4;
 
 
-    foreach(QLineEdit *tar,m_listMar)
-    {
-        connect(tar,&QLineEdit::textChanged,this,&LayerEditor::slotMarChange);
-    }
 
     connect(ui->pageText,&EditLabel::callUpdate,this,&LayerEditor::callUpdate);
 
     connect(ui->pageTxValue,&EditTxObj::callUpdate,this,&LayerEditor::callUpdate);
+
+    connect(ui->pageMar,&EditMar::callUpdate,this,&LayerEditor::callUpdate);
 
 }
 
@@ -127,19 +124,20 @@ void LayerEditor::refresh()
     {
         ui->stackType->setCurrentWidget(ui->pageMar);
 
-        QStringList list = m_obj->m_data.value(Marquee::listText).toStringList();
+           ui->pageMar->setTarget(m_obj);
+//        QStringList list = m_obj->m_data.value(Marquee::listText).toStringList();
 
-        for(int i=0;i<m_listMar.length() && i <list.length() ;i++)
-        {
-            m_listMar[i]->setText(list[i]);
-        }
-
-
-         ui->sbMar->setValue(m_obj->m_data.value(Marquee::speed).toInt());
+//        for(int i=0;i<m_listMar.length() && i <list.length() ;i++)
+//        {
+//            m_listMar[i]->setText(list[i]);
+//        }
 
 
+//         ui->sbMar->setValue(m_obj->m_data.value(Marquee::speed).toInt());
 
-        emit callUpdate();
+
+
+//        emit callUpdate();
     }
 
     else if(m_obj->m_sType == E_QRCODE)
@@ -224,31 +222,6 @@ bool LayerEditor::deleteDirectory(const QString &path)
     return dir.rmpath(dir.absolutePath());
 }
 
-
-void LayerEditor::slotMarChange(const QString &)
-{
-
-
-
-    QStringList list ;
-
-    for(int i=0;i<m_listMar.length();i++)
-    {
-        QString sText = m_listMar[i]->text();
-
-        if(sText.trimmed()!="")
-        {
-            list.append(sText);
-
-        }
-
-    }
-
-    m_obj->m_data[Marquee::listText]=list;
-
-
-    emit callUpdate();
-}
 
 
 void LayerEditor::on_btnToTop_clicked()
@@ -402,11 +375,7 @@ void LayerEditor::on_btnVideoSet_clicked()
 
 void LayerEditor::on_sbMar_valueChanged(int )
 {
-    if(m_obj == nullptr)
-        return ;
-    m_obj->m_data[Marquee::speed] = ui->sbMar->value();
 
-    emit callUpdate();
 }
 
 void LayerEditor::on_btnMarTxColor_clicked()

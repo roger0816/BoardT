@@ -88,7 +88,7 @@ void ItemMarCon::updateItem()
     QColor bgColor = m_data.value(Label::bgColor,"#ffffffff").toString();
 
 
-    QColor txtColor = m_data.value(Label::text,"#ff000000").toString();
+    QColor txtColor = m_data.value(Label::txtColor,"#ff000000").toString();
 
     QString sImagePath = m_data.value(Label::imagePath,"").toString().trimmed();
 

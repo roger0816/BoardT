@@ -79,7 +79,7 @@ private:
 
     bool deleteDirectory(const QString &path);
 
-    QList<QLineEdit*> m_listMar;
+   // QList<QLineEdit*> m_listMar;
 
 
 
@@ -96,7 +96,7 @@ signals:
 
 private slots:
 
-    void slotMarChange(const QString &);
+
     void on_sbMar_valueChanged(int);
     void on_btnMarTxColor_clicked();
     void on_btnMarBgColor_clicked();
