@@ -533,11 +533,14 @@
                   <property name="styleSheet">
                    <string notr="true">font: 16pt &quot;Arial&quot;;</string>
                   </property>
-                  <property name="maximum">
+                  <property name="minimum">
                    <number>1</number>
                   </property>
-                  <property name="singleStep">
+                  <property name="maximum">
                    <number>40</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>1</number>
                   </property>
                  </widget>
                 </item>
@@ -881,11 +884,14 @@
                   <property name="styleSheet">
                    <string notr="true">font: 16pt &quot;Arial&quot;;</string>
                   </property>
-                  <property name="maximum">
+                  <property name="minimum">
                    <number>1</number>
                   </property>
-                  <property name="singleStep">
+                  <property name="maximum">
                    <number>40</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>1</number>
                   </property>
                  </widget>
                 </item>
@@ -1220,11 +1226,14 @@
                   <property name="styleSheet">
                    <string notr="true">font: 16pt &quot;Arial&quot;;</string>
                   </property>
-                  <property name="maximum">
+                  <property name="minimum">
                    <number>1</number>
                   </property>
-                  <property name="singleStep">
+                  <property name="maximum">
                    <number>40</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>1</number>
                   </property>
                  </widget>
                 </item>

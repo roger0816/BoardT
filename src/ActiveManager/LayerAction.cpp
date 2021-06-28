@@ -11,23 +11,39 @@ LayerAction::LayerAction(QWidget *parent) :
     m_listKeyMapping<<CMD_None<<CMD_Page<<CMD_PageNoStop<<CMD_Pop
                    <<CMD_Change<<CMD_Gpio<<CMD_Script;
 
-    m_buttonRb.addButton(ui->rbNone,_NONE);
+//    m_buttonRb.addButton(ui->rbNone,_NONE);
 
-    m_buttonRb.addButton(ui->rbPage,_PAGE);
+//    m_buttonRb.addButton(ui->rbPage,_PAGE);
 
-    m_buttonRb.addButton(ui->rbPageNoStop,_PAGE_NO_STOP);
+//    m_buttonRb.addButton(ui->rbPageNoStop,_PAGE_NO_STOP);
 
-    m_buttonRb.addButton(ui->rbPop,_POP);
+//    m_buttonRb.addButton(ui->rbPop,_POP);
 
-    m_buttonRb.addButton(ui->rbChange,_CHANGE);
+//    m_buttonRb.addButton(ui->rbChange,_CHANGE);
 
-    m_buttonRb.addButton(ui->rbGpio,_GPIO);
+//    m_buttonRb.addButton(ui->rbGpio,_GPIO);
 
-    m_buttonRb.addButton(ui->rbCmd,_SCRIPT);
+//    m_buttonRb.addButton(ui->rbCmd,_SCRIPT);
 
-    connect(&m_buttonRb,&QButtonGroup::idPressed,this,&LayerAction::slotRbClicked);
+//    connect(&m_buttonRb,&QButtonGroup::idPressed,this,&LayerAction::slotRbClicked);
 
-    // ui->stackedWidget->setCurrentIndex(0);
+
+    m_listBtn.append(ui->rbNone);
+    m_listBtn.append(ui->rbPage);
+    m_listBtn.append(ui->rbPageNoStop);
+    m_listBtn.append(ui->rbPop);
+    m_listBtn.append(ui->rbChange);
+    m_listBtn.append(ui->rbGpio);
+    m_listBtn.append(ui->rbCmd);
+
+    foreach (QRadioButton *btn, m_listBtn)
+    {
+        connect(btn,&QRadioButton::clicked,this,&LayerAction::slotClicked);
+    }
+
+
+
+
 
     emit slotRbClicked(_NONE);
 
@@ -216,6 +232,11 @@ void LayerAction::writeData()
     qDebug()<<"write cmd : "<<data.sCmd<<", "<<data.sValue1<<" , "<<data.sValue2;
 
     objData->m_dataCmd = data;
+}
+
+void LayerAction::slotClicked()
+{
+   slotRbClicked(m_listBtn.indexOf(dynamic_cast<QRadioButton*>(sender())));
 }
 
 void LayerAction::slotRbClicked(int iId)

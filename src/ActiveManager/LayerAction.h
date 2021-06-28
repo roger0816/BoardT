@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QDebug>
 #include <QButtonGroup>
+#include <QRadioButton>
 #include <QShowEvent>
 #include "CData.h"
 
@@ -31,7 +32,7 @@ private:
 
     QButtonGroup m_buttonRb;
 
-
+    QList<QRadioButton*> m_listBtn;
     QString m_sObjPath;
 
 
@@ -53,7 +54,7 @@ private:
     bool m_bLockSend = false;
 
 private slots:
-
+    void slotClicked();
     void slotRbClicked(int iId);
     void on_cbChangeLayer_currentIndexChanged(int index);
     void on_cbChangeObj_currentIndexChanged(int index);

@@ -28,6 +28,7 @@ private:
 
     QButtonGroup m_btns;
 
+
 private slots:
 
     void slotClicked();
