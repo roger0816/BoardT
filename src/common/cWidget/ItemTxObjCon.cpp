@@ -325,6 +325,16 @@ void ItemTxObjCon::sendGpio(int iPin, int iValue)
 
 }
 
+void ItemTxObjCon::iniGpio()
+{
+
+    foreach(int iPin,m_listGpioPin)
+    {
+        sendGpio(iPin,0);
+    }
+
+}
+
 void ItemTxObjCon::slotTimer()
 {
 
@@ -359,9 +369,16 @@ void ItemTxObjCon::slotTimer()
     {
         int iPin = m_listGpioPin[m_status];
 
-        int iValue = m_listGpioValue[m_status];
+        int iValue =1;// = m_listGpioValue[m_status];
 
-        sendGpio(iPin,iValue);
+        if(iPin != m_iPrePin)
+        {
+            iniGpio();
+
+            sendGpio(iPin,iValue);
+        }
+
+        m_iPrePin = iPin;
     }
 
 

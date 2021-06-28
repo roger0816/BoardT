@@ -70,6 +70,10 @@ public:
     void sendGpio(int iPin, int iValue);
 
     int m_status=1;
+
+    int m_iPrePin = -1;
+
+    void iniGpio();
 signals:
 
 public slots:
