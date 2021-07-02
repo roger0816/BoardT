@@ -42,7 +42,7 @@ CPlayer::~CPlayer()
 
 void CPlayer::open(QString sPath)
 {
-    //sPath="rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov";
+    sPath="rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov";
     /* Stop if something is playing */
     if (vlcPlayer)// && libvlc_media_player_is_playing(vlcPlayer))
     {
@@ -50,7 +50,9 @@ void CPlayer::open(QString sPath)
         stop();
     }
     /* Create a new Media */
-    libvlc_media_t *vlcMedia = libvlc_media_new_path(vlcInstance, qtu(sPath));
+
+//    libvlc_media_t *vlcMedia = libvlc_media_new_path(vlcInstance, qtu(sPath));
+     libvlc_media_t *vlcMedia = libvlc_media_new_location(vlcInstance, qtu(sPath));
     if (!vlcMedia)
         return;
     /* Create a new libvlc player */
