@@ -42,7 +42,7 @@ CPlayer::~CPlayer()
 
 void CPlayer::open(QString sPath)
 {
-    sPath="rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov";
+    //sPath="rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov";
     /* Stop if something is playing */
     if (vlcPlayer)// && libvlc_media_player_is_playing(vlcPlayer))
     {
