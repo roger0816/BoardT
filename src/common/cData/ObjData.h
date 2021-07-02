@@ -39,6 +39,8 @@ public:
 
     QMap<QString,QVariant> m_data;
 
+    QVariantMap m_dEditData; // just edit temp data
+
    // DataText m_dataText;
 
     DataPic m_dataPic;

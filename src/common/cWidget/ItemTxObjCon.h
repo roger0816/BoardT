@@ -17,7 +17,6 @@ class ItemTxObjCon : public ItemLabel
 public:
     explicit ItemTxObjCon(QWidget *parent = nullptr);
 
-    void timerEvent(QTimerEvent *) override;
 
    void updateItem() override;
 
@@ -74,6 +73,9 @@ public:
     int m_iPrePin = -1;
 
     void iniGpio();
+
+
+    int m_iEditStatus = 0;
 signals:
 
 public slots:

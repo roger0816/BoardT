@@ -32,7 +32,7 @@
    <item row="0" column="0">
     <widget class="QWidget" name="wBg" native="true">
      <property name="styleSheet">
-      <string notr="true">border: 2px groove gray; border-style: outset;background-color: rgba(110,110,110,0);</string>
+      <string notr="true"/>
      </property>
     </widget>
    </item>

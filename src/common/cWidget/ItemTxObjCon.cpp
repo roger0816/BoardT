@@ -17,12 +17,6 @@ ItemTxObjCon::ItemTxObjCon(QWidget *parent) : ItemLabel(parent)
 
 }
 
-void ItemTxObjCon::timerEvent(QTimerEvent *)
-{
-
-
-
-}
 
 void ItemTxObjCon::updateItem()
 {
@@ -57,19 +51,19 @@ void ItemTxObjCon::updateItem()
 
     m_sMsg = listText.at(1);
 
-   // m_lb->setText(m_data.value(TxtValue::msg,"Txt文字").toString());
+    // m_lb->setText(m_data.value(TxtValue::msg,"Txt文字").toString());
 
-//    QColor bgColor = m_data.value(TxtValue::bgColor,"#ffffffff").toString();
-//    //bgColor.name(QColor::HexArgb)
-
-
-//    QColor txtColor = m_data.value(TxtValue::txtColor,"#ff000000").toString();
+    //    QColor bgColor = m_data.value(TxtValue::bgColor,"#ffffffff").toString();
+    //    //bgColor.name(QColor::HexArgb)
 
 
-//    if(m_data.value(TxtValue::alignCenter).toInt())
-//        m_lb->setAlignment(Qt::AlignCenter);
-//    else
-//        m_lb->setAlignment(Qt::AlignLeading);
+    //    QColor txtColor = m_data.value(TxtValue::txtColor,"#ff000000").toString();
+
+
+    //    if(m_data.value(TxtValue::alignCenter).toInt())
+    //        m_lb->setAlignment(Qt::AlignCenter);
+    //    else
+    //        m_lb->setAlignment(Qt::AlignLeading);
 
     m_changeGpio = false;
 
@@ -89,7 +83,7 @@ void ItemTxObjCon::updateItem()
 
         m_listGpioPin[1] = m_obj->m_data[TxtValue::gpioPin].toInt();
 
-            setGpio(m_listGpioPin[1]);
+        setGpio(m_listGpioPin[1]);
     }
 
     if(m_listGpioPin[2] != m_obj->m_data[TxtValue::gpioPinMax].toInt())
@@ -98,12 +92,11 @@ void ItemTxObjCon::updateItem()
 
         m_listGpioPin[2] = m_obj->m_data[TxtValue::gpioPinMax].toInt();
 
-            setGpio(m_listGpioPin[2]);
+        setGpio(m_listGpioPin[2]);
     }
 
 
-
-
+    m_iEditStatus = m_obj->m_dEditData["EditStatus"].toInt();
 
 
 
@@ -112,8 +105,9 @@ void ItemTxObjCon::updateItem()
 
 void ItemTxObjCon::doRead()
 {
-
-
+    //    if(CDATA.m_bIsEdit)
+    //        return ;
+    qDebug()<<"do read";
     //  QFile f(QApplication::applicationDirPath()+"/input.txt");
     QFile *file = new QFile(QApplication::applicationDirPath()+"/input.txt");
 
@@ -150,7 +144,30 @@ void ItemTxObjCon::doChangeShow()
 
     qDebug()<<"current : "<<m_sCurrentValue.toDouble()<<" , "<<m_iLimitMin<<" , "<<m_iLimitMax;
 
-    if(m_sCurrentValue.toDouble() < m_iLimitMin)
+    qDebug()<<"edit : "<<CDATA.m_bIsEdit<<" , status : "<<m_iEditStatus;
+
+
+    int iStatus = m_iEditStatus;
+
+    if(!CDATA.m_bIsEdit)
+    {
+        if(m_sCurrentValue.toDouble() < m_iLimitMin)
+        {
+            iStatus = _MIN;
+        }
+        else if(m_sCurrentValue.toDouble() > m_iLimitMax )
+        {
+            iStatus = _MAX;
+        }
+        else
+        {
+            iStatus = _NORMAL;
+        }
+    }
+
+
+
+    if(iStatus == _MIN)
     {
 
         m_sCurrentMsg = m_sMsgMin;
@@ -158,7 +175,7 @@ void ItemTxObjCon::doChangeShow()
         setStatusStyle(_MIN);
     }
 
-    else if(m_sCurrentValue.toDouble() > m_iLimitMax)
+    else if(iStatus == _MAX)
     {
 
         m_sCurrentMsg = m_sMsgMax;
@@ -172,15 +189,19 @@ void ItemTxObjCon::doChangeShow()
         setStatusStyle(_NORMAL);
     }
 
-    QString sDisplay = m_sCurrentValue;
+    QString sDisplay = m_sCurrentMsg;
 
-    if(m_bIsShowValue && m_sCurrentMsg!="")
+   // if(m_bIsShowValue && m_sCurrentMsg!="")
+
+    if((!m_bIsShowValue || m_sCurrentMsg=="" ) && !CDATA.m_bIsEdit)
     {
 
-        sDisplay = m_sCurrentMsg;
+        sDisplay = m_bIsShowValue;
     }
 
     m_bIsShowValue = !m_bIsShowValue;
+
+    qDebug()<<"AAAAAA : "<<sDisplay;
 
     m_lb->setText(sDisplay);
 }
@@ -193,7 +214,7 @@ void ItemTxObjCon::setStatusStyle(int i)
 
     QColor bgColor = m_data.value(TxtValue::bgColor,"#ffffffff").toString();
 
-    QColor txtColor = m_data.value(TxtValue::txtColor,"#ff000000").toString();
+    QColor txtColor = m_data.value(TxtValue::txtColor,"#99999999").toString();
 
     QString sImagePath = m_data.value(TxtValue::imagePath).toString();
 
@@ -201,10 +222,10 @@ void ItemTxObjCon::setStatusStyle(int i)
 
     Qt::Alignment ali = Qt::AlignLeading;
 
-       if(m_data.value(TxtValue::alignCenter).toInt())
-            ali=Qt::AlignCenter;
-       else
-           ali=Qt::AlignLeading;
+    if(m_data.value(TxtValue::alignCenter).toInt())
+        ali=Qt::AlignCenter;
+    else
+        ali=Qt::AlignLeading;
 
 
     QFont f ;
@@ -219,14 +240,14 @@ void ItemTxObjCon::setStatusStyle(int i)
     {
         bgColor = m_data.value(TxtValue::bgColorMin,"#ffffffff").toString();
 
-        txtColor = m_data.value(TxtValue::txtColorMin,"#000000ff").toString();
+        txtColor = m_data.value(TxtValue::txtColorMin,"#99999999").toString();
 
         sImagePath = m_data.value(TxtValue::imagePathMin).toString();
 
         sText=m_data.value(TxtValue::min,"文字").toString();
 
         if(m_data.value(TxtValue::alignCenterMin).toInt())
-             ali=Qt::AlignCenter;
+            ali=Qt::AlignCenter;
         else
             ali=Qt::AlignLeading;
     }
@@ -235,14 +256,14 @@ void ItemTxObjCon::setStatusStyle(int i)
     {
         bgColor = m_data.value(TxtValue::bgColorMax,"#ffffffff").toString();
 
-        txtColor = m_data.value(TxtValue::txtColorMax,"#00ff00ff").toString();
+        txtColor = m_data.value(TxtValue::txtColorMax,"#99999999").toString();
 
         sImagePath = m_data.value(TxtValue::imagePathMax).toString();
 
         sText=m_data.value(TxtValue::max,"文字").toString();
 
         if(m_data.value(TxtValue::alignCenterMax).toInt())
-             ali=Qt::AlignCenter;
+            ali=Qt::AlignCenter;
         else
             ali=Qt::AlignLeading;
 
@@ -319,6 +340,9 @@ void ItemTxObjCon::setGpio(int iPin)
 
 void ItemTxObjCon::sendGpio(int iPin, int iValue)
 {
+    if(CDATA.m_bIsEdit)
+        return ;
+
     QString sTmp="echo %2 > /sys/class/gpio/gpio%1/value";
 
     system(sTmp.arg(iValue).arg(iPin).toStdString().c_str());
@@ -371,7 +395,7 @@ void ItemTxObjCon::slotTimer()
 
         int iValue =1;// = m_listGpioValue[m_status];
 
-       // if(iPin != m_iPrePin)
+        // if(iPin != m_iPrePin)
         {
             iniGpio();
 

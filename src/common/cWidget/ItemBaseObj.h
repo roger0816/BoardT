@@ -7,6 +7,7 @@
 //#include "ObjData.h"
 
 #include "cData/ObjData.h"
+#include "cData/CData.h"
 
 
 class ItemBaseObj : public QWidget

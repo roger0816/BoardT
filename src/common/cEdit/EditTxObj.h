@@ -99,6 +99,8 @@ private slots:
 
     void on_spGpioValueMax_currentIndexChanged(int index);
 
+    void on_tabWidget_currentChanged(int index);
+
 private:
     Ui::EditTxObj *ui;
 };

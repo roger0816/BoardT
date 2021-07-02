@@ -400,3 +400,14 @@ void EditTxObj::on_spGpioValueMax_currentIndexChanged(int index)
 
     emit callUpdate();
 }
+
+void EditTxObj::on_tabWidget_currentChanged(int index)
+{
+    if(m_obj ==nullptr || m_bLockCallUpdate )
+        return ;
+
+    m_obj->m_dEditData["EditStatus"] = index;
+
+    emit callUpdate();
+}
+

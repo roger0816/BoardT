@@ -55,6 +55,7 @@ public:
     DataModel m_dataModel;
 
 
+    bool m_bIsEdit = false;
 
 
 private:

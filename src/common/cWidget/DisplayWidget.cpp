@@ -200,6 +200,7 @@ void DisplayWidget::refreshBg()
 {
     LayerData *layerData = CDATA.m_dData[m_layerName] ;
 
+    CDATA.m_bIsEdit = m_bEdit;
 
     if(layerData!=nullptr)
     ui->wBg->setStyleSheet("QWidget#"+ui->wBg->objectName()+"{"
