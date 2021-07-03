@@ -32,8 +32,6 @@ Widget::Widget(QWidget *parent) :
 
     connect(&m_timer,&QTimer::timeout,this,&Widget::slotTimer);
 
-    QTimer::singleShot(1000,this,SLOT(loadingLicense()));
-
 
     int iPin = 27;
 
@@ -48,6 +46,9 @@ Widget::Widget(QWidget *parent) :
 
     connect(&m_timerWaitLogin,&QTimer::timeout,this,&Widget::slotWaitLogin);
    // ui->wDisplay->setMinimumSize(1080,1920);
+
+    QTimer::singleShot(1000,this,SLOT(loadingLicense()));
+
 }
 
 Widget::~Widget()
