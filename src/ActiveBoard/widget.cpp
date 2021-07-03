@@ -37,6 +37,7 @@ Widget::Widget(QWidget *parent) :
 
     QString sTmp ="echo "+QString::number(iPin)+" > /sys/class/gpio/export ";
 
+    qDebug()<<"AAA : "<<sTmp;
     system(sTmp.toStdString().c_str());
 
 
