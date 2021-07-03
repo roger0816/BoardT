@@ -314,7 +314,7 @@ void Widget::slotWaitLogin()
     {
         QProcess p;
 
-        p.start("cat /sys/class/gpio/gpio27/value");
+        p.start("cat",QStringList()<<"/sys/class/gpio/gpio27/value");
 
         p.waitForFinished();
 
@@ -408,9 +408,9 @@ void Widget::usbChange(QString sUuid, QString sPath, bool bPlugIn)
                 ui->lbLoginKey->show();
 
 
-                m_timerWaitLogin.start(300);
+              //  m_timerWaitLogin.start(300);
 
-               // QTimer::singleShot(500,this,SLOT(launch()));
+                QTimer::singleShot(500,this,SLOT(launch()));
             }
         }
 
