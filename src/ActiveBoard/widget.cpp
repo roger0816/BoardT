@@ -35,7 +35,18 @@ Widget::Widget(QWidget *parent) :
     QTimer::singleShot(1000,this,SLOT(loadingLicense()));
 
 
+    int iPin = 27;
 
+    QString sTmp ="echo "+QString::number(iPin)+" > /sys/class/gpio/export ";
+
+    system(sTmp.toStdString().c_str());
+
+
+    QString sTmp2 ="echo in > /sys/class/gpio/gpio"+QString::number(iPin)+"/direction";
+
+    system(sTmp2.toStdString().c_str());
+
+    connect(&m_timerWaitLogin,&QTimer::timeout,this,&Widget::slotWaitLogin);
    // ui->wDisplay->setMinimumSize(1080,1920);
 }
 
@@ -107,7 +118,6 @@ void Widget::loadConfig(QString sLayer)
 
     QFileInfoList listDir = QDir(sPath).entryInfoList(QDir::AllDirs);
 
-    qDebug()<<"all content : "<<listDir.toStdList();
 
     ui->wBg->setObjectName("main_bg");
     ui->wBg->setStyleSheet("QWidget#main_bg{border-image:url("+sPath+"/bg.png);}");
@@ -184,7 +194,13 @@ void Widget::loadingLicense()
 
             ui->wFactory->setVisible(Global::Instance().m_usb.isDevelop());
 
+            m_iWaitTimeout = 10;
+
+            ui->lbUpdateData->hide();
+
             ui->stack->setCurrentWidget(ui->wLogin);
+
+
 
         }
     }
@@ -280,6 +296,41 @@ void Widget::slotTimer()
 
 }
 
+void Widget::slotWaitLogin()
+{
+    m_iWaitTimeout--;
+
+    if(m_iWaitTimeout<=0)
+    {
+        m_timerWaitLogin.stop();
+
+        launch();
+
+    }
+
+    else
+    {
+        QProcess p;
+
+        p.start("cat /sys/class/gpio/gpio27/value");
+
+        p.waitForFinished();
+
+        QString st(p.readAll());
+
+        if(st.mid(0,1) == "1")
+        {
+            ui->lbUpdateData->show();
+
+            m_timerWaitLogin.stop();
+
+            on_btnUpdateData_clicked();
+
+        }
+
+    }
+}
+
 
 
 void Widget::launch(int iIdx)
@@ -354,7 +405,10 @@ void Widget::usbChange(QString sUuid, QString sPath, bool bPlugIn)
             {
                 ui->lbLoginKey->show();
 
-                QTimer::singleShot(500,this,SLOT(launch()));
+
+                m_timerWaitLogin.start(300);
+
+               // QTimer::singleShot(500,this,SLOT(launch()));
             }
         }
 
@@ -415,29 +469,17 @@ void Widget::on_btnFacLogin_clicked()
 
 void Widget::on_btnUpdateData_clicked()
 {
-    QString sUpdatePath = Global::Instance().m_usb.m_sLastUsbPath+"/ActiveBoard/data/";
+    QString sUpdatePath = Global::Instance().m_usb.m_sLastUsbPath+"/BoardT/bin/data/model0";
 
     qDebug()<<" update Path : "<<sUpdatePath;
-    QString sCurrentPath = QApplication::applicationDirPath()+"/../bin/data/";
+    QString sCurrentPath = QApplication::applicationDirPath()+"/data/";
 
-    qDebug()<<" current path :"<<sCurrentPath;
 
-    QString sCmd = "cp -r "+sUpdatePath+"layer "+sCurrentPath+"layerNew";
+    QString sBkCmd = "mv "+sCurrentPath+"model0 "+sCurrentPath+"model0BK";
 
-    qDebug()<<"cmd : "<<sCmd;
+    system(sBkCmd.toStdString().c_str());
 
-    system(sCmd.toStdString().c_str());
-
-    QString sCmdRemove = "rm -rf "+sCurrentPath+"layer";
-
-    qDebug()<<"cmd : "<<sCmdRemove;
-    system(sCmdRemove.toStdString().c_str());
-
-    QString sCmdRename = "mv "+sCurrentPath+"layerNew "+sCurrentPath+"layer";
-
-    qDebug()<<"cmd : "<<sCmdRename;
-    system(sCmdRename.toStdString().c_str());
-
+    QString sCopy = "cp -r "+sUpdatePath+" "+sCurrentPath;
 
     launch();
 
@@ -447,17 +489,17 @@ void Widget::on_btnUpdateData_clicked()
 
 void Widget::on_btnUpdateSys_clicked()
 {
-    QString sUpdatePath = Global::Instance().m_usb.m_sLastUsbPath+"/ActiveBoard/bin/";
+//    QString sUpdatePath = Global::Instance().m_usb.m_sLastUsbPath+"/ActiveBoard/bin/";
 
-    QString sCurrentPath = QApplication::applicationDirPath()+"/../bin/";
+//    QString sCurrentPath = QApplication::applicationDirPath()+"/../bin/";
 
-    QString sCmd = "cp -r "+sUpdatePath+"ActiveBoard "+sCurrentPath+"ActiveBoardNew";
+//    QString sCmd = "cp -r "+sUpdatePath+"ActiveBoard "+sCurrentPath+"ActiveBoardNew";
 
-    qDebug()<<"cmd : "<<sCmd;
+//    qDebug()<<"cmd : "<<sCmd;
 
-    system(sCmd.toStdString().c_str());
+//    system(sCmd.toStdString().c_str());
 
-    system("reboot");
+//    system("reboot");
 
 
 }

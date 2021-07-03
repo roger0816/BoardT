@@ -70,6 +70,10 @@ private:
 
     QTimer m_timer;
 
+    QTimer m_timerWaitLogin;
+
+    int m_iWaitTimeout = 3;
+
 private slots:
 
     void loadingLicense();
@@ -96,6 +100,8 @@ private slots:
     void on_btnReboot_clicked();
 
     void slotTimer();
+
+    void slotWaitLogin();
 
 private:
     Ui::Widget *ui;

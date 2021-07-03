@@ -201,7 +201,6 @@ void ItemTxObjCon::doChangeShow()
 
     m_bIsShowValue = !m_bIsShowValue;
 
-    qDebug()<<"AAAAAA : "<<sDisplay;
 
     m_lb->setText(sDisplay);
 }

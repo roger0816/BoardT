@@ -63,7 +63,10 @@ bool FuncUsb::isReg()
     return true;
 #endif
 
-    QSettings setting("/usr/share/atb");
+   // QSettings setting("/usr/share/atb");
+
+    QSettings setting("/home/pi/atb",QSettings::IniFormat);
+
 
     if(setting.allKeys().count()>0)
     {
@@ -80,7 +83,10 @@ bool FuncUsb::isReg()
 
 void FuncUsb::writeReg(QString sUuid)
 {
-    QSettings setting("/usr/share/atb");
+  //  QSettings setting("/usr/share/atb");
+
+     QSettings setting("/home/pi/atb",QSettings::IniFormat);
+
 
     setting.setValue("m",sUuid);
 
@@ -90,7 +96,9 @@ void FuncUsb::writeReg(QString sUuid)
 
 void FuncUsb::removeReg()
 {
-    QSettings setting("/usr/share/atb");
+   // QSettings setting("/usr/share/atb");
+
+    QSettings setting("/home/pi/atb",QSettings::IniFormat);
 
     setting.clear();
 
@@ -104,7 +112,9 @@ bool FuncUsb::isLogin(QString sTarget)
 #endif
 
     bool bRe = false;
-    QSettings setting("/usr/share/atb");
+   // QSettings setting("/usr/share/atb");
+
+    QSettings setting("/home/pi/atb",QSettings::IniFormat);
 
     QString sMkey = setting.value("m","AAAAAA").toString();
 
