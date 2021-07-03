@@ -483,6 +483,9 @@ void Widget::on_btnUpdateData_clicked()
 
     QString sCopy = "cp -r "+sUpdatePath+" "+sCurrentPath;
 
+
+    system(sCopy.toStdString().c_str());
+
     launch();
 
 
