@@ -42,7 +42,7 @@ Widget::Widget(QWidget *parent) :
     system(sTmp.toStdString().c_str());
 
 
-    QString sTmp2 ="echo in > /sys/class/gpio/gpio"+QString::number(iPin)+"/direction";
+    QString sTmp2 ="echo low > /sys/class/gpio/gpio"+QString::number(iPin)+"/direction";
 
     system(sTmp2.toStdString().c_str());
 
