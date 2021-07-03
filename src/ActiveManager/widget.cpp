@@ -362,7 +362,12 @@ void Widget::upload(QString sIp, QString sTarget, QString sPath)
 {
     // QString sCmd = QApplication::applicationDirPath()+"/pscp.exe -P 22 -pw \"pi\" -r "+m_sPath+" pi@"+m_sPreIp+":/home/pi/work/bin/";
 
-    QString sCmd = QApplication::applicationDirPath()+"/pscp.exe -P 22 -pw \"pi\" %2 pi@%1:%3";
+    //putty.exe -ssh -l pi -pw pi -P 22 192.168.0.157 -m mvModel0.txt
+    QString sCmd =QApplication::applicationDirPath()+"/putty.exe -ssh -l pi -pw pi -P 22 "+sIp+" -m mvModel0.txt";
+
+    system(sCmd.toStdString().c_str());
+
+    sCmd = QApplication::applicationDirPath()+"/pscp.exe -P 22 -pw \"pi\" %2 pi@%1:%3";
 
     sCmd = sCmd.arg(sIp).arg(sTarget).arg(sPath);
 

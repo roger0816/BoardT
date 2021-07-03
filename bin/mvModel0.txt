@@ -1,0 +1,1 @@
+mv ~/BoardT/bin/data/model0 ~/BoardT/bin/data/model0BK
