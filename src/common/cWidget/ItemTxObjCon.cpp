@@ -14,7 +14,15 @@ ItemTxObjCon::ItemTxObjCon(QWidget *parent) : ItemLabel(parent)
 
     m_listGpioValue<<0<<0<<0;
 
+    m_lb->setText("Txt元件");
 
+
+
+}
+
+void ItemTxObjCon::init()
+{
+    updateItem();
 }
 
 
@@ -99,16 +107,24 @@ void ItemTxObjCon::updateItem()
     m_iEditStatus = m_obj->m_dEditData["EditStatus"].toInt();
 
 
+    doRead();
 
+     qDebug()<<"update item";
 }
 
 
 void ItemTxObjCon::doRead()
 {
-    //    if(CDATA.m_bIsEdit)
-    //        return ;
-    qDebug()<<"do read";
+
     //  QFile f(QApplication::applicationDirPath()+"/input.txt");
+
+    if(!QFile().exists(QApplication::applicationDirPath()+"/input.txt"))
+    {
+        return ;
+    }
+
+        qDebug()<<"do read";
+
     QFile *file = new QFile(QApplication::applicationDirPath()+"/input.txt");
 
     if(file->open(QIODevice::ReadOnly | QIODevice::Text))
@@ -154,6 +170,7 @@ void ItemTxObjCon::doChangeShow()
         if(m_sCurrentValue.toDouble() < m_iLimitMin)
         {
             iStatus = _MIN;
+
         }
         else if(m_sCurrentValue.toDouble() > m_iLimitMax )
         {
@@ -162,6 +179,7 @@ void ItemTxObjCon::doChangeShow()
         else
         {
             iStatus = _NORMAL;
+
         }
     }
 
@@ -191,13 +209,16 @@ void ItemTxObjCon::doChangeShow()
 
     QString sDisplay = m_sCurrentMsg;
 
-   // if(m_bIsShowValue && m_sCurrentMsg!="")
-
-    if((!m_bIsShowValue || m_sCurrentMsg=="" ) && !CDATA.m_bIsEdit)
+    if(!m_bIsShowValue)
     {
-
-        sDisplay = m_bIsShowValue;
+        sDisplay = m_sCurrentValue;
     }
+
+//    if((!m_bIsShowValue || m_sCurrentMsg=="" ) && !CDATA.m_bIsEdit)
+//    {
+
+//        sDisplay = m_sCurrentValue;
+//    }
 
     m_bIsShowValue = !m_bIsShowValue;
 
@@ -326,6 +347,11 @@ void ItemTxObjCon::setStatusStyle(int i)
 
 void ItemTxObjCon::setGpio(int iPin)
 {
+    if(CDATA.m_bIsEdit)
+        return ;
+
+    if(!QDir("/sys/class/gpio/").exists())
+        return;
 
     QString sTmp ="echo "+QString::number(iPin)+" > /sys/class/gpio/export ";
 
@@ -342,6 +368,9 @@ void ItemTxObjCon::sendGpio(int iPin, int iValue)
     if(CDATA.m_bIsEdit)
         return ;
 
+    if(!QDir("/sys/class/gpio/").exists())
+        return;
+
     QString sTmp="echo %2 > /sys/class/gpio/gpio%1/value";
 
     system(sTmp.arg(iValue).arg(iPin).toStdString().c_str());
@@ -350,7 +379,8 @@ void ItemTxObjCon::sendGpio(int iPin, int iValue)
 
 void ItemTxObjCon::iniGpio()
 {
-
+    if(CDATA.m_bIsEdit)
+        return ;
     foreach(int iPin,m_listGpioPin)
     {
         sendGpio(iPin,0);
@@ -376,8 +406,8 @@ void ItemTxObjCon::slotTimer()
 
     if(m_iSec%m_iReadSpeed==0)
     {
+        if(!CDATA.m_bIsEdit)
         doRead();
-
 
     }
 
@@ -388,20 +418,20 @@ void ItemTxObjCon::slotTimer()
 
     }
 
-    if(m_iSec % m_iGpioSpeed == 0)
+    if(m_iSec % m_iGpioSpeed == 0 &&  CDATA.m_bIsEdit)
     {
-        int iPin = m_listGpioPin[m_status];
+//        int iPin = m_listGpioPin[m_status];
 
-        int iValue =1;// = m_listGpioValue[m_status];
+//        int iValue =1;// = m_listGpioValue[m_status];
 
-        // if(iPin != m_iPrePin)
-        {
-            iniGpio();
+//        // if(iPin != m_iPrePin)
+//        {
+//            iniGpio();
 
-            sendGpio(iPin,iValue);
-        }
+//            sendGpio(iPin,iValue);
+//        }
 
-        m_iPrePin = iPin;
+//        m_iPrePin = iPin;
     }
 
 

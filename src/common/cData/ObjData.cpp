@@ -138,8 +138,6 @@ void ObjData::readData(QString sPath)
 
         conf.endGroup();
 
-            qDebug()<<"AAAAAA : "<<m_data;
-
 
 
 

@@ -137,8 +137,6 @@ void LayerContent::setPath(QString sPath,QMap<QString,int> typeMapping)
     {
         QFileInfoList list = QDir(sPath).entryInfoList(QStringList()<<"*.png"<<".jpg"<<"*.PNG"<<"*.JPG");
 
-        qDebug()<<"AAAAAA : logo len : "<<list;
-
         if(list.length()>0)
         {
 

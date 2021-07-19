@@ -17,6 +17,7 @@ class ItemTxObjCon : public ItemLabel
 public:
     explicit ItemTxObjCon(QWidget *parent = nullptr);
 
+   void init() override;
 
    void updateItem() override;
 
