@@ -420,18 +420,18 @@ void ItemTxObjCon::slotTimer()
 
     if(m_iSec % m_iGpioSpeed == 0 &&  CDATA.m_bIsEdit)
     {
-//        int iPin = m_listGpioPin[m_status];
+        int iPin = m_listGpioPin[m_status];
 
-//        int iValue =1;// = m_listGpioValue[m_status];
+        int iValue =1;// = m_listGpioValue[m_status];
 
-//        // if(iPin != m_iPrePin)
-//        {
-//            iniGpio();
+        // if(iPin != m_iPrePin)
+        {
+            iniGpio();
 
-//            sendGpio(iPin,iValue);
-//        }
+            sendGpio(iPin,iValue);
+        }
 
-//        m_iPrePin = iPin;
+        m_iPrePin = iPin;
     }
 
 
