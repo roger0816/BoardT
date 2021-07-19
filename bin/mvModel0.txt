@@ -1,1 +1,2 @@
+rm -rf ~/BoardT/bin/data/model0BK
 mv ~/BoardT/bin/data/model0 ~/BoardT/bin/data/model0BK
