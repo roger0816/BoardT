@@ -81,7 +81,7 @@ if (arg_len > 1) or (arg_len < 7):
             for temp_item in temp_list:
                 out_str += str(temp_item) + " ";
             print out_str                     
-            file = open("temperature_rec.txt","w")                    
+            file = open("input.txt","w")                    
             file.writelines(out_str)
             file.close()
             time.sleep(1)                    
