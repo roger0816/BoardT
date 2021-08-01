@@ -37,7 +37,7 @@ Widget::Widget(QWidget *parent) :
 
     QString sTmp ="echo "+QString::number(iPin)+" > /sys/class/gpio/export ";
 
-    qDebug()<<"AAA : "<<sTmp;
+
     system(sTmp.toStdString().c_str());
 
 
@@ -46,7 +46,7 @@ Widget::Widget(QWidget *parent) :
     system(sTmp2.toStdString().c_str());
 
     connect(&m_timerWaitLogin,&QTimer::timeout,this,&Widget::slotWaitLogin);
-   // ui->wDisplay->setMinimumSize(1080,1920);
+    // ui->wDisplay->setMinimumSize(1080,1920);
 
     QTimer::singleShot(1000,this,SLOT(loadingLicense()));
 
@@ -84,7 +84,7 @@ void Widget::loadConfig(QString sLayer)
     if(sLayer=="")
         return;
     QString sPath = QApplication::applicationDirPath()+"/../bin/data/layer/"+sLayer;
-      qDebug()<<"loading layer : "<<sLayer;
+    qDebug()<<"loading layer : "<<sLayer;
     QSettings defin(RDATA+"/layer/define.ini",QSettings::IniFormat);
 
     m_dDefine.clear();
@@ -234,7 +234,7 @@ void Widget::resizeEvent(QResizeEvent *)
 void Widget::showEvent(QShowEvent *)
 {
     if(m_wDisplay!=nullptr)
-    m_wDisplay->resize(size());
+        m_wDisplay->resize(size());
 }
 
 void Widget::mousePressEvent(QMouseEvent *e)
@@ -270,15 +270,40 @@ void Widget::slotTimer()
 
         if(m_iPressTime>5)
         {
-//           if(m_wDisplay!=nullptr)
-//            m_wDisplay->setEdit(true);
+            //           if(m_wDisplay!=nullptr)
+            //            m_wDisplay->setEdit(true);
 
             m_iPressTime = 0;
         }
     }
 
 
-//    QSettings conf(QApplication::applicationDirPath()+"/../bin/data/model0/conf.ini",QSettings::IniFormat);
+    if(QDir().exists("/sys/class/gpio/"))
+    {
+        QProcess p;
+
+        p.start("cat",QStringList()<<"/sys/class/gpio/gpio27/value");
+
+        p.waitForFinished();
+
+        QString st(p.readAll());
+
+        if(st.mid(0,1) == "1")
+        {
+            ui->lbUpdateData->show();
+
+           // m_timerWaitLogin.stop();
+
+            on_btnUpdateData_clicked();
+
+            QTimer::singleShot(3000,ui->lbUpdateData,SLOT(hide()));
+        }
+    }
+
+
+
+
+    //    QSettings conf(QApplication::applicationDirPath()+"/../bin/data/model0/conf.ini",QSettings::IniFormat);
     QSettings conf(QApplication::applicationDirPath()+"/../bin/data/model0/model0.BDM",QSettings::IniFormat);
 
     QString board =conf.value("Target").toString();
@@ -312,22 +337,26 @@ void Widget::slotWaitLogin()
 
     else
     {
-        QProcess p;
-
-        p.start("cat",QStringList()<<"/sys/class/gpio/gpio27/value");
-
-        p.waitForFinished();
-
-        QString st(p.readAll());
-
-        if(st.mid(0,1) == "1")
+        if(QDir().exists("/sys/class/gpio/"))
         {
-            ui->lbUpdateData->show();
+            QProcess p;
 
-            m_timerWaitLogin.stop();
+            p.start("cat",QStringList()<<"/sys/class/gpio/gpio27/value");
 
-            on_btnUpdateData_clicked();
+            p.waitForFinished();
 
+            QString st(p.readAll());
+
+            if(st.mid(0,1) == "1")
+            {
+                ui->lbUpdateData->show();
+
+               // m_timerWaitLogin.stop();
+
+                on_btnUpdateData_clicked();
+
+                QTimer::singleShot(3000,ui->lbUpdateData,SLOT(hide()));
+            }
         }
 
     }
@@ -346,7 +375,7 @@ void Widget::launch(int iIdx)
         return ;
     }
 
-  //  if(iIdx==0)
+    //  if(iIdx==0)
 
     m_timer.stop();
 
@@ -408,7 +437,7 @@ void Widget::usbChange(QString sUuid, QString sPath, bool bPlugIn)
                 ui->lbLoginKey->show();
 
 
-              //  m_timerWaitLogin.start(300);
+                //  m_timerWaitLogin.start(300);
 
                 QTimer::singleShot(500,this,SLOT(launch()));
             }
@@ -471,11 +500,19 @@ void Widget::on_btnFacLogin_clicked()
 
 void Widget::on_btnUpdateData_clicked()
 {
-    QString sUpdatePath = Global::Instance().m_usb.m_sLastUsbPath+"/BoardT/bin/data/model0";
+    QString sUpdatePath = Global::Instance().m_usb.m_sLastUsbPath+"/BoardT/data/model0";
+
+    if(!QDir().exists(sUpdatePath))
+    {
+        return ;
+    }
 
     qDebug()<<" update Path : "<<sUpdatePath;
     QString sCurrentPath = QApplication::applicationDirPath()+"/data/";
 
+    QString rmCmd = "rm -rf "+sCurrentPath+"model0BK";
+
+    system(rmCmd.toStdString().c_str());
 
     QString sBkCmd = "mv "+sCurrentPath+"model0 "+sCurrentPath+"model0BK";
 
@@ -494,27 +531,27 @@ void Widget::on_btnUpdateData_clicked()
 
 void Widget::on_btnUpdateSys_clicked()
 {
-//    QString sUpdatePath = Global::Instance().m_usb.m_sLastUsbPath+"/ActiveBoard/bin/";
+    //    QString sUpdatePath = Global::Instance().m_usb.m_sLastUsbPath+"/ActiveBoard/bin/";
 
-//    QString sCurrentPath = QApplication::applicationDirPath()+"/../bin/";
+    //    QString sCurrentPath = QApplication::applicationDirPath()+"/../bin/";
 
-//    QString sCmd = "cp -r "+sUpdatePath+"ActiveBoard "+sCurrentPath+"ActiveBoardNew";
+    //    QString sCmd = "cp -r "+sUpdatePath+"ActiveBoard "+sCurrentPath+"ActiveBoardNew";
 
-//    qDebug()<<"cmd : "<<sCmd;
+    //    qDebug()<<"cmd : "<<sCmd;
 
-//    system(sCmd.toStdString().c_str());
+    //    system(sCmd.toStdString().c_str());
 
-//    system("reboot");
+    //    system("reboot");
 
 
 }
 
 void Widget::on_btnBack_clicked()
 {
-       launch();
+    launch();
 }
 
 void Widget::on_btnReboot_clicked()
 {
-     system("reboot");
+    system("reboot");
 }
