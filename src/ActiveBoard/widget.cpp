@@ -500,10 +500,10 @@ void Widget::on_btnFacLogin_clicked()
 
 void Widget::on_btnUpdateData_clicked()
 {
-    qDebug()<<"AAAAA : on_btnUpdateData_clicked";
 
 
     QString sUpdatePath = Global::Instance().m_usb.m_sLastUsbPath+"/BoardT/bin/data/model0";
+    qDebug()<<"AAAAA : on_btnUpdateData_clicked"<<sUpdatePath;
 
     if(!QDir().exists(sUpdatePath))
     {
@@ -513,6 +513,8 @@ void Widget::on_btnUpdateData_clicked()
     qDebug()<<"AAAAA0 : on_btnUpdateData_clicked";
 
     QString sCmd = "nohub ./updateFromUsb.sh "+sUpdatePath;
+
+    system("chmod a+x updateFromUsb.sh");
 
     system(sCmd.toStdString().c_str());
 
