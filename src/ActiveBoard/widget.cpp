@@ -503,7 +503,7 @@ void Widget::on_btnUpdateData_clicked()
 
 
     QString sUpdatePath = Global::Instance().m_usb.m_sLastUsbPath+"/BoardT/bin/data/model0";
-    qDebug()<<"AAAAA : on_btnUpdateData_clicked"<<sUpdatePath;
+    qDebug()<<"AAAAAX : on_btnUpdateData_clicked"<<sUpdatePath;
 
     if(!QDir().exists(sUpdatePath))
     {
