@@ -500,12 +500,17 @@ void Widget::on_btnFacLogin_clicked()
 
 void Widget::on_btnUpdateData_clicked()
 {
+    qDebug()<<"AAAAA : on_btnUpdateData_clicked";
+
+
     QString sUpdatePath = Global::Instance().m_usb.m_sLastUsbPath+"/BoardT/bin/data/model0";
 
     if(!QDir().exists(sUpdatePath))
     {
         return ;
     }
+
+    qDebug()<<"AAAAA0 : on_btnUpdateData_clicked";
 
     QString sCmd = "nohub ./updateFromUsb.sh "+sUpdatePath;
 
