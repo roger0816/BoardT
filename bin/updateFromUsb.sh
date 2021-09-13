@@ -2,11 +2,13 @@
 
 killall ActiveBoard
 
-rm -rf ~/BoardT/bin/dataBK
+sudo rm -rf ~/BoardT/bin/data/model0
 
-cp -r ~/BoardT/bin/data ~/BoardT/bin/dataBK
+#sudo cp -r ~/BoardT/bin/data ~/BoardT/bin/dataBK
 
-cp -r $1 ~/BoardT/bin/data
+sudo cp -r $1 ~/BoardT/bin/data/
+
+echo $1
 
 cd /home/pi/BoardT/bin
 
