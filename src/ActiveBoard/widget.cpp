@@ -512,7 +512,7 @@ void Widget::on_btnUpdateData_clicked()
 
     qDebug()<<"AAAAA0 : on_btnUpdateData_clicked";
 
-    QString sCmd = "nohub ./updateFromUsb.sh "+sUpdatePath;
+    QString sCmd = "nohup ./updateFromUsb.sh "+sUpdatePath;
 
     system("chmod a+x updateFromUsb.sh");
 
