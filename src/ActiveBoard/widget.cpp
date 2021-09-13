@@ -514,7 +514,7 @@ void Widget::on_btnUpdateData_clicked()
 
     QString sCmd = "nohup ./updateFromUsb.sh "+sUpdatePath;
 
-    system("chmod a+x updateFromUsb.sh");
+    system("chmod a+x updateFromUsb.sh > updateUsb.log 2>&1 &");
 
     system(sCmd.toStdString().c_str());
 
