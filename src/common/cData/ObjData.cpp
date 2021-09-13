@@ -255,7 +255,7 @@ void ObjData::writeData()
         if(m_data[Label::imagePath].toString()!="")
         {
 
-            QImage image(m_data[Label::imagePath].toString());
+            QImage image(m_data["originImage"].toString());
 
             image.save(m_sObjPath+"/bg.png");
 
