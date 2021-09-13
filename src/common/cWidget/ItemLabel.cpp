@@ -8,6 +8,8 @@ ItemLabel::ItemLabel(QWidget *parent) :
     ui->setupUi(this);
 
     m_lb = ui->label;
+
+    m_lb->setObjectName("m_lb");
 }
 
 ItemLabel::~ItemLabel()
@@ -33,43 +35,22 @@ void ItemLabel::updateItem()
 
 
 
-      QColor bgColor = m_data.value(Label::bgColor,"#ffffffff").toString();
-      //bgColor.name(QColor::HexArgb)
+      ui->label->setStyleSheet("QLabel#"+ui->label->objectName()+"{color:"+getStyleSheetRgba(m_data.value(Label::txtColor,"#000000ff").toString())
+                               +";background-color:"+getStyleSheetRgba(m_data.value(Label::bgColor,"#ffffffff").toString())+"}");
 
 
-      QColor txtColor = m_data.value(Label::txtColor,"#ff000000").toString();
 
     QString sImagePath = m_data.value(Label::imagePath).toString();
 
-      QString sStyle = "color:rgba(%1,%2,%3,%4);"
-                       "background-color:rgba(%5,%6,%7,%8);";
 
       if(sImagePath.trimmed()!="")
       {
-          ui->label->setStyleSheet(sStyle.arg(txtColor.red())
-                                   .arg(txtColor.green())
-                                   .arg(txtColor.blue())
-                                   .arg(txtColor.alpha())
-                                   .arg(0)
-                                   .arg(0)
-                                   .arg(0)
-                                   .arg(0)
+          ui->label->setStyleSheet(ui->label->styleSheet()
                                    +" border-image:url("+sImagePath+");");
 
 
       }
-      else
-      {
-      ui->label->setStyleSheet(sStyle.arg(txtColor.red())
-                        .arg(txtColor.green())
-                        .arg(txtColor.blue())
-                        .arg(txtColor.alpha())
-                        .arg(bgColor.red())
-                        .arg(bgColor.green())
-                        .arg(bgColor.blue())
-                        .arg(bgColor.alpha())
-                          );
-      }
+
 
 
 

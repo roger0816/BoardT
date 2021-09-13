@@ -87,66 +87,34 @@ void ItemMarCon::updateItem()
 
     QColor bgColor = m_data.value(Label::bgColor,"#ffffffff").toString();
 
-
+    qDebug()<<"AAAA : "<<m_data.value(Label::bgColor,"#ffffffff").toString();
     QColor txtColor = m_data.value(Label::txtColor,"#ff000000").toString();
 
+    qDebug()<<"BBBB : "<<m_data.value(Label::txtColor,"#ffffffff").toString();
     QString sImagePath = m_data.value(Label::imagePath,"").toString().trimmed();
-
-
-    QString sStyle = "color:rgba(%1,%2,%3,%4);"
-                     "background-color:rgba(%5,%6,%7,%8);border-color:rgba(0,0,0,0);";
 
 
 
 
     if(sImagePath!="")
     {
-        m_lb->setStyleSheet(sStyle.arg(txtColor.red())
-                                 .arg(txtColor.green())
-                                 .arg(txtColor.blue())
-                                 .arg(txtColor.alpha())
-                                 .arg(0)
-                                 .arg(0)
-                                 .arg(0)
-                                 .arg(0)
-                                // +" border-image:url("+m_data.m_sImagePath
-                                    +");");
-
-        m_wBg->setStyleSheet(sStyle.arg(txtColor.red())
-                                 .arg(txtColor.green())
-                                 .arg(txtColor.blue())
-                                 .arg(txtColor.alpha())
-                                 .arg(0)
-                                 .arg(0)
-                                 .arg(0)
-                                 .arg(0)
-                                 +" border-image:url("+sImagePath+");");
 
 
     }
     else
     {
-    m_lb->setStyleSheet(sStyle.arg(txtColor.red())
-                      .arg(txtColor.green())
-                      .arg(txtColor.blue())
-                      .arg(txtColor.alpha())
-                      .arg(bgColor.red())
-                      .arg(bgColor.green())
-                      .arg(bgColor.blue())
-                      .arg(0)
-                        );
 
 
-    m_wBg->setStyleSheet(sStyle.arg(txtColor.red())
-                      .arg(txtColor.green())
-                      .arg(txtColor.blue())
-                      .arg(txtColor.alpha())
-                      .arg(bgColor.red())
-                      .arg(bgColor.green())
-                      .arg(bgColor.blue())
-                      .arg(bgColor.alpha())
-                        );
+
     }
+
+
+    m_wBg->setStyleSheet("background-color:"+getStyleSheetRgba(m_data.value(Label::bgColor,"#ffffffff").toString()));
+
+    m_lb->setStyleSheet("background-color:rgba(0,0,0,0);color:"+getStyleSheetRgba(m_data.value(Label::txtColor,"#ffffffff").toString()));
+
+   // m_wBg->setStyleSheet("background-color:red;");
+
 
     QFont f ;
     f.fromString("Arial,24,-1,5,50,0,0,0,0,0,Regular");
