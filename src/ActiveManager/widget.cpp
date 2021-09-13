@@ -17,6 +17,7 @@ Widget::Widget(QWidget *parent)
 
 
 
+
     QString sDef = QApplication::applicationDirPath()+"/data/model0";
 
     CDATA;
