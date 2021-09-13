@@ -22,7 +22,7 @@ void DialogUploadUsb::on_btnSelect_clicked()
                                                 | QFileDialog::DontResolveSymlinks);
 
 
-
+    ui->txUsb->setText(m_sPath);
 
 }
 

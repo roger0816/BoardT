@@ -564,7 +564,7 @@ void Widget::on_btnTimeSchedule_clicked()
 
 void Widget::on_rdNoneSchedule_clicked()
 {
-   // CDATA.m_dData
+    // CDATA.m_dData
 }
 
 void Widget::on_rdSchedule_clicked()
@@ -584,34 +584,36 @@ void Widget::on_btnUploadUsb_clicked()
 {
     DialogUploadUsb dialog;
 
+    dialog.resize(size()*0.6);
+
     int re = dialog.exec();
 
     if(re == 1)
     {
         QString sTarget = dialog.m_sPath;
 
-       // conf.setValue("Target",dir.path().split("/").last());
+        // conf.setValue("Target",dir.path().split("/").last());
 
-       QString sPath = CDATA.m_sPath;
+        QString sPath = CDATA.m_sPath;
 
-       QSettings conf(sPath+"/"+sPath.split("/").last()+".BDM",QSettings::IniFormat);
+        QSettings conf(sPath+"/"+sPath.split("/").last()+".BDM",QSettings::IniFormat);
 
-       QDir dir(sPath);
+        QDir dir(sPath);
 
 
-       conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
+        conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
 
-       conf.sync();
+        conf.sync();
 
-    //   upload(m_sPreIp," -r "+sPath,"/home/pi/BoardT/bin/data/");
+        //   upload(m_sPreIp," -r "+sPath,"/home/pi/BoardT/bin/data/");
 
-       auto checkDir = [=](QString sDir)
-       {
-           if(!QDir(sDir).exists())
-           {
-               QDir().mkdir(sDir);
-           }
-       };
+        auto checkDir = [=](QString sDir)
+        {
+            if(!QDir(sDir).exists())
+            {
+                QDir().mkdir(sDir);
+            }
+        };
 
 
         checkDir(sTarget+"/BoardT");
@@ -620,11 +622,9 @@ void Widget::on_btnUploadUsb_clicked()
 
         checkDir(sTarget+"/BoardT/bin/data");
 
+        QString sCmd = "scp -r "+sPath+" "+sTarget+"/BoardT/bin/data";
 
-
-       QString sCmd = "scp -r "+sPath+" "+sTarget+"/BoardT/bin/data";
-
-       system(sCmd.toStdString().c_str());
+        system(sCmd.toStdString().c_str());
 
     }
 }

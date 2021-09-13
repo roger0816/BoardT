@@ -28,11 +28,24 @@ ItemMarCon::ItemMarCon(QWidget *parent) : ItemBaseObj(parent)
 void ItemMarCon::timerEvent(QTimerEvent *)
 {
 
+
+
     if(m_obj==nullptr || m_listData.length()<=0)
         return;
 
+    bool bHasWord = false;
 
+    for(int i=0 ;i<m_listData.length();i++)
+    {
+        if(m_listData.at(i).length()>0)
+        {
+            bHasWord = true;
+            break;
+        }
+    }
 
+    if(!bHasWord)
+        return;
 
     int iX = m_lb->x();
 
@@ -129,7 +142,10 @@ void ItemMarCon::updateItem()
 
     m_iIdx = 0;
 
-    setText(m_listData[m_iIdx]);
+    if(m_listData.length()>0)
+        setText(m_listData[qBound(0,m_iIdx,m_listData.length()-1)]);
+    else
+        setText("");
 
 
 
