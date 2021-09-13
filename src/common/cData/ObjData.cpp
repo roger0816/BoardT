@@ -252,15 +252,15 @@ void ObjData::writeData()
         conf.beginGroup("Items");
 
 
-        if(m_data[Label::imagePath].toString()!="")
-        {
+//        if(m_data[Label::imagePath].toString()!="")
+//        {
 
-            QImage image(m_data[Label::imagePath].toString());
+//            QImage image(m_data[Label::imagePath].toString());
 
-            image.save(m_sObjPath+"/bg.png");
+//            image.save(m_sObjPath+"/bg.png");
 
-            m_data[Label::imagePath] = m_sObjPath+"/bg.png";
-        }
+//            m_data[Label::imagePath] = m_sObjPath.split("bin").last()+"/bg.png";
+//        }
 
         for(int i=0;i<listKey.length();i++)
         {

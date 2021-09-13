@@ -280,7 +280,7 @@ QPushButton:pressed {
          </font>
         </property>
         <property name="currentIndex">
-         <number>3</number>
+         <number>0</number>
         </property>
         <widget class="EditLabel" name="pageText">
          <property name="font">

@@ -47,19 +47,26 @@ void ItemLabel::setLbStyle(QString sTxtColorKey, QString sBgColorKey, QString sI
     QString sBg = getStyleSheetRgba(m_data.value(sBgColorKey,"#ffffffff").toString());
 
 
-    QString sImagePath = m_data.value(sImagePathKey).toString();
+    QString sImagePath =  m_data.value(sImagePathKey).toString();
 
 
 
     if(sImagePath.trimmed()!="")
     {
 
-        sBg="rgba(0, 0, 0,0);";
+        sBg="";
+
+        QString sImage = QApplication::applicationDirPath()+sImagePath;
+
+        if(!QFile(sImage).exists())
+            sImage = m_data["originImage"].toString();
 
 
         ui->label->setStyleSheet("QLabel#"+ui->label->objectName()+"{color:"+sTxtColor
-                                 +";background-color:"+sBg+";border-image:url("+sImagePath+");}");
+                                 +";background-color:rgba(0, 0, 0,0);"
+                                 ";border-image:url("+sImage+");}");
 
+        qDebug()<<" AAAA:"<<sImagePath;
     }
     else
     {
