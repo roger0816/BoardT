@@ -505,10 +505,12 @@ void Widget::on_btnUpdateData_clicked()
     QString sUpdatePath = Global::Instance().m_usb.m_sLastUsbPath+"/BoardT/bin/data/model0";
     qDebug()<<"AAAAAX : on_btnUpdateData_clicked"<<sUpdatePath;
 
-    if(Global::Instance().m_usb.m_sLastUsbPath.trimmed()=="")
+    if(m_bLocker || Global::Instance().m_usb.m_sLastUsbPath.trimmed()=="")
     {
         return ;
     }
+
+    m_bLocker = true;
 
     qDebug()<<"AAAAA0 : on_btnUpdateData_clicked";
 
