@@ -168,11 +168,6 @@ void EditFunc::setBgImage(ObjData *obj, QString sTitle,QString sDataKey)
     {
         //obj->m_data[sDataKey] = sPath;
 
-
-        QImage image(sPath);
-
-        image.save(obj->m_sObjPath+"/bg.png");
-
         obj->m_data["originImage"] = sPath;
 
         obj->m_data[sDataKey] = obj->m_sObjPath.split("bin").last()+"/bg.png";
