@@ -7,7 +7,7 @@ ItemMarCon::ItemMarCon(QWidget *parent) : ItemBaseObj(parent)
     m_wBg->setObjectName("ItemMar_wBg");
 
 
-//    m_wBg->setStyleSheet("");
+    //    m_wBg->setStyleSheet("");
 
     m_lb = new QLabel(m_wBg);
 
@@ -40,7 +40,7 @@ void ItemMarCon::timerEvent(QTimerEvent *)
     {
         m_lb->move(iX-(3*m_iSpeed),0);
 
-       // m_lb->move(iX-30,0);
+        // m_lb->move(iX-30,0);
 
     }
     else
@@ -85,35 +85,32 @@ void ItemMarCon::updateItem()
 
     m_iSpeed = m_obj->m_data.value(Marquee::speed,"3").toInt();
 
-    QColor bgColor = m_data.value(Label::bgColor,"#ffffffff").toString();
 
-    qDebug()<<"AAAA : "<<m_data.value(Label::bgColor,"#ffffffff").toString();
-    QColor txtColor = m_data.value(Label::txtColor,"#ff000000").toString();
 
-    qDebug()<<"BBBB : "<<m_data.value(Label::txtColor,"#ffffffff").toString();
+    QString sBg = getStyleSheetRgba(m_data.value(Label::bgColor,"#ffffffff").toString());
+
+    QString sTxt = getStyleSheetRgba(m_data.value(Label::txtColor,"#ff000000").toString());
+
     QString sImagePath = m_data.value(Label::imagePath,"").toString().trimmed();
-
-
 
 
     if(sImagePath!="")
     {
 
+        m_wBg->setStyleSheet("background-color:rgba(0,0,0,0);border-image:url("+sImagePath+");");
 
     }
     else
     {
 
-
+        m_wBg->setStyleSheet("background-color:"+sBg);
 
     }
 
+    m_lb->setStyleSheet("background-color:rgba(0,0,0,0);color:"+sTxt);
 
-    m_wBg->setStyleSheet("background-color:"+getStyleSheetRgba(m_data.value(Label::bgColor,"#ffffffff").toString()));
 
-    m_lb->setStyleSheet("background-color:rgba(0,0,0,0);color:"+getStyleSheetRgba(m_data.value(Label::txtColor,"#ffffffff").toString()));
 
-   // m_wBg->setStyleSheet("background-color:red;");
 
 
     QFont f ;

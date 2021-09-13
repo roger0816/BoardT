@@ -24,6 +24,8 @@ public:
 
     void updateItem()override;
 
+    void setLbStyle(QString sTxtColorKey,QString sBgColorKey,QString sImagePathKey,QString sFontKey,QString sCentKey);
+
     QLabel *m_lb;
 private:
     Ui::ItemLabel *ui;

@@ -30,50 +30,64 @@ void ItemLabel::updateItem()
 {
 
 
-      if(m_obj!=nullptr)
-          m_data = m_obj->m_data;
+    if(m_obj!=nullptr)
+        m_data = m_obj->m_data;
+
+    setLbStyle(Label::txtColor,Label::bgColor,Label::imagePath,Label::font,Label::alignCenter);
 
 
 
-      ui->label->setStyleSheet("QLabel#"+ui->label->objectName()+"{color:"+getStyleSheetRgba(m_data.value(Label::txtColor,"#000000ff").toString())
-                               +";background-color:"+getStyleSheetRgba(m_data.value(Label::bgColor,"#ffffffff").toString())+"}");
+}
+
+void ItemLabel::setLbStyle(QString sTxtColorKey, QString sBgColorKey, QString sImagePathKey, QString sFontKey, QString sCentKey)
+{
+
+    QString sTxtColor =getStyleSheetRgba(m_data.value(sTxtColorKey,"#000000ff").toString());
+
+    QString sBg = getStyleSheetRgba(m_data.value(sBgColorKey,"#ffffffff").toString());
+
+
+    QString sImagePath = m_data.value(sImagePathKey).toString();
 
 
 
-    QString sImagePath = m_data.value(Label::imagePath).toString();
+    if(sImagePath.trimmed()!="")
+    {
+
+        sBg="rgba(0, 0, 0,0);";
 
 
-      if(sImagePath.trimmed()!="")
-      {
-          ui->label->setStyleSheet(ui->label->styleSheet()
-                                   +" border-image:url("+sImagePath+");");
+        ui->label->setStyleSheet("QLabel#"+ui->label->objectName()+"{color:"+sTxtColor
+                                 +";background-color:"+sBg+";border-image:url("+sImagePath+");}");
+
+    }
+    else
+    {
+        ui->label->setStyleSheet("QLabel#"+ui->label->objectName()+"{color:"+sTxtColor
+                                 +";background-color:"+sBg+"}");
+
+    }
 
 
-      }
+    QFont f ;
+    f.fromString("Arial,24,-1,5,50,0,0,0,0,0,Regular");
+
+    QString sFont = m_data.value(sFontKey,"Arial,24,-1,5,50,0,0,0,0,0,Regular").toString();
+
+    f.fromString(sFont);
+
+    // f.setPixelSize(f.pixelSize()*m_diffSize);
+
+    ui->label->setFont(f);
 
 
+    ui->label->setText(m_data.value(Label::text,"文字").toString());
 
-
-      QFont f ;
-      f.fromString("Arial,24,-1,5,50,0,0,0,0,0,Regular");
-
-      QString sFont = m_data.value(Label::font,"Arial,24,-1,5,50,0,0,0,0,0,Regular").toString();
-
-      f.fromString(sFont);
-
-     // f.setPixelSize(f.pixelSize()*m_diffSize);
-
-      ui->label->setFont(f);
-
-
-      ui->label->setText(m_data.value(Label::text,"文字").toString());
-
-      qDebug()<<"update alignCenter : "<<m_data.value(Label::alignCenter).toInt();
-      if(m_data.value(Label::alignCenter).toInt())
-          ui->label->setAlignment(Qt::AlignCenter);
-      else
-          ui->label->setAlignment(Qt::AlignLeading);
-
+    qDebug()<<"update alignCenter : "<<m_data.value(sCentKey).toInt();
+    if(m_data.value(Label::alignCenter).toInt())
+        ui->label->setAlignment(Qt::AlignCenter);
+    else
+        ui->label->setAlignment(Qt::AlignLeading);
 
 
 }

@@ -26,7 +26,7 @@ Widget::Widget(QWidget *parent)
 
     connect(ui->wLayerSelector,&LayerSelector::sendSelectLayer,this,&Widget::slotSelector);
 
-       connect(ui->wLayerSelector,&LayerSelector::sendSelectLayer,ui->pageSchedule,&LayerSchedule::slotSelector);
+    connect(ui->wLayerSelector,&LayerSelector::sendSelectLayer,ui->pageSchedule,&LayerSchedule::slotSelector);
 
     connect(ui->wDisplay,&DisplayWidget::changeTarget,ui->wStyle,&LayerEditor::setTarget);
 
@@ -168,10 +168,6 @@ void Widget::slotSelector(QString sName)
         ui->pageTimeSchedule->setTimeData(sName);
 
     }
-
-
-
-
 
 
 }
@@ -580,3 +576,56 @@ void Widget::on_rdTimeSchedule_clicked()
 {
 
 }
+
+
+
+
+void Widget::on_btnUploadUsb_clicked()
+{
+    DialogUploadUsb dialog;
+
+    int re = dialog.exec();
+
+    if(re == 1)
+    {
+        QString sTarget = dialog.m_sPath;
+
+       // conf.setValue("Target",dir.path().split("/").last());
+
+       QString sPath = CDATA.m_sPath;
+
+       QSettings conf(sPath+"/"+sPath.split("/").last()+".BDM",QSettings::IniFormat);
+
+       QDir dir(sPath);
+
+
+       conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
+
+       conf.sync();
+
+    //   upload(m_sPreIp," -r "+sPath,"/home/pi/BoardT/bin/data/");
+
+       auto checkDir = [=](QString sDir)
+       {
+           if(!QDir(sDir).exists())
+           {
+               QDir().mkdir(sDir);
+           }
+       };
+
+
+        checkDir(sTarget+"/BoardT");
+
+        checkDir(sTarget+"/BoardT/bin");
+
+        checkDir(sTarget+"/BoardT/bin/data");
+
+
+
+       QString sCmd = "scp -r "+sPath+" "+sTarget+"/BoardT/bin/data";
+
+       system(sCmd.toStdString().c_str());
+
+    }
+}
+

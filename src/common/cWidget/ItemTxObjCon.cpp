@@ -232,9 +232,9 @@ void ItemTxObjCon::setStatusStyle(int i)
     m_status = i;
 
 
-    QColor bgColor = m_data.value(TxtValue::bgColor,"#ffffffff").toString();
+    QString bgColor = m_data.value(TxtValue::bgColor,"#ffffffff").toString();
 
-    QColor txtColor = m_data.value(TxtValue::txtColor,"#99999999").toString();
+    QString txtColor = m_data.value(TxtValue::txtColor,"#99999999").toString();
 
     QString sImagePath = m_data.value(TxtValue::imagePath).toString();
 
@@ -289,36 +289,24 @@ void ItemTxObjCon::setStatusStyle(int i)
 
     }
 
+    QString sTxt = getStyleSheetRgba(txtColor);
 
+    QString sBg = getStyleSheetRgba(bgColor);
 
-    QString sStyle = "color:rgba(%1,%2,%3,%4);"
-                     "background-color:rgba(%5,%6,%7,%8);";
 
     if(sImagePath.trimmed()!="")
     {
-        m_lb->setStyleSheet(sStyle.arg(txtColor.red())
-                            .arg(txtColor.green())
-                            .arg(txtColor.blue())
-                            .arg(txtColor.alpha())
-                            .arg(0)
-                            .arg(0)
-                            .arg(0)
-                            .arg(0)
-                            +" border-image:url("+sImagePath+");");
 
+
+        m_lb->setStyleSheet("QLabel#"+m_lb->objectName()+"{color:"+sTxt
+                                 +";background-color:rgba(0, 0, 0,0);border-image:url("+sImagePath+");}");
 
     }
     else
     {
-        m_lb->setStyleSheet(sStyle.arg(txtColor.red())
-                            .arg(txtColor.green())
-                            .arg(txtColor.blue())
-                            .arg(txtColor.alpha())
-                            .arg(bgColor.red())
-                            .arg(bgColor.green())
-                            .arg(bgColor.blue())
-                            .arg(bgColor.alpha())
-                            );
+        m_lb->setStyleSheet("QLabel#"+m_lb->objectName()+"{color:"+sTxt
+                                 +";background-color:"+sBg+"}");
+
     }
 
 

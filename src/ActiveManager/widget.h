@@ -11,6 +11,7 @@
 #include <QColorDialog>
 #include "LayerAddContent.h"
 #include <QProcess>
+#include "DialogUploadUsb.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -65,6 +66,9 @@ private slots:
     void on_rdSchedule_clicked();
 
     void on_rdTimeSchedule_clicked();
+
+
+    void on_btnUploadUsb_clicked();
 
 public slots:
     void slotSelector(QString sName);
