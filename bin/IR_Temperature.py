@@ -2,28 +2,33 @@ import sys
 import smbus
 import time
 import RPi.GPIO as GPIO
+import pygame
+
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(17, GPIO.IN)   #IR 1
-GPIO.setup(27, GPIO.OUT)  #Green LED 1
-GPIO.setup(22, GPIO.OUT)  #Red LED 1
-GPIO.setup(10, GPIO.IN)   #IR 2
-GPIO.setup(9, GPIO.OUT)   #Green LED 2
-GPIO.setup(11, GPIO.OUT)  #Red LED 2
-GPIO.setup(5, GPIO.IN)    #IR 3
-GPIO.setup(6, GPIO.OUT)   #Green LED 3
-GPIO.setup(12, GPIO.OUT)  #Red LED 3
-GPIO.setup(13, GPIO.IN)   #IR 4
-GPIO.setup(19, GPIO.OUT)  #Green LED 4
-GPIO.setup(26, GPIO.OUT)  #Red LED 4
-GPIO.setup(16, GPIO.IN)   #IR 5
-GPIO.setup(20, GPIO.OUT)  #Green LED 5
-GPIO.setup(21, GPIO.OUT)  #Red LED 5
+#GPIO.setup(27, GPIO.OUT)  #Green LED 1
+#GPIO.setup(22, GPIO.OUT)  #Red LED 1
+#GPIO.setup(10, GPIO.IN)   #IR 2
+#GPIO.setup(9, GPIO.OUT)   #Green LED 2
+#GPIO.setup(11, GPIO.OUT)  #Red LED 2
+#GPIO.setup(5, GPIO.IN)    #IR 3
+#GPIO.setup(6, GPIO.OUT)   #Green LED 3
+#GPIO.setup(12, GPIO.OUT)  #Red LED 3
+#GPIO.setup(13, GPIO.IN)   #IR 4
+#GPIO.setup(19, GPIO.OUT)  #Green LED 4
+#GPIO.setup(26, GPIO.OUT)  #Red LED 4
+#GPIO.setup(16, GPIO.IN)   #IR 5
+#GPIO.setup(20, GPIO.OUT)  #Green LED 5
+#GPIO.setup(21, GPIO.OUT)  #Red LED 5
 
-IR_GPIO = [17, 10, 5, 13, 16]
-G_LED_GPIO = [27, 9, 6, 19, 20]
-R_LED_GPIO = [22, 11, 12, 26, 21]
+#IR_GPIO = [17, 10, 5, 13, 16]
+IR_GPIO =[17]
+#G_LED_GPIO = [27, 9, 6, 19, 20]
+#R_LED_GPIO = [22, 11, 12, 26, 21]
+
+
 
 arg_len = len(sys.argv)
 
@@ -47,13 +52,15 @@ if (arg_len > 1) or (arg_len < 7):
             temp_list = []
             idx = 0
             if (chk_hum_flag == 0):              
-                chk_hum = GPIO.input(IR_GPIO[idx])
+                
+                #chk_hum = GPIO.input(IR_GPIO[idx])
+                chk_hum = 1
                 if (chk_hum > 0):
-                    chk_hum_flag = 5
+                    chk_hum_flag = 2
                 else:
                     temp_value = 0
-                    GPIO.output(G_LED_GPIO[idx],0)
-                    GPIO.output(R_LED_GPIO[idx],0)
+                    #GPIO.output(G_LED_GPIO[idx],0)
+                    #GPIO.output(R_LED_GPIO[idx],0)
             elif (chk_hum_flag > 0):
                 chk_hum_flag -= 1
                 for addr_value in addr_list:
@@ -65,15 +72,29 @@ if (arg_len > 1) or (arg_len < 7):
                     temp_value = (temp_value + read_value)/100
                     print "sensor temp_value:", temp_value
                     if (temp_value > 37):
-                        GPIO.output(R_LED_GPIO[idx],1)
-                        GPIO.output(G_LED_GPIO[idx],0)
-                    elif (temp_value >= 33):
-                        GPIO.output(R_LED_GPIO[idx],0)
-                        GPIO.output(G_LED_GPIO[idx],1)
+                        #GPIO.output(R_LED_GPIO[idx],1)
+                        #GPIO.output(G_LED_GPIO[idx],0)
+                        pygame.init()
+                        track = pygame.mixer.music.load("no.mp3")
+                        pygame.mixer.music.set_volume(1)
+                        pygame.mixer.music.play()
+                        time.sleep(1.5)
+                        pygame.mixer.music.stop()
+                    elif (temp_value >= 30):
+                        #GPIO.output(R_LED_GPIO[idx],0)
+                        #GPIO.output(G_LED_GPIO[idx],1)
+                        pygame.init()
+                        track = pygame.mixer.music.load("ok.mp3")
+                        pygame.mixer.music.set_volume(1)
+                        pygame.mixer.music.play()
+                        time.sleep(1.5)
+                        pygame.mixer.music.stop()
+
+
                     else:
                         temp_value = 0
-                        GPIO.output(G_LED_GPIO[idx],0)
-                        GPIO.output(R_LED_GPIO[idx],0)   
+                        #GPIO.output(G_LED_GPIO[idx],0)
+                        #GPIO.output(R_LED_GPIO[idx],0)   
                         
                     temp_list.append(temp_value)
                     idx += 1
