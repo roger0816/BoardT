@@ -222,6 +222,8 @@ void ItemTxObjCon::doChangeShow()
 
     m_bIsShowValue = !m_bIsShowValue;
 
+    if(sDisplay.trimmed()=="0")
+        sDisplay="";
 
     m_lb->setText(sDisplay);
 }
