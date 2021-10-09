@@ -16,7 +16,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Widget</string>
+   <string>博德創-版面管理工具</string>
   </property>
   <property name="styleSheet">
    <string notr="true"> QScrollBar:vertical {

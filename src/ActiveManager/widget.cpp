@@ -106,41 +106,6 @@ void Widget::on_btnSelectModel_clicked()
 
 }
 
-void Widget::on_btnAddModel_clicked()
-{
-    /**
-    LayerNewModel dialog;
-
-    dialog.setPath("新增模組",QApplication::applicationDirPath()+"/data/");
-
-    int i =dialog.exec();
-
-    if(i==1)
-    {
-        QString sTarget =dialog.m_sModelPath;
-
-        QDir().mkdir(sTarget);
-
-        QSettings conf(sTarget+"/"+sTarget.split("/").last()+".BDM",QSettings::IniFormat);
-
-        conf.setValue("Base/default","Default");
-
-        conf.sync();
-
-        QString defLayer = sTarget+"/Default";
-
-        QDir().mkdir(defLayer);
-
-        QSettings def(defLayer+"/Default.BDT",QSettings::IniFormat);
-
-        def.setValue("Base/resumeTimer",15);
-
-        def.sync();
-
-        loadModel(sTarget);
-    }
-    **/
-}
 
 void Widget::slotSelector(QString sName)
 {
@@ -178,188 +143,100 @@ void Widget::slotSelector(QString sName)
 
 }
 
-void Widget::refreshSelector(bool bToDef)
-{
-    qDebug()<<"re selector";
-
-    QStringList listKey = CDATA.m_dData.keys();
-
-    qDebug()<<"listkey "<<listKey;
-
-    qDebug()<<CDATA.m_dData;
-
-    DisplayWidget w;
-
-    QMap <QString , QPixmap> dPix;
-
-    for(int i=0;i<listKey.length();i++)
-    {
-
-        dPix.insert(listKey[i], w.setLayer(CDATA.m_dData[listKey.at(i)]->m_sLayerPath));
-
-    }
-
-    ui->wLayerSelector->setData(dPix,CDATA.m_sPath);
-
-    if(bToDef)
-    {
-        ui->wLayerSelector->toDef();
-    }
-}
-
-void Widget::on_btnAddLayer_clicked()
-{
-    LayerNewModel newLay;
-
-    newLay.setPath("新增版型",CDATA.m_sPath);
-
-    int iRe = newLay.exec();
-
-    if(iRe ==1 )
-    {
-        QString defLayer = newLay.m_sModelPath;
-
-        CDATA.addLayer(defLayer);
-
-        refreshSelector();
-    }
-}
-
-void Widget::on_btnRemoveLayer_clicked()
-{
-    DialogMsg msg;
-
-    QString sPath = ui->wLayerSelector->m_sCurrentPath;
-
-    QString sTarget = sPath.split("/").last();
-
-    if(sTarget==DEF_LAYER_NAME)
-    {
-        msg.setDialogInfo("預設樣版無法刪除，請選擇其它",QStringList()<<"ok");
-
-        msg.exec();
-
-        return;
-    }
-
-    else if(sTarget=="")
-    {
-        msg.setDialogInfo("請先選擇要刪除的樣版",QStringList()<<"ok");
-
-        msg.exec();
-
-        return;
-    }
-
-    QString sTmp ="確定要刪除' %1 '嗎？";
-
-    msg.setDialogInfo(sTmp.arg(sTarget),QStringList()<<"否"<<"是");
-
-    int iRe = msg.exec();
-
-    if(iRe == 1)
-    {
-        CDATA.removeLayer(sPath);
-
-        refreshSelector(true);
-
-
-    }
-}
 
 void Widget::on_btnSave_clicked()
 {
-    DialogMsg msg;
+//    DialogMsg msg;
 
-    msg.setDialogInfo("確定要儲存嗎？",QStringList()<<"否"<<"是");
+//    msg.setDialogInfo("確定要儲存嗎？",QStringList()<<"否"<<"是");
 
-    int iRe = msg.exec();
+//    int iRe = msg.exec();
 
-    if(iRe == 1)
-    {
+//    if(iRe == 1)
+//    {
 
-        ui->pageSchedule->saveSchedule();
+//        ui->pageSchedule->saveSchedule();
 
-        int iScheduleStatus = SCHEDULE_OFF;
+//        int iScheduleStatus = SCHEDULE_OFF;
 
-        if(ui->rdSchedule->isChecked())
-        {
-            iScheduleStatus = SCHEDULE_ON;
-        }
-        else if(ui->rdTimeSchedule->isChecked())
-        {
-            iScheduleStatus = SCHEDULE_TIME;
-        }
+//        if(ui->rdSchedule->isChecked())
+//        {
+//            iScheduleStatus = SCHEDULE_ON;
+//        }
+//        else if(ui->rdTimeSchedule->isChecked())
+//        {
+//            iScheduleStatus = SCHEDULE_TIME;
+//        }
 
-        CDATA.m_dataModel.iScheduleMode = iScheduleStatus;
-
-
-        CDATA.writeModel(ui->wLayerSelector->m_sSetTargetPath);
-
-        QString sPath = CDATA.m_sPath;
-
-        QSettings conf(sPath+"/"+sPath.split("/").last()+".BDM",QSettings::IniFormat);
-
-        QDir dir(sPath);
-
-        // conf.setValue("Target",dir.path().split("/").last());
-
-        conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
-
-        conf.sync();
+//        CDATA.m_dataModel.iScheduleMode = iScheduleStatus;
 
 
-        refreshSelector();
-    }
+//        CDATA.writeModel(ui->wLayerSelector->m_sSetTargetPath);
+
+//        QString sPath = CDATA.m_sPath;
+
+//        QSettings conf(sPath+"/"+sPath.split("/").last()+".BDM",QSettings::IniFormat);
+
+//        QDir dir(sPath);
+
+//        // conf.setValue("Target",dir.path().split("/").last());
+
+//        conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
+
+//        conf.sync();
+
+
+//        refreshSelector();
+//    }
 }
 
 
 
 void Widget::on_btnUpload_clicked()
 {
-    DialogMsg msg;
+//    DialogMsg msg;
 
-    if(ui->lbModel->text().trimmed()=="")
-    {
-        msg.setDialogInfo("請先開啟模組",QStringList()<<"OK");
+//    if(ui->lbModel->text().trimmed()=="")
+//    {
+//        msg.setDialogInfo("請先開啟模組",QStringList()<<"OK");
 
-        msg.exec();
+//        msg.exec();
 
-        return ;
+//        return ;
 
-    }
-
-
+//    }
 
 
-    msg.setInput("請輸入IP",m_sPreIp,QStringList()<<"取消"<<"確定");
-
-    int iRe = msg.exec();
-
-    if(iRe==1)
-    {
-        m_sPreIp = msg.getInput();
-
-        QString sPath = CDATA.m_sPath;
-
-        //     QSettings conf(sPath+"/conf.ini",QSettings::IniFormat);
 
 
-        QSettings conf(sPath+"/"+sPath.split("/").last()+".BDM",QSettings::IniFormat);
+//    msg.setInput("請輸入IP",m_sPreIp,QStringList()<<"取消"<<"確定");
+
+//    int iRe = msg.exec();
+
+//    if(iRe==1)
+//    {
+//        m_sPreIp = msg.getInput();
+
+//        QString sPath = CDATA.m_sPath;
+
+//        //     QSettings conf(sPath+"/conf.ini",QSettings::IniFormat);
 
 
-        QDir dir(sPath);
-
-        // conf.setValue("Target",dir.path().split("/").last());
-
-        conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
-
-        conf.sync();
+//        QSettings conf(sPath+"/"+sPath.split("/").last()+".BDM",QSettings::IniFormat);
 
 
-        upload(m_sPreIp," -r "+sPath,"/home/pi/BoardT/bin/data/");
+//        QDir dir(sPath);
 
-    }
+//        // conf.setValue("Target",dir.path().split("/").last());
+
+//        conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
+
+//        conf.sync();
+
+
+//        upload(m_sPreIp," -r "+sPath,"/home/pi/BoardT/bin/data/");
+
+//    }
 }
 
 void Widget::upload(QString sIp, QString sTarget, QString sPath)

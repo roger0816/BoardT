@@ -33,9 +33,6 @@ private slots:
 
     void on_btnSelectModel_clicked();
 
-    void on_btnAddModel_clicked();
-
-    void on_btnAddLayer_clicked();
 
     void on_btnSave_clicked();
 
@@ -43,7 +40,6 @@ private slots:
 
     void on_btnTest_clicked();
 
-    void on_btnRemoveLayer_clicked();
 
     void on_btnTry_clicked();
 
@@ -74,7 +70,6 @@ private slots:
 public slots:
     void slotSelector(QString sName);
 
-    void refreshSelector(bool bToDef = false);
 
 private:
     Ui::Widget *ui;

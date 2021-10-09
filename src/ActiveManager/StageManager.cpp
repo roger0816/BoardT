@@ -25,7 +25,7 @@ StageManager::~StageManager()
     delete ui;
 }
 
-void StageManager::on_btnNew_clicked()
+void StageManager::on_btnNewModel_clicked()
 {
 
     DialogMsg msg;
@@ -77,6 +77,7 @@ void StageManager::addData(QStringList list, bool bNew)
 
     m_lay = new QGridLayout;
 
+    m_lay->setMargin(40);
 
     for(int i=0;i<m_listBtn.buttons().length();i++)
     {

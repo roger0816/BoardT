@@ -24,7 +24,7 @@ public:
     ~StageManager();
 
 private slots:
-    void on_btnNew_clicked();
+    void on_btnNewModel_clicked();
 
     void addData(QStringList list,bool bNew = true);
     void on_btnDelete_clicked();
