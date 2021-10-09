@@ -7,6 +7,13 @@ Widget::Widget(QWidget *parent)
 {
     ui->setupUi(this);
 
+    ui->stackedWidget->setCurrentWidget(ui->stageManager);
+
+    connect(ui->stageManager,&StageManager::sendSelectModel,this,&Widget::loadModel);
+
+    connect(ui->stageEditArea,&StageEditArea::sendBack,this,&Widget::StageEditback);
+
+
     m_listButtonStack.addButton(ui->btnSetting,0);
 
     m_listButtonStack.addButton(ui->btnEdit,1);
@@ -16,11 +23,10 @@ Widget::Widget(QWidget *parent)
     m_listButtonStack.addButton(ui->btnTimeSchedule,3);
 
 
-    QString sDef = QApplication::applicationDirPath()+"/data/model0";
+  //  QString sDef = QApplication::applicationDirPath()+"/data/model0";
 
     CDATA;
 
-    loadModel(sDef);
 
     connect(ui->wLayerSelector,&LayerSelector::sendSelectLayer,this,&Widget::slotSelector);
 
@@ -74,11 +80,13 @@ void Widget::loadModel(QString sPath)
 
         CDATA.readModel(sPath);
 
-        qDebug()<<"model no found : "<<sPath;
+        qDebug()<<"model no found ,so create: "<<sPath;
     }
 
 
-    refreshSelector();
+
+
+    ui->stackedWidget->setCurrentWidget(ui->stageEditArea);
 
 
 }
@@ -391,6 +399,12 @@ void Widget::rename(QString sOld, QString sNew)
     ui->wDisplay->renameItem(sOld,sNew);
 
 
+}
+
+
+void Widget::StageEditback()
+{
+    ui->stackedWidget->setCurrentWidget(ui->stageManager);
 }
 
 //void Widget::refreshTimeSchedule()

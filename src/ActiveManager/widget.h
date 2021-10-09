@@ -12,6 +12,7 @@
 #include "LayerAddContent.h"
 #include <QProcess>
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
 QT_END_NAMESPACE
@@ -80,7 +81,7 @@ private:
 
     void rename(QString sOld,QString sNew);
 
-
+    void StageEditback();
  //  void refreshTimeSchedule();
 
 

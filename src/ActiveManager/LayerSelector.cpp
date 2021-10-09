@@ -2,8 +2,6 @@
 
 LayerSelector::LayerSelector(QWidget *parent) : QWidget(parent)
 {
-    m_lay =new QHBoxLayout;
-
 
 }
 
@@ -42,11 +40,7 @@ void LayerSelector::setData(QMap<QString , QPixmap> dData, QString sPath)
     int iIdxRadio = qBound(0,listKey.indexOf(sTarget),listKey.length()-1);
 
 
-    while(m_lay->count()>0)
-    {
-        m_lay->removeItem(m_lay->itemAt(0));
 
-    }
 
 
     while(m_listBtn.length()<dData.count())
@@ -152,13 +146,13 @@ void LayerSelector::showEvent(QShowEvent *)
 
 void LayerSelector::setUiRect()
 {
-    int iPicH = height()-48;
+    int iPicH = 180;
 
     int iPicW = iPicH*1080/1920;
 
     qDebug()<<"H : "<<iPicH<<" , W :"<<iPicW;
 
-    int iMargin = 10;
+    int iMargin = 30;
 
     int iCount = 0;
 
@@ -167,11 +161,11 @@ void LayerSelector::setUiRect()
         if(m_listBtn[i]->isVisible())
         {
 
-            m_listBtn[i]->setGeometry((iMargin+iPicW)*iCount,28,iPicW,iPicH);
+            m_listBtn[i]->setGeometry(40,(iMargin+iPicH)*iCount,iPicW,iPicH);
 
             m_listBtn[i]->setIconSize(m_listBtn[i]->size()*0.9);
 
-            m_listRadioBtn[i]->setGeometry(m_listBtn[i]->x(),0,iPicW,26);
+            m_listRadioBtn[i]->setGeometry(10,m_listBtn[i]->y(),iPicW,26);
 
             iCount++;
         }
@@ -180,17 +174,12 @@ void LayerSelector::setUiRect()
     }
 
 
-    setMinimumWidth((iPicW+iMargin)*iCount+10);
+    setMinimumHeight((iPicH+iMargin)*iCount+10);
+    // setMinimumWidth((iPicW+iMargin)*iCount+10);
 }
 
-
-
-void LayerSelector::slotClicked()
+void LayerSelector::setIdx(int iIdx)
 {
-    QPushButton *btn = dynamic_cast<QPushButton*>(sender());
-
-    int iIdx = m_listBtn.indexOf(btn);
-
     if(iIdx<0 || iIdx >= m_listBtn.length())
     {
         return ;
@@ -203,9 +192,28 @@ void LayerSelector::slotClicked()
         m_listBtn[i]->setChecked(iIdx==i);
     }
 
+    for(int i=0;i<m_listRadioBtn.length();i++)
+    {
+        m_listRadioBtn[i]->setChecked(i==iIdx);
+    }
+
     emit sendSelectLayer(m_listRadioBtn.at(iIdx)->text());
 
     m_sCurrentPath = m_sPath+"/"+m_listRadioBtn.at(iIdx)->text();
+
+    m_sSetTargetPath = m_sCurrentPath;
+
+
+
+}
+
+
+
+void LayerSelector::slotClicked()
+{
+    QPushButton *btn = dynamic_cast<QPushButton*>(sender());
+
+    setIdx(m_listBtn.indexOf(btn));
 
 }
 
@@ -214,7 +222,7 @@ void LayerSelector::slotClickedRadio()
     QRadioButton * target = dynamic_cast<QRadioButton*>(sender());
 
 
-    m_sSetTargetPath = m_sPath+"/"+target->text().trimmed();
+    setIdx(m_listRadioBtn.indexOf(target));
 
 //    QSettings conf(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
 

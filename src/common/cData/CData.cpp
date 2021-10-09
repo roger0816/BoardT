@@ -13,13 +13,22 @@ CData &CData::Instance()
 
 void CData::createModel(QString sPath)
 {
-    m_sPath = sPath;
+    QString sName ;
+
+    if(sPath.split("/").length()>0)
+        sName = sPath.split("/").last();
+    else
+        sName = sPath;
+
+    m_sPath = QApplication::applicationDirPath()+"/data/"+sName;
+
+
     qDebug()<<"create model : "<<sPath;
     //  QSettings define(m_sPath+"/define.ini",QSettings::IniFormat);
 
     checkDefine();
 
-    QSettings pro(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
+    QSettings pro(m_sPath+"/"+sName+".BDM",QSettings::IniFormat);
 
     QStringList listKey = m_dData.keys();
 

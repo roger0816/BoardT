@@ -14,7 +14,6 @@ UI_DIR =$$PWD/obj
 DESTDIR =$$PWD/../../bin/
 
 
-
 win32{
 CONFIG+=DEVELOP
 }
@@ -48,6 +47,10 @@ SOURCES += \
 
 }
 
+
+INCLUDEPATH+= uiItem
+
+
 SOURCES += \
     DialogMsg.cpp \
     LayerAction.cpp \
@@ -56,7 +59,10 @@ SOURCES += \
     LayerSchedule.cpp \
     LayerSelector.cpp \
     LayerTimeSchedule.cpp \
+    StageEditArea.cpp \
+    StageManager.cpp \
     main.cpp \
+    uiItem/IconButton.cpp \
     widget.cpp
 
 HEADERS += \
@@ -67,6 +73,9 @@ HEADERS += \
     LayerSchedule.h \
     LayerSelector.h \
     LayerTimeSchedule.h \
+    StageEditArea.h \
+    StageManager.h \
+    uiItem/IconButton.h \
     widget.h
 
 FORMS += \
@@ -76,6 +85,9 @@ FORMS += \
     LayerEditor.ui \
     LayerSchedule.ui \
     LayerTimeSchedule.ui \
+    StageEditArea.ui \
+    StageManager.ui \
+    uiItem/IconButton.ui \
     widget.ui
 
 # Default rules for deployment.

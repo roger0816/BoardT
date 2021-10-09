@@ -38,7 +38,6 @@ private:
 
     QString m_sPath;
 
-    QHBoxLayout *m_lay;
 
     QList<QPushButton*> m_listBtn;
 
@@ -52,6 +51,7 @@ private:
     void showEvent(QShowEvent *) override;
     void setUiRect();
 
+    void setIdx(int iIdx);
 
 private slots:
 
