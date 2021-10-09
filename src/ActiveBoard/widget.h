@@ -74,6 +74,8 @@ private:
 
     int m_iWaitTimeout = 3;
 
+    bool m_bLocker = false;
+
 private slots:
 
     void loadingLicense();

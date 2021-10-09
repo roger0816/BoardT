@@ -35,6 +35,9 @@ public:
 
     QMap<QString,QVariant> m_data;
 
+    QString getStyleSheetRgba(QString st);
+
+
 signals:
 
 };

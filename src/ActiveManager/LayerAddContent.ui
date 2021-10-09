@@ -207,11 +207,20 @@ QPushButton:pressed {
            </property>
            <property name="font">
             <font>
-             <pointsize>20</pointsize>
+             <pointsize>-1</pointsize>
+             <weight>50</weight>
+             <italic>false</italic>
+             <bold>false</bold>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(255, 0, 0);</string>
+            <string notr="true">background-color: rgb(255, 0, 0);
+
+
+    font:  32px;
+
+min-height:1em;
+min-width:4em;</string>
            </property>
            <property name="text">
             <string>進階元件</string>
@@ -268,11 +277,19 @@ QPushButton:pressed {
            </property>
            <property name="font">
             <font>
-             <pointsize>20</pointsize>
+             <pointsize>-1</pointsize>
+             <weight>50</weight>
+             <italic>false</italic>
+             <bold>false</bold>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(255, 255, 127);</string>
+            <string notr="true">background-color: rgb(255, 255, 127);
+
+    font:  32px;
+
+min-height:1em;
+min-width:4em;</string>
            </property>
            <property name="text">
             <string>基本元件</string>

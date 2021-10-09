@@ -500,30 +500,44 @@ void Widget::on_btnFacLogin_clicked()
 
 void Widget::on_btnUpdateData_clicked()
 {
-    QString sUpdatePath = Global::Instance().m_usb.m_sLastUsbPath+"/BoardT/data/model0";
 
-    if(!QDir().exists(sUpdatePath))
+
+    QString sUpdatePath = Global::Instance().m_usb.m_sLastUsbPath+"/BoardT/bin/data/model0";
+    qDebug()<<"AAAAAX : on_btnUpdateData_clicked"<<sUpdatePath;
+
+    if(m_bLocker || Global::Instance().m_usb.m_sLastUsbPath.trimmed()=="")
     {
         return ;
     }
 
-    qDebug()<<" update Path : "<<sUpdatePath;
-    QString sCurrentPath = QApplication::applicationDirPath()+"/data/";
+    m_bLocker = true;
 
-    QString rmCmd = "rm -rf "+sCurrentPath+"model0BK";
+    qDebug()<<"AAAAA0 : on_btnUpdateData_clicked";
 
-    system(rmCmd.toStdString().c_str());
+    QString sCmd = "nohup ./updateFromUsb.sh "+sUpdatePath;
 
-    QString sBkCmd = "mv "+sCurrentPath+"model0 "+sCurrentPath+"model0BK";
+    system("chmod a+x updateFromUsb.sh > updateUsb.log 2>&1 &");
 
-    system(sBkCmd.toStdString().c_str());
-
-    QString sCopy = "cp -r "+sUpdatePath+" "+sCurrentPath;
+    system(sCmd.toStdString().c_str());
 
 
-    system(sCopy.toStdString().c_str());
+//    qDebug()<<" update Path : "<<sUpdatePath;
+//    QString sCurrentPath = QApplication::applicationDirPath()+"/data/";
 
-    launch();
+//    QString rmCmd = "rm -rf "+sCurrentPath+"model0BK";
+
+//    system(rmCmd.toStdString().c_str());
+
+//    QString sBkCmd = "mv "+sCurrentPath+"model0 "+sCurrentPath+"model0BK";
+
+//    system(sBkCmd.toStdString().c_str());
+
+//    QString sCopy = "cp -r "+sUpdatePath+" "+sCurrentPath;
+
+
+//    system(sCopy.toStdString().c_str());
+
+//    launch();
 
 
 }

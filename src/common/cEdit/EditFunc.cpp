@@ -12,15 +12,26 @@ bool EditFunc::setColor(ObjData *obj, QString sDataKey, QPushButton *btn)
     if(obj == nullptr)
         return false;
 
-    QColor txColor = obj->m_data.value(sDataKey).toString();
+    QString sTmp = obj->m_data.value(sDataKey).toString().replace("#","");
 
+    while(sTmp.length()<8)
+        sTmp.append("f");
+
+    QColor txColor;
+
+    bool b;
+
+    txColor.setRed(sTmp.midRef(0,2).toInt(&b,16));
+    txColor.setGreen(sTmp.midRef(2,2).toInt(&b,16));
+    txColor.setBlue(sTmp.midRef(4,2).toInt(&b,16));
+    txColor.setAlpha(255);
     QVariant var;
 
     bool bRe = setColor(txColor,var);
 
     if(bRe)
     {
-         obj->m_data[sDataKey] = var;
+        obj->m_data[sDataKey] = var;
     }
 
     return bRe;
@@ -63,7 +74,17 @@ bool EditFunc::setColor(QColor current, QVariant &var)
 
     QColor color = dialog.getColor(current,nullptr,"",QColorDialog::ShowAlphaChannel);
 
-    var = QVariant(color.name(QColor::HexArgb));
+    qDebug()<<"SS0 : "<<color;
+
+    var = QVariant(color.name()+QString("%1").arg(color.alpha(), 2, 16, QLatin1Char('0')));
+
+    qDebug()<<"SS1 : "<<var;
+
+    //     var = QVariant("#"+QString::number(color.red(),16)
+    //                +QString::number(color.green(),16)
+    //     +QString::number(color.blue(),16)
+    //     +QString::number(color.alpha(),16));
+
 
     return color.isValid();
 
@@ -145,9 +166,14 @@ void EditFunc::setBgImage(ObjData *obj, QString sTitle,QString sDataKey)
 
     if(obj->m_data.value(sDataKey)!= sPath)
     {
-        obj->m_data[sDataKey] = sPath;
+        //obj->m_data[sDataKey] = sPath;
 
+        obj->m_data["originImage"] = sPath;
+
+        obj->m_data[sDataKey] = obj->m_sObjPath.split("bin").last()+"/bg.png";
     }
+
+
 }
 
 void EditFunc::clearBgImage(ObjData *obj, QString sDataKey)

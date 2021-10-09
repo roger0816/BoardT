@@ -7,7 +7,7 @@ ItemMarCon::ItemMarCon(QWidget *parent) : ItemBaseObj(parent)
     m_wBg->setObjectName("ItemMar_wBg");
 
 
-//    m_wBg->setStyleSheet("");
+    //    m_wBg->setStyleSheet("");
 
     m_lb = new QLabel(m_wBg);
 
@@ -28,11 +28,24 @@ ItemMarCon::ItemMarCon(QWidget *parent) : ItemBaseObj(parent)
 void ItemMarCon::timerEvent(QTimerEvent *)
 {
 
+
+
     if(m_obj==nullptr || m_listData.length()<=0)
         return;
 
+    bool bHasWord = false;
 
+    for(int i=0 ;i<m_listData.length();i++)
+    {
+        if(m_listData.at(i).length()>0)
+        {
+            bHasWord = true;
+            break;
+        }
+    }
 
+    if(!bHasWord)
+        return;
 
     int iX = m_lb->x();
 
@@ -40,7 +53,7 @@ void ItemMarCon::timerEvent(QTimerEvent *)
     {
         m_lb->move(iX-(3*m_iSpeed),0);
 
-       // m_lb->move(iX-30,0);
+        // m_lb->move(iX-30,0);
 
     }
     else
@@ -85,68 +98,33 @@ void ItemMarCon::updateItem()
 
     m_iSpeed = m_obj->m_data.value(Marquee::speed,"3").toInt();
 
-    QColor bgColor = m_data.value(Label::bgColor,"#ffffffff").toString();
 
 
-    QColor txtColor = m_data.value(Label::txtColor,"#ff000000").toString();
+    QString sBg = getStyleSheetRgba(m_data.value(Label::bgColor,"#ffffffff").toString());
+
+    QString sTxt = getStyleSheetRgba(m_data.value(Label::txtColor,"#ff000000").toString());
 
     QString sImagePath = m_data.value(Label::imagePath,"").toString().trimmed();
 
 
-    QString sStyle = "color:rgba(%1,%2,%3,%4);"
-                     "background-color:rgba(%5,%6,%7,%8);border-color:rgba(0,0,0,0);";
-
-
-
-
     if(sImagePath!="")
     {
-        m_lb->setStyleSheet(sStyle.arg(txtColor.red())
-                                 .arg(txtColor.green())
-                                 .arg(txtColor.blue())
-                                 .arg(txtColor.alpha())
-                                 .arg(0)
-                                 .arg(0)
-                                 .arg(0)
-                                 .arg(0)
-                                // +" border-image:url("+m_data.m_sImagePath
-                                    +");");
 
-        m_wBg->setStyleSheet(sStyle.arg(txtColor.red())
-                                 .arg(txtColor.green())
-                                 .arg(txtColor.blue())
-                                 .arg(txtColor.alpha())
-                                 .arg(0)
-                                 .arg(0)
-                                 .arg(0)
-                                 .arg(0)
-                                 +" border-image:url("+sImagePath+");");
-
+        m_wBg->setStyleSheet("background-color:rgba(0,0,0,0);border-image:url("+sImagePath+");");
 
     }
     else
     {
-    m_lb->setStyleSheet(sStyle.arg(txtColor.red())
-                      .arg(txtColor.green())
-                      .arg(txtColor.blue())
-                      .arg(txtColor.alpha())
-                      .arg(bgColor.red())
-                      .arg(bgColor.green())
-                      .arg(bgColor.blue())
-                      .arg(0)
-                        );
 
+        m_wBg->setStyleSheet("background-color:"+sBg);
 
-    m_wBg->setStyleSheet(sStyle.arg(txtColor.red())
-                      .arg(txtColor.green())
-                      .arg(txtColor.blue())
-                      .arg(txtColor.alpha())
-                      .arg(bgColor.red())
-                      .arg(bgColor.green())
-                      .arg(bgColor.blue())
-                      .arg(bgColor.alpha())
-                        );
     }
+
+    m_lb->setStyleSheet("background-color:rgba(0,0,0,0);color:"+sTxt);
+
+
+
+
 
     QFont f ;
     f.fromString("Arial,24,-1,5,50,0,0,0,0,0,Regular");
@@ -164,7 +142,10 @@ void ItemMarCon::updateItem()
 
     m_iIdx = 0;
 
-    setText(m_listData[m_iIdx]);
+    if(m_listData.length()>0)
+        setText(m_listData[qBound(0,m_iIdx,m_listData.length()-1)]);
+    else
+        setText("");
 
 
 

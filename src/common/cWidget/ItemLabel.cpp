@@ -8,6 +8,8 @@ ItemLabel::ItemLabel(QWidget *parent) :
     ui->setupUi(this);
 
     m_lb = ui->label;
+
+    m_lb->setObjectName("m_lb");
 }
 
 ItemLabel::~ItemLabel()
@@ -28,71 +30,71 @@ void ItemLabel::updateItem()
 {
 
 
-      if(m_obj!=nullptr)
-          m_data = m_obj->m_data;
+    if(m_obj!=nullptr)
+        m_data = m_obj->m_data;
+
+    setLbStyle(Label::txtColor,Label::bgColor,Label::imagePath,Label::font,Label::alignCenter);
 
 
 
-      QColor bgColor = m_data.value(Label::bgColor,"#ffffffff").toString();
-      //bgColor.name(QColor::HexArgb)
+}
+
+void ItemLabel::setLbStyle(QString sTxtColorKey, QString sBgColorKey, QString sImagePathKey, QString sFontKey, QString sCentKey)
+{
+
+    QString sTxtColor =getStyleSheetRgba(m_data.value(sTxtColorKey,"#000000ff").toString());
+
+    QString sBg = getStyleSheetRgba(m_data.value(sBgColorKey,"#ffffffff").toString());
 
 
-      QColor txtColor = m_data.value(Label::txtColor,"#ff000000").toString();
-
-    QString sImagePath = m_data.value(Label::imagePath).toString();
-
-      QString sStyle = "color:rgba(%1,%2,%3,%4);"
-                       "background-color:rgba(%5,%6,%7,%8);";
-
-      if(sImagePath.trimmed()!="")
-      {
-          ui->label->setStyleSheet(sStyle.arg(txtColor.red())
-                                   .arg(txtColor.green())
-                                   .arg(txtColor.blue())
-                                   .arg(txtColor.alpha())
-                                   .arg(0)
-                                   .arg(0)
-                                   .arg(0)
-                                   .arg(0)
-                                   +" border-image:url("+sImagePath+");");
-
-
-      }
-      else
-      {
-      ui->label->setStyleSheet(sStyle.arg(txtColor.red())
-                        .arg(txtColor.green())
-                        .arg(txtColor.blue())
-                        .arg(txtColor.alpha())
-                        .arg(bgColor.red())
-                        .arg(bgColor.green())
-                        .arg(bgColor.blue())
-                        .arg(bgColor.alpha())
-                          );
-      }
+    QString sImagePath =  m_data.value(sImagePathKey).toString();
 
 
 
-      QFont f ;
-      f.fromString("Arial,24,-1,5,50,0,0,0,0,0,Regular");
+    if(sImagePath.trimmed()!="")
+    {
 
-      QString sFont = m_data.value(Label::font,"Arial,24,-1,5,50,0,0,0,0,0,Regular").toString();
+        sBg="";
 
-      f.fromString(sFont);
+        QString sImage = QApplication::applicationDirPath()+sImagePath;
 
-     // f.setPixelSize(f.pixelSize()*m_diffSize);
+        if(!QFile(sImage).exists())
+            sImage = m_data["originImage"].toString();
 
-      ui->label->setFont(f);
+
+        ui->label->setStyleSheet("QLabel#"+ui->label->objectName()+"{color:"+sTxtColor
+                                 +";background-color:rgba(0, 0, 0,0);"
+                                 ";border-image:url("+sImage+");}");
+
+        qDebug()<<" AAAA:"<<sImagePath;
+    }
+    else
+    {
+        ui->label->setStyleSheet("QLabel#"+ui->label->objectName()+"{color:"+sTxtColor
+                                 +";background-color:"+sBg+"}");
+
+    }
 
 
-      ui->label->setText(m_data.value(Label::text,"文字").toString());
+    QFont f ;
+    f.fromString("Arial,24,-1,5,50,0,0,0,0,0,Regular");
 
-      qDebug()<<"update alignCenter : "<<m_data.value(Label::alignCenter).toInt();
-      if(m_data.value(Label::alignCenter).toInt())
-          ui->label->setAlignment(Qt::AlignCenter);
-      else
-          ui->label->setAlignment(Qt::AlignLeading);
+    QString sFont = m_data.value(sFontKey,"Arial,24,-1,5,50,0,0,0,0,0,Regular").toString();
 
+    f.fromString(sFont);
+
+    // f.setPixelSize(f.pixelSize()*m_diffSize);
+
+    ui->label->setFont(f);
+
+
+    ui->label->setText(m_data.value(Label::text,"文字").toString());
+
+    qDebug()<<"update alignCenter : "<<m_data.value(sCentKey).toInt();
+    if(m_data.value(Label::alignCenter).toInt())
+        ui->label->setAlignment(Qt::AlignCenter);
+    else
+        ui->label->setAlignment(Qt::AlignLeading);
 
 
 }

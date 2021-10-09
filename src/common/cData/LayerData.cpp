@@ -3,7 +3,6 @@
 
 
 
-//---------
 LayerData::LayerData(QObject *parent):QObject(parent)
 {
 
