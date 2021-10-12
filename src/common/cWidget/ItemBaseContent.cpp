@@ -22,7 +22,10 @@ ItemBaseContent::ItemBaseContent(QWidget *parent) :
 
     m_touch = new ItemEditTouch(this);
 
+
     m_touch->setObjectName("m_itemTouch_");
+
+
 
     connect(m_touch,&ItemEditTouch::sendMouse,this,&ItemBaseContent::slotMouseEvent);
 
@@ -82,7 +85,7 @@ void ItemBaseContent::setData(ObjData *obj, float diffSize)
 
     if(m_sType == E_TEXT)
     {
-
+        qDebug()<<"Text type";
         itemLabel = new ItemLabel(m_wBg);
     }
 
@@ -165,6 +168,8 @@ void ItemBaseContent::setEdit(bool b)
     m_touch->setVisible(b);
 
     m_click->setVisible(!b);
+
+
 }
 
 void ItemBaseContent::updateItem()

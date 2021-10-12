@@ -50,6 +50,9 @@ public:
 
         m_wBg->setObjectName("m_touch_wBg");
 
+        m_wBg->setStyleSheet("background-color:rgba(255,255,0,0)");
+
+
         m_lb = new QLabel(m_wBg);
 
         QFont f;

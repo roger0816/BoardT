@@ -132,7 +132,6 @@ void ObjData::readData(QString sPath)
         {
             m_data[key] = conf.value(key);
 
-
         }
 
 

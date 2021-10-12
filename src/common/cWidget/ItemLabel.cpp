@@ -89,7 +89,7 @@ void ItemLabel::setLbStyle(QString sTxtColorKey, QString sBgColorKey, QString sI
 
 
     ui->label->setText(m_data.value(Label::text,"文字").toString());
-
+    qDebug()<<m_data.value(Label::text,"文字").toString();
     qDebug()<<"update alignCenter : "<<m_data.value(sCentKey).toInt();
     if(m_data.value(Label::alignCenter).toInt())
         ui->label->setAlignment(Qt::AlignCenter);

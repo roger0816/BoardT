@@ -462,7 +462,7 @@ void DisplayWidget::addItem(int iIdx)
 
     item->setData(layerData->m_listData.last(),m_fDiff);
 
-    item->m_wBg->setStyleSheet("background-color:green;");
+   // item->m_wBg->setStyleSheet("background-color:green;");
 
     item->setEdit(true);
 

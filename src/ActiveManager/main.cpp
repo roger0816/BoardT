@@ -42,31 +42,31 @@ int main(int argc, char *argv[])
 
 //   qDebug()<<QDateTime::currentDateTime().toString("dddd");
 
-    QFile qss(":/style.qss");
+//    QFile qss(":/style.qss");
 
-           if( qss.open(QFile::ReadOnly))
+//           if( qss.open(QFile::ReadOnly))
 
-           {
+//           {
 
-               qDebug("open success");
+//               qDebug("open success");
 
-               QString style = QLatin1String(qss.readAll());
+//               QString style = QLatin1String(qss.readAll());
 
-               a.setStyleSheet(style);
+//               a.setStyleSheet(style);
 
-               qss.close();
+//               qss.close();
 
 
 
-           }
+//           }
 
-           else
+//           else
 
-           {
+//           {
 
-              qDebug("Open failed");
+//              qDebug("Open failed");
 
-     }
+//     }
 
     Widget w;
 
