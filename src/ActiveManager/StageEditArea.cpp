@@ -10,6 +10,22 @@ StageEditArea::StageEditArea(QWidget *parent) :
 
     connect(ui->wLayerSelector,&LayerSelector::sendSelectLayer,this,&StageEditArea::slotSelector);
 
+
+    connect(ui->wDisplay,&DisplayWidget::changeTarget,ui->wStyle,&LayerEditor::setTarget);
+
+    connect(ui->wDisplay,&DisplayWidget::changeTarget,ui->wAction,&LayerAction::setTarget);
+
+    connect(ui->wStyle,&LayerEditor::callUpdate,ui->wDisplay,&DisplayWidget::refreshItem);
+
+    connect(ui->wStyle,&LayerEditor::callRaise,ui->wDisplay,&DisplayWidget::raiseItem);
+
+    connect(ui->wStyle,&LayerEditor::callRename,ui->wDisplay,&DisplayWidget::renameItem);
+
+    connect(ui->wStyle,&LayerEditor::callDelete,ui->wDisplay,&DisplayWidget::deleteItem);
+
+    connect(ui->wAdd,&LayerAddContent::btnAddClicked,ui->wDisplay,&DisplayWidget::addItem);
+
+
 }
 
 StageEditArea::~StageEditArea()
@@ -233,3 +249,4 @@ void StageEditArea::slotSelector(QString sName)
 
     ui->wDisplay->setEdit(true);
 }
+

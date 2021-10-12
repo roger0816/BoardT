@@ -78,7 +78,7 @@ private:
 
     QButtonGroup m_listButtonStack;
 
-    void rename(QString sOld,QString sNew);
+ //   void rename(QString sOld,QString sNew);
 
     void StageEditback();
  //  void refreshTimeSchedule();

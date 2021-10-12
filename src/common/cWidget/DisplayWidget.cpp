@@ -280,6 +280,7 @@ void DisplayWidget::raiseItem(QString sPath)
 
 void DisplayWidget::renameItem(QString sOldPath, QString sNewPath)
 {
+    CDATA.getObj(sOldPath)->m_sWaitRename = sOldPath;
 
     foreach(ItemBaseContent *item ,m_listItem)
     {
@@ -356,6 +357,7 @@ void DisplayWidget::addItem(int iIdx)
 
     if(iIdx == ADD_BASIC_PIC)
     {
+
         obj->m_sType = E_PIC;
 
         sTmp = "PIC_%1";
@@ -401,6 +403,8 @@ void DisplayWidget::addItem(int iIdx)
     }
     else if(iIdx == ADD_BASIC_TEXT)
     {
+
+            qDebug()<<"TEXT ";
         obj->m_sType = E_TEXT;
 
         sTmp = "TEXT_%1";

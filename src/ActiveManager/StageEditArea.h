@@ -36,6 +36,8 @@ private slots:
 
     void slotSelector(QString sName);
 
+
+
 private:
     Ui::StageEditArea *ui;
 

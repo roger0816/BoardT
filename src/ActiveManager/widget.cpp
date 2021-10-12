@@ -28,25 +28,23 @@ Widget::Widget(QWidget *parent)
     CDATA;
 
 
-    connect(ui->wLayerSelector,&LayerSelector::sendSelectLayer,this,&Widget::slotSelector);
+//    connect(ui->wLayerSelector,&LayerSelector::sendSelectLayer,this,&Widget::slotSelector);
 
-    connect(ui->wLayerSelector,&LayerSelector::sendSelectLayer,ui->pageSchedule,&LayerSchedule::slotSelector);
+//    connect(ui->wLayerSelector,&LayerSelector::sendSelectLayer,ui->pageSchedule,&LayerSchedule::slotSelector);
 
-    connect(ui->wDisplay,&DisplayWidget::changeTarget,ui->wStyle,&LayerEditor::setTarget);
+//    connect(ui->wDisplay,&DisplayWidget::changeTarget,ui->wStyle,&LayerEditor::setTarget);
 
-    connect(ui->wDisplay,&DisplayWidget::changeTarget,ui->wAction,&LayerAction::setTarget);
+//    connect(ui->wDisplay,&DisplayWidget::changeTarget,ui->wAction,&LayerAction::setTarget);
 
-    connect(ui->wStyle,&LayerEditor::callUpdate,ui->wDisplay,&DisplayWidget::refreshItem);
+//    connect(ui->wStyle,&LayerEditor::callUpdate,ui->wDisplay,&DisplayWidget::refreshItem);
 
-    connect(ui->wStyle,&LayerEditor::callRaise,ui->wDisplay,&DisplayWidget::raiseItem);
+//    connect(ui->wStyle,&LayerEditor::callRaise,ui->wDisplay,&DisplayWidget::raiseItem);
 
-    connect(ui->wStyle,&LayerEditor::callRename,this,&Widget::rename);
+//    connect(ui->wStyle,&LayerEditor::callRename,this,&Widget::rename);
 
+//    connect(ui->wStyle,&LayerEditor::callDelete,ui->wDisplay,&DisplayWidget::deleteItem);
 
-
-    connect(ui->wStyle,&LayerEditor::callDelete,ui->wDisplay,&DisplayWidget::deleteItem);
-
-    connect(ui->wAdd,&LayerAddContent::btnAddClicked,ui->wDisplay,&DisplayWidget::addItem);
+//    connect(ui->wAdd,&LayerAddContent::btnAddClicked,ui->wDisplay,&DisplayWidget::addItem);
 
     ui->wStackWork->setCurrentWidget(ui->page0);
 
@@ -112,33 +110,33 @@ void Widget::slotSelector(QString sName)
 
 
 
-    if(ui->btnEdit->isChecked())
-    {
-        ui->wStackWork->setCurrentWidget(ui->pageWork);
+//    if(ui->btnEdit->isChecked())
+//    {
+//        ui->wStackWork->setCurrentWidget(ui->pageWork);
 
-        ui->wDisplay->setLayer(CDATA.m_sPath+"/"+sName);
+//        ui->wDisplay->setLayer(CDATA.m_sPath+"/"+sName);
 
-        ui->wDisplay->setEdit(true);
+//        ui->wDisplay->setEdit(true);
 
-    }
-    else if(ui->btnSetting->isChecked())
-    {
-        ui->wStackWork->setCurrentWidget(ui->pageSetting);
-    }
+//    }
+//    else if(ui->btnSetting->isChecked())
+//    {
+//        ui->wStackWork->setCurrentWidget(ui->pageSetting);
+//    }
 
-    else if(ui->btnSchedule->isChecked())
-    {
-        ui->wStackWork->setCurrentWidget(ui->pageSchedule);
-    }
+//    else if(ui->btnSchedule->isChecked())
+//    {
+//        ui->wStackWork->setCurrentWidget(ui->pageSchedule);
+//    }
 
-    else if(ui->btnTimeSchedule->isChecked())
-    {
-        ui->wStackWork->setCurrentWidget(ui->pageTimeSchedule);
+//    else if(ui->btnTimeSchedule->isChecked())
+//    {
+//        ui->wStackWork->setCurrentWidget(ui->pageTimeSchedule);
 
 
-        ui->pageTimeSchedule->setTimeData(sName);
+//        ui->pageTimeSchedule->setTimeData(sName);
 
-    }
+//    }
 
 
 }
@@ -241,38 +239,32 @@ void Widget::on_btnUpload_clicked()
 
 void Widget::upload(QString sIp, QString sTarget, QString sPath)
 {
-    // QString sCmd = QApplication::applicationDirPath()+"/pscp.exe -P 22 -pw \"pi\" -r "+m_sPath+" pi@"+m_sPreIp+":/home/pi/work/bin/";
+//    //putty.exe -ssh -l pi -pw pi -P 22 192.168.0.157 -m mvModel0.txt
+//    QString sCmd =QApplication::applicationDirPath()+"/putty.exe -ssh -l pi -pw pi -P 22 "+sIp+" -m mvModel0.txt";
 
-    //putty.exe -ssh -l pi -pw pi -P 22 192.168.0.157 -m mvModel0.txt
-    QString sCmd =QApplication::applicationDirPath()+"/putty.exe -ssh -l pi -pw pi -P 22 "+sIp+" -m mvModel0.txt";
+//    system(sCmd.toStdString().c_str());
 
-    system(sCmd.toStdString().c_str());
+//    sCmd = QApplication::applicationDirPath()+"/pscp.exe -P 22 -pw \"pi\" %2 pi@%1:%3";
 
-    sCmd = QApplication::applicationDirPath()+"/pscp.exe -P 22 -pw \"pi\" %2 pi@%1:%3";
+//    sCmd = sCmd.arg(sIp).arg(sTarget).arg(sPath);
 
-    sCmd = sCmd.arg(sIp).arg(sTarget).arg(sPath);
+//    qDebug()<<"scmd : "<<sCmd;
 
-    qDebug()<<"scmd : "<<sCmd;
+//    system(sCmd.toStdString().c_str());
 
-    system(sCmd.toStdString().c_str());
-
-
-    //    QProcess p;
-
-    //    p.start(sCmd.toStdString().c_str());
-
-    //    p.waitForFinished();
-}
-
-void Widget::rename(QString sOld, QString sNew)
-{
-
-    CDATA.getObj(sOld)->m_sWaitRename = sOld;
-
-    ui->wDisplay->renameItem(sOld,sNew);
 
 
 }
+
+//void Widget::rename(QString sOld, QString sNew)
+//{
+
+//    CDATA.getObj(sOld)->m_sWaitRename = sOld;
+
+//    ui->wDisplay->renameItem(sOld,sNew);
+
+
+//}
 
 
 void Widget::StageEditback()
