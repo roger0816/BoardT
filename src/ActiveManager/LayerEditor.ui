@@ -236,8 +236,15 @@ QPushButton:pressed {
           <widget class="QLabel" name="label_7">
            <property name="font">
             <font>
-             <pointsize>16</pointsize>
+             <family>Agency FB</family>
+             <pointsize>-1</pointsize>
+             <weight>50</weight>
+             <italic>false</italic>
+             <bold>false</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font: 16px &quot;Agency FB&quot;;</string>
            </property>
            <property name="text">
             <string>元件名稱</string>
@@ -248,8 +255,16 @@ QPushButton:pressed {
           <widget class="QLabel" name="label_5">
            <property name="font">
             <font>
-             <pointsize>16</pointsize>
+             <family>Agency FB</family>
+             <pointsize>-1</pointsize>
+             <weight>50</weight>
+             <italic>false</italic>
+             <bold>false</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font: 16px &quot;Agency FB&quot;;
+min-height: 1.2em</string>
            </property>
            <property name="text">
             <string>刪除元件</string>
@@ -280,7 +295,7 @@ QPushButton:pressed {
          </font>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <widget class="EditLabel" name="pageText">
          <property name="font">

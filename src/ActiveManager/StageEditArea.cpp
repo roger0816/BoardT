@@ -127,7 +127,7 @@ void StageEditArea::refreshSelector(bool bToDef)
 void StageEditArea::showEvent(QShowEvent *event)
 {
     qDebug()<<"show event : StageEditArea";
-
+    ui->btnBack->setMaximumWidth(54);
     refreshSelector();
 }
 

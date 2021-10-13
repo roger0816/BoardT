@@ -74,7 +74,7 @@ QPixmap DisplayWidget::setLayer(QString sPath, int iVideoStatus)
 
         item->setData(listData[i],m_fDiff);
 
-        item->m_wBg->setStyleSheet("background-color:green;");
+       // item->m_wBg->setStyleSheet("background-color:green;");
 
         item->setEdit(false);
 
@@ -240,16 +240,17 @@ void DisplayWidget::slotFocus()
 
 void DisplayWidget::slotUpdate()
 {
+    qDebug()<<"DisplayWidget:slotUpdate";
     ItemBaseContent *target = dynamic_cast<ItemBaseContent*>(sender());
 
-    qDebug()<<"slot Update ";
+
     emit changeTarget(target->m_sPath);
 }
 
 void DisplayWidget::refreshItem()
 {
+    qDebug()<<"DisplayWidget:refreshItem";
 
-    qDebug()<<"base content count : "<<m_listItem.count();
     foreach(ItemBaseContent *item ,m_listItem)
     {
         item->updateItem();
@@ -271,6 +272,7 @@ void DisplayWidget::refreshItem()
 
 void DisplayWidget::raiseItem(QString sPath)
 {
+    qDebug()<<"DisplayWidget:raiseItem";
     foreach(ItemBaseContent *item ,m_listItem)
     {
         if(item->m_sPath == sPath)
@@ -342,7 +344,7 @@ void DisplayWidget::deleteItem(QString sPath)
 
 void DisplayWidget::addItem(int iIdx)
 {
-
+    qDebug()<<"DisplayWidget:addItem";
     LayerData *layerData = CDATA.m_dData[m_layerName] ;
 
     if(layerData == nullptr)
@@ -390,7 +392,7 @@ void DisplayWidget::addItem(int iIdx)
 
         obj->m_data[Marquee::speed]=3;
 
-        obj->m_data[Label::bgColor] = QColor(255,255,255,0).name(QColor::HexArgb);
+       // obj->m_data[Label::bgColor] = QColor(255,255,255,0).name(QColor::HexArgb);
 
         sTmp = "MARQUEE%1";
     }

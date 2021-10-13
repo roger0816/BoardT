@@ -7,7 +7,6 @@ ItemMarCon::ItemMarCon(QWidget *parent) : ItemBaseObj(parent)
     m_wBg->setObjectName("ItemMar_wBg");
 
 
-    //    m_wBg->setStyleSheet("");
 
     m_lb = new QLabel(m_wBg);
 
@@ -23,6 +22,7 @@ ItemMarCon::ItemMarCon(QWidget *parent) : ItemBaseObj(parent)
     m_lb->adjustSize();
 
     startTimer(100);
+
 }
 
 void ItemMarCon::timerEvent(QTimerEvent *)
@@ -47,12 +47,14 @@ void ItemMarCon::timerEvent(QTimerEvent *)
     if(!bHasWord)
         return;
 
+
     int iX = m_lb->x();
 
     if(iX>= -(m_lb->width()+20))
     {
         m_lb->move(iX-(3*m_iSpeed),0);
 
+        m_lb->raise();
         // m_lb->move(iX-30,0);
 
     }
@@ -102,7 +104,7 @@ void ItemMarCon::updateItem()
 
     QString sBg = getStyleSheetRgba(m_data.value(Label::bgColor,"#ffffffff").toString());
 
-    QString sTxt = getStyleSheetRgba(m_data.value(Label::txtColor,"#ff000000").toString());
+    QString sTxt = getStyleSheetRgba(m_data.value(Label::txtColor,"#000000ff").toString());
 
     QString sImagePath = m_data.value(Label::imagePath,"").toString().trimmed();
 
@@ -122,6 +124,7 @@ void ItemMarCon::updateItem()
 
     m_lb->setStyleSheet("background-color:rgba(0,0,0,0);color:"+sTxt);
 
+ //   m_lb->setStyleSheet("background-color:rgba(0,0,0,0);color:red");
 
 
 

@@ -7,66 +7,63 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-//    QLocale locale = QLocale::Chinese;//指定英文显示
+    //    QLocale locale = QLocale::Chinese;//指定英文显示
 
-//    QString st = QDateTime::currentDateTime().toString("yyyyMMdd,hh:mm:ss,dddd");
+    //    QString st = QDateTime::currentDateTime().toString("yyyyMMdd,hh:mm:ss,dddd");
 
-//    qDebug()<<st;
+    //    qDebug()<<st;
 
-//    QDateTime aa;
+    //    QDateTime aa;
 
-//    aa = QDateTime::fromString("20210515,15:34:25,星期六","yyyyMMdd,hh:mm:ss,dddd");
-
-
-//    aa.setDate(QDate::fromString("1"))
-
-//    for( int i =0; i<7;i++)
-//    {
-//        qDebug()<<aa.addDays(i).toString("dddd");
-
-//        qDebug()<<aa.addDays(i).date().dayOfWeek();
-
-//    }
+    //    aa = QDateTime::fromString("20210515,15:34:25,星期六","yyyyMMdd,hh:mm:ss,dddd");
 
 
+    //    aa.setDate(QDate::fromString("1"))
 
-//    return 0;
+    //    for( int i =0; i<7;i++)
+    //    {
+    //        qDebug()<<aa.addDays(i).toString("dddd");
+
+    //        qDebug()<<aa.addDays(i).date().dayOfWeek();
+
+    //    }
 
 
 
-//    QLocale locale = QLocale::Chinese;//指定中文显示
-//    //QLocale locale = QLocale::English;//指定英文显示
-//    //QLocale locale = QLocale::Japanese;//指定日文显示
-
-//   qDebug()<<"AA :"<< QString(locale.toString(QDateTime::currentDateTime(),QString("dddd")));//这样获得的星期为指定的语言格式下的。此处为星期一 - 星期日
-
-//   qDebug()<<QDateTime::currentDateTime().toString("dddd");
-
-//    QFile qss(":/style.qss");
-
-//           if( qss.open(QFile::ReadOnly))
-
-//           {
-
-//               qDebug("open success");
-
-//               QString style = QLatin1String(qss.readAll());
-
-//               a.setStyleSheet(style);
-
-//               qss.close();
+    //    return 0;
 
 
 
-//           }
+    //    QLocale locale = QLocale::Chinese;//指定中文显示
+    //    //QLocale locale = QLocale::English;//指定英文显示
+    //    //QLocale locale = QLocale::Japanese;//指定日文显示
 
-//           else
+    //   qDebug()<<"AA :"<< QString(locale.toString(QDateTime::currentDateTime(),QString("dddd")));//这样获得的星期为指定的语言格式下的。此处为星期一 - 星期日
 
-//           {
+    //   qDebug()<<QDateTime::currentDateTime().toString("dddd");
 
-//              qDebug("Open failed");
+    QFile qss(":/style.qss");
 
-//     }
+    if( qss.open(QFile::ReadOnly))
+
+    {
+
+        qDebug("open success");
+
+        QString style = QLatin1String(qss.readAll());
+
+        a.setStyleSheet(style);
+
+        qss.close();
+
+    }
+
+    else
+    {
+
+        qDebug("Open failed");
+
+    }
 
     Widget w;
 
@@ -77,29 +74,29 @@ int main(int argc, char *argv[])
 
 
 
-//    QString s="AAAAAAAAAAA";
+    //    QString s="AAAAAAAAAAA";
 
-//    for(int i=0;i<10;i++)
-//    {
+    //    for(int i=0;i<10;i++)
+    //    {
 
-//        s+="AA";
-//        QLabel *lb=new QLabel;
+    //        s+="AA";
+    //        QLabel *lb=new QLabel;
 
-//        lb->move(100,100*i);
-//    lb->setText(s);
+    //        lb->move(100,100*i);
+    //    lb->setText(s);
 
-//    QSizePolicy sizes(QSizePolicy::Fixed,QSizePolicy::Fixed);
+    //    QSizePolicy sizes(QSizePolicy::Fixed,QSizePolicy::Fixed);
 
-//    lb->adjustSize();
+    //    lb->adjustSize();
 
-//    lb->setSizePolicy(sizes);
+    //    lb->setSizePolicy(sizes);
 
-//    lb->show();
+    //    lb->show();
 
-//    qDebug()<<lb->size();
+    //    qDebug()<<lb->size();
 
 
-//    }
+    //    }
 
     //w1.show();
     return a.exec();

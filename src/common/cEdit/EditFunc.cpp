@@ -74,11 +74,10 @@ bool EditFunc::setColor(QColor current, QVariant &var)
 
     QColor color = dialog.getColor(current,nullptr,"",QColorDialog::ShowAlphaChannel);
 
-    qDebug()<<"SS0 : "<<color;
 
     var = QVariant(color.name()+QString("%1").arg(color.alpha(), 2, 16, QLatin1Char('0')));
 
-    qDebug()<<"SS1 : "<<var;
+
 
     //     var = QVariant("#"+QString::number(color.red(),16)
     //                +QString::number(color.green(),16)

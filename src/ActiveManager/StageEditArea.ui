@@ -15,46 +15,6 @@
   </property>
   <property name="styleSheet">
    <string notr="true">
-QPushButton
-    {    
-     background-color: rgb(247,247,247); 
-        border-style: outset; 
-  border-radius: 10px; 
-    padding:0px;     
-        border-width: 2px; 
-      border-color: #99b3d3; 
-	font: 75 12pt &quot;Agency FB&quot;;
-color:rgb(77,77,77);
-
-     }
-
-    QPushButton:hover
-    {    
-	font: 75 14pt &quot;Agency FB&quot;;
-      border-color: gray; 
-     border-width: 3px; 
-
-     }
-
-    QPushButton:pressed:checked
-    {    
-		font: 75 16pt &quot;Agency FB&quot;;
-      border-color: black; 
-     border-width: 3px; 
-
-     }
-
-    QPushButton:checked
-    {    
-		font: 75 16pt &quot;Agency FB&quot;;
-      border-color: black; 
-     border-width: 3px; 
-
-
-     }
-
-
-
 </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -179,7 +139,7 @@ color:rgb(77,77,77);
                       <font>
                        <family>Agency FB</family>
                        <pointsize>12</pointsize>
-                       <weight>9</weight>
+                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -195,7 +155,7 @@ color:rgb(77,77,77);
                       <font>
                        <family>Agency FB</family>
                        <pointsize>12</pointsize>
-                       <weight>9</weight>
+                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -245,11 +205,16 @@ color:rgb(77,77,77);
                      </property>
                      <property name="font">
                       <font>
-                       <pointsize>22</pointsize>
+                       <family>Agency FB</family>
+                       <pointsize>-1</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
                       </font>
                      </property>
                      <property name="styleSheet">
-                      <string notr="true">background-color: rgba(195, 75, 0,0);</string>
+                      <string notr="true">background-color: rgba(195, 75, 0,0);
+font: 16px &quot;Agency FB&quot;;</string>
                      </property>
                      <property name="currentIndex">
                       <number>0</number>
@@ -340,8 +305,7 @@ color:rgb(77,77,77);
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">
-</string>
+         <string notr="true"/>
         </property>
         <layout class="QGridLayout" name="gridLayout_2">
          <item row="0" column="0">
@@ -354,7 +318,7 @@ color:rgb(77,77,77);
            </property>
            <property name="maximumSize">
             <size>
-             <width>60</width>
+             <width>54</width>
              <height>16777215</height>
             </size>
            </property>
@@ -553,7 +517,7 @@ color:rgb(77,77,77);
             <font>
              <family>Agency FB</family>
              <pointsize>12</pointsize>
-             <weight>9</weight>
+             <weight>50</weight>
              <italic>false</italic>
              <bold>false</bold>
             </font>
@@ -587,7 +551,7 @@ color:rgb(77,77,77);
             <font>
              <family>Agency FB</family>
              <pointsize>12</pointsize>
-             <weight>9</weight>
+             <weight>50</weight>
              <italic>false</italic>
              <bold>false</bold>
             </font>

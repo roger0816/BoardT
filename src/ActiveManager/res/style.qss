@@ -14,15 +14,16 @@ QPushButton
     padding:0px;
         border-width: 2px;
       border-color: #99b3d3;
-        font: 75 12pt "Agency FB";
+        font: 75 12px "Agency FB";
         min-height:30px;
+        min-width:72px;
 color:rgb(77,77,77);
 
      }
 
     QPushButton:hover
     {
-        font: 75 14pt "Agency FB";
+        font: 75 14px "Agency FB";
       border-color: gray;
      border-width: 3px;
 
@@ -30,7 +31,7 @@ color:rgb(77,77,77);
 
     QPushButton:pressed
     {
-                font: 75 16pt "Agency FB";
+                font: 75 16px "Agency FB";
       border-color: black;
      border-width: 3px;
 
