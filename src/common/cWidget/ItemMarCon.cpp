@@ -139,6 +139,10 @@ void ItemMarCon::updateItem()
 
     f.setPixelSize(f.pixelSize()*m_diffSize);
 
+#ifndef Q_OS_WINDOWS
+    f.setPointSize(f.pointSize()*2.2);
+#endif
+
     m_lb->setFont(f);
 
     qDebug()<<"update item : mar data";

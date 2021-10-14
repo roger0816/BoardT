@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 
         QString style = QLatin1String(qss.readAll());
 
-    //    a.setStyleSheet(style);
+        a.setStyleSheet(style);
 
         qss.close();
 
