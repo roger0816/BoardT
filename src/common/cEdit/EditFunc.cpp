@@ -131,6 +131,8 @@ bool EditFunc::setFont(QFont &current)
 {
     bool   ok=false;
     QFont font=QFontDialog::getFont(&ok,current);
+
+ //   font.setPixelSize(font.pointSize()*2);
     if (ok)
     {
         //  btn->setFont(font);
@@ -144,6 +146,9 @@ bool EditFunc::setFont(QFont &current)
 
         current = font;
     }
+
+
+
 
     return ok;
 }
