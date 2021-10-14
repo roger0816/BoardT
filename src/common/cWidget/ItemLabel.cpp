@@ -83,7 +83,8 @@ void ItemLabel::setLbStyle(QString sTxtColorKey, QString sBgColorKey, QString sI
 
     f.fromString(sFont);
 
-    // f.setPixelSize(f.pixelSize()*m_diffSize);
+
+    f.setPixelSize(f.pixelSize()*2);
 
     ui->label->setFont(f);
 
