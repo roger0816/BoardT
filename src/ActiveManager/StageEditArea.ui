@@ -205,7 +205,6 @@
                      </property>
                      <property name="font">
                       <font>
-                       <family>Agency FB</family>
                        <pointsize>-1</pointsize>
                        <weight>50</weight>
                        <italic>false</italic>
@@ -214,7 +213,7 @@
                      </property>
                      <property name="styleSheet">
                       <string notr="true">background-color: rgba(195, 75, 0,0);
-font: 16px &quot;Agency FB&quot;;</string>
+font: 20px ;</string>
                      </property>
                      <property name="currentIndex">
                       <number>0</number>

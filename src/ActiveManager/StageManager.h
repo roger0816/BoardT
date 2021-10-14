@@ -31,6 +31,10 @@ private slots:
 
     void on_btnEdit_clicked();
 
+    void slotBtnUpload();
+
+    void slotRadioClicked(int);
+
 private:
     Ui::StageManager *ui;
 
@@ -39,6 +43,8 @@ private:
     QStringList m_listKey;
 
     QGridLayout *m_lay;
+
+    QString m_sPreIp;
 
 signals:
     void sendSelectModel(QString sPath);

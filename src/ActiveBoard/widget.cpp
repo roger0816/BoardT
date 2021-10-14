@@ -235,6 +235,58 @@ void Widget::showEvent(QShowEvent *)
 {
     if(m_wDisplay!=nullptr)
         m_wDisplay->resize(size());
+
+    checkIpAndName();
+}
+
+void Widget::checkIpAndName()
+{
+
+    m_sIp="";
+
+    QList<QHostAddress> list = QNetworkInterface::allAddresses();
+
+    for(int i=0;i<list.length();i++)
+    {
+        if(list.at(i) != QHostAddress::LocalHost && list.at(i).toIPv4Address())
+        {
+            m_sIp = list.at(i).toString();
+            break;
+        }
+    }
+
+    if(m_sIp=="")
+    {
+        m_sIp = QHostAddress(QHostAddress::LocalHost).toString();
+    }
+
+    ui->lbIp->setText(m_sIp);
+
+    ui->lbIp2->setText(m_sIp);
+
+
+
+#ifdef Q_OS_WINDOWS
+    m_sDeviceName="Test";
+#else
+    QString sPath = QApplication::applicationDirPath()+"/../../deviceInfo";
+
+    QFile file(sPath);
+
+    if(file.open(QIODevice::ReadWrite))
+    {
+        m_sDeviceName = QString(file.readAll()).split("\n").first().trimmed();
+
+        file.close();
+    }
+
+#endif
+
+    ui->lbName->setText(m_sDeviceName);
+
+    ui->lbName2->setText(m_sDeviceName);
+
+
 }
 
 void Widget::mousePressEvent(QMouseEvent *e)
@@ -292,7 +344,7 @@ void Widget::slotTimer()
         {
             ui->lbUpdateData->show();
 
-           // m_timerWaitLogin.stop();
+            // m_timerWaitLogin.stop();
 
             on_btnUpdateData_clicked();
 
@@ -351,7 +403,7 @@ void Widget::slotWaitLogin()
             {
                 ui->lbUpdateData->show();
 
-               // m_timerWaitLogin.stop();
+                // m_timerWaitLogin.stop();
 
                 on_btnUpdateData_clicked();
 
@@ -521,23 +573,23 @@ void Widget::on_btnUpdateData_clicked()
     system(sCmd.toStdString().c_str());
 
 
-//    qDebug()<<" update Path : "<<sUpdatePath;
-//    QString sCurrentPath = QApplication::applicationDirPath()+"/data/";
+    //    qDebug()<<" update Path : "<<sUpdatePath;
+    //    QString sCurrentPath = QApplication::applicationDirPath()+"/data/";
 
-//    QString rmCmd = "rm -rf "+sCurrentPath+"model0BK";
+    //    QString rmCmd = "rm -rf "+sCurrentPath+"model0BK";
 
-//    system(rmCmd.toStdString().c_str());
+    //    system(rmCmd.toStdString().c_str());
 
-//    QString sBkCmd = "mv "+sCurrentPath+"model0 "+sCurrentPath+"model0BK";
+    //    QString sBkCmd = "mv "+sCurrentPath+"model0 "+sCurrentPath+"model0BK";
 
-//    system(sBkCmd.toStdString().c_str());
+    //    system(sBkCmd.toStdString().c_str());
 
-//    QString sCopy = "cp -r "+sUpdatePath+" "+sCurrentPath;
+    //    QString sCopy = "cp -r "+sUpdatePath+" "+sCurrentPath;
 
 
-//    system(sCopy.toStdString().c_str());
+    //    system(sCopy.toStdString().c_str());
 
-//    launch();
+    //    launch();
 
 
 }

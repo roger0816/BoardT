@@ -43,7 +43,7 @@ private:
 
     void refreshSelector(bool bToDef = false);
 
-    void showEvent(QShowEvent *event) override;
+    void showEvent(QShowEvent *) override;
 
     QString m_sPreIp;
 

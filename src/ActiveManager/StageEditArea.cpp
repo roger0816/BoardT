@@ -124,7 +124,7 @@ void StageEditArea::refreshSelector(bool bToDef)
     }
 }
 
-void StageEditArea::showEvent(QShowEvent *event)
+void StageEditArea::showEvent(QShowEvent *)
 {
     qDebug()<<"show event : StageEditArea";
     ui->btnBack->setMaximumWidth(54);
@@ -238,7 +238,17 @@ void StageEditArea::on_btnUpload_clicked()
 
 void StageEditArea::on_btnView_clicked()
 {
+    QString sApp = QApplication::applicationDirPath()+"/ActiveBoard.exe ";
 
+    // QString sApp = QApplication::applicationDirPath()+"/ActiveTools.exe change ";
+    //  system(sApp.toStdString().c_str());
+
+
+    QProcess p;
+
+    p.setWorkingDirectory(QApplication::applicationDirPath());
+
+    p.startDetached(sApp);
 }
 
 void StageEditArea::slotSelector(QString sName)

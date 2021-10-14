@@ -14,6 +14,7 @@
 #include <QResizeEvent>
 #include <QShowEvent>
 #include <QMouseEvent>
+#include <QNetworkInterface>
 #include "DisplayWidget.h"
 #include "ItemVideoCon.h"
 static QString RDATA = "../bin/data";
@@ -44,6 +45,12 @@ public:
     QString m_sTestModel="";
 
     ItemVideoCon *m_video =nullptr;
+
+    void checkIpAndName();
+
+    QString m_sIp="";
+
+    QString m_sDeviceName="";
 
 private:
 
