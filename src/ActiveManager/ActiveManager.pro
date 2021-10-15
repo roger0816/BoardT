@@ -53,6 +53,7 @@ INCLUDEPATH+= uiItem
 
 SOURCES += \
     DialogMsg.cpp \
+    DialogSelectFile.cpp \
     DialogUploadUsb.cpp \
     LayerAction.cpp \
     LayerAddContent.cpp \
@@ -68,6 +69,7 @@ SOURCES += \
 
 HEADERS += \
     DialogMsg.h \
+    DialogSelectFile.h \
     DialogUploadUsb.h \
     LayerAction.h \
     LayerAddContent.h \
@@ -82,6 +84,7 @@ HEADERS += \
 
 FORMS += \
     DialogMsg.ui \
+    DialogSelectFile.ui \
     DialogUploadUsb.ui \
     LayerAction.ui \
     LayerAddContent.ui \

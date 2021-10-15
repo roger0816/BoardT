@@ -2,11 +2,32 @@
 #include "StageEdit.h"
 #include "DisplayWidget.h"
 #include <QApplication>
+#include "DialogSelectFile.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    QFile qss(":/style.qss");
+
+    if( qss.open(QFile::ReadOnly))
+    {
+        qDebug("open success");
+
+        QString style = QLatin1String(qss.readAll());
+
+        a.setStyleSheet(style);
+
+        qss.close();
+
+    }
+
+
+//    DialogSelectFile f;
+
+//    f.exec();
+
+//    return a.exec();
     //    QLocale locale = QLocale::Chinese;//指定英文显示
 
     //    QString st = QDateTime::currentDateTime().toString("yyyyMMdd,hh:mm:ss,dddd");
@@ -42,28 +63,6 @@ int main(int argc, char *argv[])
 
     //   qDebug()<<QDateTime::currentDateTime().toString("dddd");
 
-    QFile qss(":/style.qss");
-
-    if( qss.open(QFile::ReadOnly))
-
-    {
-
-        qDebug("open success");
-
-        QString style = QLatin1String(qss.readAll());
-
-        a.setStyleSheet(style);
-
-        qss.close();
-
-    }
-
-    else
-    {
-
-        qDebug("Open failed");
-
-    }
 
     Widget w;
 

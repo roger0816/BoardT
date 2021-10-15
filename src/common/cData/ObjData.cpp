@@ -71,7 +71,9 @@ void ObjData::readData(QString sPath)
         {
             QString sName = m_dataPic.listPicName.at(i);
 
-            QString sFilePath = m_sObjPath+"/"+sName;
+            QString sFilePath = m_sObjPath+"/"+sName.split("/").last();
+
+            qDebug()<<"pic file : "<<sFilePath;
 
             if(QFileInfo(sFilePath).exists())
             {

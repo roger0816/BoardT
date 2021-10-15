@@ -85,15 +85,15 @@ void LayerEditor::refresh()
         ui->stackType->setCurrentWidget(ui->pageText);
 
         ui->pageText->setTarget(m_obj);
-//        ui->txtText->setText(m_obj->m_data.value(Label::text).toString());
+        //        ui->txtText->setText(m_obj->m_data.value(Label::text).toString());
 
-//        ui->chCent->setChecked(m_obj->m_data.value(Label::alignCenter).toInt());
+        //        ui->chCent->setChecked(m_obj->m_data.value(Label::alignCenter).toInt());
 
-//        QColor colorBg = m_obj->m_data.value(Label::bgColor).toString();
+        //        QColor colorBg = m_obj->m_data.value(Label::bgColor).toString();
 
-//        QColor colorTxt = m_obj->m_data.value(Label::txtColor).toString();
+        //        QColor colorTxt = m_obj->m_data.value(Label::txtColor).toString();
 
-//        QString sStyle = "background-color:rgba(%1,%2,%3,%4);";
+        //        QString sStyle = "background-color:rgba(%1,%2,%3,%4);";
 
 
     }
@@ -124,20 +124,20 @@ void LayerEditor::refresh()
     {
         ui->stackType->setCurrentWidget(ui->pageMar);
 
-           ui->pageMar->setTarget(m_obj);
-//        QStringList list = m_obj->m_data.value(Marquee::listText).toStringList();
+        ui->pageMar->setTarget(m_obj);
+        //        QStringList list = m_obj->m_data.value(Marquee::listText).toStringList();
 
-//        for(int i=0;i<m_listMar.length() && i <list.length() ;i++)
-//        {
-//            m_listMar[i]->setText(list[i]);
-//        }
-
-
-//         ui->sbMar->setValue(m_obj->m_data.value(Marquee::speed).toInt());
+        //        for(int i=0;i<m_listMar.length() && i <list.length() ;i++)
+        //        {
+        //            m_listMar[i]->setText(list[i]);
+        //        }
 
 
+        //         ui->sbMar->setValue(m_obj->m_data.value(Marquee::speed).toInt());
 
-//        emit callUpdate();
+
+
+        //        emit callUpdate();
     }
 
     else if(m_obj->m_sType == E_QRCODE)
@@ -293,10 +293,12 @@ void LayerEditor::on_btnDelete_clicked()
 
 void LayerEditor::on_btnSetPic_clicked()
 {
-    QStringList listSelect =QFileDialog::getOpenFileNames(this,
-                                                          QStringLiteral("選取圖檔"),
-                                                          QApplication::applicationDirPath(),
-                                                          QStringLiteral("*.png"));
+    //    QStringList listSelect =QFileDialog::getOpenFileNames(this,
+    //                                                          QStringLiteral("選取圖檔"),
+    //                                                          QApplication::applicationDirPath(),
+    //                                                          QStringLiteral("*.png *jpg *jpeg"));
+
+
 
 
     bool bOk = false;
@@ -308,12 +310,22 @@ void LayerEditor::on_btnSetPic_clicked()
 
     QList<QPixmap> *list = &data->m_dataPic.listPic;
 
-    QStringList *listName = &data->m_dataPic.listPicName;
+
+    QStringList listSelect = data->m_dataPic.listPicName;
+
+
+    DialogSelectFile select;
+
+    select.setFileList(listSelect,data->m_sObjPath);
+
+    select.exec();
+
+    listSelect = select.fileList();
 
 
     list->clear();
 
-    listName->clear();
+    data->m_dataPic.listPicName.clear();
 
 
     for(int i=0;i<listSelect.length();i++)
@@ -323,7 +335,9 @@ void LayerEditor::on_btnSetPic_clicked()
 
         list->append(p);
 
-        listName->append(listSelect.at(i).split("/").last());
+        data->m_dataPic.listPicName.append(listSelect.at(i));
+
+     //   data->m_dataPic.listOriginPath.append(listSelect.at(i));
     }
 
 
@@ -390,7 +404,7 @@ void LayerEditor::on_btnMarBgColor_clicked()
 
 void LayerEditor::on_btnMarFont_clicked()
 {
-   // on_btnSelectFont_clicked();
+    // on_btnSelectFont_clicked();
 }
 
 void LayerEditor::on_txQr_textChanged(const QString &arg1)
@@ -402,7 +416,7 @@ void LayerEditor::on_txQr_textChanged(const QString &arg1)
 
 void LayerEditor::on_btnBgColor_2_clicked()
 {
-   // on_btnBgColor_clicked();
+    // on_btnBgColor_clicked();
 }
 
 void LayerEditor::on_btnTxtColor_2_clicked()
@@ -417,12 +431,12 @@ void LayerEditor::on_btnBgImage_2_clicked()
 
 void LayerEditor::on_btnClearBg_2_clicked()
 {
- //   on_btnClearBg_clicked();
+    //   on_btnClearBg_clicked();
 }
 
 void LayerEditor::on_btnSelectFont2_clicked()
 {
-   // on_btnSelectFont_clicked();
+    // on_btnSelectFont_clicked();
 }
 
 

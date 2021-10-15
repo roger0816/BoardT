@@ -10,6 +10,7 @@
 #include "DialogMsg.h"
 #include <QDebug>
 #include <QLineEdit>
+#include "DialogSelectFile.h"
 
 #include "Voj.h"
 

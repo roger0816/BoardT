@@ -157,6 +157,8 @@ struct DataPic
 
     QStringList listPicName;
 
+    QStringList listOriginPath;
+
 
 };
 
