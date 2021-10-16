@@ -65,15 +65,16 @@ void ObjData::readData(QString sPath)
         m_dataPic.listPicName =conf.value("Pic/list","").toStringList();
 
 
+
+
         QStringList listCantFind;
 
         for(int i=0;i<m_dataPic.listPicName.length();i++)
         {
-            QString sName = m_dataPic.listPicName.at(i);
+            QString sFilePath = m_dataPic.listPicName.at(i);
 
-            QString sFilePath = m_sObjPath+"/"+sName.split("/").last();
-
-            qDebug()<<"pic file : "<<sFilePath;
+            if(!QFileInfo(sFilePath).exists())
+                sFilePath = m_sObjPath+"/"+sFilePath.split("/").last();
 
             if(QFileInfo(sFilePath).exists())
             {
@@ -83,7 +84,7 @@ void ObjData::readData(QString sPath)
             }
             else
             {
-                listCantFind.append(sName);
+                listCantFind.append(m_dataPic.listPicName.at(i));
             }
         }
 
@@ -216,7 +217,7 @@ void ObjData::writeData()
         {
             QPixmap *p = & m_dataPic.listPic[i];
 
-            p->save(m_sObjPath+"/"+listName.at(i));
+            p->save(m_sObjPath+"/"+listName.at(i).split("/").last());
         }
 
     }

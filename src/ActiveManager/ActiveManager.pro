@@ -48,7 +48,8 @@ SOURCES += \
 }
 
 
-INCLUDEPATH+= uiItem
+INCLUDEPATH+= uiItem \
+              cEdit
 
 
 SOURCES += \
@@ -63,6 +64,11 @@ SOURCES += \
     LayerTimeSchedule.cpp \
     StageEditArea.cpp \
     StageManager.cpp \
+    cEdit/EditFunc.cpp \
+    cEdit/EditLabel.cpp \
+    cEdit/EditMar.cpp \
+    cEdit/EditPic.cpp \
+    cEdit/EditTxObj.cpp \
     main.cpp \
     uiItem/IconButton.cpp \
     widget.cpp
@@ -79,6 +85,11 @@ HEADERS += \
     LayerTimeSchedule.h \
     StageEditArea.h \
     StageManager.h \
+    cEdit/EditFunc.h \
+    cEdit/EditLabel.h \
+    cEdit/EditMar.h \
+    cEdit/EditPic.h \
+    cEdit/EditTxObj.h \
     uiItem/IconButton.h \
     widget.h
 
@@ -93,6 +104,10 @@ FORMS += \
     LayerTimeSchedule.ui \
     StageEditArea.ui \
     StageManager.ui \
+    cEdit/EditLabel.ui \
+    cEdit/EditMar.ui \
+    cEdit/EditPic.ui \
+    cEdit/EditTxObj.ui \
     uiItem/IconButton.ui \
     widget.ui
 

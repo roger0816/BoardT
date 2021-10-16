@@ -100,9 +100,11 @@ void LayerEditor::refresh()
     else if(m_obj->m_sType == E_PIC)
     {
 
+       ui->pagePic->setTarget(m_obj);
+
         ui->stackType->setCurrentWidget(ui->pagePic);
 
-        ui->sbPicSec->setValue(m_obj->m_dataPic.iSec);
+
 
     }
 
@@ -291,71 +293,8 @@ void LayerEditor::on_btnDelete_clicked()
 
 }
 
-void LayerEditor::on_btnSetPic_clicked()
-{
-    //    QStringList listSelect =QFileDialog::getOpenFileNames(this,
-    //                                                          QStringLiteral("選取圖檔"),
-    //                                                          QApplication::applicationDirPath(),
-    //                                                          QStringLiteral("*.png *jpg *jpeg"));
 
 
-
-
-    bool bOk = false;
-
-    ObjData *data = CDATA.getObj(m_sLayerName,m_sObjName,bOk);
-
-    if(!bOk)
-        return;
-
-    QList<QPixmap> *list = &data->m_dataPic.listPic;
-
-
-    QStringList listSelect = data->m_dataPic.listPicName;
-
-
-    DialogSelectFile select;
-
-    select.setFileList(listSelect,data->m_sObjPath);
-
-    select.exec();
-
-    listSelect = select.fileList();
-
-
-    list->clear();
-
-    data->m_dataPic.listPicName.clear();
-
-
-    for(int i=0;i<listSelect.length();i++)
-    {
-
-        QPixmap p(listSelect.at(i));
-
-        list->append(p);
-
-        data->m_dataPic.listPicName.append(listSelect.at(i));
-
-     //   data->m_dataPic.listOriginPath.append(listSelect.at(i));
-    }
-
-
-
-}
-
-void LayerEditor::on_sbPicSec_valueChanged(int )
-{
-    bool bOk = false;
-
-    ObjData *data = CDATA.getObj(m_sLayerName,m_sObjName,bOk);
-
-    if(!bOk)
-        return;
-
-    data->m_dataPic.iSec = ui->sbPicSec->value();
-
-}
 
 void LayerEditor::on_btnVideoSet_clicked()
 {
@@ -414,30 +353,6 @@ void LayerEditor::on_txQr_textChanged(const QString &arg1)
     emit callUpdate();
 }
 
-void LayerEditor::on_btnBgColor_2_clicked()
-{
-    // on_btnBgColor_clicked();
-}
-
-void LayerEditor::on_btnTxtColor_2_clicked()
-{
-    //on_btnTxtColor_clicked();
-}
-
-void LayerEditor::on_btnBgImage_2_clicked()
-{
-    //on_btnBgImage_clicked();
-}
-
-void LayerEditor::on_btnClearBg_2_clicked()
-{
-    //   on_btnClearBg_clicked();
-}
-
-void LayerEditor::on_btnSelectFont2_clicked()
-{
-    // on_btnSelectFont_clicked();
-}
 
 
 

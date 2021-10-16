@@ -50,9 +50,6 @@ private slots:
 
 
     //
-    void on_btnSetPic_clicked();
-
-    void on_sbPicSec_valueChanged(int);
 
     void on_btnVideoSet_clicked();
 
@@ -103,11 +100,7 @@ private slots:
     void on_btnMarBgColor_clicked();
     void on_btnMarFont_clicked();
     void on_txQr_textChanged(const QString &arg1);
-    void on_btnBgColor_2_clicked();
-    void on_btnTxtColor_2_clicked();
-    void on_btnBgImage_2_clicked();
-    void on_btnClearBg_2_clicked();
-    void on_btnSelectFont2_clicked();
+
 
     //tx value
 

@@ -1,5 +1,5 @@
 #include "widget.h"
-#include "StageEdit.h"
+
 #include "DisplayWidget.h"
 #include <QApplication>
 #include "DialogSelectFile.h"
