@@ -80,6 +80,8 @@ void LayerEditor::refresh()
     ui->sbH->setValue(m_obj->m_rect.height());
 
 
+
+
     if(m_obj->m_sType == E_TEXT || m_obj->m_sType == E_BUTTON)
     {
         ui->stackType->setCurrentWidget(ui->pageText);
