@@ -104,7 +104,7 @@ void EditBase::setEditFont(ObjData *obj, QString sDataKey, QPushButton *btn)
 
     iniFont.fromString(sFont);
 
-    setFont(iniFont);
+    setEditFont(iniFont);
 
     obj->m_data[sDataKey] = iniFont;
 
