@@ -12,7 +12,7 @@ StageManager::StageManager(QWidget *parent) :
     ui->btnDownload->setData(QStringList()<<":/button/folder-downloads-icon.png","下載專案");
     connect(ui->btnUpload,&IconButton::clicked,this,&StageManager::slotBtnUpload);
 
-    connect(&m_listBtn,&QButtonGroup::idClicked,this,&StageManager::slotRadioClicked);
+    connect(&m_listBtn,SIGNAL(buttonClicked(QAbstractButton *)),this,SLOT(slotRadioClicked(QAbstractButton *)));
 
     m_lay = new QGridLayout;
 
@@ -221,11 +221,19 @@ void StageManager::slotBtnUpload()
         }
 }
 
-void StageManager::slotRadioClicked(int)
+//void StageManager::slotRadioClicked(int)
+//{
+//    QString sPath = QApplication::applicationDirPath()+"/data/"+m_listKey.at(m_listBtn.checkedId());
+
+//    qDebug()<<"AAA "<<sPath;
+//    CDATA.readModel(sPath);
+
+//}
+
+void StageManager::slotRadioClicked(QAbstractButton *)
 {
     QString sPath = QApplication::applicationDirPath()+"/data/"+m_listKey.at(m_listBtn.checkedId());
 
     qDebug()<<"AAA "<<sPath;
     CDATA.readModel(sPath);
-
 }

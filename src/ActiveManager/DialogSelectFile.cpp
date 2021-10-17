@@ -45,6 +45,15 @@ DialogSelectFile::~DialogSelectFile()
     delete ui;
 }
 
+void DialogSelectFile::setType(bool bIsPic, QString sFilter)
+{
+    m_sFilter = sFilter;
+
+    m_bIsPic = bIsPic;
+
+    setPreview(m_bIsPic);
+}
+
 void DialogSelectFile::setFileList(QStringList list,QString sPath)
 {
 
@@ -119,9 +128,9 @@ void DialogSelectFile::on_btnAdd_clicked()
 
 
     QStringList listSelect =QFileDialog::getOpenFileNames(this,
-                                                          QStringLiteral("選取圖檔"),
+                                                          QStringLiteral("選擇檔案"),
                                                           QApplication::applicationDirPath()+"/../",
-                                                          QStringLiteral("*.png *jpg *jpeg"));
+                                                          m_sFilter);
 
 
 

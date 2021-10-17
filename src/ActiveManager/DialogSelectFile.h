@@ -20,6 +20,8 @@ public:
     explicit DialogSelectFile(QWidget *parent = nullptr);
     ~DialogSelectFile();
 
+    void setType(bool bIsPic,QString sFilter);
+
     void setFileList(QStringList list, QString sPath="");
 
     QStringList fileList();
@@ -46,6 +48,10 @@ private:
     bool m_bPreView = true;
 
     QStandardItemModel *m_model;
+
+    bool m_bIsPic = true;
+
+    QString m_sFilter = "*.png *jpg *jpeg";
 
     void refreshList();
 };

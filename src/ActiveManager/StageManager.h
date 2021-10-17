@@ -33,7 +33,10 @@ private slots:
 
     void slotBtnUpload();
 
-    void slotRadioClicked(int);
+ //   void slotRadioClicked(int);
+
+
+    void slotRadioClicked(QAbstractButton *);
 
 private:
     Ui::StageManager *ui;

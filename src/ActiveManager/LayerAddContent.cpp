@@ -38,8 +38,9 @@ LayerAddContent::LayerAddContent(QWidget *parent) :
     m_listBtn.append(ui->btnAddUrl);
     m_listBtn.append(ui->btnAddQr);
 
-    m_listBtn.append(ui->btnAddMedia);
     m_listBtn.append(ui->btnAddBtn);
+    m_listBtn.append(ui->btnAddMedia);
+
     m_listBtn.append(ui->btnAddPixBtn);
     m_listBtn.append(ui->btnAdd964);
     m_listBtn.append(ui->btnAddPaiter);
@@ -51,6 +52,14 @@ LayerAddContent::LayerAddContent(QWidget *parent) :
     {
         connect(btn,&QPushButton::clicked,this,&LayerAddContent::slotClicked);
     }
+
+    ui->btnAddMedia->hide();
+
+    ui->btnAddPaiter->hide();
+
+    ui->btnAddTicket->hide();
+
+    ui->btnAddOrder->hide();
 
 }
 

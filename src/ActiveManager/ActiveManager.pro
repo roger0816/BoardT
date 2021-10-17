@@ -69,6 +69,7 @@ SOURCES += \
     cEdit/EditMar.cpp \
     cEdit/EditPic.cpp \
     cEdit/EditTxObj.cpp \
+    cEdit/EditVideo.cpp \
     main.cpp \
     uiItem/IconButton.cpp \
     widget.cpp
@@ -90,6 +91,7 @@ HEADERS += \
     cEdit/EditMar.h \
     cEdit/EditPic.h \
     cEdit/EditTxObj.h \
+    cEdit/EditVideo.h \
     uiItem/IconButton.h \
     widget.h
 
@@ -108,6 +110,7 @@ FORMS += \
     cEdit/EditMar.ui \
     cEdit/EditPic.ui \
     cEdit/EditTxObj.ui \
+    cEdit/EditVideo.ui \
     uiItem/IconButton.ui \
     widget.ui
 
