@@ -45,6 +45,8 @@ void EditPic::readData()
 
 void EditPic::refreshTable()
 {
+    ui->tb->setRowCount(0);
+
     for(int i=0;i<m_obj->m_dataPic.listPicName.length();i++)
     {
         ui->tb->setRowCount(i+1);
