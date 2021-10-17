@@ -107,9 +107,9 @@ void ObjData::readData(QString sPath)
 
         foreach(QString sFilePath, list)
         {
-            qDebug()<<"read: "<<list ;
-            if(!QFileInfo(sFilePath).exists())
-                sFilePath = m_sObjPath+"/"+sFilePath.split("/").last();
+            //            qDebug()<<"read: "<<sFilePath ;
+            //            if(!QFileInfo(sFilePath).exists())
+            sFilePath = m_sObjPath+"/"+sFilePath.split("/").last();
             m_dataVideo.listName.append(sFilePath);
         }
 
@@ -232,16 +232,16 @@ void ObjData::writeData()
 
         for(int i=0;i<listName.length();i++)
         {
-//            QFile file(listName.at(i));
+            //            QFile file(listName.at(i));
 
-//            if(file.open(QIODevice::ReadOnly))
-//            {
-//                file.copy(m_sObjPath+"/"+listName.at(i).split("/").last());
+            //            if(file.open(QIODevice::ReadOnly))
+            //            {
+            //                file.copy(m_sObjPath+"/"+listName.at(i).split("/").last());
 
-//                file.close();
-//            }
+            //                file.close();
+            //            }
 
-            QString sTarget = m_sObjPath+"/"+listName.at(i).split("/").last();
+            QString sTarget =listName.at(i).split("/").last();
             qDebug()<<"file : "<<listName.at(i);
             qDebug()<<"save : "<<sTarget;
             QFile::copy(listName.at(i),sTarget);
