@@ -2,13 +2,13 @@
 #define EDITMAR_H
 
 #include <QWidget>
-#include "EditFunc.h"
+#include "EditBase.h"
 #include <QLineEdit>
 namespace Ui {
 class EditMar;
 }
 
-class EditMar : public QWidget
+class EditMar : public EditBase
 {
     Q_OBJECT
 
@@ -19,7 +19,6 @@ public:
     void setTarget(ObjData *obj);
 
 private:
-    EditFunc func;
 
     ObjData *m_obj =nullptr;
 

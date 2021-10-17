@@ -2,7 +2,7 @@
 #include "ui_EditMar.h"
 
 EditMar::EditMar(QWidget *parent) :
-    QWidget(parent),
+    EditBase(parent),
     ui(new Ui::EditMar)
 {
     ui->setupUi(this);
@@ -54,7 +54,7 @@ void EditMar::on_btnMarTxColor_2_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    func.setColor(m_obj,Label::txtColor);
+    EditBase::setEditColor(m_obj,Label::txtColor);
 
     emit callUpdate();
 }
@@ -64,7 +64,7 @@ void EditMar::on_btnMarBgColor_2_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    func.setColor(m_obj,Label::bgColor);
+    EditBase::setEditColor(m_obj,Label::bgColor);
 
     emit callUpdate();
 }
@@ -74,7 +74,7 @@ void EditMar::on_btnMarFont_2_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    func.setFont(m_obj,Label::font,ui->btnMarFont_2);
+    EditBase::setEditFont(m_obj,Label::font,ui->btnMarFont_2);
 
     emit callUpdate();
 }

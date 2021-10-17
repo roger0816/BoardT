@@ -69,12 +69,6 @@ void EditPic::refreshTable()
 
 void EditPic::on_btnSetPic_clicked()
 {
-    //    QStringList listSelect =QFileDialog::getOpenFileNames(this,
-    //                                                          QStringLiteral("選取圖檔"),
-    //                                                          QApplication::applicationDirPath(),
-    //                                                          QStringLiteral("*.png *jpg *jpeg"));
-
-
 
 
 

@@ -2,7 +2,7 @@
 #include "ui_EditLabel.h"
 
 EditLabel::EditLabel(QWidget *parent) :
-    QWidget(parent),
+    EditBase(parent),
     ui(new Ui::EditLabel)
 {
     ui->setupUi(this);
@@ -43,7 +43,7 @@ void EditLabel::on_btnBgColor_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    func.setColor(m_obj,Label::bgColor);
+     EditBase::setEditColor(m_obj,Label::bgColor);
 
      emit callUpdate();
 }
@@ -53,7 +53,7 @@ void EditLabel::on_btnTxtColor_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    func.setColor(m_obj,Label::txtColor);
+    EditBase::setEditColor(m_obj,Label::txtColor);
 
      emit callUpdate();
 }
@@ -63,7 +63,7 @@ void EditLabel::on_btnBgImage_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    func.setBgImage(m_obj,"選擇元件背景圖",Label::imagePath);
+    EditBase::setEditBgImage(m_obj,"選擇元件背景圖",Label::imagePath);
 
     emit callUpdate();
 }
@@ -73,7 +73,7 @@ void EditLabel::on_btnClearBg_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    func.clearBgImage(m_obj,Label::imagePath);
+    EditBase::clearEditBgImage(m_obj,Label::imagePath);
 
     emit callUpdate();
 }
@@ -83,7 +83,7 @@ void EditLabel::on_btnSelectFont_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    func.setFont(m_obj,Label::font,ui->btnSelectFont);
+    EditBase::setEditFont(m_obj,Label::font,ui->btnSelectFont);
 
      emit callUpdate();
 }
@@ -93,7 +93,7 @@ void EditLabel::on_chCent_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    func.setCent(m_obj,Label::alignCenter,ui->chCent);
+    EditBase::setEditCent(m_obj,Label::alignCenter,ui->chCent);
 
     emit callUpdate();
 }

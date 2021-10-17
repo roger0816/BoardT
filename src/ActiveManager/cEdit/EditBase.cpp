@@ -1,11 +1,12 @@
-#include "EditFunc.h"
+#include "EditBase.h"
 
-EditFunc::EditFunc(QObject *parent) : QObject(parent)
+EditBase::EditBase(QWidget *parent) : QWidget(parent)
 {
 
 }
 
-bool EditFunc::setColor(ObjData *obj, QString sDataKey, QPushButton *btn)
+
+bool EditBase::setEditColor(ObjData *obj, QString sDataKey, QPushButton *btn)
 {
     Q_UNUSED(btn);
 
@@ -27,7 +28,7 @@ bool EditFunc::setColor(ObjData *obj, QString sDataKey, QPushButton *btn)
     txColor.setAlpha(255);
     QVariant var;
 
-    bool bRe = setColor(txColor,var);
+    bool bRe = setEditColor(txColor,var);
 
     if(bRe)
     {
@@ -55,7 +56,7 @@ bool EditFunc::setColor(ObjData *obj, QString sDataKey, QPushButton *btn)
 
 }
 
-bool EditFunc::setColor(QColor current, QVariant &var)
+bool EditBase::setEditColor(QColor current, QVariant &var)
 {
 
     QColorDialog dialog;
@@ -91,7 +92,7 @@ bool EditFunc::setColor(QColor current, QVariant &var)
 
 
 
-void EditFunc::setFont(ObjData *obj, QString sDataKey, QPushButton *btn)
+void EditBase::setEditFont(ObjData *obj, QString sDataKey, QPushButton *btn)
 {
 
     if(obj == nullptr || btn ==nullptr)
@@ -127,7 +128,7 @@ void EditFunc::setFont(ObjData *obj, QString sDataKey, QPushButton *btn)
 
 }
 
-bool EditFunc::setFont(QFont &current)
+bool EditBase::setEditFont(QFont &current)
 {
     bool   ok=false;
     QFont font=QFontDialog::getFont(&ok,current);
@@ -153,7 +154,7 @@ bool EditFunc::setFont(QFont &current)
     return ok;
 }
 
-void EditFunc::setCent(ObjData *obj, QString sDataKey, QCheckBox *btn)
+void EditBase::setEditCent(ObjData *obj, QString sDataKey, QCheckBox *btn)
 {
     if(obj ==nullptr || btn ==nullptr)
         return ;
@@ -164,7 +165,7 @@ void EditFunc::setCent(ObjData *obj, QString sDataKey, QCheckBox *btn)
 
 }
 
-void EditFunc::setBgImage(ObjData *obj, QString sTitle,QString sDataKey)
+void EditBase::setEditBgImage(ObjData *obj, QString sTitle,QString sDataKey)
 {
     QString sPath = QFileDialog::getOpenFileName(nullptr,sTitle,QApplication::applicationDirPath(),"*.png");
 
@@ -180,7 +181,7 @@ void EditFunc::setBgImage(ObjData *obj, QString sTitle,QString sDataKey)
 
 }
 
-void EditFunc::clearBgImage(ObjData *obj, QString sDataKey)
+void EditBase::clearEditBgImage(ObjData *obj, QString sDataKey)
 {
     if(obj->m_data.value(sDataKey).toString()!="")
     {

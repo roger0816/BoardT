@@ -64,7 +64,7 @@ SOURCES += \
     LayerTimeSchedule.cpp \
     StageEditArea.cpp \
     StageManager.cpp \
-    cEdit/EditFunc.cpp \
+    cEdit/EditBase.cpp \
     cEdit/EditLabel.cpp \
     cEdit/EditMar.cpp \
     cEdit/EditPic.cpp \
@@ -85,7 +85,7 @@ HEADERS += \
     LayerTimeSchedule.h \
     StageEditArea.h \
     StageManager.h \
-    cEdit/EditFunc.h \
+    cEdit/EditBase.h \
     cEdit/EditLabel.h \
     cEdit/EditMar.h \
     cEdit/EditPic.h \

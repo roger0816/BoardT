@@ -46,8 +46,6 @@ public:
 
     ItemVideoCon *m_video =nullptr;
 
-    void checkIpAndName();
-
     QString m_sIp="";
 
     QString m_sDeviceName="";
@@ -111,6 +109,10 @@ private slots:
     void slotTimer();
 
     void slotWaitLogin();
+
+
+    void checkIpAndName();
+
 
 private:
     Ui::Widget *ui;

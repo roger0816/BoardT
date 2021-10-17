@@ -2,14 +2,14 @@
 #define EDITTXOBJ_H
 
 #include <QWidget>
-#include "EditFunc.h"
+#include "EditBase.h"
 #include "ObjData.h"
 
 namespace Ui {
 class EditTxObj;
 }
 
-class EditTxObj : public QWidget
+class EditTxObj : public EditBase
 {
     Q_OBJECT
 
@@ -29,7 +29,6 @@ private:
 
     bool m_bLockCallUpdate = false;
 
-    EditFunc m_func;
 
 signals:
     void callUpdate();

@@ -2,7 +2,7 @@
 #include "ui_EditTxObj.h"
 
 EditTxObj::EditTxObj(QWidget *parent) :
-    QWidget(parent),
+    EditBase(parent),
     ui(new Ui::EditTxObj)
 {
     ui->setupUi(this);
@@ -166,7 +166,7 @@ void EditTxObj::on_chCentMin_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    m_func.setCent(m_obj,TxtValue::alignCenterMin,ui->chCentMin);
+    EditBase::setEditCent(m_obj,TxtValue::alignCenterMin,ui->chCentMin);
 
     emit callUpdate();
 }
@@ -176,7 +176,7 @@ void EditTxObj::on_chCent_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    m_func.setCent(m_obj,TxtValue::alignCenter,ui->chCent);
+    EditBase::setEditCent(m_obj,TxtValue::alignCenter,ui->chCent);
 
     emit callUpdate();
 }
@@ -186,7 +186,7 @@ void EditTxObj::on_chCentMax_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    m_func.setCent(m_obj,TxtValue::alignCenterMax,ui->chCentMax);
+    EditBase::setEditCent(m_obj,TxtValue::alignCenterMax,ui->chCentMax);
 
     emit callUpdate();
 }
@@ -196,7 +196,7 @@ void EditTxObj::on_btnSelectFontMin_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    m_func.setFont(m_obj,TxtValue::fontMin,ui->btnSelectFontMin);
+    EditBase::setEditFont(m_obj,TxtValue::fontMin,ui->btnSelectFontMin);
 
      emit callUpdate();
 }
@@ -206,7 +206,7 @@ void EditTxObj::on_btnSelectFont_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    m_func.setFont(m_obj,TxtValue::font,ui->btnSelectFont);
+    EditBase::setEditFont(m_obj,TxtValue::font,ui->btnSelectFont);
 
      emit callUpdate();
 }
@@ -216,7 +216,7 @@ void EditTxObj::on_btnSelectFontMax_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    m_func.setFont(m_obj,TxtValue::fontMax,ui->btnSelectFontMax);
+    EditBase::setEditFont(m_obj,TxtValue::fontMax,ui->btnSelectFontMax);
 
      emit callUpdate();
 }
@@ -226,7 +226,7 @@ void EditTxObj::on_btnTxtColorMin_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    m_func.setColor(m_obj,TxtValue::txtColorMin);
+    EditBase::setEditColor(m_obj,TxtValue::txtColorMin);
 
      emit callUpdate();
 }
@@ -236,7 +236,7 @@ void EditTxObj::on_btnTxtColor_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    m_func.setColor(m_obj,TxtValue::txtColor);
+    EditBase::setEditColor(m_obj,TxtValue::txtColor);
 
      emit callUpdate();
 }
@@ -246,7 +246,7 @@ void EditTxObj::on_btnTxtColorMax_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    m_func.setColor(m_obj,TxtValue::txtColorMax);
+    EditBase::setEditColor(m_obj,TxtValue::txtColorMax);
 
      emit callUpdate();
 }
@@ -256,7 +256,7 @@ void EditTxObj::on_btnBgColorMin_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    m_func.setColor(m_obj,TxtValue::bgColorMin);
+    EditBase::setEditColor(m_obj,TxtValue::bgColorMin);
 
      emit callUpdate();
 }
@@ -266,7 +266,7 @@ void EditTxObj::on_btnBgColor_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    m_func.setColor(m_obj,TxtValue::bgColor);
+    EditBase::setEditColor(m_obj,TxtValue::bgColor);
 
      emit callUpdate();
 }
@@ -276,7 +276,7 @@ void EditTxObj::on_btnBgColorMax_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    m_func.setColor(m_obj,TxtValue::bgColorMax);
+    EditBase::setEditColor(m_obj,TxtValue::bgColorMax);
 
      emit callUpdate();
 }
@@ -286,7 +286,7 @@ void EditTxObj::on_btnBgImageMin_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    m_func.setBgImage(m_obj,"選擇元件背景圖",TxtValue::imagePathMin);
+    EditBase::setEditBgImage(m_obj,"選擇元件背景圖",TxtValue::imagePathMin);
 
     emit callUpdate();
 }
@@ -296,7 +296,7 @@ void EditTxObj::on_btnBgImage_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    m_func.setBgImage(m_obj,"選擇元件背景圖",TxtValue::imagePath);
+    EditBase::setEditBgImage(m_obj,"選擇元件背景圖",TxtValue::imagePath);
 
     emit callUpdate();
 }
@@ -306,7 +306,7 @@ void EditTxObj::on_btnBgImageMax_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    m_func.setBgImage(m_obj,"選擇元件背景圖",TxtValue::imagePathMax);
+    EditBase::setEditBgImage(m_obj,"選擇元件背景圖",TxtValue::imagePathMax);
 
     emit callUpdate();
 }
@@ -316,7 +316,7 @@ void EditTxObj::on_btnClearBgMin_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    m_func.clearBgImage(m_obj,TxtValue::imagePathMin);
+    EditBase::clearEditBgImage(m_obj,TxtValue::imagePathMin);
 
     emit callUpdate();
 }
@@ -326,7 +326,7 @@ void EditTxObj::on_btnClearBg_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    m_func.clearBgImage(m_obj,TxtValue::imagePath);
+    EditBase::clearEditBgImage(m_obj,TxtValue::imagePath);
 
     emit callUpdate();
 }
@@ -336,7 +336,7 @@ void EditTxObj::on_btnClearBgMax_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    m_func.clearBgImage(m_obj,TxtValue::imagePathMax);
+    EditBase::clearEditBgImage(m_obj,TxtValue::imagePathMax);
 
     emit callUpdate();
 }

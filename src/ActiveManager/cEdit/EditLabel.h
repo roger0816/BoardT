@@ -6,12 +6,12 @@
 #include <QFileDialog>
 #include <QFontDialog>
 #include "ObjData.h"
-#include "EditFunc.h"
+#include "EditBase.h"
 namespace Ui {
 class EditLabel;
 }
 
-class EditLabel : public QWidget
+class EditLabel : public EditBase
 {
     Q_OBJECT
 
@@ -25,7 +25,7 @@ public:
 
 private:
 
-    EditFunc func;
+  //  EditFunc func;
 
     ObjData *m_obj =nullptr;
 

@@ -260,9 +260,6 @@ void Widget::checkIpAndName()
         m_sIp = QHostAddress(QHostAddress::LocalHost).toString();
     }
 
-    ui->lbIp->setText(m_sIp);
-
-    ui->lbIp2->setText(m_sIp);
 
 
 
@@ -286,6 +283,17 @@ void Widget::checkIpAndName()
 
     ui->lbName2->setText(m_sDeviceName);
 
+
+
+    if(m_sIp=="127.0.0.1" || m_sIp=="")
+    {
+        m_sIp = "";
+        QTimer::singleShot(3000,this,SLOT(checkIpAndName()));
+    }
+
+    ui->lbIp->setText(m_sIp);
+
+    ui->lbIp2->setText(m_sIp);
 
 }
 

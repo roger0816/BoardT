@@ -118,18 +118,30 @@ void DialogSelectFile::on_btnAdd_clicked()
 {
 
 
-    QString sPic = QFileDialog::getOpenFileName(this,"","../","*.png *.jpg *jpeg");
+    QStringList listSelect =QFileDialog::getOpenFileNames(this,
+                                                          QStringLiteral("選取圖檔"),
+                                                          QApplication::applicationDirPath()+"/../",
+                                                          QStringLiteral("*.png *jpg *jpeg"));
 
-    if(sPic!="")
+
+
+
+    //   QString sPic = QFileDialog::getOpenFileName(this,"","../","*.png *.jpg *jpeg");
+
+    for(int i=0;i<listSelect.length();i++)
     {
-        int idx = ui->listView->currentIndex().row();
+        QString sPic = listSelect.at(i);
+        if(sPic!="")
+        {
+            int idx = ui->listView->currentIndex().row();
 
-        m_listFile.insert(idx+1,sPic);
+            m_listFile.insert(idx+1,sPic);
 
-        ui->listView->setCurrentIndex(m_model->index(idx+1,0));
+            ui->listView->setCurrentIndex(m_model->index(idx+1,0));
 
 
 
+        }
     }
     refreshList();
 
