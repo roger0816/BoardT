@@ -17,7 +17,7 @@ public:
     explicit EditTxObj(QWidget *parent = nullptr);
     ~EditTxObj();
 
-    void setTarget(ObjData *obj);
+    void setTarget(ObjData *obj) override;
 
 
 private:
@@ -25,7 +25,6 @@ private:
 
     void readData();
 
-    ObjData *m_obj =nullptr;
 
     bool m_bLockCallUpdate = false;
 

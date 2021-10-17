@@ -2,6 +2,7 @@
 #define EDITPIC_H
 
 #include <QWidget>
+#include "EditBase.h"
 #include <QDebug>
 #include "CData.h"
 #include "ObjData.h"
@@ -13,7 +14,7 @@ namespace Ui {
 class EditPic;
 }
 
-class EditPic : public QWidget
+class EditPic : public EditBase
 {
     Q_OBJECT
 
@@ -21,7 +22,7 @@ public:
     explicit EditPic(QWidget *parent = nullptr);
     ~EditPic();
 
-    void setTarget(ObjData *obj);
+    void setTarget(ObjData *obj) override;
 
     void showEvent(QShowEvent *) override;
 
@@ -30,10 +31,8 @@ public:
 private:
     Ui::EditPic *ui;
 
-    ObjData *m_obj =nullptr;
 
 
-    void readData();
 
     void refreshTable();
 private slots:

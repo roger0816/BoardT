@@ -87,7 +87,7 @@ void DialogSelectFile::setPreview(bool bEnable)
 
 void DialogSelectFile::on_btnOk_clicked()
 {
-    done(0);
+    done(1);
 }
 
 void DialogSelectFile::refreshList()

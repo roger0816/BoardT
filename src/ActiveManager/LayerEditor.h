@@ -51,9 +51,6 @@ private slots:
 
     //
 
-    void on_btnVideoSet_clicked();
-
-
 
 
 private:

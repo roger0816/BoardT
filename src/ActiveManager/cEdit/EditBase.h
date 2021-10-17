@@ -16,6 +16,10 @@ class EditBase : public QWidget
 public:
     explicit EditBase(QWidget *parent = nullptr);
 
+    virtual void setTarget(ObjData *){}
+
+    ObjData *m_obj =nullptr;
+
 protected:
     bool setEditColor(ObjData *obj,QString sDataKey, QPushButton*btn =nullptr );
 

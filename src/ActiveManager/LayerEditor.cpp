@@ -116,14 +116,12 @@ void LayerEditor::refresh()
     else if(m_obj->m_sType == E_VIDEO)
     {
 
+        ui->pageVideo->setTarget(m_obj);
+
         ui->stackType->setCurrentWidget(ui->pageVideo);
 
-        ui->txtPlayList->clear();
 
-        for(int i=0;i<m_obj->m_dataVideo.listName.length();i++)
-        {
-            ui->txtPlayList->append(m_obj->m_dataVideo.listName[i]);
-        }
+
 
     }
 
@@ -301,33 +299,6 @@ void LayerEditor::on_btnDelete_clicked()
 
 }
 
-
-
-
-void LayerEditor::on_btnVideoSet_clicked()
-{
-    bool bOk = false;
-
-    ObjData *data = CDATA.getObj(m_sLayerName,m_sObjName,bOk);
-
-    if(!bOk)
-        return;
-
-    QStringList listSelect =QFileDialog::getOpenFileNames(this,
-                                                          QStringLiteral("選取影片"),
-                                                          QApplication::applicationDirPath()+"/video",
-                                                          QStringLiteral("*.mp4"));
-
-
-    qDebug()<<"listselect video : "<<listSelect;
-    QStringList *listName = &data->m_dataVideo.listName;
-
-    listName->clear();
-
-    listName->append(listSelect);
-
-
-}
 
 
 

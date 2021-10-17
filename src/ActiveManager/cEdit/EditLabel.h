@@ -19,15 +19,12 @@ public:
     explicit EditLabel(QWidget *parent = nullptr);
     ~EditLabel();
 
-    void setTarget(ObjData *obj);
+    void setTarget(ObjData *obj) override;
 
 
 
 private:
 
-  //  EditFunc func;
-
-    ObjData *m_obj =nullptr;
 
     void readData();
 

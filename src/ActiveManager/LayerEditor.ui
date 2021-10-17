@@ -295,7 +295,7 @@ min-height: 1.2em</string>
          </font>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>2</number>
         </property>
         <widget class="EditLabel" name="pageText">
          <property name="font">
@@ -321,55 +321,8 @@ min-height: 1.2em</string>
         <widget class="EditPic" name="pagePic">
          <layout class="QGridLayout" name="gridLayout_7"/>
         </widget>
-        <widget class="QWidget" name="pageVideo">
-         <layout class="QGridLayout" name="gridLayout_9">
-          <item row="0" column="0">
-           <widget class="QPushButton" name="btnVideoSet">
-            <property name="minimumSize">
-             <size>
-              <width>96</width>
-              <height>42</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>-1</pointsize>
-              <weight>50</weight>
-              <italic>false</italic>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>影片設置</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>372</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="1" column="0">
-           <widget class="QTextEdit" name="txtPlayList">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
+        <widget class="EditVideo" name="pageVideo">
+         <layout class="QGridLayout" name="gridLayout_9"/>
         </widget>
         <widget class="EditMar" name="pageMar"/>
         <widget class="QWidget" name="pageQr">
@@ -679,6 +632,12 @@ min-height: 1.2em</string>
    <class>EditPic</class>
    <extends>QWidget</extends>
    <header>EditPic.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>EditVideo</class>
+   <extends>QWidget</extends>
+   <header>EditVideo.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

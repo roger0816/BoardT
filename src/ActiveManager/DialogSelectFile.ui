@@ -54,7 +54,7 @@
           <widget class="QListView" name="listView">
            <property name="maximumSize">
             <size>
-             <width>400</width>
+             <width>1200</width>
              <height>16777215</height>
             </size>
            </property>

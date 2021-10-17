@@ -169,6 +169,9 @@ struct DataVideo
 
     QStringList listName;
 
+    QString sRtsp = "";
+
+    bool bIsMute = false;
 
 };
 

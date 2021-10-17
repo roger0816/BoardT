@@ -16,11 +16,10 @@ public:
     explicit EditMar(QWidget *parent = nullptr);
     ~EditMar();
 
-    void setTarget(ObjData *obj);
+    void setTarget(ObjData *obj) override;
 
 private:
 
-    ObjData *m_obj =nullptr;
 
     void readData();
 

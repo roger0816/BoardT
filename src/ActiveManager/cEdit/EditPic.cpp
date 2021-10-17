@@ -2,7 +2,7 @@
 #include "ui_EditPic.h"
 
 EditPic::EditPic(QWidget *parent) :
-    QWidget(parent),
+    EditBase(parent),
     ui(new Ui::EditPic)
 {
     ui->setupUi(this);
@@ -22,7 +22,7 @@ void EditPic::setTarget(ObjData *obj)
 
     m_obj = obj;
 
-    readData();
+    ui->sbPicSec->setValue(m_obj->m_dataPic.iSec);
 
     refreshTable();
 }
@@ -39,14 +39,6 @@ void EditPic::clearListView()
     ui->tb->setRowCount(0);
 }
 
-void EditPic::readData()
-{
-    if(m_obj==nullptr)
-        return ;
-
-    ui->sbPicSec->setValue(m_obj->m_dataPic.iSec);
-
-}
 
 void EditPic::refreshTable()
 {
@@ -92,7 +84,10 @@ void EditPic::on_btnSetPic_clicked()
 
     select.setFileList(listSelect,m_obj->m_sObjPath);
 
-    select.exec();
+    int iRe = select.exec();
+
+    if(iRe!=1)
+        return ;
 
     listSelect = select.fileList();
 

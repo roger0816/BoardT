@@ -98,19 +98,19 @@ void ObjData::readData(QString sPath)
     }
     else if(sType == E_VIDEO)
     {
-       // m_dataVideo.listName =conf.value("Video/list","").toStringList();
+        // m_dataVideo.listName =conf.value("Video/list","").toStringList();
 
-        //QStringList
 
         m_dataVideo.listName.clear();
 
         QStringList list = conf.value("Video/list","").toStringList();
 
-        foreach(QString st, list)
+        foreach(QString sFilePath, list)
         {
-            QString s = QApplication::applicationDirPath()+st;
-
-            m_dataVideo.listName.append(s.replace("//","/"));
+            qDebug()<<"read: "<<list ;
+            if(!QFileInfo(sFilePath).exists())
+                sFilePath = m_sObjPath+"/"+sFilePath.split("/").last();
+            m_dataVideo.listName.append(sFilePath);
         }
 
     }
@@ -121,10 +121,10 @@ void ObjData::readData(QString sPath)
 
         QString sTitle= sType;
 
-//        if(QFileInfo(m_sObjPath+"/bg.png").exists())
-//        {
-//            m_dataText.m_sImagePath = m_sObjPath+"/bg.png";
-//        }
+        //        if(QFileInfo(m_sObjPath+"/bg.png").exists())
+        //        {
+        //            m_dataText.m_sImagePath = m_sObjPath+"/bg.png";
+        //        }
 
         m_data.clear();
 
@@ -229,17 +229,29 @@ void ObjData::writeData()
 
         QStringList listName = m_dataVideo.listName;
 
-        QStringList list;
 
-        foreach(QString st ,listName)
+        for(int i=0;i<listName.length();i++)
         {
-            QString s ="/"+ st.split("bin").last();
+//            QFile file(listName.at(i));
 
+//            if(file.open(QIODevice::ReadOnly))
+//            {
+//                file.copy(m_sObjPath+"/"+listName.at(i).split("/").last());
 
-            list.append(s);
+//                file.close();
+//            }
+
+            QString sTarget = m_sObjPath+"/"+listName.at(i).split("/").last();
+            qDebug()<<"file : "<<listName.at(i);
+            qDebug()<<"save : "<<sTarget;
+            QFile::copy(listName.at(i),sTarget);
+
+            listName[i] = sTarget;
+
         }
 
-        conf.setValue("Video/list",list);
+
+        conf.setValue("Video/list",listName);
 
     }
 
@@ -281,7 +293,7 @@ void ObjData::writeData()
         conf.sync();
 
 
-          qDebug()<<"write itemdata : "<<m_data;
+        qDebug()<<"write itemdata : "<<m_data;
     }
 
 }
