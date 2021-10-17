@@ -25,6 +25,8 @@ public:
 
     void showEvent(QShowEvent *) override;
 
+    void clearListView();
+
 private:
     Ui::EditPic *ui;
 

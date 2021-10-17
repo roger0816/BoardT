@@ -51,7 +51,10 @@ void LayerEditor::setTarget(QString sObjPath)
 
     m_sPath = sObjPath;
 
+
     refresh();
+
+
 
 }
 
@@ -102,7 +105,7 @@ void LayerEditor::refresh()
     else if(m_obj->m_sType == E_PIC)
     {
 
-       ui->pagePic->setTarget(m_obj);
+        ui->pagePic->setTarget(m_obj);
 
         ui->stackType->setCurrentWidget(ui->pagePic);
 
@@ -291,6 +294,9 @@ void LayerEditor::on_btnDelete_clicked()
 
         deleteDirectory(m_sPath);
     }
+
+    if(ui->stackType->currentWidget() == ui->pagePic)
+        ui->pagePic->clearListView();
 
 
 }

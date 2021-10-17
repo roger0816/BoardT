@@ -34,6 +34,11 @@ void EditPic::showEvent(QShowEvent *)
     ui->tb->setColumnWidth(1,80);
 }
 
+void EditPic::clearListView()
+{
+    ui->tb->setRowCount(0);
+}
+
 void EditPic::readData()
 {
     if(m_obj==nullptr)
@@ -115,10 +120,11 @@ void EditPic::on_btnSetPic_clicked()
 
 void EditPic::on_sbPicSec_valueChanged(int)
 {
-    bool bOk = false;
 
-    if(!bOk)
+
+    if(m_obj==nullptr)
         return;
+
 
     m_obj->m_dataPic.iSec = ui->sbPicSec->value();
 
