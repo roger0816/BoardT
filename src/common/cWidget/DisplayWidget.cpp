@@ -36,7 +36,9 @@ QPixmap DisplayWidget::setLayer(QString sPath, int iVideoStatus)
         {
             m_video->hide();
 
-            m_video->deleteLater();
+            delete m_video;
+
+            m_video =nullptr;
            // m_video->m_player->stop();
 
          //   m_video->hide();
