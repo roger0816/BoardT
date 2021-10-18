@@ -352,14 +352,10 @@ void LayerEditor::on_txQr_textChanged(const QString &arg1)
 
 
 
-
-
-
-
-
-
-
 void LayerEditor::on_txUrl_textChanged(const QString &arg1)
 {
+    if(m_obj==nullptr)
+        return;
+    m_obj->m_data[Url::source]= arg1;
 
 }
