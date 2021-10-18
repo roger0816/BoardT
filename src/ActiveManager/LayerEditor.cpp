@@ -122,8 +122,13 @@ void LayerEditor::refresh()
 
         ui->stackType->setCurrentWidget(ui->pageVideo);
 
+    }
+
+    else if(m_obj->m_sType == E_URL)
+    {
 
 
+        ui->stackType->setCurrentWidget(ui->pageUrl);
 
     }
 
@@ -133,9 +138,6 @@ void LayerEditor::refresh()
         ui->pageDate->setTarget(m_obj);
 
         ui->stackType->setCurrentWidget(ui->pageDate);
-
-
-
 
     }
 
@@ -356,3 +358,8 @@ void LayerEditor::on_txQr_textChanged(const QString &arg1)
 
 
 
+
+void LayerEditor::on_txUrl_textChanged(const QString &arg1)
+{
+
+}

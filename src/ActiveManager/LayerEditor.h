@@ -103,6 +103,7 @@ private slots:
 
 
 
+    void on_txUrl_textChanged(const QString &arg1);
 };
 
 #endif // LAYEREDITOR_H

@@ -23,7 +23,7 @@ static QString E_BUTTON ="button";
 
 static QString E_DATETIME ="dateTime";
 
-static QString E_WEB ="web";
+static QString E_URL ="url";
 
 static QString E_FUNCTION ="function";
 
@@ -224,6 +224,10 @@ static QString speed="dateSpeed";
 static QString dateStr ="dateStr";
 
 static QString timeStr ="timeStr";
+}
+
+namespace Url {
+static QString source="urlSource";
 }
 
 namespace  TxtValue{

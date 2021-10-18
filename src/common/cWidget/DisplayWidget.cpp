@@ -372,6 +372,16 @@ void DisplayWidget::addItem(int iIdx)
 
     }
 
+    else if(iIdx == ADD_BASIC_URL)
+    {
+
+        obj->m_sType = E_URL;
+
+        sTmp = "URL_%1";
+
+    }
+
+
     else if(iIdx == ADD_BASIC_VIDEO)
     {
         obj->m_sType = E_VIDEO;

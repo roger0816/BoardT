@@ -19,6 +19,7 @@ HEADERS += \
     $$PWD/cWidget/ItemPicCon.h \
     $$PWD/cWidget/ItemQrCon.h \
     $$PWD/cWidget/ItemTxObjCon.h \
+    $$PWD/cWidget/ItemUrl.h \
     $$PWD/cWidget/ItemVideoCon.h
 
 SOURCES += \
@@ -36,6 +37,7 @@ SOURCES += \
     $$PWD/cWidget/ItemPicCon.cpp \
     $$PWD/cWidget/ItemQrCon.cpp \
     $$PWD/cWidget/ItemTxObjCon.cpp \
+    $$PWD/cWidget/ItemUrl.cpp \
     $$PWD/cWidget/ItemVideoCon.cpp
 
 FORMS += \
@@ -43,7 +45,8 @@ FORMS += \
     $$PWD/cWidget/ItemBaseContent.ui \
     $$PWD/cWidget/ItemBtnCon.ui \
     $$PWD/cWidget/ItemLabel.ui \
-    $$PWD/cWidget/ItemPicCon.ui
+    $$PWD/cWidget/ItemPicCon.ui \
+    $$PWD/cWidget/ItemUrl.ui
 
 
 

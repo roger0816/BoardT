@@ -17,6 +17,11 @@ void EditTxObj::setTarget(ObjData *obj)
 {
     m_obj = obj;
 
+    ui->tabWidget->setCurrentIndex(1);
+
+    m_obj->m_dEditData["EditStatus"] = 1;
+
+    emit callUpdate();
     readData();
 }
 

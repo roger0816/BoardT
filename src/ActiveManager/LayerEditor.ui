@@ -324,6 +324,46 @@ min-height: 1.2em</string>
         <widget class="EditVideo" name="pageVideo">
          <layout class="QGridLayout" name="gridLayout_9"/>
         </widget>
+        <widget class="QWidget" name="pageUrl">
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="1" column="0">
+           <widget class="QLineEdit" name="txUrl">
+            <property name="text">
+             <string>www.google.com</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="0">
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>10</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
         <widget class="EditDateTime" name="pageDate"/>
         <widget class="EditMar" name="pageMar"/>
         <widget class="QWidget" name="pageQr">

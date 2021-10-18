@@ -19,6 +19,7 @@
 #include "ItemQrCon.h"
 #include "ItemTxObjCon.h"
 #include "ItemDateTime.h"
+#include "ItemUrl.h"
 namespace Ui {
 class ItemBaseContent;
 }

@@ -125,6 +125,12 @@ void ItemBaseContent::setData(ObjData *obj, float diffSize)
 
         itemLabel = new ItemDateTime(m_wBg);
     }
+
+    else if(m_sType == E_URL)
+    {
+
+        itemLabel = new ItemUrl(m_wBg);
+    }
     else
     {
         itemLabel = new ItemLabel(m_wBg);

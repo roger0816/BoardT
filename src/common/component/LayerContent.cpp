@@ -94,9 +94,9 @@ void LayerContent::setPath(QString sPath,QMap<QString,int> typeMapping)
 
     else if(sType==TYPE.DATE_TIME)
     {
-        ui->wDateTime->setPath(sPath);
+//        ui->wDateTime->setPath(sPath);
 
-        ui->stackedWidget->setCurrentWidget(ui->wDateTime);
+//        ui->stackedWidget->setCurrentWidget(ui->wDateTime);
 
     }
 

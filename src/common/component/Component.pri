@@ -9,7 +9,6 @@ $$PWD/ItemPicRun.h \
    $$PWD/ItemPic.h \
    $$PWD/ItemBase.h \
    $$PWD/ItemWebView.h \
-   $$PWD/ItemDateTime.h \
    $$PWD/ItemVideo.h \
    $$PWD/ItemTicket.h \
    $$PWD/ItemFunction.h \
@@ -25,7 +24,6 @@ SOURCES += \
         $$PWD/ItemPic.cpp \
         $$PWD/ItemBase.cpp \
         $$PWD/ItemWebView.cpp \
-        $$PWD/ItemDateTime.cpp \
         $$PWD/ItemVideo.cpp \
         $$PWD/ItemTicket.cpp \
         $$PWD/ItemFunction.cpp \
