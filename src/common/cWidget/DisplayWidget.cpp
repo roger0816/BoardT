@@ -30,8 +30,8 @@ QPixmap DisplayWidget::setLayer(QString sPath, int iVideoStatus)
 
     qDebug()<<"layer path : "<<m_sPath<<",video status :  "<<iVideoStatus;
 
-    if(iVideoStatus == 0)
-    {
+//    if(iVideoStatus == 0)
+//    {
         if(m_video!=nullptr)
         {
 
@@ -40,7 +40,7 @@ QPixmap DisplayWidget::setLayer(QString sPath, int iVideoStatus)
             m_video->hide();
         }
 
-    }
+  //  }
 
 
     m_layerName = m_sPath.split("/").last();
