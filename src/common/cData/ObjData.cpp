@@ -245,7 +245,7 @@ void ObjData::writeData()
             //                file.close();
             //            }
 
-            QString sTarget =listName.at(i).split("/").last();
+            QString sTarget =m_sObjPath+"/"+listName.at(i).split("/").last();
             qDebug()<<"file : "<<listName.at(i);
             qDebug()<<"save : "<<sTarget;
             QFile::copy(listName.at(i),sTarget);
