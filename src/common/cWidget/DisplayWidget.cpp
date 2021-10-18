@@ -377,6 +377,8 @@ void DisplayWidget::addItem(int iIdx)
 
         obj->m_sType = E_URL;
 
+        obj->m_data[Url::source] = "www.google.com";
+
         sTmp = "URL_%1";
 
     }

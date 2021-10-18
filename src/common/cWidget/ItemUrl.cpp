@@ -9,7 +9,10 @@ ItemUrl::ItemUrl(QWidget *parent) :
 #ifdef WEB
     m_view = new QWebView(this);
 #else
-    m_view = new QWidget(this);
+//    m_view = new QLabel(this);
+
+
+//    m_view->setText("Url");
 #endif
 }
 
@@ -28,11 +31,11 @@ void ItemUrl::updateItem()
 #ifdef WEB
     m_view->load(QUrl(m_obj->m_data[Url::source]));
 #endif
-    m_view->show();
+  //  m_view->show();
 
 }
 
 void ItemUrl::reSetSize()
 {
-   m_view->resize(size());
+  // m_view->resize(size());
 }

@@ -2,7 +2,7 @@
 #define ITEMURL_H
 
 #include <QWidget>
-
+#include <QLabel>
 #include "ItemBaseObj.h"
 #include <QResizeEvent>
 
@@ -27,7 +27,7 @@ private:
 #ifdef WEB
     // QWebView *m_view;
 #else
-    QWidget *m_view;
+    QLabel *m_view;
 #endif
 
     void reSetSize() override;

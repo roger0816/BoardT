@@ -46,7 +46,7 @@ void ObjData::readData(QString sPath)
 
     m_sType = sType;
 
-
+    qDebug()<<"type "<<m_sType;
 
     m_dataCmd.sCmd = conf.value("Action/cmd","").toString();
 

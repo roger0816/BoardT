@@ -23,7 +23,7 @@ static QString E_BUTTON ="button";
 
 static QString E_DATETIME ="dateTime";
 
-static QString E_URL ="url";
+static QString E_URL ="web";
 
 static QString E_FUNCTION ="function";
 
