@@ -113,6 +113,10 @@ void ObjData::readData(QString sPath)
             m_dataVideo.listName.append(sFilePath);
         }
 
+        m_dataVideo.bIsMute =conf.value("Video/mute").toBool();
+
+        m_dataVideo.sRtsp = conf.value("Video/rtsp").toString().trimmed();
+
     }
 
     else //if(sType == E_TEXT || sType == E_BUTTON || sType == E_MARQUEE || sType == E_QRCODE)
@@ -250,6 +254,9 @@ void ObjData::writeData()
 
         }
 
+        conf.setValue("Video/mute",m_dataVideo.bIsMute);
+
+        conf.setValue("Video/rtsp",m_dataVideo.sRtsp);
 
         conf.setValue("Video/list",listName);
 
