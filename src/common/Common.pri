@@ -13,6 +13,7 @@ HEADERS += \
     $$PWD/cWidget/ItemBaseContent.h \
     $$PWD/cWidget/ItemBaseObj.h \
     $$PWD/cWidget/ItemBtnCon.h \
+    $$PWD/cWidget/ItemDateTime.h \
     $$PWD/cWidget/ItemLabel.h \
     $$PWD/cWidget/ItemMarCon.h \
     $$PWD/cWidget/ItemPicCon.h \
@@ -29,6 +30,7 @@ SOURCES += \
     $$PWD/cWidget/ItemBaseContent.cpp \
     $$PWD/cWidget/ItemBaseObj.cpp \
     $$PWD/cWidget/ItemBtnCon.cpp \
+    $$PWD/cWidget/ItemDateTime.cpp \
     $$PWD/cWidget/ItemLabel.cpp \
     $$PWD/cWidget/ItemMarCon.cpp \
     $$PWD/cWidget/ItemPicCon.cpp \

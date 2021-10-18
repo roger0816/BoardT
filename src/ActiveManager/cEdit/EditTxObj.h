@@ -25,13 +25,6 @@ private:
 
     void readData();
 
-
-    bool m_bLockCallUpdate = false;
-
-
-signals:
-    void callUpdate();
-
 private slots:
     void on_cbTxValue_currentIndexChanged(int);
 

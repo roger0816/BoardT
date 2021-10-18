@@ -295,7 +295,7 @@ min-height: 1.2em</string>
          </font>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>3</number>
         </property>
         <widget class="EditLabel" name="pageText">
          <property name="font">
@@ -324,6 +324,7 @@ min-height: 1.2em</string>
         <widget class="EditVideo" name="pageVideo">
          <layout class="QGridLayout" name="gridLayout_9"/>
         </widget>
+        <widget class="EditDateTime" name="pageDate"/>
         <widget class="EditMar" name="pageMar"/>
         <widget class="QWidget" name="pageQr">
          <layout class="QGridLayout" name="gridLayout_11">
@@ -638,6 +639,12 @@ min-height: 1.2em</string>
    <class>EditVideo</class>
    <extends>QWidget</extends>
    <header>EditVideo.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>EditDateTime</class>
+   <extends>QWidget</extends>
+   <header>EditDateTime.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

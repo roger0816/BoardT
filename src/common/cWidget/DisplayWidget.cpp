@@ -426,8 +426,23 @@ void DisplayWidget::addItem(int iIdx)
         sTmp = "TxValue_%1";
 
     }
+
+    else if(iIdx == ADD_BASIC_DATETIME)
+    {
+        obj->m_sType = E_DATETIME;
+
+        obj->m_data[DateTime::dateStr] = "yyyy/MM/dd";
+
+        obj->m_data[DateTime::timeStr] = "hh:mm:ss";
+
+        obj->m_data[DateTime::speed] = 3;
+
+        sTmp = "DateTime_%1";
+
+    }
     else
     {
+        delete obj;
         return ;
     }
 

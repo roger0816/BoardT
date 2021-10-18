@@ -18,6 +18,8 @@ LayerEditor::LayerEditor(QWidget *parent) :
 
     connect(ui->pageMar,&EditMar::callUpdate,this,&LayerEditor::callUpdate);
 
+    connect(ui->pageDate,&EditDateTime::callUpdate,this,&LayerEditor::callUpdate);
+
 }
 
 LayerEditor::~LayerEditor()
@@ -119,6 +121,18 @@ void LayerEditor::refresh()
         ui->pageVideo->setTarget(m_obj);
 
         ui->stackType->setCurrentWidget(ui->pageVideo);
+
+
+
+
+    }
+
+    else if(m_obj->m_sType == E_DATETIME)
+    {
+
+        ui->pageDate->setTarget(m_obj);
+
+        ui->stackType->setCurrentWidget(ui->pageDate);
 
 
 

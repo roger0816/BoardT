@@ -35,7 +35,13 @@ protected:
 
     void clearEditBgImage(ObjData *obj, QString sDataKey);
 
+    bool m_bLockCallUpdate = false;
+
+
 signals:
+    void callUpdate();
+
+
 
 };
 

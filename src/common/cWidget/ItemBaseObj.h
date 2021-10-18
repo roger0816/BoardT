@@ -18,7 +18,7 @@ public:
 
     void setData(ObjData *obj);
 
-    virtual void init(){}
+    virtual void init(){updateItem();}
 
     virtual void updateItem(){}
 

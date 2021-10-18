@@ -18,6 +18,7 @@
 #include "ItemMarCon.h"
 #include "ItemQrCon.h"
 #include "ItemTxObjCon.h"
+#include "ItemDateTime.h"
 namespace Ui {
 class ItemBaseContent;
 }

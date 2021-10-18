@@ -62,9 +62,8 @@ enum
     ADD_BASIC_URL,
     ADD_BASIC_QR,
 
-
-    ADD_ADV_MEDIA,
     ADD_ADV_BUTTON,
+    ADD_ADV_MEDIA,
     ADD_ADV_PIX_BUTTON,
     ADD_ADV_964,
     ADD_ADV_PAINTER,
@@ -216,6 +215,15 @@ namespace Marquee
 static QString speed="speed";
 
 static QString listText ="listText";
+}
+
+namespace DateTime
+{
+static QString speed="dateSpeed";
+
+static QString dateStr ="dateStr";
+
+static QString timeStr ="timeStr";
 }
 
 namespace  TxtValue{

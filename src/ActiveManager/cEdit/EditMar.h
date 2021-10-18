@@ -23,13 +23,10 @@ private:
 
     void readData();
 
-    bool m_bLockCallUpdate = false;
-
     QList<QLineEdit*> m_listMar;
 
 
-signals:
-    void callUpdate();
+
 
 private slots:
     void on_btnMarTxColor_2_clicked();

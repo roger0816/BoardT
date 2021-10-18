@@ -119,6 +119,9 @@ void ObjData::readData(QString sPath)
 
     }
 
+
+
+
     else //if(sType == E_TEXT || sType == E_BUTTON || sType == E_MARQUEE || sType == E_QRCODE)
     {
 
@@ -137,7 +140,17 @@ void ObjData::readData(QString sPath)
         QStringList keys = conf.childKeys();
         foreach (QString key, keys)
         {
-            m_data[key] = conf.value(key);
+//            if(key==DateTime::dateStr)
+//                m_data[key] = conf.value(key,"yyyy/MM/dd").toString();
+//            else if(key==DateTime::timeStr)
+//                m_data[key] = conf.value(key,"hh:mm:ss").toString();
+//            else if(key==DateTime::speed)
+//                m_data[key] = conf.value(key,3).toInt();
+//            else
+                m_data[key] = conf.value(key);
+
+
+            qDebug()<<"CC : key :"<<key<<" , data : "<< m_data[key];
 
         }
 

@@ -66,12 +66,14 @@ void ItemLabel::setLbStyle(QString sTxtColorKey, QString sBgColorKey, QString sI
                                  +";background-color:rgba(0, 0, 0,0);"
                                  ";border-image:url("+sImage+");}");
 
-        qDebug()<<" AAAA:"<<sImagePath;
+
     }
     else
     {
         ui->label->setStyleSheet("QLabel#"+ui->label->objectName()+"{color:"+sTxtColor
                                  +";background-color:"+sBg+"}");
+
+        qDebug()<<"AAAA : "<<sTxtColor<<" , "<<sBg;
 
     }
 

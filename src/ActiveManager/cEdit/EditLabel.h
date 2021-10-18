@@ -21,18 +21,9 @@ public:
 
     void setTarget(ObjData *obj) override;
 
-
-
 private:
 
-
     void readData();
-
-    bool m_bLockCallUpdate = false;
-
-
-signals:
-    void callUpdate();
 
 private slots:
     void on_btnBgColor_clicked();

@@ -120,6 +120,11 @@ void ItemBaseContent::setData(ObjData *obj, float diffSize)
 
         itemLabel = new ItemTxObjCon(m_wBg);
     }
+    else if(m_sType == E_DATETIME)
+    {
+
+        itemLabel = new ItemDateTime(m_wBg);
+    }
     else
     {
         itemLabel = new ItemLabel(m_wBg);
@@ -135,9 +140,6 @@ void ItemBaseContent::setData(ObjData *obj, float diffSize)
     m_lay->addWidget(itemLabel);
 
     m_wBg->setLayout(m_lay);
-
-
-
 
 
 }
