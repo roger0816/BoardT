@@ -35,6 +35,11 @@ void ItemPlayer::setPlayList(QStringList list)
 
 }
 
+void ItemPlayer::setMute(bool bMute)
+{
+    m_player->setMute(bMute);
+}
+
 void ItemPlayer::reSize()
 {
     m_wBg->resize(size());

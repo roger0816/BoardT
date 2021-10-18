@@ -26,6 +26,8 @@ public:
 private slots:
     void on_btnSetting_clicked();
 
+    void on_cbMute_clicked(bool checked);
+
 private:
     Ui::EditVideo *ui;
 

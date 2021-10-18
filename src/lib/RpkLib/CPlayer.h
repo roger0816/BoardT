@@ -11,6 +11,7 @@
 #include <QPalette>
 #include <QTimerEvent>
 
+
 #ifdef VLC
 #include <vlc/vlc.h>
 
@@ -34,6 +35,9 @@ public:
     void pause();
 
     void stop();
+
+    void setMute(bool mute);
+
 
     int changeVolume(int vol);
 
@@ -88,6 +92,8 @@ public:
     void open(QString file);
 
     void openList(QStringList list);
+
+    void setMute(bool mute){}
 
     void play();
 

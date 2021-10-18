@@ -23,6 +23,8 @@ public:
 
     void setPlayList(QStringList list);
 
+    void setMute(bool bMute);
+
 private:
 
     QWidget *m_wBg;

@@ -95,3 +95,11 @@ void EditVideo::on_btnSetting_clicked()
 
 
 }
+
+void EditVideo::on_cbMute_clicked(bool checked)
+{
+    if(m_obj==nullptr)
+        return;
+
+    m_obj->m_dataVideo.bIsMute = checked;
+}

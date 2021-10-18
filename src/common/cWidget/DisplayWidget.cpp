@@ -95,6 +95,8 @@ QPixmap DisplayWidget::setLayer(QString sPath, int iVideoStatus)
 
             m_video->setPlayList(listData[i]->m_dataVideo.listName);
 
+            m_video->setMute(listData[i]->m_dataVideo.bIsMute);
+
             m_video->resize(item->size());
 
             m_video->move(item->pos());

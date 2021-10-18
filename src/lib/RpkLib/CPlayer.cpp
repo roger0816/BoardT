@@ -30,7 +30,12 @@ CPlayer::CPlayer(QWidget *parent) : QWidget(parent)
     startTimer(1000);
 }
 
-
+void CPlayer::setMute(bool mute)
+{
+    if (vlcPlayer != NULL) {
+        libvlc_audio_set_mute(vlcPlayer, mute ? 1 : 0);
+    }
+}
 
 CPlayer::~CPlayer()
 {
