@@ -75,7 +75,7 @@
              <height>40</height>
             </size>
            </property>
-           <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,1">
+           <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,2,2,2">
             <property name="topMargin">
              <number>0</number>
             </property>
@@ -102,7 +102,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton">
+             <widget class="QPushButton" name="btnG1SetPic">
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -110,12 +110,12 @@
                </size>
               </property>
               <property name="text">
-               <string>插入圖片</string>
+               <string>設定圖片</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_2">
+             <widget class="QPushButton" name="btnG1Clear">
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -128,7 +128,17 @@
              </widget>
             </item>
             <item>
-             <widget class="QWidget" name="widget_5" native="true"/>
+             <widget class="QPushButton" name="btnG1SetListPic">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>批量設圖</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>

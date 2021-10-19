@@ -6,6 +6,8 @@
 #include <QGridLayout>
 #include <QShowEvent>
 #include <QResizeEvent>
+#include <QFileDialog>
+#include "DialogMsg.h"
 
 namespace Ui {
 class DialogEditGrid;
@@ -23,6 +25,11 @@ public:
 
     void resizeEvent(QResizeEvent* )override;
     void resetSize();
+
+private slots:
+    void on_btnG1SetListPic_clicked();
+
+    void on_btnG1SetPic_clicked();
 
 private:
     Ui::DialogEditGrid *ui;

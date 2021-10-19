@@ -9,40 +9,42 @@
 #include <QResizeEvent>
 #include <QMouseEvent>
 #include <QGridLayout>
+#include <QButtonGroup>
+
+//class TouchLabel : public QWidget
+//{
+//    Q_OBJECT
+//public:
+//    TouchLabel(QWidget *parent =nullptr);
+
+//    void setPic(QString sFile);
+
+//    void setClicked(bool bIsClicked);
+
+//signals:
+
+//    void clicked();
+
+//private:
+
+//    bool m_bIsSelect = false;
+
+//    QPushButton *m_btn;
+
+//    QLabel *m_lb;
+
+//    void resetSize();
+
+//    void showEvent(QShowEvent * ) override;
+
+//    void resizeEvent(QResizeEvent *) override;
+
+//private slots:
+//    void slotClicked();
+
+//};
 
 
-class TouchLabel : public QWidget
-{
-    Q_OBJECT
-public:
-    TouchLabel(QWidget *parent =nullptr);
-
-    void setPic(QString sFile);
-
-    void setClicked(bool bIsClicked);
-
-signals:
-
-    void clicked();
-
-private:
-
-    bool m_bIsSelect = false;
-
-    QPushButton *m_btn;
-
-    QLabel *m_lb;
-
-    void resetSize();
-
-    void showEvent(QShowEvent * ) override;
-
-    void resizeEvent(QResizeEvent *) override;
-
-private slots:
-    void slotClicked();
-
-};
 
 namespace Ui {
 class LayerEditGrid;
@@ -56,9 +58,18 @@ public:
     explicit LayerEditGrid(QWidget *parent = nullptr);
     ~LayerEditGrid();
 
-    void set4Grid(bool b);
+    void setGridCount(int iCount);
 
-    bool m_bIs4Grid = true;
+    void setDate(QStringList list);
+
+    void setPic(QString sFilePath, int iIdx=-1);
+
+    int currentId(){return m_listBtns.checkedId();}
+
+private:
+
+
+    int m_iGridCount =9;
 
     void showEvent(QShowEvent* ) override;
 
@@ -66,17 +77,20 @@ public:
 
     void resetSize();
 
-    QList<TouchLabel*> m_listItem;
+    QButtonGroup m_listBtns;
 
     QGridLayout *lay ;
-
+signals:
+    void clicked(int id);
 
 private:
     Ui::LayerEditGrid *ui;
 
-private slots:
+public slots:
 
-    void slotClicked();
+   // void slotClicked();
+
+    void slotClicked(QAbstractButton *);
 };
 
 #endif // LAYEREDITGRID_H
