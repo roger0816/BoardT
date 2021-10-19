@@ -35,6 +35,7 @@ static QString E_QRCODE = "qrcode";
 
 static QString E_TXVALUE = "txValue";
 
+static QString E_GRID = "grid";
 
 // cmd
 static QString CMD_None ="";

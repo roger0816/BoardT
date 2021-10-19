@@ -14,6 +14,7 @@ HEADERS += \
     $$PWD/cWidget/ItemBaseObj.h \
     $$PWD/cWidget/ItemBtnCon.h \
     $$PWD/cWidget/ItemDateTime.h \
+    $$PWD/cWidget/ItemGrid.h \
     $$PWD/cWidget/ItemLabel.h \
     $$PWD/cWidget/ItemMarCon.h \
     $$PWD/cWidget/ItemPicCon.h \
@@ -32,6 +33,7 @@ SOURCES += \
     $$PWD/cWidget/ItemBaseObj.cpp \
     $$PWD/cWidget/ItemBtnCon.cpp \
     $$PWD/cWidget/ItemDateTime.cpp \
+    $$PWD/cWidget/ItemGrid.cpp \
     $$PWD/cWidget/ItemLabel.cpp \
     $$PWD/cWidget/ItemMarCon.cpp \
     $$PWD/cWidget/ItemPicCon.cpp \
@@ -44,6 +46,7 @@ FORMS += \
     $$PWD/cWidget/DisplayWidget.ui \
     $$PWD/cWidget/ItemBaseContent.ui \
     $$PWD/cWidget/ItemBtnCon.ui \
+    $$PWD/cWidget/ItemGrid.ui \
     $$PWD/cWidget/ItemLabel.ui \
     $$PWD/cWidget/ItemPicCon.ui \
     $$PWD/cWidget/ItemUrl.ui

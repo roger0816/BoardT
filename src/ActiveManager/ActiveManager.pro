@@ -53,11 +53,13 @@ INCLUDEPATH+= uiItem \
 
 
 SOURCES += \
+    DialogEditGrid.cpp \
     DialogMsg.cpp \
     DialogSelectFile.cpp \
     DialogUploadUsb.cpp \
     LayerAction.cpp \
     LayerAddContent.cpp \
+    LayerEditGrid.cpp \
     LayerEditor.cpp \
     LayerSchedule.cpp \
     LayerSelector.cpp \
@@ -66,6 +68,7 @@ SOURCES += \
     StageManager.cpp \
     cEdit/EditBase.cpp \
     cEdit/EditDateTime.cpp \
+    cEdit/EditGrid.cpp \
     cEdit/EditLabel.cpp \
     cEdit/EditMar.cpp \
     cEdit/EditPic.cpp \
@@ -76,11 +79,13 @@ SOURCES += \
     widget.cpp
 
 HEADERS += \
+    DialogEditGrid.h \
     DialogMsg.h \
     DialogSelectFile.h \
     DialogUploadUsb.h \
     LayerAction.h \
     LayerAddContent.h \
+    LayerEditGrid.h \
     LayerEditor.h \
     LayerSchedule.h \
     LayerSelector.h \
@@ -89,6 +94,7 @@ HEADERS += \
     StageManager.h \
     cEdit/EditBase.h \
     cEdit/EditDateTime.h \
+    cEdit/EditGrid.h \
     cEdit/EditLabel.h \
     cEdit/EditMar.h \
     cEdit/EditPic.h \
@@ -98,17 +104,20 @@ HEADERS += \
     widget.h
 
 FORMS += \
+    DialogEditGrid.ui \
     DialogMsg.ui \
     DialogSelectFile.ui \
     DialogUploadUsb.ui \
     LayerAction.ui \
     LayerAddContent.ui \
+    LayerEditGrid.ui \
     LayerEditor.ui \
     LayerSchedule.ui \
     LayerTimeSchedule.ui \
     StageEditArea.ui \
     StageManager.ui \
     cEdit/EditDateTime.ui \
+    cEdit/EditGrid.ui \
     cEdit/EditLabel.ui \
     cEdit/EditMar.ui \
     cEdit/EditPic.ui \

@@ -3,10 +3,19 @@
 #include "DisplayWidget.h"
 #include <QApplication>
 #include "DialogSelectFile.h"
+#include "DialogEditGrid.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+
+    DialogEditGrid d;
+
+    d.exec();
+
+    return 0;
+
 
     QFile qss(":/style.qss");
 

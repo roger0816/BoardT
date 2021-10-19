@@ -248,6 +248,7 @@ void CData::checkDefine()
     defData.insert("txValue",15);
     defData.insert("mediaCent",17);
 
+        defData.insert("grid",19);
     defData.insert("marquee",21);
 
 
@@ -262,6 +263,14 @@ void CData::checkDefine()
 
     QStringList defKey = define.allKeys();
 
+    QStringList defValue ;
+
+    for(int i=0;i<defKey.length();i++)
+    {
+        defValue.append(define.value(defKey.at(i)).toString());
+    }
+
+
     QStringList checkKey = defData.keys();
 
 
@@ -270,8 +279,11 @@ void CData::checkDefine()
     {
         if(defKey.indexOf(checkKey[i])<0)
         {
+            int iValue=defData[checkKey[i]];
 
-            define.setValue(checkKey[i],defData[checkKey[i]]);
+            while(defValue.indexOf(QString::number(iValue)) >=0)
+                ++iValue;
+            define.setValue(checkKey[i],QString::number(iValue));
         }
 
 
