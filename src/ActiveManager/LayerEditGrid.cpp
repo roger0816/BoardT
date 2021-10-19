@@ -14,6 +14,8 @@ LayerEditGrid::LayerEditGrid(QWidget *parent) :
 
         item->hide();
 
+        connect(item,&TouchLabel::clicked,this,&LayerEditGrid::slotClicked);
+
         m_listItem.append(item);
     }
 
@@ -89,6 +91,16 @@ void LayerEditGrid::resetSize()
 
 }
 
+void LayerEditGrid::slotClicked()
+{
+    TouchLabel * item = dynamic_cast<TouchLabel*>(sender());
+
+    foreach(TouchLabel *target,m_listItem)
+    {
+        item->setClicked(item == target);
+    }
+}
+
 //=================================
 
 TouchLabel::TouchLabel(QWidget *parent):QWidget(parent)
@@ -96,6 +108,39 @@ TouchLabel::TouchLabel(QWidget *parent):QWidget(parent)
     m_lb = new QLabel(this);
 
     m_btn = new QPushButton(this);
+
+
+
+//    QPushButton
+//    {
+//    color:rgb(14,14,14);
+//    background-color: rgb(247,247,247);
+//    border-style: outset;
+//    border-radius: 10px;
+//    padding:0px;
+//    border-width: 2px;
+//    border-color: #99b3d3;
+//    font: 75 12px "Agency FB";
+//    min-height:30px;
+//    min-width:72px;
+//    color:rgb(77,77,77);
+
+//    }
+
+//    QPushButton:hover
+//    {
+//    font: 75 14px "Agency FB";
+//    border-color: gray;
+//    border-width: 3px;
+
+//    }
+
+//    QPushButton:pressed
+//    {
+//    font: 75 16px "Agency FB";
+//    border-color: black;
+//    border-width: 3px;
+
 
     m_btn->setFlat(false);
 
@@ -115,6 +160,8 @@ void TouchLabel::setPic(QString sFile)
 void TouchLabel::setClicked(bool bIsClicked)
 {
     m_bIsSelect = bIsClicked;
+
+
 }
 
 void TouchLabel::resetSize()

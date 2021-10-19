@@ -73,6 +73,10 @@ public:
 
 private:
     Ui::LayerEditGrid *ui;
+
+private slots:
+
+    void slotClicked();
 };
 
 #endif // LAYEREDITGRID_H

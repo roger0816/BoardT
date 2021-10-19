@@ -10,11 +10,11 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
 
-    DialogEditGrid d;
+//    DialogEditGrid d;
 
-    d.exec();
+//    d.exec();
 
-    return 0;
+//    return 0;
 
 
     QFile qss(":/style.qss");
