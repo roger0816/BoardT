@@ -2,6 +2,8 @@
 
 cd /home/pi/BoardT
 
+git checkout .
+
 git pull 
 
 cd /home/pi/BoardT/src/ActiveBoard
