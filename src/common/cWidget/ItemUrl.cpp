@@ -29,7 +29,7 @@ void ItemUrl::updateItem()
         return;
 
 #ifdef WEB
-    m_view->load(QUrl(m_obj->m_data[Url::source]));
+    m_view->load(QUrl(m_obj->m_data[Url::source].toString()));
 #endif
   //  m_view->show();
 
