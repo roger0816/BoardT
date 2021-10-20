@@ -2,7 +2,7 @@
 #include "ui_ItemGrid.h"
 
 ItemGrid::ItemGrid(QWidget *parent) :
-    QWidget(parent),
+    ItemBaseObj(parent),
     ui(new Ui::ItemGrid)
 {
     ui->setupUi(this);

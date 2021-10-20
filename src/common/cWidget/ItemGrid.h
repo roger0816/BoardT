@@ -20,7 +20,7 @@ namespace Ui {
 class ItemGrid;
 }
 
-class ItemGrid : public QWidget
+class ItemGrid : public ItemBaseObj
 {
     Q_OBJECT
 

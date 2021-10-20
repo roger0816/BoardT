@@ -20,6 +20,7 @@
 #include "ItemTxObjCon.h"
 #include "ItemDateTime.h"
 #include "ItemUrl.h"
+#include "ItemGrid.h"
 namespace Ui {
 class ItemBaseContent;
 }

@@ -30,7 +30,18 @@
     <number>0</number>
    </property>
    <item row="0" column="0">
-    <widget class="QWidget" name="wBg" native="true"/>
+    <widget class="QWidget" name="wBg" native="true">
+     <property name="styleSheet">
+      <string notr="true">QPushButton
+{
+
+border-width: 2px;
+border-color: #99b3d3;
+
+}
+</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

@@ -12,40 +12,6 @@
 #include <QButtonGroup>
 #include "ObjData.h"
 
-//class TouchLabel : public QWidget
-//{
-//    Q_OBJECT
-//public:
-//    TouchLabel(QWidget *parent =nullptr);
-
-//    void setPic(QString sFile);
-
-//    void setClicked(bool bIsClicked);
-
-//signals:
-
-//    void clicked();
-
-//private:
-
-//    bool m_bIsSelect = false;
-
-//    QPushButton *m_btn;
-
-//    QLabel *m_lb;
-
-//    void resetSize();
-
-//    void showEvent(QShowEvent * ) override;
-
-//    void resizeEvent(QResizeEvent *) override;
-
-//private slots:
-//    void slotClicked();
-
-//};
-
-
 
 namespace Ui {
 class LayerEditGrid;
@@ -66,6 +32,7 @@ public:
     void setPic(QString sFilePath, int iIdx=-1);
 
     int currentId(){return m_listBtns.checkedId();}
+
 
 private:
 

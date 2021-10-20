@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QDebug>
+#include <QPixmap>
 #include <QGridLayout>
 #include <QShowEvent>
 #include <QResizeEvent>
@@ -24,6 +25,7 @@ public:
 
     void setObj(ObjData *obj);
 
+
 private:
     void showEvent(QShowEvent* )override;
 
@@ -35,9 +37,23 @@ private slots:
 
     void on_btnG1SetPic_clicked();
 
-    void slotItemClicked(int i);
+    void slotItemClicked(int);
 
-    void slotG2ItemClicked(int i);
+    void slotG2ItemClicked(int);
+
+    void on_btnG2SetPic_clicked();
+
+    void on_btnG2SetListPic_clicked();
+
+    void on_btnG1Clear_clicked();
+
+    void on_btnG2Clear_clicked();
+
+    void on_btnG3SetPic_clicked();
+
+    void on_btnG3Clear_clicked();
+
+    void on_btnOk_clicked();
 
 private:
     Ui::DialogEditGrid *ui;
@@ -45,6 +61,12 @@ private:
     ObjData *m_obj = nullptr;
 
     int m_iCount= 9;
+
+    void refresh();
+
+    int m_iPreG1Idx =-1;
+
+    int m_iPreG2Idx = -1;
 };
 
 #endif // DIALOGEDITGRID_H

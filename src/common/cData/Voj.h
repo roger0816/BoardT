@@ -178,12 +178,33 @@ struct DataVideo
 struct DataGrid
 {
     // int iSec = 10;
+    DataGrid()
+    {
+        for(int i=0;i<9;i++)
+        {
+            listG1.append("");
 
-    QString g1[9];  //grid layer level 1
+            QStringList listItemG2;
 
-    QString g2[9][9];
+            QStringList listItemG3;
+            for(int j=0;j<9;j++)
+            {
+                listItemG2.append("");
 
-    QString g3[81];
+                listItemG3.append("");
+            }
+            listG2[i] = listItemG2;
+
+            listG3[i] = listItemG3;
+        }
+    }
+
+
+    QStringList listG1;  //grid layer level 1
+
+    QStringList listG2[9];
+
+    QStringList listG3[9];
 
     int iCount =9;
 

@@ -182,7 +182,7 @@ void LayerEditor::refresh()
         ui->stackType->setCurrentWidget(ui->pageGrid);
 
 
-        ui->pageTxValue->setTarget(m_obj);
+        ui->pageGrid->setTarget(m_obj);
 
 
 

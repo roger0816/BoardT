@@ -131,6 +131,12 @@ void ItemBaseContent::setData(ObjData *obj, float diffSize)
 
         itemLabel = new ItemUrl(m_wBg);
     }
+
+    else if(m_sType == E_GRID)
+    {
+
+        itemLabel = new ItemGrid(m_wBg);
+    }
     else
     {
         itemLabel = new ItemLabel(m_wBg);

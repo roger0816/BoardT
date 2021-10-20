@@ -33,7 +33,7 @@ private slots:
 
     void slotClicked();
 
-
+    void buttonClicked(QAbstractButton *btn);
 signals:
     void btnAddClicked(int iIdx);
 };

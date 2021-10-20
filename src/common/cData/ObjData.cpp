@@ -275,6 +275,29 @@ void ObjData::writeData()
 
     }
 
+    else if(m_sType == E_GRID)
+    {
+        if(!QDir(m_sObjPath+"/pic").exists())
+            QDir().mkdir(m_sObjPath+"/pic");
+
+
+        for(int i=0;i<9;i++)
+        {
+            QString sPathG1 = m_sObjPath+"/"+QString::number(i+1);
+
+            if(!QDir(sPathG1).exists())
+                QDir().mkdir(sPathG1);
+
+            QPixmap p(m_dataGrid.listG1.at(i));
+
+            p.save(sPathG1+QString("/%1.png").arg(i+1),"PNG");
+
+
+        }
+
+
+    }
+
     else
     {
 

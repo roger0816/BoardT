@@ -14,9 +14,14 @@ LayerEditGrid::LayerEditGrid(QWidget *parent) :
 
         item->setCheckable(true);
 
-        item->setStyleSheet("QPushButton:checked{"
-                            "border-style:inset ; "
-                            "border: 2px solid red;} ");
+        item->setStyleSheet("QPushButton{"
+        "border-width: 2px;"
+                           "border-style: outset; "
+                            "border-radius: 0px; "
+        "border-color: #99b3d3;}"
+        "QPushButton:checked{"
+        "border-style:inset ; "
+        "border: 2px solid red;} ");
 
 
         item->hide();
@@ -26,9 +31,10 @@ LayerEditGrid::LayerEditGrid(QWidget *parent) :
         m_listBtns.addButton(item,i);
     }
 
+    connect(&m_listBtns,SIGNAL(buttonClicked(QAbstractButton *)),SLOT(slotClicked(QAbstractButton *)));
+
     m_listBtns.buttons().first()->setChecked(true);
 
-    // connect(&m_listBtns,&QButtonGroup::buttonClicked,this,&LayerEditGrid::slotClicked);
 
 }
 
@@ -135,102 +141,8 @@ void LayerEditGrid::resetSize()
 
 void LayerEditGrid::slotClicked(QAbstractButton *)
 {
+    qDebug()<<"clicked";
     emit clicked(m_listBtns.checkedId());
 }
 
-//=================================
 
-//TouchLabel::TouchLabel(QWidget *parent):QWidget(parent)
-//{
-//    m_lb = new QLabel(this);
-
-//    m_btn = new QPushButton(this);
-
-//    m_btn->setCheckable(true);
-
-//    m_btn->setStyleSheet(
-//                        "QPushButton:checked{"
-//                                     "border-style:inset ; "
-//                                     "border: 2px solid red;} ");
-//                      //  "QPushButton:pressed{background-color:red;}");
-////    QPushButton
-////    {
-////    color:rgb(14,14,14);
-////    background-color: rgb(247,247,247);
-////    border-style: outset;
-////    border-radius: 10px;
-////    padding:0px;
-////    border-width: 2px;
-////    border-color: #99b3d3;
-////    font: 75 12px "Agency FB";
-////    min-height:30px;
-////    min-width:72px;
-////    color:rgb(77,77,77);
-
-////    }
-
-////    QPushButton:hover
-////    {
-////    font: 75 14px "Agency FB";
-////    border-color: gray;
-////    border-width: 3px;
-
-////    }
-
-////    QPushButton:pressed
-////    {
-////    font: 75 16px "Agency FB";
-////    border-color: black;
-////    border-width: 3px;
-
-
-//    m_btn->setFlat(false);
-
-//    connect(m_btn,SIGNAL(clicked()),this,SLOT(slotClicked()));
-//}
-
-
-
-
-//void TouchLabel::setPic(QString sFile)
-//{
-//    QPixmap p(sFile);
-
-//    m_lb->setPixmap(p.scaledToHeight(height()));
-//}
-
-//void TouchLabel::setClicked(bool bIsClicked)
-//{
-//    m_bIsSelect = bIsClicked;
-
-
-//}
-
-//void TouchLabel::resetSize()
-//{
-//    qDebug()<<"one size "<<size();
-//    m_lb->setMinimumSize(size());
-
-//    m_lb->setMaximumSize(size());
-
-//    m_btn->setMinimumSize(size());
-
-//    m_btn->setMaximumSize(size());
-//}
-
-//void TouchLabel::showEvent(QShowEvent *)
-//{
-//    resetSize();
-//}
-
-//void TouchLabel::resizeEvent(QResizeEvent *)
-//{
-//    resetSize();
-//}
-
-//void TouchLabel::slotClicked()
-//{
-//    setClicked(true);
-
-//    emit clicked();
-//}

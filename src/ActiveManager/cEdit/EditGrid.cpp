@@ -13,6 +13,7 @@ EditGrid::~EditGrid()
     delete ui;
 }
 
+
 void EditGrid::setTarget(ObjData *obj)
 {
     m_obj = obj;
@@ -30,6 +31,9 @@ void EditGrid::setTarget(ObjData *obj)
 
 void EditGrid::on_btnSet_clicked()
 {
+    if(m_obj==nullptr)
+        return;
+
     DialogEditGrid dialog;
 
 
@@ -43,9 +47,11 @@ void EditGrid::on_btnSet_clicked()
     dialog.exec();
 }
 
-
 void EditGrid::on_cbSelect_currentIndexChanged(int index)
 {
+    if(m_obj==nullptr)
+        return;
+
     if(index==0)
     {
         m_obj->m_dataGrid.iCount = 4;
