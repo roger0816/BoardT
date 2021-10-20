@@ -173,6 +173,14 @@ void LayerEditor::refresh()
     {
         ui->stackType->setCurrentWidget(ui->pageTxValue);
 
+        ui->pageTxValue->setTarget(m_obj);
+
+    }
+
+    else if(m_obj->m_sType == E_GRID)
+    {
+        ui->stackType->setCurrentWidget(ui->pageGrid);
+
 
         ui->pageTxValue->setTarget(m_obj);
 

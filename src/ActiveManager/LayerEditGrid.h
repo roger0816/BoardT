@@ -10,6 +10,7 @@
 #include <QMouseEvent>
 #include <QGridLayout>
 #include <QButtonGroup>
+#include "ObjData.h"
 
 //class TouchLabel : public QWidget
 //{
@@ -58,16 +59,15 @@ public:
     explicit LayerEditGrid(QWidget *parent = nullptr);
     ~LayerEditGrid();
 
-    void setGridCount(int iCount);
+    void setObj(ObjData *obj);
 
-    void setDate(QStringList list);
+    void setListPic(QStringList list);
 
     void setPic(QString sFilePath, int iIdx=-1);
 
     int currentId(){return m_listBtns.checkedId();}
 
 private:
-
 
     int m_iGridCount =9;
 
@@ -85,6 +85,8 @@ signals:
 
 private:
     Ui::LayerEditGrid *ui;
+
+    ObjData *m_obj = nullptr;
 
 public slots:
 

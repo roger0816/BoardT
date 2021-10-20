@@ -175,6 +175,20 @@ struct DataVideo
 
 };
 
+struct DataGrid
+{
+    // int iSec = 10;
+
+    QString g1[9];  //grid layer level 1
+
+    QString g2[9][9];
+
+    QString g3[81];
+
+    int iCount =9;
+
+};
+
 struct DataMar
 {
     QStringList listText;

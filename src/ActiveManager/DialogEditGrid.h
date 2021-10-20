@@ -8,6 +8,7 @@
 #include <QResizeEvent>
 #include <QFileDialog>
 #include "DialogMsg.h"
+#include "ObjData.h"
 
 namespace Ui {
 class DialogEditGrid;
@@ -21,6 +22,9 @@ public:
     explicit DialogEditGrid(QWidget *parent = nullptr);
     ~DialogEditGrid();
 
+    void setObj(ObjData *obj);
+
+private:
     void showEvent(QShowEvent* )override;
 
     void resizeEvent(QResizeEvent* )override;
@@ -31,8 +35,16 @@ private slots:
 
     void on_btnG1SetPic_clicked();
 
+    void slotItemClicked(int i);
+
+    void slotG2ItemClicked(int i);
+
 private:
     Ui::DialogEditGrid *ui;
+
+    ObjData *m_obj = nullptr;
+
+    int m_iCount= 9;
 };
 
 #endif // DIALOGEDITGRID_H

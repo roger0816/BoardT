@@ -14,21 +14,21 @@ LayerEditGrid::LayerEditGrid(QWidget *parent) :
 
         item->setCheckable(true);
 
-            item->setStyleSheet("QPushButton:checked{"
-                                             "border-style:inset ; "
-                                             "border: 2px solid red;} ");
+        item->setStyleSheet("QPushButton:checked{"
+                            "border-style:inset ; "
+                            "border: 2px solid red;} ");
 
 
         item->hide();
 
-      //  connect(item,&TouchLabel::clicked,this,&LayerEditGrid::slotClicked);
+        //  connect(item,&TouchLabel::clicked,this,&LayerEditGrid::slotClicked);
 
         m_listBtns.addButton(item,i);
     }
 
     m_listBtns.buttons().first()->setChecked(true);
 
-   // connect(&m_listBtns,&QButtonGroup::buttonClicked,this,&LayerEditGrid::slotClicked);
+    // connect(&m_listBtns,&QButtonGroup::buttonClicked,this,&LayerEditGrid::slotClicked);
 
 }
 
@@ -37,15 +37,21 @@ LayerEditGrid::~LayerEditGrid()
     delete ui;
 }
 
-void LayerEditGrid::setGridCount(int iCount)
+void LayerEditGrid::setObj(ObjData *obj)
 {
-    m_iGridCount = iCount;
+    m_obj = obj;
+
+    m_iGridCount = m_obj->m_dataGrid.iCount;
 }
 
 
-void LayerEditGrid::setDate(QStringList list)
-{
 
+void LayerEditGrid::setListPic(QStringList list)
+{
+    for(int i=0;i<m_iGridCount && i<list.length();i++)
+    {
+        setPic(list.at(i),i);
+    }
 
 }
 
@@ -98,7 +104,7 @@ void LayerEditGrid::resetSize()
         item->hide();
     }
 
-    qDebug()<<"area : "<<iW<<" , "<<iH;
+
     int iIdx=0;
 
     for(int i=0;i<iRowCount;i++)
@@ -107,13 +113,15 @@ void LayerEditGrid::resetSize()
         {
             //  m_listItem[iIdx]->setGeometry(i*iH,j*iW,iW,iH);
 
-            m_listBtns.buttons()[iIdx]->setMinimumSize(QSize(iW,iH));
+            QPushButton *btn = dynamic_cast<QPushButton*>(m_listBtns.buttons().at(iIdx));
 
-            m_listBtns.buttons()[iIdx]->setMaximumSize(QSize(iW,iH));
+            btn->setMinimumSize(QSize(iW,iH));
 
-            m_listBtns.buttons()[iIdx]->move(j*iW,i*iH);
+            btn->setMaximumSize(QSize(iW,iH));
+
+            btn->move(j*iW,i*iH);
             //item->setGeometry(i*iH,j*iW,iW,iH);
-            m_listBtns.buttons()[iIdx]->show();
+            btn->show();
 
             iIdx++;
         }

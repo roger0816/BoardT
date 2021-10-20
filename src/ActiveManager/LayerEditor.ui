@@ -295,7 +295,7 @@ min-height: 1.2em</string>
          </font>
         </property>
         <property name="currentIndex">
-         <number>3</number>
+         <number>7</number>
         </property>
         <widget class="EditLabel" name="pageText">
          <property name="font">
@@ -401,6 +401,7 @@ min-height: 1.2em</string>
           </item>
          </layout>
         </widget>
+        <widget class="EditGrid" name="pageGrid"/>
         <widget class="EditTxObj" name="pageTxValue">
          <layout class="QGridLayout" name="gridLayout_12">
           <property name="topMargin">
@@ -685,6 +686,12 @@ min-height: 1.2em</string>
    <class>EditDateTime</class>
    <extends>QWidget</extends>
    <header>EditDateTime.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>EditGrid</class>
+   <extends>QWidget</extends>
+   <header>EditGrid.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

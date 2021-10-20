@@ -47,6 +47,8 @@ public:
 
     DataVideo m_dataVideo;
 
+    DataGrid m_dataGrid;
+
     //DataMar m_dataMar;
 
     DataCmd m_dataCmd;
