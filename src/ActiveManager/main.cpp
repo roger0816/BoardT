@@ -4,19 +4,23 @@
 #include <QApplication>
 #include "DialogSelectFile.h"
 #include "DialogEditGrid.h"
+#include <QFontDatabase>
+#include <QDir>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
 
+//    QDir dir(QApplication::applicationDirPath()+"/../font");
+
+//    QStringList list =dir.entryList(QStringList()<<"*.ttf");
 
 
-//    DialogEditGrid d;
-
-//    d.exec();
-
-//    return 0;
+//    foreach(QString sPath,list)
+//    {
+//        QFontDatabase::addApplicationFont(sPath);
+//    }
 
 
     QFile qss(":/style.qss");
@@ -34,11 +38,11 @@ int main(int argc, char *argv[])
     }
 
 
-//    DialogSelectFile f;
+    //    DialogSelectFile f;
 
-//    f.exec();
+    //    f.exec();
 
-//    return a.exec();
+    //    return a.exec();
     //    QLocale locale = QLocale::Chinese;//指定英文显示
 
     //    QString st = QDateTime::currentDateTime().toString("yyyyMMdd,hh:mm:ss,dddd");

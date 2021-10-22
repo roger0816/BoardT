@@ -5,6 +5,8 @@
 #include "ItemVideoCon.h"
 #include "ItemVideo.h"
 //#include <QtWebKitWidgets>
+#include <QDir>
+#include <QFontDatabase>
 #define GLOBAL Global::Instance();
 
 
@@ -12,6 +14,16 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+
+    QDir dir(QApplication::applicationDirPath()+"/../font");
+
+    QStringList list =dir.entryList(QStringList()<<"*.ttf");
+
+
+    foreach(QString sPath,list)
+    {
+        QFontDatabase::addApplicationFont(sPath);
+    }
 
 
 //    ItemVideoCon w;
