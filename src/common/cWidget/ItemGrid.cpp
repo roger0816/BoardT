@@ -14,6 +14,13 @@ ItemGrid::ItemGrid(QWidget *parent) :
 
         m_btns.addButton(btn,i);
 
+        QFont f;
+
+        f.setPixelSize(22);
+
+
+        btn->setFont(f);
+
         btn->hide();
     }
 
@@ -59,7 +66,6 @@ void ItemGrid::updateItem()
         return ;
 
     m_type = GRID_TYPE(m_obj->m_dataGrid.iCount);
-    qDebug()<<"AAA : "<<m_obj->m_dataGrid.iCount;
 
     m_iCurrentLv = 1;
 
