@@ -45,6 +45,7 @@ public:
 
     QString m_sCurrentFile;
 
+    bool m_bIsMute = false;
 private:
 
     libvlc_instance_t *vlcInstance;

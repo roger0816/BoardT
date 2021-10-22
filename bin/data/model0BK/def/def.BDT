@@ -1,0 +1,11 @@
+[General]
+ObjSort=Grid_0, MARQUEE1, TEXT_0
+
+[Base]
+resumeTimer=15
+
+[TimeSchedule]
+from=
+to=
+stopPreVideo=false
+dayOfWeek=0

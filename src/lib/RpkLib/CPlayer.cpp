@@ -32,8 +32,10 @@ CPlayer::CPlayer(QWidget *parent) : QWidget(parent)
 
 void CPlayer::setMute(bool mute)
 {
+    m_bIsMute = mute;
+
     if (vlcPlayer != NULL) {
-        libvlc_audio_set_mute(vlcPlayer, mute ? 1 : 0);
+        libvlc_audio_set_mute(vlcPlayer, m_bIsMute ? 1 : 0);
     }
 }
 
@@ -112,6 +114,8 @@ void CPlayer::play()
     if (!libvlc_media_player_is_playing(vlcPlayer))
     {
         /* Play again */
+           libvlc_audio_set_mute(vlcPlayer, m_bIsMute ? 1 : 0);
+
         libvlc_media_player_play(vlcPlayer);
 
     }
