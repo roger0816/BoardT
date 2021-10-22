@@ -113,3 +113,6 @@ INCLUDEPATH+=$$PWD/../lib/RpkLib/qrencode/
 include($$PWD/../common/component/Component.pri);
 include($$PWD/../common/Common.pri);
 
+RESOURCES += \
+    res/res.qrc
+

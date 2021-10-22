@@ -15,15 +15,17 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
 
-    QDir dir(QApplication::applicationDirPath()+"/../font");
+//    QDir dir(QApplication::applicationDirPath()+"/../font");
 
-    QStringList list =dir.entryList(QStringList()<<"*.ttf");
+//    QStringList list =dir.entryList(QStringList()<<"*.ttf");
 
 
-    foreach(QString sPath,list)
-    {
-        QFontDatabase::addApplicationFont(sPath);
-    }
+//    foreach(QString sPath,list)
+//    {
+//        QFontDatabase::addApplicationFont(sPath);
+//    }
+
+    QFontDatabase::addApplicationFont("://ALGER.TTF");
 
 
 //    ItemVideoCon w;
