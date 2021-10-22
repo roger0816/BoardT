@@ -147,18 +147,7 @@ void StageEditArea::on_btnSave_clicked()
     if(iRe == 1)
     {
 
-   //     ui->pageSchedule->saveSchedule();
-
         int iScheduleStatus = SCHEDULE_OFF;
-
-//        if(ui->rdSchedule->isChecked())
-//        {
-//            iScheduleStatus = SCHEDULE_ON;
-//        }
-//        else if(ui->rdTimeSchedule->isChecked())
-//        {
-//            iScheduleStatus = SCHEDULE_TIME;
-//        }
 
         CDATA.m_dataModel.iScheduleMode = iScheduleStatus;
 
@@ -184,6 +173,31 @@ void StageEditArea::on_btnSave_clicked()
 
 void StageEditArea::on_btnUpload_clicked()
 {
+
+    auto fnSave =[=]()
+    {
+        int iScheduleStatus = SCHEDULE_OFF;
+
+        CDATA.m_dataModel.iScheduleMode = iScheduleStatus;
+
+
+        CDATA.writeModel(ui->wLayerSelector->m_sSetTargetPath);
+
+        QString sPath = CDATA.m_sPath;
+
+        QSettings conf(sPath+"/"+sPath.split("/").last()+".BDM",QSettings::IniFormat);
+
+        QDir dir(sPath);
+
+        // conf.setValue("Target",dir.path().split("/").last());
+
+        conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
+
+        conf.sync();
+
+
+        refreshSelector();
+    };
 
 
     auto fnUpload =[=](QString sIp,QString sTarget,QString sPath)
@@ -231,7 +245,7 @@ void StageEditArea::on_btnUpload_clicked()
         conf.sync();
 
 
-        on_btnSave_clicked();
+        fnSave();
 
         fnUpload(m_sPreIp," -r "+sPath,"/home/pi/BoardT/bin/data/");
 
