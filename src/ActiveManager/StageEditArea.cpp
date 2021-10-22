@@ -231,6 +231,8 @@ void StageEditArea::on_btnUpload_clicked()
         conf.sync();
 
 
+        on_btnSave_clicked();
+
         fnUpload(m_sPreIp," -r "+sPath,"/home/pi/BoardT/bin/data/");
 
     }
