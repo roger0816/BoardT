@@ -60,5 +60,7 @@ void EditGrid::on_cbSelect_currentIndexChanged(int index)
     {
         m_obj->m_dataGrid.iCount = 9;
     }
+    qDebug()<<"AAAA call : ";
+    emit callUpdate();
 }
 

@@ -59,7 +59,7 @@ void ItemGrid::updateItem()
         return ;
 
     m_type = GRID_TYPE(m_obj->m_dataGrid.iCount);
-
+    qDebug()<<"AAA : "<<m_obj->m_dataGrid.iCount;
 
     m_iCurrentLv = 1;
 
@@ -165,7 +165,7 @@ void ItemGrid::refresh()
 
             QPixmap p(list.at(i));
 
-            QIcon btnIcon(p.scaledToHeight(m_btns.buttons()[i]->height()-2));
+            QIcon btnIcon(p.scaledToHeight(m_btns.buttons()[i]->height()));
 
             m_btns.buttons()[i]->setIcon(btnIcon);
 

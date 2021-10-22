@@ -20,6 +20,8 @@ LayerEditor::LayerEditor(QWidget *parent) :
 
     connect(ui->pageDate,&EditDateTime::callUpdate,this,&LayerEditor::callUpdate);
 
+    connect(ui->pageGrid,&EditGrid::callUpdate,this,&LayerEditor::callUpdate);
+
 }
 
 LayerEditor::~LayerEditor()
