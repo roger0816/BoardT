@@ -260,3 +260,43 @@ void StageEditArea::slotSelector(QString sName)
     ui->wDisplay->setEdit(true);
 }
 
+
+void StageEditArea::on_btnLayerBg_clicked()
+{
+
+    if(CDATA.m_sCurrentLayerName == "")
+        return;
+
+    QString sTarget =CDATA.m_sCurrentLayerName;
+
+    if(CDATA.m_dData.keys().indexOf(sTarget)<0)
+        return ;
+
+    QString sPath = QFileDialog::getOpenFileName(this,"選擇版面背景圖",QApplication::applicationDirPath(),"*.png");
+
+    if(sPath != CDATA.m_dData[sTarget]->m_sBgPath)
+    {
+        CDATA.m_dData[sTarget]->m_sBgPath = sPath;
+
+        ui->wDisplay->refreshItem();
+    }
+}
+
+void StageEditArea::on_btnDelLayerBg_clicked()
+{
+    if(CDATA.m_sCurrentLayerName == "")
+        return;
+
+    QString sTarget =CDATA.m_sCurrentLayerName;
+
+    if(CDATA.m_dData.keys().indexOf(sTarget)<0)
+        return ;
+
+
+    if(CDATA.m_dData[sTarget]->m_sBgPath != "")
+    {
+        CDATA.m_dData[sTarget]->m_sBgPath = "";
+
+        ui->wDisplay->refreshItem();
+    }
+}

@@ -208,6 +208,8 @@ struct DataGrid
 
     int iCount =9;
 
+    bool bHasChange = false;
+
 };
 
 struct DataMar

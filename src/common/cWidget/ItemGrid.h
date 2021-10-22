@@ -9,9 +9,9 @@
 
 enum GRID_TYPE
 {
-    GRID4,
-    GRID6,
-    GRID9
+    GRID4=4,
+    GRID6=6,
+    GRID9 =9
 
 };
 
@@ -28,12 +28,38 @@ public:
     explicit ItemGrid(QWidget *parent = nullptr);
     ~ItemGrid();
 
-    void setType(GRID_TYPE type);
+    void updateItem() override;
+
+
+private:
+
+    void reSetSize() override;
 
     QButtonGroup m_listButton;
 
-private:
+ //   QPushButton *m_btnMain;
+
+    QPushButton *m_btnBack;
+
     Ui::ItemGrid *ui;
+
+    GRID_TYPE m_type = GRID9;
+
+    int m_iCurrentLv = 1;
+
+
+    QButtonGroup m_btns;
+
+    int m_iIdxLv1=0;
+
+    int m_iIdxLv2=0;
+
+    void refresh();
+private slots:
+
+    void slotClick(QAbstractButton *btn);
+
+    void slotBack();
 };
 
 #endif // ITEMGRID_H

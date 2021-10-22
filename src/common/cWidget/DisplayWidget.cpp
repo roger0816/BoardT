@@ -424,7 +424,8 @@ void DisplayWidget::addItem(int iIdx)
     else if(iIdx == ADD_BASIC_TEXT)
     {
 
-            qDebug()<<"TEXT ";
+        qDebug()<<"TEXT ";
+
         obj->m_sType = E_TEXT;
 
         sTmp = "TEXT_%1";
@@ -441,12 +442,12 @@ void DisplayWidget::addItem(int iIdx)
 
     else if(iIdx == ADD_ADV_964)
     {
-//        obj->m_sType = E_GRID;
+        obj->m_sType = E_GRID;
 
-//        sTmp = "Grid_%1";
+        sTmp = "Grid_%1";
 
-        delete obj;
-        return ;
+//        delete obj;
+//        return ;
 
     }
 

@@ -183,6 +183,10 @@ void ItemBaseContent::setEdit(bool b)
 
     m_click->setVisible(!b);
 
+    if(m_sType==E_GRID)
+    {
+        m_click->hide();
+    }
 
 }
 

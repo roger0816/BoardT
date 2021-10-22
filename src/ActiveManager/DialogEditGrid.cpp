@@ -48,9 +48,9 @@ void DialogEditGrid::resizeEvent(QResizeEvent *)
 
 void DialogEditGrid::resetSize()
 {
-//    ui->wG1->setGridCount(m_iCount);
+    //    ui->wG1->setGridCount(m_iCount);
 
-//    ui->wG2->setGridCount(m_iCount);
+    //    ui->wG2->setGridCount(m_iCount);
     ui->wG1Area->setMinimumHeight((float)ui->wG1Area->width()/1080*720);
     ui->wG1Area->setMaximumHeight((float)ui->wG1Area->width()/1080*720);
 
@@ -80,6 +80,7 @@ void DialogEditGrid::on_btnG1SetListPic_clicked()
 
     m_obj->m_dataGrid.listG1 = listFile;
 
+    m_obj->m_dataGrid.bHasChange = true;
     refresh();
 
 }
@@ -105,6 +106,7 @@ void DialogEditGrid::on_btnG1SetPic_clicked()
 
     m_obj->m_dataGrid.listG1[ui->wG1->currentId()]= sFile;
 
+    m_obj->m_dataGrid.bHasChange = true;
     refresh();
 }
 
@@ -152,11 +154,10 @@ void DialogEditGrid::on_btnG2SetPic_clicked()
                                                 "*.png *.jpg *jpeg");
 
 
-
     ui->wG2->setPic(sFile);
 
     m_obj->m_dataGrid.listG2[ui->wG1->currentId()][ui->wG2->currentId()]= sFile;
-
+    m_obj->m_dataGrid.bHasChange = true;
     refresh();
 }
 
@@ -176,7 +177,7 @@ void DialogEditGrid::on_btnG2SetListPic_clicked()
     ui->wG2->setListPic(listFile);
 
     m_obj->m_dataGrid.listG2[ui->wG1->currentId()] = listFile;
-
+    m_obj->m_dataGrid.bHasChange = true;
     refresh();
 }
 
@@ -194,7 +195,7 @@ void DialogEditGrid::on_btnG3SetPic_clicked()
 
     m_obj->m_dataGrid.listG3[ui->wG1->currentId()][ui->wG2->currentId()] = sFile;
 
-
+    m_obj->m_dataGrid.bHasChange = true;
 }
 
 
@@ -202,12 +203,14 @@ void DialogEditGrid::on_btnG1Clear_clicked()
 {
     ui->wG1->setPic("",ui->wG1->currentId());
     m_obj->m_dataGrid.listG1[ui->wG1->currentId()]="";
+    m_obj->m_dataGrid.bHasChange = true;
 }
 
 void DialogEditGrid::on_btnG2Clear_clicked()
 {
     ui->wG2->setPic("",ui->wG2->currentId());
-     m_obj->m_dataGrid.listG2[ui->wG1->currentId()][ui->wG2->currentId()]="";
+    m_obj->m_dataGrid.listG2[ui->wG1->currentId()][ui->wG2->currentId()]="";
+    m_obj->m_dataGrid.bHasChange = true;
 }
 
 
@@ -218,6 +221,7 @@ void DialogEditGrid::on_btnG3Clear_clicked()
 
 
     m_obj->m_dataGrid.listG3[ui->wG1->currentId()][ui->wG2->currentId()] = "";
+    m_obj->m_dataGrid.bHasChange = true;
 
 }
 

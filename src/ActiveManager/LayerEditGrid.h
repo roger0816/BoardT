@@ -36,6 +36,7 @@ public:
 
 private:
 
+
     int m_iGridCount =9;
 
     void showEvent(QShowEvent* ) override;

@@ -119,7 +119,44 @@ void ObjData::readData(QString sPath)
 
     }
 
+    else if(sType == E_GRID)
+    {
+        if(!QDir(m_sObjPath+"/pic").exists())
+            QDir().mkdir(m_sObjPath+"/pic");
 
+
+        for(int i=0;i<9;i++)
+        {
+            QString sPathG1 = m_sObjPath+"/"+QString::number(i+1);
+
+            if(!QDir(sPathG1).exists())
+                QDir().mkdir(sPathG1);
+
+            m_dataGrid.listG1[i] = sPathG1+QString("/%1.png").arg(i+1);
+
+            for(int j=0;j<9;j++)
+            {
+                QString sPathG2=sPathG1+"/"+QString::number(j+1);
+                if(!QDir(sPathG2).exists())
+                    QDir().mkdir(sPathG2);
+
+                m_dataGrid.listG2[i][j]=sPathG2+QString("/%1.png").arg(j+1);
+
+                m_dataGrid.listG3[i][j]=sPathG2+QString("/%1_d.png").arg(j+1);
+
+                qDebug()<<"G3 pic : i "<<i<<" , j "<<j<<" : "<<sPathG2+QString("/%1_d.png").arg(j+1);
+
+            }
+        }
+
+        m_dataGrid.bHasChange = false;
+
+
+        m_dataGrid.iCount = conf.value("Grid/count",9).toInt();
+
+
+
+    }
 
 
     else //if(sType == E_TEXT || sType == E_BUTTON || sType == E_MARQUEE || sType == E_QRCODE)
@@ -281,7 +318,7 @@ void ObjData::writeData()
             QDir().mkdir(m_sObjPath+"/pic");
 
 
-        for(int i=0;i<9;i++)
+        for(int i=0;i<9&&m_dataGrid.bHasChange;i++)
         {
             QString sPathG1 = m_sObjPath+"/"+QString::number(i+1);
 
@@ -292,17 +329,32 @@ void ObjData::writeData()
 
             p.save(sPathG1+QString("/%1.png").arg(i+1),"PNG");
 
+            for(int j=0;j<9;j++)
+            {
+                QString sPathG2=sPathG1+"/"+QString::number(j+1);
+                if(!QDir(sPathG2).exists())
+                    QDir().mkdir(sPathG2);
 
+                QPixmap p2(m_dataGrid.listG2[i].at(j));
+
+                p2.save(sPathG2+QString("/%1.png").arg(j+1),"PNG");
+
+                QPixmap p3(m_dataGrid.listG3[i].at(j));
+
+                p3.save(sPathG2+QString("/%1_d.png").arg(j+1),"PNG");
+
+            }
         }
+
+        conf.setValue("Grid/count",m_dataGrid.iCount);
+
+        m_dataGrid.bHasChange = false;
 
 
     }
 
     else
     {
-
-
-        //
 
         QStringList listKey = m_data.keys();
 
