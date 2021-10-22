@@ -295,7 +295,7 @@ min-height: 1.2em</string>
          </font>
         </property>
         <property name="currentIndex">
-         <number>7</number>
+         <number>3</number>
         </property>
         <widget class="EditLabel" name="pageText">
          <property name="font">
@@ -329,7 +329,7 @@ min-height: 1.2em</string>
           <item row="1" column="0">
            <widget class="QLineEdit" name="txUrl">
             <property name="text">
-             <string>www.google.com</string>
+             <string>http://www.google.com</string>
             </property>
            </widget>
           </item>
