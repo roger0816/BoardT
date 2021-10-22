@@ -182,6 +182,8 @@ void CData::writeModel(QString defLayer)
 
         conf.setValue("TimeSchedule/dayOfWeek",layerData->m_dataLayer.dayOfWeek);
 
+        conf.setValue("ObjSort",layerData->m_dataLayer.listObjSort);
+
         conf.sync();
 
 

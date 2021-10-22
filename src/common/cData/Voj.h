@@ -93,6 +93,8 @@ struct DataLayer
 
     bool bStopPreVideo = true;
 
+    QList<QVariant> listObjSort;
+
 };
 
 

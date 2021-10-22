@@ -257,7 +257,10 @@ bool LayerEditor::deleteDirectory(const QString &path)
 
 void LayerEditor::on_btnToTop_clicked()
 {
-    emit callRaise(m_sPath);
+
+ CDATA.m_dData[CDATA.m_sCurrentLayerName]->raise(m_sObjName);
+
+ emit callRaise(m_sPath);
 }
 
 void LayerEditor::on_btnRename_clicked()
@@ -291,6 +294,7 @@ void LayerEditor::on_btnRename_clicked()
 
     m_sPath = sNewPath;
 
+    m_sObjName = m_obj->m_sName;
 
     emit callRename(sOldPath,sNewPath);
     // callUpdate();

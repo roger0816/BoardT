@@ -29,11 +29,13 @@ public:
 
     QList<ObjData*> m_listData;
 
+    QStringList m_listObjName;
+
     QMap<QString,int> m_dDefine;
 
     DataLayer m_dataLayer;
 
-
+    void raise(QString sObjName);
 private:
 
 
