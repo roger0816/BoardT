@@ -5,7 +5,9 @@
 #include <QLabel>
 #include "ItemBaseObj.h"
 #include <QResizeEvent>
-
+#ifdef WEB
+#include <QWebView>
+#endif
 namespace Ui {
 class ItemUrl;
 }
@@ -25,7 +27,7 @@ public:
 private:
 
 #ifdef WEB
-    // QWebView *m_view;
+     QWebView *m_view;
 #else
     QLabel *m_view;
 #endif
