@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
 //    }
 
 
+
     QFile qss(":/style.qss");
 
     if( qss.open(QFile::ReadOnly))

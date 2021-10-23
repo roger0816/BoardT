@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
 //        QFontDatabase::addApplicationFont(sPath);
 //    }
 
+
     QFontDatabase::addApplicationFont("://ALGER.TTF");
 
 
