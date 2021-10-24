@@ -123,8 +123,8 @@ void ObjData::readData(QString sPath)
 
     else if(sType == E_GRID)
     {
-        if(!QDir(m_sObjPath+"/pic").exists())
-            QDir().mkdir(m_sObjPath+"/pic");
+//        if(!QDir(m_sObjPath+"/pic").exists())
+//            QDir().mkdir(m_sObjPath+"/pic");
 
 
         for(int i=0;i<9;i++)
@@ -217,15 +217,6 @@ void ObjData::writeData()
         return ;
 
 
-
-    QString sSourcePath = m_sObjPath+"/source/";
-
-    deleteDirectory(sSourcePath);
-
-    QDir().mkdir(sSourcePath);
-
-
-
     int  x = m_rect.x();
 
     int y = m_rect.y();
@@ -256,6 +247,14 @@ void ObjData::writeData()
     conf.setValue("Action/value2",m_dataCmd.sValue2);
 
     conf.sync();
+
+    QString sSourcePath = m_sObjPath+"/source/";
+
+    deleteDirectory(sSourcePath);
+
+    QDir().mkdir(sSourcePath);
+
+
 
     if(m_sWaitRename.trimmed()!="")
     {
@@ -325,11 +324,8 @@ void ObjData::writeData()
 
     else if(m_sType == E_GRID)
     {
-        if(!QDir(m_sObjPath+"/pic").exists())
-            QDir().mkdir(m_sObjPath+"/pic");
 
-
-        for(int i=0;i<9&&m_dataGrid.bHasChange;i++)
+        for(int i=0;i<9;i++)
         {
             QString sPathG1 = sSourcePath+QString::number(i+1);
 
