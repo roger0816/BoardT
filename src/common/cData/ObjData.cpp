@@ -123,8 +123,8 @@ void ObjData::readData(QString sPath)
 
     else if(sType == E_GRID)
     {
-//        if(!QDir(m_sObjPath+"/pic").exists())
-//            QDir().mkdir(m_sObjPath+"/pic");
+        //        if(!QDir(m_sObjPath+"/pic").exists())
+        //            QDir().mkdir(m_sObjPath+"/pic");
 
 
         for(int i=0;i<9;i++)
@@ -179,14 +179,14 @@ void ObjData::readData(QString sPath)
         QStringList keys = conf.childKeys();
         foreach (QString key, keys)
         {
-//            if(key==DateTime::dateStr)
-//                m_data[key] = conf.value(key,"yyyy/MM/dd").toString();
-//            else if(key==DateTime::timeStr)
-//                m_data[key] = conf.value(key,"hh:mm:ss").toString();
-//            else if(key==DateTime::speed)
-//                m_data[key] = conf.value(key,3).toInt();
-//            else
-                m_data[key] = conf.value(key);
+            //            if(key==DateTime::dateStr)
+            //                m_data[key] = conf.value(key,"yyyy/MM/dd").toString();
+            //            else if(key==DateTime::timeStr)
+            //                m_data[key] = conf.value(key,"hh:mm:ss").toString();
+            //            else if(key==DateTime::speed)
+            //                m_data[key] = conf.value(key,3).toInt();
+            //            else
+            m_data[key] = conf.value(key);
 
 
             qDebug()<<"CC : key :"<<key<<" , data : "<< m_data[key];
@@ -250,9 +250,7 @@ void ObjData::writeData()
 
     QString sSourcePath = m_sObjPath+"/source/";
 
-    deleteDirectory(sSourcePath);
 
-    QDir().mkdir(sSourcePath);
 
 
 
@@ -267,6 +265,9 @@ void ObjData::writeData()
     if(m_sType == E_PIC)
     {
 
+        deleteDirectory(sSourcePath);
+
+        QDir().mkdir(sSourcePath);
 
         QStringList listName = m_dataPic.listPicName;
 
@@ -288,7 +289,12 @@ void ObjData::writeData()
 
     else if(m_sType == E_VIDEO)
     {
+        if(m_dataVideo.bHasChange)
+        {
+            deleteDirectory(sSourcePath);
 
+            QDir().mkdir(sSourcePath);
+        }
 
 
         QStringList listName = m_dataVideo.listName;
@@ -296,19 +302,13 @@ void ObjData::writeData()
 
         for(int i=0;i<listName.length();i++)
         {
-            //            QFile file(listName.at(i));
-
-            //            if(file.open(QIODevice::ReadOnly))
-            //            {
-            //                file.copy(m_sObjPath+"/"+listName.at(i).split("/").last());
-
-            //                file.close();
-            //            }
 
             QString sTarget =sSourcePath+listName.at(i).split("/").last();
             qDebug()<<"file : "<<listName.at(i);
             qDebug()<<"save : "<<sTarget;
-            QFile::copy(listName.at(i),sTarget);
+
+            if(m_dataVideo.bHasChange)
+                QFile::copy(listName.at(i),sTarget);
 
             listName[i] = sTarget;
 
@@ -324,34 +324,42 @@ void ObjData::writeData()
 
     else if(m_sType == E_GRID)
     {
-
-        for(int i=0;i<9;i++)
+        if(m_dataGrid.bHasChange)
         {
-            QString sPathG1 = sSourcePath+QString::number(i+1);
+            deleteDirectory(sSourcePath);
 
-            if(!QDir(sPathG1).exists())
-                QDir().mkdir(sPathG1);
+            QDir().mkdir(sSourcePath);
 
-            QPixmap p(m_dataGrid.listG1.at(i));
 
-            p.save(sPathG1+QString("/%1.png").arg(i+1),"PNG");
-
-            for(int j=0;j<9;j++)
+            for(int i=0;i<9;i++)
             {
-                QString sPathG2=sPathG1+"/"+QString::number(j+1);
-                if(!QDir(sPathG2).exists())
-                    QDir().mkdir(sPathG2);
+                QString sPathG1 = sSourcePath+QString::number(i+1);
 
-                QPixmap p2(m_dataGrid.listG2[i].at(j));
+                if(!QDir(sPathG1).exists())
+                    QDir().mkdir(sPathG1);
 
-                p2.save(sPathG2+QString("/%1.png").arg(j+1),"PNG");
+                QPixmap p(m_dataGrid.listG1.at(i));
 
-                QPixmap p3(m_dataGrid.listG3[i].at(j));
+                p.save(sPathG1+QString("/%1.png").arg(i+1),"PNG");
 
-                p3.save(sPathG2+QString("/%1_d.png").arg(j+1),"PNG");
+                for(int j=0;j<9;j++)
+                {
+                    QString sPathG2=sPathG1+"/"+QString::number(j+1);
+                    if(!QDir(sPathG2).exists())
+                        QDir().mkdir(sPathG2);
 
+                    QPixmap p2(m_dataGrid.listG2[i].at(j));
+
+                    p2.save(sPathG2+QString("/%1.png").arg(j+1),"PNG");
+
+                    QPixmap p3(m_dataGrid.listG3[i].at(j));
+
+                    p3.save(sPathG2+QString("/%1_d.png").arg(j+1),"PNG");
+
+                }
             }
         }
+
 
         conf.setValue("Grid/count",m_dataGrid.iCount);
 

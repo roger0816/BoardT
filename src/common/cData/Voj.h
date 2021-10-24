@@ -175,6 +175,8 @@ struct DataVideo
 
     bool bIsMute = false;
 
+    bool bHasChange = false;
+
 };
 
 struct DataGrid

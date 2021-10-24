@@ -76,6 +76,9 @@ void EditVideo::on_btnSetting_clicked()
 
     refreshTable();
 
+    if(dialog.bHasChange)
+        m_obj->m_dataVideo.bHasChange = true;
+
     //    ObjData *data = CDATA.getObj(m_sLayerName,m_sObjName,bOk);
 
 

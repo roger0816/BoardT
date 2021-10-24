@@ -30,6 +30,8 @@ public:
     void setPreview(bool bEnable = true);
 
     void resizeEvent(QResizeEvent *) override;
+
+    bool bHasChange = false;
 private slots:
     void on_btnOk_clicked();
 
@@ -57,6 +59,8 @@ private:
     QString m_sFilter = "*.png *jpg *jpeg";
 
     void refreshList();
+
+
 };
 
 #endif // DIALOGSELECTFILE_H

@@ -170,7 +170,7 @@ void DialogSelectFile::on_btnAdd_clicked()
     on_listView_pressed(m_model->index(idx,0));
 
 
-
+    bHasChange = true;
 
 }
 
@@ -186,6 +186,7 @@ void DialogSelectFile::on_btnRemove_clicked()
         refreshList();
     }
 
+    bHasChange = true;
 }
 
 void DialogSelectFile::on_btnUp_clicked()
@@ -205,6 +206,8 @@ void DialogSelectFile::on_btnUp_clicked()
 
     refreshList();
 
+    bHasChange = true;
+
 }
 
 void DialogSelectFile::on_btnDown_clicked()
@@ -221,4 +224,6 @@ void DialogSelectFile::on_btnDown_clicked()
     ui->listView->setCurrentIndex(m_model->index(iRow+1,0));
 
     refreshList();
+
+    bHasChange = true;
 }
