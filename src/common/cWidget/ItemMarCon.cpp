@@ -54,7 +54,7 @@ void ItemMarCon::timerEvent(QTimerEvent *)
     {
         m_lb->move(iX-(3*m_iSpeed),0);
 
-        m_lb->raise();
+      //  m_lb->raise();
         // m_lb->move(iX-30,0);
 
     }
