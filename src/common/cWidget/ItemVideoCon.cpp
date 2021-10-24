@@ -93,7 +93,9 @@ ItemVideoCon::ItemVideoCon(QWidget *parent) : ItemBaseObj(parent)
 
     m_wBg->setObjectName("m_wVideoBg");
 
-    m_wBg->setStyleSheet("QWidget#m_wVideoBg{background-color:black;color:white;}");
+  //  m_wBg->setStyleSheet("QWidget#m_wVideoBg{background-color:black;color:white;}");
+
+     m_wBg->setStyleSheet("QWidget#m_wVideoBg{background-color:gray;color:white;}");
 
     m_wBg->setAlignment(Qt::AlignHCenter);
 
