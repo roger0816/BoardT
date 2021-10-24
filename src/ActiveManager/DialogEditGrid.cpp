@@ -70,6 +70,9 @@ void DialogEditGrid::on_btnG1SetListPic_clicked()
                                                         "*.png *.jpg *jpeg");
 
 
+    if(listFile.length()<1)
+        return;
+
     while(listFile.length()<9)
         listFile.append("");
 
@@ -100,7 +103,8 @@ void DialogEditGrid::on_btnG1SetPic_clicked()
                                                 QApplication::applicationDirPath()+"/../",
                                                 "*.png *.jpg *jpeg");
 
-
+    if(sFile.length()<1)
+        return;
 
     ui->wG1->setPic(sFile);
 
@@ -154,6 +158,9 @@ void DialogEditGrid::on_btnG2SetPic_clicked()
                                                 "*.png *.jpg *jpeg");
 
 
+    if(sFile.length()<1)
+        return;
+
     ui->wG2->setPic(sFile);
 
     m_obj->m_dataGrid.listG2[ui->wG1->currentId()][ui->wG2->currentId()]= sFile;
@@ -167,6 +174,9 @@ void DialogEditGrid::on_btnG2SetListPic_clicked()
                                                         QApplication::applicationDirPath()+"/../",
                                                         "*.png *.jpg *jpeg");
 
+
+    if(listFile.length()<1)
+        return;
 
     while(listFile.length()<9)
         listFile.append("");
@@ -189,7 +199,8 @@ void DialogEditGrid::on_btnG3SetPic_clicked()
                                                 "*.png *.jpg *jpeg");
 
 
-
+    if(sFile.length()<1)
+        return;
     QPixmap p(sFile);
     ui->wG3->setPixmap(p.scaledToHeight(ui->wG3->height()));
 
