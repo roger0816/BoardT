@@ -115,6 +115,7 @@ void ItemTxObjCon::updateItem()
 
 void ItemTxObjCon::doRead()
 {
+    qDebug()<<"doRead";
 
     //  QFile f(QApplication::applicationDirPath()+"/input.txt");
 
@@ -123,7 +124,6 @@ void ItemTxObjCon::doRead()
         return ;
     }
 
-        qDebug()<<"do read";
 
     QFile *file = new QFile(QApplication::applicationDirPath()+"/input.txt");
 
@@ -141,6 +141,10 @@ void ItemTxObjCon::doRead()
 
             m_sCurrentValue = list.at(m_iSelect);
 
+        }
+        else
+        {
+            m_sCurrentValue ="0";
         }
         file->close();
     }
@@ -382,7 +386,7 @@ void ItemTxObjCon::iniGpio()
 void ItemTxObjCon::slotTimer()
 {
 
-
+    qDebug()<<"AAA Tx";
     m_iSec++;
 
     if(m_iSec>=10000)
@@ -401,6 +405,8 @@ void ItemTxObjCon::slotTimer()
         doRead();
 
     }
+
+
 
     if(m_iSec%m_iPlaySpeed==0)
     {
