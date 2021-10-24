@@ -288,7 +288,7 @@ void StageEditArea::on_btnLayerBg_clicked()
     if(CDATA.m_dData.keys().indexOf(sTarget)<0)
         return ;
 
-    QString sPath = QFileDialog::getOpenFileName(this,"選擇版面背景圖",QApplication::applicationDirPath(),"*.png *jpg *jpeg");
+    QString sPath = QFileDialog::getOpenFileName(this,"選擇版面背景圖",QApplication::applicationDirPath(),"*.png *.jpg *.jpeg");
 
     if(sPath != CDATA.m_dData[sTarget]->m_sBgPath)
     {
