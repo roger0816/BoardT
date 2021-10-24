@@ -9,6 +9,8 @@ void ObjData::readData(QString sPath)
 {
     m_sObjPath = sPath;
 
+    QString sSourcePath = m_sObjPath+"/source/";
+
     m_sName = m_sObjPath.split("/").last();
 
     if(m_sObjPath.length()>1)
@@ -74,7 +76,7 @@ void ObjData::readData(QString sPath)
             QString sFilePath = m_dataPic.listPicName.at(i);
 
             if(!QFileInfo(sFilePath).exists())
-                sFilePath = m_sObjPath+"/"+sFilePath.split("/").last();
+                sFilePath = sSourcePath+sFilePath.split("/").last();
 
             if(QFileInfo(sFilePath).exists())
             {
@@ -109,7 +111,7 @@ void ObjData::readData(QString sPath)
         {
             //            qDebug()<<"read: "<<sFilePath ;
             //            if(!QFileInfo(sFilePath).exists())
-            sFilePath = m_sObjPath+"/"+sFilePath.split("/").last();
+            sFilePath = sSourcePath+sFilePath.split("/").last();
             m_dataVideo.listName.append(sFilePath);
         }
 
@@ -127,7 +129,7 @@ void ObjData::readData(QString sPath)
 
         for(int i=0;i<9;i++)
         {
-            QString sPathG1 = m_sObjPath+"/"+QString::number(i+1);
+            QString sPathG1 = sSourcePath+QString::number(i+1);
 
             if(!QDir(sPathG1).exists())
                 QDir().mkdir(sPathG1);
@@ -215,6 +217,15 @@ void ObjData::writeData()
         return ;
 
 
+
+    QString sSourcePath = m_sObjPath+"/source/";
+
+    deleteDirectory(sSourcePath);
+
+    QDir().mkdir(sSourcePath);
+
+
+
     int  x = m_rect.x();
 
     int y = m_rect.y();
@@ -271,7 +282,7 @@ void ObjData::writeData()
         {
             QPixmap *p = & m_dataPic.listPic[i];
 
-            p->save(m_sObjPath+"/"+listName.at(i).split("/").last());
+            p->save(sSourcePath+listName.at(i).split("/").last());
         }
 
     }
@@ -295,7 +306,7 @@ void ObjData::writeData()
             //                file.close();
             //            }
 
-            QString sTarget =m_sObjPath+"/"+listName.at(i).split("/").last();
+            QString sTarget =sSourcePath+listName.at(i).split("/").last();
             qDebug()<<"file : "<<listName.at(i);
             qDebug()<<"save : "<<sTarget;
             QFile::copy(listName.at(i),sTarget);
@@ -320,7 +331,7 @@ void ObjData::writeData()
 
         for(int i=0;i<9&&m_dataGrid.bHasChange;i++)
         {
-            QString sPathG1 = m_sObjPath+"/"+QString::number(i+1);
+            QString sPathG1 = sSourcePath+QString::number(i+1);
 
             if(!QDir(sPathG1).exists())
                 QDir().mkdir(sPathG1);
