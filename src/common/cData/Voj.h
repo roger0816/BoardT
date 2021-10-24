@@ -175,6 +175,8 @@ struct DataVideo
 
     bool bIsMute = false;
 
+    bool bUseFile = true;
+
     bool bHasChange = false;
 
 };

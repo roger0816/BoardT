@@ -61,7 +61,7 @@ void EditTxObj::readData()
         int iIdx = m_obj->m_data[TxtValue::index].toInt();
 
         if(ui->cbTxValue->count()>0 &&  iIdx < ui->cbTxValue->count())
-        ui->cbTxValue->setCurrentIndex(iIdx);
+            ui->cbTxValue->setCurrentIndex(iIdx);
 
         QStringList listText = m_obj->m_data.value(TxtValue::msg).toStringList();
 
@@ -85,7 +85,7 @@ void EditTxObj::readData()
     }
 
 
-   // ui->chCent2->setChecked(m_obj->m_data.value(Label::alignCenter).toInt());
+    // ui->chCent2->setChecked(m_obj->m_data.value(Label::alignCenter).toInt());
 
 
     m_bLockCallUpdate = false;
@@ -93,34 +93,34 @@ void EditTxObj::readData()
 
 void EditTxObj::updateTxValue()
 {
-        if(m_obj ==nullptr || m_bLockCallUpdate )
-            return ;
+    if(m_obj ==nullptr || m_bLockCallUpdate )
+        return ;
 
 
-        m_obj->m_data[TxtValue::index] = ui->cbTxValue->currentIndex();
+    m_obj->m_data[TxtValue::index] = ui->cbTxValue->currentIndex();
 
 
-        m_obj->m_data[TxtValue::playSpeed]= ui->sbTxValueDisplay->value();
+    m_obj->m_data[TxtValue::playSpeed]= ui->sbTxValueDisplay->value();
 
-        m_obj->m_data[TxtValue::readSpeed]= ui->sbTxValueRead->value();
+    m_obj->m_data[TxtValue::readSpeed]= ui->sbTxValueRead->value();
 
-        m_obj->m_data[TxtValue::min] = ui->sbMin->value();
+    m_obj->m_data[TxtValue::min] = ui->sbMin->value();
 
-        m_obj->m_data[TxtValue::max] = ui->sbMax->value();
-
-
-        QStringList listText ;
-
-        listText<<ui->txTxValueMinMsg->text();
-
-        listText<<ui->txTxValueMsg->text();
-
-        listText<<ui->txTxValueMaxMsg->text();
-
-        m_obj->m_data[TxtValue::msg] = listText;
+    m_obj->m_data[TxtValue::max] = ui->sbMax->value();
 
 
-        emit callUpdate();
+    QStringList listText ;
+
+    listText<<ui->txTxValueMinMsg->text();
+
+    listText<<ui->txTxValueMsg->text();
+
+    listText<<ui->txTxValueMaxMsg->text();
+
+    m_obj->m_data[TxtValue::msg] = listText;
+
+
+    emit callUpdate();
 
 }
 
@@ -203,7 +203,7 @@ void EditTxObj::on_btnSelectFontMin_clicked()
 
     EditBase::setEditFont(m_obj,TxtValue::fontMin,ui->btnSelectFontMin);
 
-     emit callUpdate();
+    emit callUpdate();
 }
 
 void EditTxObj::on_btnSelectFont_clicked()
@@ -213,7 +213,7 @@ void EditTxObj::on_btnSelectFont_clicked()
 
     EditBase::setEditFont(m_obj,TxtValue::font,ui->btnSelectFont);
 
-     emit callUpdate();
+    emit callUpdate();
 }
 
 void EditTxObj::on_btnSelectFontMax_clicked()
@@ -223,7 +223,7 @@ void EditTxObj::on_btnSelectFontMax_clicked()
 
     EditBase::setEditFont(m_obj,TxtValue::fontMax,ui->btnSelectFontMax);
 
-     emit callUpdate();
+    emit callUpdate();
 }
 
 void EditTxObj::on_btnTxtColorMin_clicked()
@@ -233,7 +233,7 @@ void EditTxObj::on_btnTxtColorMin_clicked()
 
     EditBase::setEditColor(m_obj,TxtValue::txtColorMin);
 
-     emit callUpdate();
+    emit callUpdate();
 }
 
 void EditTxObj::on_btnTxtColor_clicked()
@@ -243,7 +243,7 @@ void EditTxObj::on_btnTxtColor_clicked()
 
     EditBase::setEditColor(m_obj,TxtValue::txtColor);
 
-     emit callUpdate();
+    emit callUpdate();
 }
 
 void EditTxObj::on_btnTxtColorMax_clicked()
@@ -253,7 +253,7 @@ void EditTxObj::on_btnTxtColorMax_clicked()
 
     EditBase::setEditColor(m_obj,TxtValue::txtColorMax);
 
-     emit callUpdate();
+    emit callUpdate();
 }
 
 void EditTxObj::on_btnBgColorMin_clicked()
@@ -263,7 +263,7 @@ void EditTxObj::on_btnBgColorMin_clicked()
 
     EditBase::setEditColor(m_obj,TxtValue::bgColorMin);
 
-     emit callUpdate();
+    emit callUpdate();
 }
 
 void EditTxObj::on_btnBgColor_clicked()
@@ -273,7 +273,7 @@ void EditTxObj::on_btnBgColor_clicked()
 
     EditBase::setEditColor(m_obj,TxtValue::bgColor);
 
-     emit callUpdate();
+    emit callUpdate();
 }
 
 void EditTxObj::on_btnBgColorMax_clicked()
@@ -283,7 +283,7 @@ void EditTxObj::on_btnBgColorMax_clicked()
 
     EditBase::setEditColor(m_obj,TxtValue::bgColorMax);
 
-     emit callUpdate();
+    emit callUpdate();
 }
 
 void EditTxObj::on_btnBgImageMin_clicked()
@@ -291,7 +291,10 @@ void EditTxObj::on_btnBgImageMin_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    EditBase::setEditBgImage(m_obj,"選擇元件背景圖",TxtValue::imagePathMin);
+    QString sPath = QFileDialog::getOpenFileName(nullptr,"選擇元件背景圖",QApplication::applicationDirPath(),"*.png *.jpg *.jpeg");
+
+    if(sPath!="")
+        m_obj->m_data[TxtValue::imagePathMin] = sPath;
 
     emit callUpdate();
 }
@@ -301,7 +304,13 @@ void EditTxObj::on_btnBgImage_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    EditBase::setEditBgImage(m_obj,"選擇元件背景圖",TxtValue::imagePath);
+
+    QString sPath = QFileDialog::getOpenFileName(nullptr,"選擇元件背景圖",QApplication::applicationDirPath(),"*.png *.jpg *.jpeg");
+
+    if(sPath!="")
+        m_obj->m_data[TxtValue::imagePath] = sPath;
+
+    //  EditBase::setEditBgImage(m_obj,"選擇元件背景圖",TxtValue::imagePath);
 
     emit callUpdate();
 }
@@ -311,8 +320,10 @@ void EditTxObj::on_btnBgImageMax_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    EditBase::setEditBgImage(m_obj,"選擇元件背景圖",TxtValue::imagePathMax);
+    QString sPath = QFileDialog::getOpenFileName(nullptr,"選擇元件背景圖",QApplication::applicationDirPath(),"*.png *.jpg *.jpeg");
 
+    if(sPath!="")
+        m_obj->m_data[TxtValue::imagePathMax] = sPath;
     emit callUpdate();
 }
 
@@ -320,7 +331,6 @@ void EditTxObj::on_btnClearBgMin_clicked()
 {
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
-
     EditBase::clearEditBgImage(m_obj,TxtValue::imagePathMin);
 
     emit callUpdate();

@@ -117,15 +117,14 @@ void ObjData::readData(QString sPath)
 
         m_dataVideo.bIsMute =conf.value("Video/mute").toBool();
 
+        m_dataVideo.bUseFile = conf.value("Video/userFile",true).toBool();
+
         m_dataVideo.sRtsp = conf.value("Video/rtsp").toString().trimmed();
 
     }
 
     else if(sType == E_GRID)
     {
-        //        if(!QDir(m_sObjPath+"/pic").exists())
-        //            QDir().mkdir(m_sObjPath+"/pic");
-
 
         for(int i=0;i<9;i++)
         {
@@ -160,47 +159,43 @@ void ObjData::readData(QString sPath)
 
     }
 
+//    else if(sType == E_TXVALUE)
+//    {
 
-    else //if(sType == E_TEXT || sType == E_BUTTON || sType == E_MARQUEE || sType == E_QRCODE)
+
+//        m_data[TxtValue::imagePath] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePath);
+
+//        m_data[TxtValue::imagePathMin] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePathMin);
+
+//        m_data[TxtValue::imagePathMax] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePathMax);
+
+
+//    }
+
+
+
+    //        m_data.clear();
+
+
+    conf.beginGroup("Items");
+    QStringList keys = conf.childKeys();
+    foreach (QString key, keys)
     {
 
-
-        QString sTitle= sType;
-
-        //        if(QFileInfo(m_sObjPath+"/bg.png").exists())
-        //        {
-        //            m_dataText.m_sImagePath = m_sObjPath+"/bg.png";
-        //        }
-
-        m_data.clear();
-
-
-        conf.beginGroup("Items");
-        QStringList keys = conf.childKeys();
-        foreach (QString key, keys)
+      //  if(key!=TxtValue::imagePath && key!=TxtValue::imagePathMin && key!=TxtValue::imagePathMax)
         {
-            //            if(key==DateTime::dateStr)
-            //                m_data[key] = conf.value(key,"yyyy/MM/dd").toString();
-            //            else if(key==DateTime::timeStr)
-            //                m_data[key] = conf.value(key,"hh:mm:ss").toString();
-            //            else if(key==DateTime::speed)
-            //                m_data[key] = conf.value(key,3).toInt();
-            //            else
             m_data[key] = conf.value(key);
 
-
             qDebug()<<"CC : key :"<<key<<" , data : "<< m_data[key];
-
         }
-
-
-        conf.endGroup();
-
-
-
-
-        qDebug()<<"read itemdata : "<<m_data;
     }
+
+
+    conf.endGroup();
+
+
+    qDebug()<<"read itemdata : "<<m_data;
+
 
 
 
@@ -318,6 +313,8 @@ void ObjData::writeData()
 
         conf.setValue("Video/rtsp",m_dataVideo.sRtsp);
 
+        conf.setValue("Video/useFile",m_dataVideo.bUseFile);
+
         conf.setValue("Video/list",listName);
 
     }
@@ -368,43 +365,81 @@ void ObjData::writeData()
 
     }
 
-    else
+    else if(m_sType == E_TXVALUE)
+    {
+        deleteDirectory(sSourcePath);
+
+        QDir().mkdir(sSourcePath);
+
+        auto fnSavePic =[=](QString sKey)
+        {
+
+
+            QString sPath = m_data[sKey].toString();
+
+            QPixmap p(sPath);
+
+
+            QString sTarget =sSourcePath+QString("%1.png").arg(sKey);
+
+            p.save(sTarget,"PNG");
+
+            qDebug()<<"key : "<<sKey<<" open : "<<sPath<<" ,target : "<<sTarget;
+
+
+            m_data[sKey] = sTarget;
+        };
+
+        fnSavePic(TxtValue::imagePath);
+
+        fnSavePic(TxtValue::imagePathMin);
+
+        fnSavePic(TxtValue::imagePathMax);
+
+
+    }
+
+
+
+
+
+    QStringList listKey = m_data.keys();
+
+    conf.beginGroup("Items");
+
+
+    if(m_data[Label::imagePath].toString()!="")
     {
 
-        QStringList listKey = m_data.keys();
+        QImage image(m_data["originImage"].toString());
 
-        conf.beginGroup("Items");
+        image.save(m_sObjPath+"/bg.png");
 
-
-        if(m_data[Label::imagePath].toString()!="")
-        {
-
-            QImage image(m_data["originImage"].toString());
-
-            image.save(m_sObjPath+"/bg.png");
-
-            m_data[Label::imagePath] = m_sObjPath.split("bin").last()+"/bg.png";
-        }
-
-        for(int i=0;i<listKey.length();i++)
-        {
-
-            QString sKey = listKey.at(i);
-
-
-            QVariant target = m_data[sKey];
-
-            conf.setValue(sKey,target);
-
-        }
-
-        conf.endGroup();
-
-        conf.sync();
-
-
-        qDebug()<<"write itemdata : "<<m_data;
+        m_data[Label::imagePath] = m_sObjPath.split("bin").last()+"/bg.png";
     }
+
+    for(int i=0;i<listKey.length();i++)
+    {
+
+        QString sKey = listKey.at(i);
+
+
+        QVariant target = m_data[sKey];
+
+        conf.setValue(sKey,target);
+
+    }
+
+    conf.endGroup();
+
+
+
+    qDebug()<<"write itemdata : "<<m_data;
+
+
+    conf.sync();
+
+
 
 }
 

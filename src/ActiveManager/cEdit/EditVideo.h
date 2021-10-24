@@ -28,6 +28,10 @@ private slots:
 
     void on_cbMute_clicked(bool checked);
 
+    void on_rbRtsp_clicked();
+
+    void on_rbVideo_clicked();
+
 private:
     Ui::EditVideo *ui;
 

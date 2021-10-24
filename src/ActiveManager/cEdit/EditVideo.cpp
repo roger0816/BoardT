@@ -10,6 +10,9 @@ EditVideo::EditVideo(QWidget *parent) :
     m_btnsRb.addButton(ui->rbVideo);
 
     m_btnsRb.addButton(ui->rbRtsp);
+
+
+
 }
 
 EditVideo::~EditVideo()
@@ -22,6 +25,10 @@ void EditVideo::setTarget(ObjData *data)
     m_obj = data;
 
     ui->cbMute->setChecked(m_obj->m_dataVideo.bIsMute);
+
+    ui->rbRtsp->setChecked(!m_obj->m_dataVideo.bUseFile);
+
+    ui->rbVideo->setChecked(m_obj->m_dataVideo.bUseFile);
 
     refreshTable();
 }
@@ -106,3 +113,16 @@ void EditVideo::on_cbMute_clicked(bool checked)
 
     m_obj->m_dataVideo.bIsMute = checked;
 }
+
+void EditVideo::on_rbRtsp_clicked()
+{
+
+   m_obj->m_dataVideo.bUseFile = !ui->rbRtsp->isChecked();
+}
+
+
+void EditVideo::on_rbVideo_clicked()
+{
+       m_obj->m_dataVideo.bUseFile = ui->rbVideo->isChecked();
+}
+

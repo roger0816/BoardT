@@ -6,6 +6,8 @@ DialogMsg::DialogMsg(QWidget *parent) :
     ui(new Ui::DialogMsg)
 {
     ui->setupUi(this);
+
+    ui->btnOk->setFocus();
 }
 
 DialogMsg::~DialogMsg()

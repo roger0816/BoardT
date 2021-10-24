@@ -140,9 +140,10 @@ void DialogSelectFile::on_btnAdd_clicked()
 
 
 
-
+    qDebug()<<"AA : "<<listSelect;
     listSelect.sort();
 
+    qDebug()<<"BB : "<<listSelect;
 
 
 

@@ -165,10 +165,6 @@ void ItemTxObjCon::doChangeShow()
         return ;
     m_sCurrentMsg="";
 
-    qDebug()<<"current : "<<m_sCurrentValue.toDouble()<<" , "<<m_iLimitMin<<" , "<<m_iLimitMax;
-
-    qDebug()<<"edit : "<<CDATA.m_bIsEdit<<" , status : "<<m_iEditStatus;
-
 
     int iStatus = m_iEditStatus;
 
@@ -275,6 +271,10 @@ void ItemTxObjCon::setStatusStyle(int i)
 
         sText=m_data.value(TxtValue::min,"文字").toString();
 
+        sFont = m_data.value(TxtValue::fontMin,"Arial,24,-1,5,50,0,0,0,0,0,Regular").toString();
+
+
+
         if(m_data.value(TxtValue::alignCenterMin).toInt())
             ali=Qt::AlignCenter;
         else
@@ -296,7 +296,12 @@ void ItemTxObjCon::setStatusStyle(int i)
         else
             ali=Qt::AlignLeading;
 
+        sFont = m_data.value(TxtValue::fontMax,"Arial,24,-1,5,50,0,0,0,0,0,Regular").toString();
+
     }
+
+    f.fromString(sFont);
+
 
     QString sTxt = getStyleSheetRgba(txtColor);
 
@@ -389,7 +394,7 @@ void ItemTxObjCon::iniGpio()
 void ItemTxObjCon::slotTimer()
 {
 
-    qDebug()<<"AAA Tx";
+
     m_iSec++;
 
     if(m_iSec>=10000)
