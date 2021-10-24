@@ -140,6 +140,8 @@ void DialogSelectFile::on_btnAdd_clicked()
 
 
 
+
+
     //   QString sPic = QFileDialog::getOpenFileName(this,"","../","*.png *.jpg *jpeg");
 
     int idx = ui->listView->currentIndex().row();
