@@ -263,6 +263,8 @@ void EditTxObj::on_btnBgColorMin_clicked()
 
     EditBase::setEditColor(m_obj,TxtValue::bgColorMin);
 
+    on_btnClearBgMin_clicked();
+
     emit callUpdate();
 }
 
@@ -273,6 +275,8 @@ void EditTxObj::on_btnBgColor_clicked()
 
     EditBase::setEditColor(m_obj,TxtValue::bgColor);
 
+    on_btnClearBg_clicked();
+
     emit callUpdate();
 }
 
@@ -282,6 +286,8 @@ void EditTxObj::on_btnBgColorMax_clicked()
         return ;
 
     EditBase::setEditColor(m_obj,TxtValue::bgColorMax);
+
+    on_btnClearBgMax_clicked();
 
     emit callUpdate();
 }
