@@ -159,18 +159,18 @@ void ObjData::readData(QString sPath)
 
     }
 
-//    else if(sType == E_TXVALUE)
-//    {
+    //    else if(sType == E_TXVALUE)
+    //    {
 
 
-//        m_data[TxtValue::imagePath] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePath);
+    //        m_data[TxtValue::imagePath] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePath);
 
-//        m_data[TxtValue::imagePathMin] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePathMin);
+    //        m_data[TxtValue::imagePathMin] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePathMin);
 
-//        m_data[TxtValue::imagePathMax] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePathMax);
+    //        m_data[TxtValue::imagePathMax] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePathMax);
 
 
-//    }
+    //    }
 
 
 
@@ -182,7 +182,7 @@ void ObjData::readData(QString sPath)
     foreach (QString key, keys)
     {
 
-      //  if(key!=TxtValue::imagePath && key!=TxtValue::imagePathMin && key!=TxtValue::imagePathMax)
+        //  if(key!=TxtValue::imagePath && key!=TxtValue::imagePathMin && key!=TxtValue::imagePathMax)
         {
             m_data[key] = conf.value(key);
 
@@ -263,9 +263,9 @@ void ObjData::writeData()
     if(m_sType == E_PIC)
     {
 
-        deleteDirectory(sSourcePath);
 
-        QDir().mkdir(sSourcePath);
+
+        QDir().mkdir(sSourcePathTmp);
 
         QStringList listName = m_dataPic.listPicName;
 
@@ -280,19 +280,21 @@ void ObjData::writeData()
         {
             QPixmap *p = & m_dataPic.listPic[i];
 
-            p->save(sSourcePath+listName.at(i).split("/").last());
+            p->save(sSourcePathTmp+listName.at(i).split("/").last());
         }
+
+
+
+        deleteDirectory(sSourcePath);
+
+        QDir().rename(sSourcePathTmp,sSourcePath);
+
 
     }
 
     else if(m_sType == E_VIDEO)
     {
-        if(m_dataVideo.bHasChange)
-        {
-            deleteDirectory(sSourcePath);
 
-            QDir().mkdir(sSourcePath);
-        }
 
 
         QStringList listName = m_dataVideo.listName;
@@ -301,13 +303,18 @@ void ObjData::writeData()
         for(int i=0;i<listName.length();i++)
         {
 
+            QString sTargetTmp =sSourcePathTmp+listName.at(i).split("/").last();
             QString sTarget =sSourcePath+listName.at(i).split("/").last();
             qDebug()<<"file : "<<listName.at(i);
             qDebug()<<"save : "<<sTarget;
 
             if(m_dataVideo.bHasChange)
-                QFile::copy(listName.at(i),sTarget);
+            {
+                QDir().mkdir(sSourcePathTmp);
 
+
+                QFile::copy(listName.at(i),sTargetTmp);
+            }
             listName[i] = sTarget;
 
         }
@@ -320,20 +327,29 @@ void ObjData::writeData()
 
         conf.setValue("Video/list",listName);
 
+
+        if(m_dataVideo.bHasChange)
+        {
+
+            deleteDirectory(sSourcePath);
+
+            QDir().rename(sSourcePathTmp,sSourcePath);
+
+        }
+
     }
 
     else if(m_sType == E_GRID)
     {
         if(m_dataGrid.bHasChange)
         {
-            deleteDirectory(sSourcePath);
 
-            QDir().mkdir(sSourcePath);
+            QDir().mkdir(sSourcePathTmp);
 
 
             for(int i=0;i<9;i++)
             {
-                QString sPathG1 = sSourcePath+QString::number(i+1);
+                QString sPathG1 = sSourcePathTmp+QString::number(i+1);
 
                 if(!QDir(sPathG1).exists())
                     QDir().mkdir(sPathG1);
@@ -358,6 +374,13 @@ void ObjData::writeData()
 
                 }
             }
+
+            deleteDirectory(sSourcePath);
+
+            QDir().rename(sSourcePathTmp,sSourcePath);
+
+
+
         }
 
 
