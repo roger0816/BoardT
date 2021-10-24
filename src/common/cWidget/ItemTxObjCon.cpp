@@ -18,6 +18,7 @@ ItemTxObjCon::ItemTxObjCon(QWidget *parent) : ItemLabel(parent)
 
 
 
+
 }
 
 void ItemTxObjCon::init()
@@ -308,15 +309,15 @@ void ItemTxObjCon::setStatusStyle(int i)
     QString sBg = getStyleSheetRgba(bgColor);
 
 
-    if(sImagePath.trimmed()!="")
-    {
+//    if(sImagePath.trimmed()!="")
+//    {
 
 
-        m_lb->setStyleSheet("QLabel#"+m_lb->objectName()+"{color:"+sTxt
-                                 +";background-color:rgba(0, 0, 0,0);border-image:url("+sImagePath+");}");
+//        m_lb->setStyleSheet("QLabel#"+m_lb->objectName()+"{color:"+sTxt
+//                                 +";background-color:rgba(0, 0, 0,0);border-image:url("+sImagePath+");}");
 
-    }
-    else
+//    }
+//    else
     {
         m_lb->setStyleSheet("QLabel#"+m_lb->objectName()+"{color:"+sTxt
                                  +";background-color:"+sBg+"}");

@@ -6,6 +6,18 @@ EditTxObj::EditTxObj(QWidget *parent) :
     ui(new Ui::EditTxObj)
 {
     ui->setupUi(this);
+
+    ui->btnBgImage->hide();
+
+    ui->btnBgImageMax->hide();
+
+    ui->btnBgImageMin->hide();
+
+    ui->btnClearBg->hide();
+
+    ui->btnClearBgMax->hide();
+
+    ui->btnClearBgMin->hide();
 }
 
 EditTxObj::~EditTxObj()

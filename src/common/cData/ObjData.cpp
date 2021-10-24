@@ -159,18 +159,18 @@ void ObjData::readData(QString sPath)
 
     }
 
-    //    else if(sType == E_TXVALUE)
-    //    {
+        else if(sType == E_TXVALUE)
+        {
 
 
-    //        m_data[TxtValue::imagePath] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePath);
+            m_data[TxtValue::imagePath] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePath);
 
-    //        m_data[TxtValue::imagePathMin] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePathMin);
+            m_data[TxtValue::imagePathMin] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePathMin);
 
-    //        m_data[TxtValue::imagePathMax] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePathMax);
+            m_data[TxtValue::imagePathMax] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePathMax);
 
 
-    //    }
+        }
 
 
 
@@ -265,7 +265,6 @@ void ObjData::writeData()
 
 
 
-        QDir().mkdir(sSourcePathTmp);
 
         QStringList listName = m_dataPic.listPicName;
 
