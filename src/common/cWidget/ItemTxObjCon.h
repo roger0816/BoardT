@@ -49,7 +49,7 @@ public:
 
     QString m_sMsgMax="";
 
-    QString m_sCurrentValue;
+    QString m_sCurrentValue = "0";
 
     QString m_sCurrentMsg;
 

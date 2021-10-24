@@ -127,6 +127,7 @@ void ItemTxObjCon::doRead()
 
     QFile *file = new QFile(QApplication::applicationDirPath()+"/input.txt");
 
+
     if(file->open(QIODevice::ReadOnly | QIODevice::Text))
     {
 
@@ -142,12 +143,14 @@ void ItemTxObjCon::doRead()
             m_sCurrentValue = list.at(m_iSelect);
 
         }
-        else
-        {
-            m_sCurrentValue ="0";
-        }
+
         file->close();
     }
+
+    if(m_sCurrentValue=="")
+        m_sCurrentValue="0";
+
+
 
     delete file;
 
