@@ -85,6 +85,11 @@ void DialogSelectFile::setPreview(bool bEnable)
     ui->wBody->setVisible(m_bPreView);
 }
 
+void DialogSelectFile::resizeEvent(QResizeEvent *)
+{
+    on_listView_pressed(ui->listView->currentIndex());
+}
+
 void DialogSelectFile::on_btnOk_clicked()
 {
     done(1);
@@ -162,7 +167,7 @@ void DialogSelectFile::on_btnAdd_clicked()
 
     ui->listView->setCurrentIndex(m_model->index(idx,0));
 
-   on_listView_pressed(m_model->index(idx,0));
+    on_listView_pressed(m_model->index(idx,0));
 
 
 

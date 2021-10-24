@@ -7,6 +7,7 @@
 #include <QListView>
 #include <QStandardItemModel>
 #include <QStandardItem>
+#include <QResizeEvent>
 
 namespace Ui {
 class DialogSelectFile;
@@ -27,6 +28,8 @@ public:
     QStringList fileList();
 
     void setPreview(bool bEnable = true);
+
+    void resizeEvent(QResizeEvent *) override;
 private slots:
     void on_btnOk_clicked();
 
