@@ -245,8 +245,11 @@ void ObjData::writeData()
 
     QString sSourcePath = m_sObjPath+"/source/";
 
+    QString sSourcePathTmp = m_sObjPath+"/sourceTmp/";
 
+    deleteDirectory(sSourcePathTmp);
 
+    QDir().mkdir(sSourcePathTmp);
 
 
     if(m_sWaitRename.trimmed()!="")
@@ -367,9 +370,7 @@ void ObjData::writeData()
 
     else if(m_sType == E_TXVALUE)
     {
-        deleteDirectory(sSourcePath);
 
-        QDir().mkdir(sSourcePath);
 
         auto fnSavePic =[=](QString sKey)
         {
@@ -382,12 +383,17 @@ void ObjData::writeData()
 
             QString sTarget =sSourcePath+QString("%1.png").arg(sKey);
 
-            p.save(sTarget,"PNG");
+            QString sTargetTmp =sSourcePathTmp+QString("%1.png").arg(sKey);
+
+
+            p.save(sTargetTmp,"PNG");
 
             qDebug()<<"key : "<<sKey<<" open : "<<sPath<<" ,target : "<<sTarget;
 
 
             m_data[sKey] = sTarget;
+
+
         };
 
         fnSavePic(TxtValue::imagePath);
@@ -395,6 +401,12 @@ void ObjData::writeData()
         fnSavePic(TxtValue::imagePathMin);
 
         fnSavePic(TxtValue::imagePathMax);
+
+
+        deleteDirectory(sSourcePath);
+
+        QDir().rename(sSourcePathTmp,sSourcePath);
+
 
 
     }

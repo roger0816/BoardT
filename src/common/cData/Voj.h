@@ -299,7 +299,7 @@ static QString bgColor="bgColor";
 
 static QString txtColor="txtColor";
 
-static QString imagePath="imagePath";
+static QString imagePath="imagePathNormal";
 
 static QString fontMin="fontMin";
 
