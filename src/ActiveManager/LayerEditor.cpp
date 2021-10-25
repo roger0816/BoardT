@@ -260,11 +260,17 @@ void LayerEditor::on_btnToTop_clicked()
 
  CDATA.m_dData[CDATA.m_sCurrentLayerName]->raise(m_sObjName);
 
+ qDebug()<<"after delete raise : "<<CDATA.m_dData[CDATA.m_sCurrentLayerName]->m_dataLayer.listObjSort;
+
+
  emit callRaise(m_sPath);
 }
 
 void LayerEditor::on_btnRename_clicked()
 {
+
+
+
     if(m_obj == nullptr)
     {
         return ;
@@ -273,6 +279,9 @@ void LayerEditor::on_btnRename_clicked()
 
     if(m_sPath.split("/").last().trimmed() == ui->txtName->text())
         return ;
+
+
+
 
     QString sOldPath = m_sPath;
 
@@ -290,15 +299,27 @@ void LayerEditor::on_btnRename_clicked()
 
     m_obj->m_sObjPath = sNewPath;
 
-    QDir().rename(sOldPath,sNewPath);
-
     m_sPath = sNewPath;
 
     m_sObjName = m_obj->m_sName;
 
+
+    QVariantList *listSort = &CDATA.m_dData[CDATA.m_sCurrentLayerName]->m_dataLayer.listObjSort;
+
+    int iIdx =  listSort->indexOf(sOldPath.split("/").last());
+
+    if(iIdx>=0 && iIdx < listSort->length())
+    {
+        listSort->replace(iIdx,sNewPath.split("/").last());
+    }
+
+    QDir().rename(sOldPath,sNewPath);
+
+
     emit callRename(sOldPath,sNewPath);
     // callUpdate();
 
+    qDebug()<<"after rename sort : "<<CDATA.m_dData[CDATA.m_sCurrentLayerName]->m_dataLayer.listObjSort;
 
 
 }
@@ -317,10 +338,17 @@ void LayerEditor::on_btnDelete_clicked()
     if(iRe==1)
     {
 
-        emit callDelete(m_sPath);
 
+        QVariantList *listSort = &CDATA.m_dData[CDATA.m_sCurrentLayerName]->m_dataLayer.listObjSort;
+
+        listSort->removeOne(m_sObjName);
 
         deleteDirectory(m_sPath);
+
+        emit callDelete(m_sPath);
+
+        qDebug()<<"after delete sort : "<<CDATA.m_dData[CDATA.m_sCurrentLayerName]->m_dataLayer.listObjSort;
+
     }
 
     if(ui->stackType->currentWidget() == ui->pagePic)
@@ -334,26 +362,6 @@ void LayerEditor::on_btnDelete_clicked()
 
 
 
-
-void LayerEditor::on_sbMar_valueChanged(int )
-{
-
-}
-
-void LayerEditor::on_btnMarTxColor_clicked()
-{
-    //on_btnTxtColor_clicked();
-}
-
-void LayerEditor::on_btnMarBgColor_clicked()
-{
-    //on_btnBgColor_clicked();
-}
-
-void LayerEditor::on_btnMarFont_clicked()
-{
-    // on_btnSelectFont_clicked();
-}
 
 void LayerEditor::on_txQr_textChanged(const QString &arg1)
 {

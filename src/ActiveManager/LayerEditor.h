@@ -92,10 +92,6 @@ signals:
 private slots:
 
 
-    void on_sbMar_valueChanged(int);
-    void on_btnMarTxColor_clicked();
-    void on_btnMarBgColor_clicked();
-    void on_btnMarFont_clicked();
     void on_txQr_textChanged(const QString &arg1);
 
 

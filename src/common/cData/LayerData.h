@@ -36,6 +36,8 @@ public:
     DataLayer m_dataLayer;
 
     void raise(QString sObjName);
+
+
 private:
 
 
