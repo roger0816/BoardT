@@ -501,6 +501,8 @@ void DisplayWidget::addItem(int iIdx)
 
     layerData->m_listData.append(obj);
 
+    layerData->m_dataLayer.listObjSort.append(sName);
+
     ItemBaseContent *item = new ItemBaseContent(ui->wBg);
 
     connect(item,&ItemBaseContent::sendFocus,this,&DisplayWidget::slotFocus);
