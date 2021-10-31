@@ -4,6 +4,7 @@ INCLUDEPATH+=$$PWD \
 
 
 HEADERS += \
+    $$PWD/CCtrlFunc.h \
     $$PWD/cData/CData.h \
     $$PWD/cData/LayerData.h \
     $$PWD/cData/ObjData.h \
@@ -24,6 +25,7 @@ HEADERS += \
     $$PWD/cWidget/ItemVideoCon.h
 
 SOURCES += \
+    $$PWD/CCtrlFunc.cpp \
     $$PWD/cData/CData.cpp \
     $$PWD/cData/LayerData.cpp \
     $$PWD/cData/ObjData.cpp \

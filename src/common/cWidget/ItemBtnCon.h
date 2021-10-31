@@ -2,12 +2,18 @@
 #define ITEMBTNCON_H
 
 #include <QWidget>
-#include "ItemBaseObj.h"
+#include "ItemLabel.h"
+#include <QShowEvent>
+#include <QMouseEvent>
+#include "CCtrlFunc.h"
 namespace Ui {
 class ItemBtnCon;
 }
 
-class ItemBtnCon : public ItemBaseObj
+
+
+
+class ItemBtnCon : public ItemLabel
 {
     Q_OBJECT
 
@@ -15,8 +21,13 @@ public:
     explicit ItemBtnCon(QWidget *parent = nullptr);
 
 
-    void updateItem() override;
     ~ItemBtnCon();
+
+    void setLbStyle(QString sTxtColorKey,QString sBgColorKey,QString sImagePathKey,QString sFontKey,QString sCentKey) override;
+
+    void mousePressEvent(QMouseEvent *) override;
+
+    void mouseReleaseEvent(QMouseEvent *) override;
 
 private:
     Ui::ItemBtnCon *ui;

@@ -25,6 +25,8 @@ StageEditArea::StageEditArea(QWidget *parent) :
 
     connect(ui->wAdd,&LayerAddContent::btnAddClicked,ui->wDisplay,&DisplayWidget::addItem);
 
+    connect(&CCTRL,&CCtrlFunc::callChangePage,ui->wDisplay,&DisplayWidget::slotChangeLayer);
+
 
 }
 
@@ -290,7 +292,7 @@ void StageEditArea::on_btnLayerBg_clicked()
 
     QString sPath = QFileDialog::getOpenFileName(this,"選擇版面背景圖",QApplication::applicationDirPath(),"*.png *.jpg *.jpeg");
 
-    if(sPath != CDATA.m_dData[sTarget]->m_sBgPath)
+    if(sPath!="" &&  sPath != CDATA.m_dData[sTarget]->m_sBgPath)
     {
         CDATA.m_dData[sTarget]->m_sBgPath = sPath;
 

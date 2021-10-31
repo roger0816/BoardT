@@ -137,16 +137,9 @@ QPushButton:pressed {
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="btnAddPixBtn">
-           <property name="text">
-            <string>實體按鈕</string>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QPushButton" name="btnAdd964">
            <property name="text">
-            <string>964宮格</string>
+            <string>94宮格</string>
            </property>
           </widget>
          </item>

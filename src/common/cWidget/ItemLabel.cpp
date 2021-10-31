@@ -73,7 +73,7 @@ void ItemLabel::setLbStyle(QString sTxtColorKey, QString sBgColorKey, QString sI
         ui->label->setStyleSheet("QLabel#"+ui->label->objectName()+"{color:"+sTxtColor
                                  +";background-color:"+sBg+"}");
 
-        qDebug()<<"AAAA : "<<sTxtColor<<" , "<<sBg;
+
 
     }
 

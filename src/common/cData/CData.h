@@ -57,7 +57,7 @@ public:
 
     bool m_bIsEdit = false;
 
-
+    QVariant test;
 private:
     CData(QObject *parent = nullptr);
     static CData* m_pInstance;

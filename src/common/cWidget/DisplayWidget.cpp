@@ -23,12 +23,12 @@ DisplayWidget::~DisplayWidget()
     delete ui;
 }
 
-QPixmap DisplayWidget::setLayer(QString sPath, int iVideoStatus)
+QPixmap DisplayWidget::setLayer(QString sPath, bool bStopVideo)
 {
 
     m_sPath = sPath;
 
-    qDebug()<<"layer path : "<<m_sPath<<",video status :  "<<iVideoStatus;
+    qDebug()<<"layer path : "<<m_sPath<<",video stop :  "<<bStopVideo;
 
 //    if(iVideoStatus == 0)
 //    {
@@ -86,7 +86,7 @@ QPixmap DisplayWidget::setLayer(QString sPath, int iVideoStatus)
 
         m_listItem.append(item);
 
-        if(listData[i]->m_sType == E_VIDEO && iVideoStatus ==0)
+        if(listData[i]->m_sType == E_VIDEO && bStopVideo)
         {
 
             qDebug()<<"video set ";
@@ -214,6 +214,11 @@ void DisplayWidget::refreshBg()
                           " border: "+QString::number(m_iBorderSize)+"px #6ca5d9; border-style: solid;background-color: rgba(0, 0, 0,0); "
                                                                                                      "}");
 
+}
+
+void DisplayWidget::slotChangeLayer(QString sName, bool b)
+{
+        setLayer(sName);
 }
 
 void DisplayWidget::slotFocus()

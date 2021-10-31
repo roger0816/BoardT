@@ -22,7 +22,7 @@ public:
     explicit DisplayWidget(QWidget *parent = nullptr);
     ~DisplayWidget();
 
-    QPixmap setLayer(QString sPath , int iVideoStatus = false);
+    QPixmap setLayer(QString sPath , bool bStopVideo = true);
 
     void setEdit(bool b);
 
@@ -56,6 +56,9 @@ signals:
 
     void changeTarget(QString sPath);
 public slots:
+
+    void slotChangeLayer(QString sName,bool b);
+
     void slotFocus();
 
     void slotUpdate();

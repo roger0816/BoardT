@@ -17,6 +17,7 @@
 #include <QNetworkInterface>
 #include "DisplayWidget.h"
 #include "ItemVideoCon.h"
+#include "CCtrlFunc.h"
 static QString RDATA = "../bin/data";
 
 namespace Ui {

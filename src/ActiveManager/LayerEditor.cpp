@@ -14,6 +14,9 @@ LayerEditor::LayerEditor(QWidget *parent) :
 
     connect(ui->pageText,&EditLabel::callUpdate,this,&LayerEditor::callUpdate);
 
+    connect(ui->pageBtn,&EditButton::callUpdate,this,&LayerEditor::callUpdate);
+
+
     connect(ui->pageTxValue,&EditTxObj::callUpdate,this,&LayerEditor::callUpdate);
 
     connect(ui->pageMar,&EditMar::callUpdate,this,&LayerEditor::callUpdate);
@@ -89,21 +92,11 @@ void LayerEditor::refresh()
 
 
 
-    if(m_obj->m_sType == E_TEXT || m_obj->m_sType == E_BUTTON)
+    if(m_obj->m_sType == E_TEXT)
     {
         ui->stackType->setCurrentWidget(ui->pageText);
 
         ui->pageText->setTarget(m_obj);
-        //        ui->txtText->setText(m_obj->m_data.value(Label::text).toString());
-
-        //        ui->chCent->setChecked(m_obj->m_data.value(Label::alignCenter).toInt());
-
-        //        QColor colorBg = m_obj->m_data.value(Label::bgColor).toString();
-
-        //        QColor colorTxt = m_obj->m_data.value(Label::txtColor).toString();
-
-        //        QString sStyle = "background-color:rgba(%1,%2,%3,%4);";
-
 
     }
     else if(m_obj->m_sType == E_PIC)
@@ -113,6 +106,14 @@ void LayerEditor::refresh()
 
         ui->stackType->setCurrentWidget(ui->pagePic);
 
+    }
+    if(m_obj->m_sType == E_BUTTON)
+    {
+        ui->stackType->setCurrentWidget(ui->pageBtn);
+
+        ui->pageBtn->setLayerList(CDATA.m_dData.keys());
+
+        ui->pageBtn->setTarget(m_obj);
 
 
     }

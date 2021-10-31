@@ -12,7 +12,7 @@
 #include "LayerAddContent.h"
 #include <QProcess>
 #include "DialogUploadUsb.h"
-
+#include "CCtrlFunc.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }

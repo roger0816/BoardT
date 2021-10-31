@@ -165,20 +165,26 @@ void EditBase::setEditCent(ObjData *obj, QString sDataKey, QCheckBox *btn)
 
 }
 
-void EditBase::setEditBgImage(ObjData *obj, QString sTitle,QString sDataKey)
+bool EditBase::setEditBgImage(ObjData *obj, QString sTitle,QString sDataKey)
 {
+    bool bRe =  false;
+
     QString sPath = QFileDialog::getOpenFileName(nullptr,sTitle,QApplication::applicationDirPath(),"*.png *.jpg *.jpeg");
 
-    if(obj->m_data.value(sDataKey)!= sPath)
+
+
+    if(sPath!="" && obj->m_data.value(sDataKey)!= sPath)
     {
         //obj->m_data[sDataKey] = sPath;
 
         obj->m_data["originImage"] = sPath;
 
         obj->m_data[sDataKey] = obj->m_sObjPath.split("bin").last()+"/bg.png";
+
+        bRe =true;
     }
 
-
+    return bRe;
 }
 
 void EditBase::clearEditBgImage(ObjData *obj, QString sDataKey)

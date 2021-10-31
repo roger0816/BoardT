@@ -65,7 +65,6 @@ enum
 
     ADD_ADV_BUTTON,
     ADD_ADV_MEDIA,
-    ADD_ADV_PIX_BUTTON,
     ADD_ADV_964,
     ADD_ADV_PAINTER,
     ADD_ADV_TXT,
@@ -149,6 +148,24 @@ struct DataText
 
 };
 
+
+//struct DataBtn
+//{
+//    enum {_none=0,_change,_changeAndPlay};
+
+//    int iType = _none;
+
+//    QVariant sTypeNode="";
+
+//    QString sInput="";
+
+//    QString sOutPut="";
+
+//    QString sText2="";
+
+
+
+//};
 
 
 struct DataPic
@@ -251,6 +268,23 @@ static QString bgColor="bgColor";
 static QString txtColor="txtColor";
 
 static QString imagePath="imagePath";
+
+}
+
+namespace Btn {
+
+static QString btnType="btnType";
+
+static QString btnTypeNote="btnTypeNote";
+
+static QString btnStopPlay ="btnStopPlay";
+
+static QString btnInput="btnInput";
+
+static QString btnOpuput="btnOutput";
+
+static QString btnText2="btnText2";
+
 
 }
 

@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    CDATA;
 
 //    QDir dir(QApplication::applicationDirPath()+"/../font");
 

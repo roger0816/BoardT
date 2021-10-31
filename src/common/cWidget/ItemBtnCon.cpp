@@ -1,84 +1,118 @@
 #include "ItemBtnCon.h"
 #include "ui_ItemBtnCon.h"
 
+
 ItemBtnCon::ItemBtnCon(QWidget *parent) :
-    ItemBaseObj(parent),
+    ItemLabel(parent),
     ui(new Ui::ItemBtnCon)
 {
-    ui->setupUi(this);
+    //   ui->setupUi(this);
+
+
 }
 
-
-
-void ItemBtnCon::updateItem()
-{
-
-      if(m_obj!=nullptr)
-          m_data = m_obj->m_data;
-
-
-
-      QColor bgColor = m_data.value(Label::bgColor,"#ffffffff").toString();
-      //bgColor.name(QColor::HexArgb)
-
-
-      QColor txtColor = m_data.value(Label::txtColor,"#ff000000").toString();
-
-    QString sImagePath = m_data.value(Label::imagePath).toString();
-
-      QString sStyle = "color:rgba(%1,%2,%3,%4);"
-                       "background-color:rgba(%5,%6,%7,%8);";
-
-      if(sImagePath.trimmed()!="")
-      {
-          ui->btn->setStyleSheet(sStyle.arg(txtColor.red())
-                                   .arg(txtColor.green())
-                                   .arg(txtColor.blue())
-                                   .arg(txtColor.alpha())
-                                   .arg(0)
-                                   .arg(0)
-                                   .arg(0)
-                                   .arg(0)
-                                   +" border-image:url("+sImagePath+");");
-
-
-      }
-      else
-      {
-      ui->btn->setStyleSheet(sStyle.arg(txtColor.red())
-                        .arg(txtColor.green())
-                        .arg(txtColor.blue())
-                        .arg(txtColor.alpha())
-                        .arg(bgColor.red())
-                        .arg(bgColor.green())
-                        .arg(bgColor.blue())
-                        .arg(bgColor.alpha())
-                          );
-      }
-
-
-
-      QFont f ;
-      f.fromString("Arial,24,-1,5,50,0,0,0,0,0,Regular");
-
-      QString sFont = m_data.value(Label::font,"Arial,24,-1,5,50,0,0,0,0,0,Regular").toString();
-
-      f.fromString(sFont);
-
-     // f.setPixelSize(f.pixelSize()*m_diffSize);
-
-      ui->btn->setFont(f);
-
-
-    ui->btn->setText(m_data.value(Label::text).toString());
-
-//    if(m_data.bIsCent)
-//        ui->btn->setAlignment(Qt::AlignCenter);
-//    else
-//        ui->btn->setAlignment(Qt::AlignLeading);
-}
 
 ItemBtnCon::~ItemBtnCon()
 {
     delete ui;
 }
+
+void ItemBtnCon::setLbStyle(QString sTxtColorKey, QString sBgColorKey, QString sImagePathKey, QString sFontKey, QString sCentKey)
+{
+    ItemLabel::setLbStyle(sTxtColorKey,sBgColorKey,sImagePathKey,sFontKey,sCentKey);
+
+    m_lb->setAlignment(Qt::AlignCenter);
+
+
+    QString sT=
+            " border-style: outset; "
+            " border-radius: 12px; "
+            " border-width: 5px; "
+            " padding:1px; "
+            " border-color: #99b3d3; "
+            " }"
+            ;
+
+    //           border-style: outset;
+    //           border-radius: 10px;
+    //           padding:0px;
+
+    //           border-color: #99b3d3;
+    QString sCurrentStyle = m_lb->styleSheet();
+
+    if(sCurrentStyle.right(1)== "}" )
+        sCurrentStyle.remove(sCurrentStyle.length()-1,1);
+
+    m_lb->setStyleSheet(sCurrentStyle+sT);
+
+}
+
+void ItemBtnCon::mousePressEvent(QMouseEvent *)
+{
+
+    if(m_obj!=nullptr)
+    {
+       m_lb->setText(m_data[Btn::btnText2].toString());
+
+    }
+
+    QString sT=
+            " border-style: outset; "
+            " border-radius: 12px; "
+            " border-width: 4px; "
+            " padding:1px; "
+            " border-color: #99b3d3; "
+            " }"
+            ;
+
+
+
+    QString sCurrentStyle = m_lb->styleSheet();
+
+    if(sCurrentStyle.right(1)== "}" )
+        sCurrentStyle.remove(sCurrentStyle.length()-1,1);
+
+    m_lb->setStyleSheet(sCurrentStyle+sT);
+}
+
+void ItemBtnCon::mouseReleaseEvent(QMouseEvent *)
+{
+
+    if(m_obj!=nullptr)
+    {
+        m_lb->setText(m_obj->m_data[Label::text].toString());
+
+    }
+
+    QString sT=
+            " border-style: outset; "
+            " border-radius: 12px; "
+            " border-width: 8px; "
+            " padding:1px; "
+            " border-color: #99b3d3; "
+            " }"
+            ;
+
+
+    QString sCurrentStyle = m_lb->styleSheet();
+
+    if(sCurrentStyle.right(1)== "}" )
+        sCurrentStyle.remove(sCurrentStyle.length()-1,1);
+
+    m_lb->setStyleSheet(sCurrentStyle+sT);
+
+
+    if(m_data[Btn::btnType].toInt()==1 && m_data[Btn::btnTypeNote]!="")
+    {
+        //change page
+
+        QString sLayerName = m_data[Btn::btnTypeNote].toString();
+
+          qDebug()<<"AAA0";
+        CCTRL.changeLayer(sLayerName);
+
+
+    }
+
+}
+

@@ -31,7 +31,7 @@ protected:
 
     void setEditCent(ObjData *obj,QString sDataKey, QCheckBox *btn);
 
-    void setEditBgImage(ObjData *obj, QString sTitle, QString sDataKey);
+    bool setEditBgImage(ObjData *obj, QString sTitle, QString sDataKey);
 
     void clearEditBgImage(ObjData *obj, QString sDataKey);
 

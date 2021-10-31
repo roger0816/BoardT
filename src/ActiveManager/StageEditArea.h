@@ -5,7 +5,8 @@
 #include <QDebug>
 #include <QShowEvent>
 #include "LayerNewModel.h"
-
+#include "CCtrlFunc.h"
+#include "CData.h"
 
 namespace Ui {
 class StageEditArea;

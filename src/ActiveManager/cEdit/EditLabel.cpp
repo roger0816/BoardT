@@ -43,9 +43,9 @@ void EditLabel::on_btnBgColor_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-     EditBase::setEditColor(m_obj,Label::bgColor);
+    EditBase::setEditColor(m_obj,Label::bgColor);
 
-     emit callUpdate();
+    emit callUpdate();
 }
 
 void EditLabel::on_btnTxtColor_clicked()
@@ -55,7 +55,7 @@ void EditLabel::on_btnTxtColor_clicked()
 
     EditBase::setEditColor(m_obj,Label::txtColor);
 
-     emit callUpdate();
+    emit callUpdate();
 }
 
 void EditLabel::on_btnBgImage_clicked()
@@ -63,9 +63,8 @@ void EditLabel::on_btnBgImage_clicked()
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
 
-    EditBase::setEditBgImage(m_obj,"選擇元件背景圖",Label::imagePath);
-
-    emit callUpdate();
+    if(EditBase::setEditBgImage(m_obj,"選擇元件背景圖",Label::imagePath))
+        emit callUpdate();
 }
 
 void EditLabel::on_btnClearBg_clicked()
@@ -85,7 +84,7 @@ void EditLabel::on_btnSelectFont_clicked()
 
     EditBase::setEditFont(m_obj,Label::font,ui->btnSelectFont);
 
-     emit callUpdate();
+    emit callUpdate();
 }
 
 void EditLabel::on_chCent_clicked()

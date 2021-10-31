@@ -65,7 +65,13 @@ void Widget::loadConfig(QString sLayer)
 {
 
     if(m_wDisplay == nullptr)
+    {
         m_wDisplay = new DisplayWidget(ui->wBg);
+
+        connect(&CCTRL,&CCtrlFunc::callChangePage,m_wDisplay,&DisplayWidget::slotChangeLayer);
+
+    }
+ //   CCTRL.setCtrlSource(&CDATA,m_wDisplay);
 
     m_wDisplay->show();
 

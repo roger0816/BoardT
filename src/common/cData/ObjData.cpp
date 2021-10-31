@@ -145,7 +145,7 @@ void ObjData::readData(QString sPath)
 
                 m_dataGrid.listG3[i][j]=sPathG2+QString("/%1_d.png").arg(j+1);
 
-                qDebug()<<"G3 pic : i "<<i<<" , j "<<j<<" : "<<sPathG2+QString("/%1_d.png").arg(j+1);
+
 
             }
         }
@@ -171,6 +171,23 @@ void ObjData::readData(QString sPath)
 
 
         }
+
+//    else if(sType == E_BUTTON)
+//    {
+
+
+//        m_dataBtn.iType = m_data[Btn::btnType] ;
+
+//        m_data[Btn::btnTypeNote] = m_dataBtn.sTypeNode;
+
+//        m_data[Btn::btnText2] = m_dataBtn.sText2;
+
+//        m_data[Btn::btnInput] = m_dataBtn.sInput;
+
+//        m_data[Btn::btnOpuput] = m_dataBtn.sOutPut;
+
+//    }
+
 
 
 
@@ -290,6 +307,8 @@ void ObjData::writeData()
 
 
     }
+
+
 
     else if(m_sType == E_VIDEO)
     {

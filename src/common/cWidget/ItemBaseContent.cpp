@@ -183,7 +183,7 @@ void ItemBaseContent::setEdit(bool b)
 
     m_click->setVisible(!b);
 
-    if(m_sType==E_GRID || m_sType==E_URL)
+    if(m_sType==E_BUTTON || m_sType==E_GRID || m_sType==E_URL)
     {
         m_click->hide();
     }

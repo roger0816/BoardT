@@ -51,6 +51,12 @@
       </property>
       <item row="2" column="0" colspan="2">
        <widget class="QPushButton" name="btnSelectFont">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>42</height>
+         </size>
+        </property>
         <property name="font">
          <font>
           <pointsize>16</pointsize>
@@ -58,6 +64,9 @@
           <italic>false</italic>
           <bold>false</bold>
          </font>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
         </property>
         <property name="text">
          <string>字型</string>
@@ -113,6 +122,9 @@
              <bold>false</bold>
             </font>
            </property>
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
            <property name="text">
             <string>背景色</string>
            </property>
@@ -139,6 +151,9 @@
              <italic>false</italic>
              <bold>false</bold>
             </font>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
            </property>
            <property name="text">
             <string>清除底圖</string>
@@ -202,6 +217,9 @@
              <italic>false</italic>
              <bold>false</bold>
             </font>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
            </property>
            <property name="text">
             <string>字體色</string>

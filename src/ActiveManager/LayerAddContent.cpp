@@ -19,7 +19,6 @@ LayerAddContent::LayerAddContent(QWidget *parent) :
 
     m_btns.addButton(ui->btnAddMedia,ADD_ADV_MEDIA);
     m_btns.addButton(ui->btnAddBtn,ADD_ADV_BUTTON);
-    m_btns.addButton(ui->btnAddPixBtn,ADD_ADV_PIX_BUTTON);
     m_btns.addButton(ui->btnAdd964,ADD_ADV_964);
     m_btns.addButton(ui->btnAddPaiter,ADD_ADV_PAINTER);
     m_btns.addButton(ui->btnAddTxtValue,ADD_ADV_TXT);

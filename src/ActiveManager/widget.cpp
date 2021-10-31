@@ -25,7 +25,7 @@ Widget::Widget(QWidget *parent)
 
   //  QString sDef = QApplication::applicationDirPath()+"/data/model0";
 
-    CDATA;
+
 
 
 //    connect(ui->wLayerSelector,&LayerSelector::sendSelectLayer,this,&Widget::slotSelector);
