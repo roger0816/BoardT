@@ -45,6 +45,9 @@ void EditButton::setTarget(ObjData *obj)
       //  ui->cbPageSelect->setCurrentIndex(iIdx);
     }
 
+
+    getCmdList();
+
     m_bLockCallUpdate = false;
 
 }
@@ -63,6 +66,21 @@ void EditButton::setLayerList(QStringList listName)
 
     m_bLockCallUpdate = false;
 
+}
+
+QStringList EditButton::getCmdList()
+{
+    QDir dir(QApplication::applicationDirPath()+"/cmd");
+
+   QStringList list= dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
+
+   ui->cbCmd->clear();
+
+   ui->cbCmd->addItems(list);
+
+    qDebug()<<"CCD "<<QApplication::applicationDirPath()+"/cmd"<<" : "<<list;
+
+  return list;
 }
 
 void EditButton::on_btnSelectFont_clicked()

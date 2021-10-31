@@ -52,7 +52,7 @@ void ItemBtnCon::mousePressEvent(QMouseEvent *)
 
     if(m_obj!=nullptr)
     {
-       m_lb->setText(m_data[Btn::btnText2].toString());
+        m_lb->setText(m_data[Btn::btnText2].toString());
 
     }
 
@@ -108,10 +108,27 @@ void ItemBtnCon::mouseReleaseEvent(QMouseEvent *)
 
         QString sLayerName = m_data[Btn::btnTypeNote].toString();
 
-          qDebug()<<"AAA0";
+        qDebug()<<"AAA0";
         CCTRL.changeLayer(sLayerName);
 
 
+    }
+
+    else if(m_data[Btn::btnType].toInt()==2 && m_data[Btn::btnTypeNote]!="")
+    {
+        //cmd
+
+#ifndef Q_OS_WIN
+        QString sFile =QApplication::applicationDirPath()+"/cmd/"+m_data[Btn::btnTypeNote].toString();
+
+        QString sCmd ="chmod a+x "+sFile;
+
+        system(sCmd.toStdString().c_str());
+
+        sCmd ="./"+sFile;
+
+        system(sCmd.toStdString().c_str());
+#endif
     }
 
 }

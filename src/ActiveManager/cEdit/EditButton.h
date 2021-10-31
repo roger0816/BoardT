@@ -23,6 +23,8 @@ public:
 private:
 
     QStringList m_listLayerName;
+
+    QStringList getCmdList();
 private slots:
     void on_btnSelectFont_clicked();
 
