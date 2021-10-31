@@ -47,6 +47,12 @@ void LayerSelector::setData(QMap<QString , QPixmap> dData, QString sPath)
     {
         QPushButton *btn = new QPushButton(this);
 
+
+        btn->setStyleSheet("QPushButton:checked { \
+        font: 75 20px ; \
+        border-color: #ffaa00; \
+        border-width: 3px; }");
+
         btn->setCheckable(true);
 
         connect(btn,&QPushButton::clicked,this,&LayerSelector::slotClicked);

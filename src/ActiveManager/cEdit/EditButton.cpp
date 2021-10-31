@@ -76,9 +76,10 @@ QStringList EditButton::getCmdList()
 
    ui->cbCmd->clear();
 
+   list.push_front("無");
+
    ui->cbCmd->addItems(list);
 
-    qDebug()<<"CCD "<<QApplication::applicationDirPath()+"/cmd"<<" : "<<list;
 
   return list;
 }
@@ -182,3 +183,20 @@ void EditButton::on_cbPageSelect_currentIndexChanged(const QString &arg1)
     emit callUpdate();
 }
 
+
+void EditButton::on_cbCmd_currentTextChanged(const QString &arg1)
+{
+    if(m_obj ==nullptr || m_bLockCallUpdate )
+        return ;
+
+    QString st = arg1;
+
+    if(ui->cbPageSelect->currentIndex()==0)
+    {
+        st ="";
+    }
+
+    m_obj->m_data[Btn::btnTypeNote] = st;
+
+    emit callUpdate();
+}

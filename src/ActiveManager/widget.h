@@ -31,57 +31,15 @@ public:
     QString m_sPreIp="";
 private slots:
 
-    void on_btnSelectModel_clicked();
-
-
-    void on_btnSave_clicked();
-
-    void on_btnUpload_clicked();
-
-    void on_btnTest_clicked();
-
-
-    void on_btnTry_clicked();
-
-    void on_btnLayerBg_clicked();
-
-    void on_btnDelLayerBg_clicked();
-
-    void on_btnEdit_clicked();
-
-    void on_btnSetting_clicked();
-
-    void on_btnSchedule_clicked();
-
-    void on_btnTimeSchedule_clicked();
-
-
-
-
-    void on_rdNoneSchedule_clicked();
-
-    void on_rdSchedule_clicked();
-
-    void on_rdTimeSchedule_clicked();
-
-
-    void on_btnUploadUsb_clicked();
 
 public slots:
-    void slotSelector(QString sName);
-
 
 private:
     Ui::Widget *ui;
 
-    void upload(QString sIp, QString sTarget, QString sPath);
-
-    QButtonGroup m_listButtonStack;
-
- //   void rename(QString sOld,QString sNew);
 
     void StageEditback();
- //  void refreshTimeSchedule();
+
 
 
 };

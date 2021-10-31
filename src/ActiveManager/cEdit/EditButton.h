@@ -46,6 +46,8 @@ private slots:
 
 
 
+    void on_cbCmd_currentTextChanged(const QString &arg1);
+
 private:
     Ui::EditButton *ui;
 };

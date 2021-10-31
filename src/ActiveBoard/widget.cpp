@@ -611,6 +611,18 @@ void Widget::on_btnUpdateData_clicked()
 
 void Widget::on_btnUpdateSys_clicked()
 {
+    QString sFile =QApplication::applicationDirPath()+"/cmd/updateFw.sh";
+
+    QString sCmd = "chmod a+x "+sFile;
+
+    system(sCmd.toStdString().c_str());
+
+    sCmd = "./"+sFile;
+
+    system(sCmd.toStdString().c_str());
+
+
+
     //    QString sUpdatePath = Global::Instance().m_usb.m_sLastUsbPath+"/ActiveBoard/bin/";
 
     //    QString sCurrentPath = QApplication::applicationDirPath()+"/../bin/";

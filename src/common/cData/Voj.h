@@ -149,23 +149,14 @@ struct DataText
 };
 
 
-//struct DataBtn
-//{
-//    enum {_none=0,_change,_changeAndPlay};
-
-//    int iType = _none;
-
-//    QVariant sTypeNode="";
-
-//    QString sInput="";
-
-//    QString sOutPut="";
-
-//    QString sText2="";
+struct DataSchedule
+{
+    QString sDef="def";
 
 
 
-//};
+
+};
 
 
 struct DataPic

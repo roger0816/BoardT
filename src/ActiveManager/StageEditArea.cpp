@@ -176,6 +176,11 @@ void StageEditArea::on_btnSave_clicked()
 void StageEditArea::on_btnUpload_clicked()
 {
 
+//    ui->wStackWork->setCurrentWidget(ui->pageSchedule);
+
+//return;
+
+
     auto fnSave =[=]()
     {
         int iScheduleStatus = SCHEDULE_OFF;
@@ -271,6 +276,8 @@ void StageEditArea::on_btnView_clicked()
 
 void StageEditArea::slotSelector(QString sName)
 {
+    CDATA.m_dataModel.sTarget = sName;
+
     ui->wStackWork->setCurrentWidget(ui->pageWork);
 
     ui->wDisplay->setLayer(CDATA.m_sPath+"/"+sName);

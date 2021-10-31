@@ -59,7 +59,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="wBg"/>
      <widget class="QWidget" name="wReg">
@@ -233,9 +233,9 @@
       <property name="styleSheet">
        <string notr="true">font: 28px ;</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,1,0,1">
+      <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,1,0,1,0">
        <property name="spacing">
-        <number>80</number>
+        <number>60</number>
        </property>
        <property name="leftMargin">
         <number>80</number>
@@ -286,6 +286,12 @@
        </item>
        <item>
         <widget class="QWidget" name="widget_3" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>200</height>
+          </size>
+         </property>
          <layout class="QGridLayout" name="gridLayout_5">
           <item row="0" column="0" colspan="2">
            <widget class="QLabel" name="label_3">
@@ -392,7 +398,7 @@ font: 36px ;</string>
                </property>
                <property name="styleSheet">
                 <string notr="true">color: rgb(255, 170, 127);
-font: 36px ;</string>
+font: 24px ;</string>
                </property>
                <property name="text">
                 <string>資料更新</string>
@@ -423,7 +429,7 @@ font: 36px ;</string>
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>200</height>
+              <height>100</height>
              </size>
             </property>
             <layout class="QGridLayout" name="gridLayout_8">
@@ -436,6 +442,9 @@ font: 36px ;</string>
                  <italic>false</italic>
                  <bold>false</bold>
                 </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 24px;</string>
                </property>
                <property name="text">
                 <string>登入</string>
@@ -451,6 +460,9 @@ font: 36px ;</string>
                  <italic>false</italic>
                  <bold>false</bold>
                 </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 24px;</string>
                </property>
                <property name="text">
                 <string>重新註冊</string>
@@ -478,7 +490,7 @@ font: 36px ;</string>
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>60</height>
+              <height>40</height>
              </size>
             </property>
             <property name="font">
@@ -501,6 +513,16 @@ font: 36px ;</string>
            </widget>
           </item>
          </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_11">
+         <property name="text">
+          <string>ver 1.0.1101</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
         </widget>
        </item>
       </layout>
@@ -804,7 +826,7 @@ font: 36px ;</string>
           <string notr="true">font: 26px;</string>
          </property>
          <property name="text">
-          <string>ver 1.0.0228</string>
+          <string/>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
