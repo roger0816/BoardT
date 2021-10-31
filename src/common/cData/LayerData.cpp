@@ -51,9 +51,19 @@ void LayerData::setPath(QString sPath)
 
             obj->m_dDefine = m_dDefine;
 
+                qDebug()<<"obj readData "<<sObjPath;
             obj->readData(sObjPath);
 
-            if(m_dataLayer.listObjSort.indexOf(obj->m_sName)<0)
+            bool bFind = false;
+
+            foreach(QVariant var,m_dataLayer.listObjSort)
+            {
+               if(obj->m_sName == var.toString())
+                   bFind = true;
+            }
+
+
+            if(!bFind)
                 m_dataLayer.listObjSort.append(obj->m_sName);
 
 
@@ -65,6 +75,8 @@ void LayerData::setPath(QString sPath)
     }
 
     raise("");
+
+    qDebug()<<"setPath OK ";
 
 }
 

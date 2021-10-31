@@ -575,7 +575,7 @@
                    <string notr="true">QWidget#wContent{background-color: rgb(239, 239, 239);}</string>
                   </property>
                   <property name="currentIndex">
-                   <number>2</number>
+                   <number>4</number>
                   </property>
                   <widget class="QWidget" name="page0">
                    <layout class="QGridLayout" name="gridLayout_2">
@@ -962,9 +962,7 @@ p, li { white-space: pre-wrap; }
                    </layout>
                   </widget>
                   <widget class="LayerSchedule" name="pageSchedule"/>
-                  <widget class="LayerTimeSchedule" name="pageTimeSchedule">
-                   <layout class="QGridLayout" name="gridLayout_8"/>
-                  </widget>
+                  <widget class="LayerTimeSchedule" name="pageTimeSchedule"/>
                  </widget>
                 </item>
                </layout>

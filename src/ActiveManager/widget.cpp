@@ -52,6 +52,8 @@ Widget::Widget(QWidget *parent)
 
     ui->tabWidget->setCurrentWidget(ui->wStyle);
 
+    qDebug()<<"widget create Ok";
+
 }
 
 Widget::~Widget()
