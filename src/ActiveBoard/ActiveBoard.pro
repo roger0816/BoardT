@@ -70,7 +70,9 @@ INCLUDEPATH +=$$PWD/../lib
 
 
 include($$PWD/../lib/RpkLib/RpkPlayer.pri)
-
+!win32{
+include($$PWD/../lib/udev/udev.pri)
+}
 
 
 
@@ -115,4 +117,5 @@ include($$PWD/../common/Common.pri);
 
 RESOURCES += \
     res/res.qrc
+
 
