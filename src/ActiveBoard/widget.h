@@ -18,6 +18,12 @@
 #include "DisplayWidget.h"
 #include "ItemVideoCon.h"
 #include "CCtrlFunc.h"
+#include "LayerUsbUpdate.h"
+
+#ifndef WIN32
+#include "udevmonitor.h"
+#endif
+
 static QString RDATA = "../bin/data";
 
 namespace Ui {
@@ -114,9 +120,23 @@ private slots:
 
     void checkIpAndName();
 
+public slots:
+
+    void slotUsbAdd(QString );
+
+    void slotUsbRemove(QString );
 
 private:
     Ui::Widget *ui;
+
+
+    LayerUsbUpdate *m_listUsbUpdate;
+
+    QStringList m_listUsb;
+
+#ifndef WIN32
+    UdevMonitor *m_udev;
+#endif
 };
 
 #endif // WIDGET_H

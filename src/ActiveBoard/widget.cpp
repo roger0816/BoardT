@@ -50,6 +50,23 @@ Widget::Widget(QWidget *parent) :
 
     QTimer::singleShot(1000,this,SLOT(loadingLicense()));
 
+
+    m_listUsbUpdate = new LayerUsbUpdate(this);
+
+    m_listUsbUpdate->hide();
+
+
+#ifndef WIN32
+    m_udev = new UdevMonitor;
+
+    connect(m_udev,SIGNAL(deviceAdded(QString)),this,SLOT(slotUsbAdd(QString )));
+
+    connect(m_udev,SIGNAL(deviceRemoved(QString)),this,SLOT(slotUsbRemove(QString )));
+
+    m_udev->start();
+
+#endif
+
 }
 
 Widget::~Widget()
@@ -303,6 +320,25 @@ void Widget::checkIpAndName()
 
 }
 
+void Widget::slotUsbAdd(QString)
+{
+
+#ifndef WIN32
+    m_listUsb = m_udev->deviceList();
+    m_listUsbUpdate->setUsbList(m_listUsb);
+#endif
+
+}
+
+void Widget::slotUsbRemove(QString)
+{
+#ifndef WIN32
+    m_listUsb = m_udev->deviceList();
+    m_listUsbUpdate->setUsbList(m_listUsb);
+#endif
+}
+
+
 void Widget::mousePressEvent(QMouseEvent *e)
 {
     if(e->pos().x()> width()-50 && e->pos().y()> height()-50)
@@ -356,13 +392,27 @@ void Widget::slotTimer()
 
         if(st.mid(0,1) == "1")
         {
-            ui->lbUpdateData->show();
 
-            // m_timerWaitLogin.stop();
+//            ui->lbUpdateData->show();
 
-            on_btnUpdateData_clicked();
+//            // m_timerWaitLogin.stop();
 
-            QTimer::singleShot(3000,ui->lbUpdateData,SLOT(hide()));
+//            on_btnUpdateData_clicked();
+
+//            QTimer::singleShot(3000,ui->lbUpdateData,SLOT(hide()));
+
+
+            m_listUsbUpdate->resize(this->width(),this->height());
+
+            m_listUsbUpdate->raise();
+
+            m_listUsbUpdate->show();
+
+
+        }
+        else
+        {
+                m_listUsbUpdate->hide();
         }
     }
 

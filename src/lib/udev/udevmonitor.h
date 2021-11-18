@@ -4,12 +4,14 @@
 #include <QThread>
 #include <QList>
 #include <QMutex>
+#include <QDebug>
+#include <QDir>
 #include <QMutexLocker>
 #include <QProcess>
 #include <QElapsedTimer>
 #include <QTimer>
 #include "udev.h"
-#include "const_defines.h"
+//#include "const_defines.h"
 
 class UdevMonitor : public QThread {
     Q_OBJECT

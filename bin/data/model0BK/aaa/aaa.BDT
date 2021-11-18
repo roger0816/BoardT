@@ -1,0 +1,11 @@
+[General]
+ObjSort=DateTime_0, MARQUEE0, TEXT_0, VIDEO_0, PIC_0, TEXT_1, BUTTON_0
+
+[Base]
+resumeTimer=15
+
+[TimeSchedule]
+from=
+to=
+stopPreVideo=false
+dayOfWeek=0

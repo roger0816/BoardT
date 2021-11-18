@@ -85,7 +85,8 @@ SOURCES += \
         main.cpp \
         widget.cpp \
     Global.cpp \
-    DialogPop.cpp
+    DialogPop.cpp \
+    LayerUsbUpdate.cpp
 
 
 HEADERS += \
@@ -94,13 +95,15 @@ HEADERS += \
     FuncUsb.h \
         widget.h \
     Global.h \
-    DialogPop.h
+    DialogPop.h \
+    LayerUsbUpdate.h
 
 
 FORMS += \
     DialogPainter.ui \
         widget.ui \
-    DialogPop.ui
+    DialogPop.ui \
+    LayerUsbUpdate.ui
 
 
 # Default rules for deployment.
