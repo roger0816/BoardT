@@ -97,7 +97,7 @@ QPixmap DisplayWidget::setLayer(QString sPath, bool bStopVideo)
 
                 QEventLoop loop;
 
-                QTimer::singleShot(1000,&loop,SLOT(quit()));
+                QTimer::singleShot(3000,&loop,SLOT(quit()));
 
                 loop.exec();
             }
