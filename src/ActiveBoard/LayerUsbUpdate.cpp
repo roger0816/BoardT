@@ -68,6 +68,8 @@ void LayerUsbUpdate::detectUsb()
 
     m_bCanDoit = false;
 
+    m_bLock = false;
+
     ui->process->setValue(0);
 
 
