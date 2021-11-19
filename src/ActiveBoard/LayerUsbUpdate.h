@@ -46,7 +46,7 @@ private:
 
     void timerEvent(QTimerEvent *) override;
 private slots:
-    bool doHide();
+    void doHide();
 };
 
 #endif // LAYERUSBUPDATE_H

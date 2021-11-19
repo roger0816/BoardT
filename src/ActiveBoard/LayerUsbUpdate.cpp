@@ -134,7 +134,7 @@ void LayerUsbUpdate::timerEvent(QTimerEvent *)
     }
 }
 
-bool LayerUsbUpdate::doHide()
+void LayerUsbUpdate::doHide()
 {
     if(ui->lbMsg->text()==msg_updating)
     {
