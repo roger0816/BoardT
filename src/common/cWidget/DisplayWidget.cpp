@@ -93,6 +93,13 @@ QPixmap DisplayWidget::setLayer(QString sPath, bool bStopVideo)
             if(m_video == nullptr)
             {
                 m_video = new ItemPlayer(this);
+
+
+                QEventLoop loop;
+
+                QTimer::singleShot(1000,&loop,SLOT(quit()));
+
+                loop.exec();
             }
 
             m_video->show();
