@@ -58,6 +58,19 @@ void LayerUsbUpdate::doUpdate()
     ui->lbMsg->setText(msg_finish);
 }
 
+void LayerUsbUpdate::callHide()
+{
+    if(m_bWaitHide)
+        return ;
+
+    m_bWaitHide = true;
+
+
+    doHide();
+
+
+}
+
 void LayerUsbUpdate::detectUsb()
 {
     ui->lbLast->setText("");
@@ -119,4 +132,23 @@ void LayerUsbUpdate::timerEvent(QTimerEvent *)
 
 
     }
+}
+
+bool LayerUsbUpdate::doHide()
+{
+    if(ui->lbMsg->text()==msg_updating)
+    {
+        QTimer::singleShot(1000,this,SLOT(doHide()));
+    }
+    else if(ui->lbMsg->text()==msg_finish)
+    {
+         m_bWaitHide = false;
+         QTimer::singleShot(2000,this,SLOT(hide()));
+    }
+    else
+    {
+        m_bWaitHide = false;
+        QTimer::singleShot(300,this,SLOT(hide()));
+    }
+
 }

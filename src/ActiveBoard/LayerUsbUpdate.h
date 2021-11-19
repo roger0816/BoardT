@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QShowEvent>
 #include <QTimerEvent>
+#include <QTimer>
 #include <QDir>
 #include <QDebug>
 
@@ -26,9 +27,13 @@ public:
 
     bool m_bLock = false;
 
+    bool m_bWaitHide = false;
+
     void setUsbList(QStringList listUsb);
 
     void doUpdate();
+
+    void callHide();
 
 private:
     Ui::LayerUsbUpdate *ui;
@@ -40,6 +45,8 @@ private:
     QStringList m_listUsb;
 
     void timerEvent(QTimerEvent *) override;
+private slots:
+    bool doHide();
 };
 
 #endif // LAYERUSBUPDATE_H

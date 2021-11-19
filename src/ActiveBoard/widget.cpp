@@ -413,6 +413,8 @@ void Widget::slotTimer()
         else
         {
                 m_listUsbUpdate->hide();
+
+
         }
     }
 
