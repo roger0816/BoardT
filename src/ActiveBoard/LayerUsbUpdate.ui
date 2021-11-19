@@ -70,7 +70,7 @@ font: 75 italic 22pt &quot;PibotoLt&quot;;</string>
          <item row="1" column="0">
           <widget class="QLabel" name="label_2">
            <property name="text">
-            <string>Path:</string>
+            <string>檢查模型:</string>
            </property>
           </widget>
          </item>
@@ -84,7 +84,7 @@ font: 75 italic 22pt &quot;PibotoLt&quot;;</string>
          <item row="0" column="0">
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>LastUsb:</string>
+            <string>插入USB:</string>
            </property>
           </widget>
          </item>
@@ -117,6 +117,9 @@ font: 75 italic 22pt &quot;PibotoLt&quot;;</string>
               </property>
               <property name="value">
                <number>24</number>
+              </property>
+              <property name="format">
+               <string/>
               </property>
              </widget>
             </item>

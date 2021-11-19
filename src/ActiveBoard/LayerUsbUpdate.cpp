@@ -1,6 +1,10 @@
 #include "LayerUsbUpdate.h"
 #include "ui_LayerUsbUpdate.h"
 
+static QString msg_finish= "更新完成";
+
+static QString msg_updating="更新中...";
+
 LayerUsbUpdate::LayerUsbUpdate(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::LayerUsbUpdate)
@@ -35,7 +39,7 @@ void LayerUsbUpdate::doUpdate()
 {
     m_bLock = true;
 
-    ui->lbMsg->setText("UPDATE ...");
+    ui->lbMsg->setText(msg_updating);
 
     QString sCmd = "rm -rf ~/BoardT/bin/data/model0BK";
 
@@ -51,7 +55,7 @@ void LayerUsbUpdate::doUpdate()
     system(sCmd.toStdString().c_str());
 
 
-    ui->lbMsg->setText("Finish");
+    ui->lbMsg->setText(msg_finish);
 }
 
 void LayerUsbUpdate::detectUsb()
