@@ -30,6 +30,9 @@ public:
 
     //defult layer select
     QString m_sSetTargetPath = "def";
+
+    void setReadOnly(bool bReadOnly);
+
 signals:
 
     void sendSelectLayer(QString sName);
@@ -38,6 +41,7 @@ private:
 
     QString m_sPath;
 
+    bool m_bReadOnly = false;
 
     QList<QPushButton*> m_listBtn;
 
@@ -52,6 +56,11 @@ private:
     void setUiRect();
 
     void setIdx(int iIdx);
+
+    QWidget *m_wMask;
+
+
+    int m_iIdx=0;
 
 private slots:
 

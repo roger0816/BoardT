@@ -2,7 +2,11 @@
 
 LayerSelector::LayerSelector(QWidget *parent) : QWidget(parent)
 {
+    m_wMask = new QWidget(this);
 
+    m_wMask->setStyleSheet("background-color:rgba(0,0,0,100)");
+
+    m_wMask->hide();
 }
 
 void LayerSelector::setData(QMap<QString , QPixmap> dData, QString sPath)
@@ -140,6 +144,17 @@ void LayerSelector::toDef()
     }
 }
 
+void LayerSelector::setReadOnly(bool bReadOnly)
+{
+    m_bReadOnly = bReadOnly;
+
+    m_wMask->show();
+
+    m_wMask->raise();
+
+//    foreach(QRadioButton *btn, m_listBtn)
+}
+
 void LayerSelector::resizeEvent(QResizeEvent *)
 {
     setUiRect();
@@ -181,12 +196,14 @@ void LayerSelector::setUiRect()
 
 
     setMinimumHeight((iPicH+iMargin)*iCount+10);
+
+    m_wMask->resize(size());
     // setMinimumWidth((iPicW+iMargin)*iCount+10);
 }
 
 void LayerSelector::setIdx(int iIdx)
 {
-    if(iIdx<0 || iIdx >= m_listBtn.length())
+    if(iIdx<0 || iIdx >= m_listBtn.length() || m_bReadOnly)
     {
         return ;
     }

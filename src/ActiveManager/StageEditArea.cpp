@@ -27,7 +27,8 @@ StageEditArea::StageEditArea(QWidget *parent) :
 
     connect(&CCTRL,&CCtrlFunc::callChangePage,ui->wDisplay,&DisplayWidget::slotChangeLayer);
 
-
+    ui->wStackWork->setCurrentWidget(ui->pageWork);
+    ui->wBottom->setCurrentWidget(ui->wBottomPage1);
 }
 
 StageEditArea::~StageEditArea()
@@ -129,6 +130,7 @@ void StageEditArea::refreshSelector(bool bToDef)
 void StageEditArea::showEvent(QShowEvent *)
 {
     qDebug()<<"show event : StageEditArea";
+
     ui->btnBack->setMaximumWidth(54);
     refreshSelector();
 }
@@ -176,9 +178,15 @@ void StageEditArea::on_btnSave_clicked()
 void StageEditArea::on_btnUpload_clicked()
 {
 
+    ui->wStackWork->setCurrentWidget(ui->pageSchedule);
+
+    ui->wBottom->setCurrentWidget(ui->wBottomPage2);
+
+    ui->wLayerSelector->setReadOnly(true);
+
 //    ui->wStackWork->setCurrentWidget(ui->pageSchedule);
 
-//return;
+return;
 
 
     auto fnSave =[=]()

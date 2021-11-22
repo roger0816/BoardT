@@ -112,7 +112,7 @@ bool LayerUsbUpdate::checkPath(QString sPath)
 
 void LayerUsbUpdate::timerEvent(QTimerEvent *)
 {
-    if(m_bCanDoit)
+    if(m_bCanDoit && isVisible())
     {
         if(ui->process->value()<100)
         {
