@@ -50,9 +50,10 @@ void EditLabel::on_btnBgColor_clicked()
 
 void EditLabel::on_btnTxtColor_clicked()
 {
+    qDebug()<<"AAA1";
     if(m_obj ==nullptr || m_bLockCallUpdate )
         return ;
-
+    qDebug()<<"AAA2";
     EditBase::setEditColor(m_obj,Label::txtColor);
 
     emit callUpdate();

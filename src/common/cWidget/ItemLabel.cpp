@@ -33,6 +33,7 @@ void ItemLabel::updateItem()
     if(m_obj!=nullptr)
         m_data = m_obj->m_data;
 
+   qDebug()<<"MDATA : "<<m_data;
     setLbStyle(Label::txtColor,Label::bgColor,Label::imagePath,Label::font,Label::alignCenter);
 
 
@@ -90,7 +91,7 @@ void ItemLabel::setLbStyle(QString sTxtColorKey, QString sBgColorKey, QString sI
 #endif
     ui->label->setFont(f);
 
-
+    qDebug()<<"CCC : "<<m_data.value(Label::text,"文字").toString();
     ui->label->setText(m_data.value(Label::text,"文字").toString());
     qDebug()<<m_data.value(Label::text,"文字").toString();
     qDebug()<<"update alignCenter : "<<m_data.value(sCentKey).toInt();

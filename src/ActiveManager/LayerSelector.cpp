@@ -18,7 +18,7 @@ void LayerSelector::setData(QMap<QString , QPixmap> dData, QString sPath)
 
     // QSettings conf(sPath+"/conf.ini",QSettings::IniFormat);
 
-    QSettings conf(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
+    QSettings conf(m_sPath+"/model0.BDM",QSettings::IniFormat);
 
     QString sTarget = conf.value("Target","").toString();
 
@@ -247,22 +247,7 @@ void LayerSelector::slotClickedRadio()
 
     setIdx(m_listRadioBtn.indexOf(target));
 
-//    QSettings conf(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
 
-
-//    QString sPre = conf.value("Target","").toString();
-
-//    if(sPre != target->text())
-//    {
-//        conf.setValue("Target",target->text());
-
-//        conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
-
-//        conf.sync();
-
-
-
-//    }
 
 }
 

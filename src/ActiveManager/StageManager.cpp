@@ -7,6 +7,7 @@ StageManager::StageManager(QWidget *parent) :
 {
     ui->setupUi(this);
 
+
     ui->btnUpload->setData(QStringList()<<":/button/folder-html-icon.png","上傳專案");
 
     ui->btnDownload->setData(QStringList()<<":/button/folder-downloads-icon.png","下載專案");
@@ -14,17 +15,16 @@ StageManager::StageManager(QWidget *parent) :
 
     connect(&m_listBtn,SIGNAL(buttonClicked(QAbstractButton *)),this,SLOT(slotRadioClicked(QAbstractButton *)));
 
+
     m_lay = new QGridLayout;
 
-    addData(QDir(QApplication::applicationDirPath()+"/data").entryList(QDir::Dirs | QDir::NoDotAndDotDot),false);
+    m_lay->setMargin(40);
 
-    if(m_listBtn.buttons().length()>0)
-    {
-        m_listBtn.buttons()[0]->setChecked(true);
+    //    addData(QDir(QApplication::applicationDirPath()+"/data").entryList(QDir::Dirs | QDir::NoDotAndDotDot),false);
 
-        slotRadioClicked(0);
+    refresh();
 
-    }
+
 
 
 }
@@ -47,59 +47,59 @@ void StageManager::on_btnNewModel_clicked()
     QString sName = msg.getInput();
     //qDeleteAll(ui->wSpace->children());
 
-    addData(QStringList()<<sName);
+    addModel(sName);
 
 
 
 }
 
-void StageManager::addData(QStringList list, bool bNew)
-{
-    for(int i=0;i<list.length();i++)
-    {
+//void StageManager::addData(QStringList list, bool bNew)
+//{
+//    for(int i=0;i<list.length();i++)
+//    {
 
-        QCheckBox * t = new QCheckBox();
+//        QCheckBox * t = new QCheckBox();
 
-        QFont font;
+//        QFont font;
 
-        font.setPixelSize(22);
+//        font.setPixelSize(22);
 
-        font.setBold(true);
+//        font.setBold(true);
 
-        t->setFont(font);
+//        t->setFont(font);
 
-        t->setMinimumSize(QSize(120,30));
+//        t->setMinimumSize(QSize(120,30));
 
-        t->setMaximumSize(QSize(120,30));
+//        t->setMaximumSize(QSize(120,30));
 
-        m_listBtn.addButton(t,m_listBtn.buttons().length());
-
-
-
-        m_listKey.append(list.at(i));
-
-        if(bNew)
-            CDATA.createModel(list.at(i));
-    }
-
-    delete  m_lay;
-
-    m_lay = new QGridLayout;
-
-    m_lay->setMargin(40);
-
-    for(int i=0;i<m_listBtn.buttons().length();i++)
-    {
-        m_lay->addWidget(m_listBtn.buttons()[i],i/5,i%5);
-
-        m_listBtn.buttons()[i]->setText(m_listKey.at(i));
-    }
-
-    ui->wSpace->setLayout(m_lay);
+//        m_listBtn.addButton(t,m_listBtn.buttons().length());
 
 
 
-}
+//        m_listKey.append(list.at(i));
+
+//        if(bNew)
+//            CDATA.createModel(list.at(i));
+//    }
+
+//    delete  m_lay;
+
+//    m_lay = new QGridLayout;
+
+//    m_lay->setMargin(40);
+
+//    for(int i=0;i<m_listBtn.buttons().length();i++)
+//    {
+//        m_lay->addWidget(m_listBtn.buttons()[i],i/5,i%5);
+
+//        m_listBtn.buttons()[i]->setText(m_listKey.at(i));
+//    }
+
+//    ui->wSpace->setLayout(m_lay);
+
+
+
+//}
 
 void StageManager::on_btnDelete_clicked()
 {
@@ -124,25 +124,26 @@ void StageManager::on_btnDelete_clicked()
     if(msg2.exec()==0)
         return;
 
+    removeModel(m_listKey.at(m_listBtn.checkedId()));
 
-    m_listKey.removeAt(m_listBtn.checkedId());
+//    m_listKey.removeAt(m_listBtn.checkedId());
 
-    m_listBtn.removeButton(m_listBtn.button(m_listBtn.checkedId()));
-
-
-    delete  m_lay;
-
-    m_lay = new QGridLayout;
+//    m_listBtn.removeButton(m_listBtn.button(m_listBtn.checkedId()));
 
 
-    for(int i=0;i<m_listBtn.buttons().length();i++)
-    {
-        m_lay->addWidget(m_listBtn.buttons()[i],i/5,i%5);
+//    delete  m_lay;
 
-        m_listBtn.buttons()[i]->setText(m_listKey.at(i));
-    }
+//    m_lay = new QGridLayout;
 
-    ui->wSpace->setLayout(m_lay);
+
+//    for(int i=0;i<m_listBtn.buttons().length();i++)
+//    {
+//        m_lay->addWidget(m_listBtn.buttons()[i],i/5,i%5);
+
+//        m_listBtn.buttons()[i]->setText(m_listKey.at(i));
+//    }
+
+//    ui->wSpace->setLayout(m_lay);
 
 
 
@@ -180,46 +181,90 @@ void StageManager::slotBtnUpload()
 
         system(sCmd.toStdString().c_str());
 
-        sCmd = QApplication::applicationDirPath()+"/pscp.exe -P 22 -pw \"pi\" %2 pi@%1:%3";
+        CDATA.deleteDirectory(QApplication::applicationDirPath()+"/tmp/upload");
 
-        sCmd = sCmd.arg(sIp).arg(sTarget).arg(sPath);
+        if(!QDir(QApplication::applicationDirPath()+"/tmp").exists())
+            QDir().mkdir(QApplication::applicationDirPath()+"/tmp");
+
+        if(!QDir(QApplication::applicationDirPath()+"/tmp/upload").exists())
+            QDir().mkdir(QApplication::applicationDirPath()+"/tmp/upload");
+
+        if(!QDir(QApplication::applicationDirPath()+"/tmp/upload/model0").exists())
+            QDir().mkdir(QApplication::applicationDirPath()+"/tmp/upload/model0");
+
+
+        qDebug()<<"DDDG : "<<sTarget;
+
+        CDATA.copyDir(sTarget,QApplication::applicationDirPath()+"/tmp/upload/model0");
+
+        //
+        sCmd = QApplication::applicationDirPath()+"/pscp.exe -P 22 -pw \"pi\" -r %2 pi@%1:%3";
+
+        sCmd = sCmd.arg(sIp).arg(QApplication::applicationDirPath()+"/tmp/upload/model0").arg(sPath);
 
         qDebug()<<"scmd : "<<sCmd;
 
         system(sCmd.toStdString().c_str());
 
     };
-        DialogMsg msg;
 
-        msg.setInput("請輸入IP",m_sPreIp,QStringList()<<"取消"<<"確定");
+//    upload(m_sPreIp," -r "+CDATA.m_sPath,"/home/pi/BoardT/bin/data/");
 
-        int iRe = msg.exec();
+//    return;
 
-        if(iRe==1)
-        {
-            m_sPreIp = msg.getInput();
+    DialogMsg msg;
 
-            QString sPath = CDATA.m_sPath;
+    msg.setInput("請輸入IP",m_sPreIp,QStringList()<<"取消"<<"確定");
 
-            //     QSettings conf(sPath+"/conf.ini",QSettings::IniFormat);
+    int iRe = msg.exec();
 
+    if(iRe==1)
+    {
+        m_sPreIp = msg.getInput();
 
-            QSettings conf(sPath+"/"+sPath.split("/").last()+".BDM",QSettings::IniFormat);
+        QString sPath = CDATA.m_sPath;
 
-
-            QDir dir(sPath);
-
-            // conf.setValue("Target",dir.path().split("/").last());
-
-            conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
-
-            conf.sync();
+        //     QSettings conf(sPath+"/conf.ini",QSettings::IniFormat);
 
 
-            upload(m_sPreIp," -r "+sPath,"/home/pi/BoardT/bin/data/");
+        QSettings conf(sPath+"/model0.BDM",QSettings::IniFormat);
 
-        }
+
+        QDir dir(sPath);
+
+        // conf.setValue("Target",dir.path().split("/").last());
+
+        conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
+
+        conf.sync();
+
+
+        upload(m_sPreIp,sPath,"/home/pi/BoardT/bin/data/");
+
+    }
 }
+
+
+void StageManager::addModel(QString sName)
+{
+     CDATA.createModel(sName);
+
+     refresh();
+}
+
+void StageManager::removeModel(QString sName)
+{
+    CDATA.deleteModel(sName);
+
+    refresh();
+}
+
+void StageManager::renameModel(QString sOld, QString sName)
+{
+
+}
+
+
 
 //void StageManager::slotRadioClicked(int)
 //{
@@ -234,6 +279,82 @@ void StageManager::slotRadioClicked(QAbstractButton *)
 {
     QString sPath = QApplication::applicationDirPath()+"/data/"+m_listKey.at(m_listBtn.checkedId());
 
-    qDebug()<<"AAA "<<sPath;
     CDATA.readModel(sPath);
+}
+
+
+
+void StageManager::refresh()
+{
+
+    QLayoutItem *child;
+    while ((child = m_lay->takeAt(0)) != nullptr) {
+
+        delete child->widget(); // delete the widget
+        delete child;   // delete the layout item
+    }
+
+
+    for(int j=0;j<m_listBtn.buttons().length();j++)
+    {
+        m_listBtn.buttons()[j]->hide();
+    }
+
+
+
+
+
+    QStringList list = QDir(QApplication::applicationDirPath()+"/data").entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+
+    m_listKey = list;
+
+    QGridLayout *lay=new QGridLayout;
+
+    for(int i=0;i<m_listKey.length();i++)
+    {
+        QCheckBox * t ;
+
+        if(i>=m_listBtn.buttons().length())
+            t = new QCheckBox(ui->wSpace);
+        else
+            t = dynamic_cast<QCheckBox*>(m_listBtn.buttons()[i]);
+        QFont font;
+
+        font.setPixelSize(22);
+
+        font.setBold(true);
+
+        t->setFont(font);
+
+        t->setMinimumSize(QSize(120,30));
+
+        t->setMaximumSize(QSize(120,30));
+
+        t->setText(m_listKey.at(i));
+
+        t->show();
+
+        m_listBtn.addButton(t,m_listBtn.buttons().length());
+
+        m_lay->addWidget(m_listBtn.buttons()[i],i/5,i%5);
+
+
+    }
+
+    ui->wSpace->setLayout(m_lay);
+
+
+
+    if(m_listBtn.buttons().length()>0)
+    {
+        m_listBtn.buttons()[0]->setChecked(true);
+
+        slotRadioClicked(0);
+
+    }
+}
+
+void StageManager::showEvent(QShowEvent *)
+{
+   // refresh();
 }

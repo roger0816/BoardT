@@ -26,7 +26,7 @@ public:
 private slots:
     void on_btnNewModel_clicked();
 
-    void addData(QStringList list,bool bNew = true);
+  //d  void addData(QStringList list,bool bNew = true);
     void on_btnDelete_clicked();
 
     void on_btnEdit_clicked();
@@ -36,6 +36,11 @@ private slots:
  //   void slotRadioClicked(int);
 
 
+    void addModel(QString sName);
+
+    void removeModel(QString sName);
+
+    void renameModel(QString sOld,QString sName);
     void slotRadioClicked(QAbstractButton *);
 
 private:
@@ -48,6 +53,10 @@ private:
     QGridLayout *m_lay;
 
     QString m_sPreIp;
+
+    void refresh();
+
+    void showEvent(QShowEvent *) override;
 
 signals:
     void sendSelectModel(QString sPath);

@@ -27,6 +27,8 @@ public:
 
     void createModel(QString sPath);
 
+    void deleteModel(QString sPath);
+
     void readModel(QString sPath);
 
     void writeModel(QString defLayer="def");
@@ -37,6 +39,9 @@ public:
 
     void removeLayer(QString sPath);
 
+    void copyDir(QString sFrom,QString sTarget);
+
+    bool deleteDirectory(const QString &path);
 
     QMap < QString , LayerData*> m_dData;
 
@@ -55,6 +60,7 @@ public:
     DataModel m_dataModel;
 
 
+
     bool m_bIsEdit = false;
 
     QVariant test;
@@ -62,13 +68,12 @@ private:
     CData(QObject *parent = nullptr);
     static CData* m_pInstance;
 
-
+    QList<LayerData*> m_listTmp;
     void typeMapping();
 
   //  void writeObj(ObjData *item);
 
 
-    bool deleteDirectory(const QString &path);
 
 
 signals:

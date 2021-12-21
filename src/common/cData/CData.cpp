@@ -28,7 +28,7 @@ void CData::createModel(QString sPath)
 
     checkDefine();
 
-    QSettings pro(m_sPath+"/"+sName+".BDM",QSettings::IniFormat);
+    QSettings pro(m_sPath+"/model0.BDM",QSettings::IniFormat);
 
     QStringList listKey = m_dData.keys();
 
@@ -50,26 +50,42 @@ void CData::createModel(QString sPath)
 
 }
 
+void CData::deleteModel(QString sPath)
+{
+    QString sName ;
+
+    if(sPath.split("/").length()>0)
+        sName = sPath.split("/").last();
+    else
+        sName = sPath;
+
+    m_sPath = QApplication::applicationDirPath()+"/data/"+sName;
+
+
+    deleteDirectory(m_sPath);
+}
+
 void CData::readModel(QString sPath)
 {
     qDebug()<<"read model : "<<sPath;
 
     m_sPath = sPath;
 
-    checkDefine();
-
 
     m_sModelName = m_sPath.split("/").last();
 
+    checkDefine();
+
+
     typeMapping();
 
-    qDeleteAll(m_dData);
+   // qDeleteAll(m_dData);
 
     m_dData.clear();
 
 
 
-    QSettings pro(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
+    QSettings pro(m_sPath+"/model0.BDM",QSettings::IniFormat);
 
     m_dataModel.sTarget = pro.value("Target","").toString();
 
@@ -96,10 +112,18 @@ void CData::readModel(QString sPath)
 
             LayerData *layer = new LayerData(this);
 
+//            if(i>= m_listTmp.length())
+//            {
+//                layer = new LayerData(this);
+//                m_listTmp.append(layer);
+//            }
+//            else
+//                layer= m_listTmp[i];
+
             layer->m_dDefine = m_dDefine;
 
             layer->setPath(dir.filePath());
-
+            qDebug()<<"layer obj : "<<dir.filePath();
 
             m_dData.insert(dir.fileName(),layer);
         }
@@ -136,7 +160,7 @@ void CData::writeModel(QString defLayer)
 
     defin.sync();
 
-    QSettings pro(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
+    QSettings pro(m_sPath+"/model0.BDM",QSettings::IniFormat);
 
     QString sPre = pro.value("Target","").toString();
 
@@ -223,7 +247,7 @@ void CData::checkDefine()
 {
 
 
-    QString sPath = QApplication::applicationDirPath()+"/data/model0";
+    QString sPath = QApplication::applicationDirPath()+"/data/"+m_sModelName;
 
 
     QMap<QString, int > defData;
@@ -502,6 +526,40 @@ void CData::removeLayer(QString sPath)
     deleteDirectory(sPath);
 
     qDebug()<<"remove layer : "<<sPath<<" , data count : "<<m_dData.count();
+}
+
+void CData::copyDir(QString sFrom, QString dst)
+{
+    QDir srcDir(sFrom);
+
+    QDir dstDir(dst);
+
+    if(!dstDir.exists())
+        dstDir.mkdir(dst);
+
+    QFileInfoList list = srcDir.entryInfoList();
+
+    foreach(QFileInfo info ,list)
+    {
+        if(info.fileName() =="." || info.fileName()=="..")
+        {
+            continue;
+        }
+
+        if(info.isDir())
+        {
+            copyDir(info.filePath(),dst+"/"+info.fileName());
+
+            continue;
+        }
+
+        QFile file(info.filePath());
+
+        file.copy(dst+"/"+info.fileName());
+
+        file.close();
+    }
+
 }
 
 

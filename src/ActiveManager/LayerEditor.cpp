@@ -50,7 +50,7 @@ void LayerEditor::setTarget(QString sObjPath)
     m_sObjName = listTmp.at(listTmp.length()-1);
 
     ObjData *data = CDATA.getObj(m_sLayerName,m_sObjName,bOk);
-
+    qDebug()<<"BBB1 "<<bOk;
     if(!bOk)
         return;
 

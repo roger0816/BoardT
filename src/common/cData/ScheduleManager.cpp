@@ -10,7 +10,7 @@ void ScheduleManager::startModel(QString sPath)
 
     m_sPath = sPath;
 
-    QSettings pro(m_sPath+"/"+m_sPath.split("/").last()+".BDM",QSettings::IniFormat);
+    QSettings pro(m_sPath+"/model0.BDM",QSettings::IniFormat);
 
     m_sCurrentLayer = pro.value("Target","def").toString();
 

@@ -160,7 +160,7 @@ void StageEditArea::on_btnSave_clicked()
 
         QString sPath = CDATA.m_sPath;
 
-        QSettings conf(sPath+"/"+sPath.split("/").last()+".BDM",QSettings::IniFormat);
+        QSettings conf(sPath+"/model0.BDM",QSettings::IniFormat);
 
         QDir dir(sPath);
 
@@ -200,7 +200,7 @@ return;
 
         QString sPath = CDATA.m_sPath;
 
-        QSettings conf(sPath+"/"+sPath.split("/").last()+".BDM",QSettings::IniFormat);
+        QSettings conf(sPath+"/model0.BDM",QSettings::IniFormat);
 
         QDir dir(sPath);
 
@@ -248,7 +248,7 @@ return;
         //     QSettings conf(sPath+"/conf.ini",QSettings::IniFormat);
 
 
-        QSettings conf(sPath+"/"+sPath.split("/").last()+".BDM",QSettings::IniFormat);
+        QSettings conf(sPath+"/model0.BDM",QSettings::IniFormat);
 
 
         QDir dir(sPath);
