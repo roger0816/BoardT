@@ -10,6 +10,7 @@
 #include <QDir>
 #include <QFileInfo>
 #include "DialogMsg.h"
+#include "DialogDownload.h"
 #include "CData.h"
 namespace Ui {
 class StageManager;
@@ -32,6 +33,9 @@ private slots:
     void on_btnEdit_clicked();
 
     void slotBtnUpload();
+
+    void slotBtnDowload();
+
 
  //   void slotRadioClicked(int);
 

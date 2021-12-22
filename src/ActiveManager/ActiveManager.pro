@@ -53,6 +53,7 @@ INCLUDEPATH+= uiItem \
 
 
 SOURCES += \
+    DialogDownload.cpp \
     DialogEditGrid.cpp \
     DialogMsg.cpp \
     DialogSelectFile.cpp \
@@ -80,6 +81,7 @@ SOURCES += \
     widget.cpp
 
 HEADERS += \
+    DialogDownload.h \
     DialogEditGrid.h \
     DialogMsg.h \
     DialogSelectFile.h \
@@ -106,6 +108,7 @@ HEADERS += \
     widget.h
 
 FORMS += \
+    DialogDownload.ui \
     DialogEditGrid.ui \
     DialogMsg.ui \
     DialogSelectFile.ui \

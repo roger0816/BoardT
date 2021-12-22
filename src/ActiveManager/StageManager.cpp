@@ -13,6 +13,8 @@ StageManager::StageManager(QWidget *parent) :
     ui->btnDownload->setData(QStringList()<<":/button/folder-downloads-icon.png","下載專案");
     connect(ui->btnUpload,&IconButton::clicked,this,&StageManager::slotBtnUpload);
 
+    connect(ui->btnDownload,&IconButton::clicked,this,&StageManager::slotBtnDowload);
+
     connect(&m_listBtn,SIGNAL(buttonClicked(QAbstractButton *)),this,SLOT(slotRadioClicked(QAbstractButton *)));
 
 
@@ -126,24 +128,24 @@ void StageManager::on_btnDelete_clicked()
 
     removeModel(m_listKey.at(m_listBtn.checkedId()));
 
-//    m_listKey.removeAt(m_listBtn.checkedId());
+    //    m_listKey.removeAt(m_listBtn.checkedId());
 
-//    m_listBtn.removeButton(m_listBtn.button(m_listBtn.checkedId()));
-
-
-//    delete  m_lay;
-
-//    m_lay = new QGridLayout;
+    //    m_listBtn.removeButton(m_listBtn.button(m_listBtn.checkedId()));
 
 
-//    for(int i=0;i<m_listBtn.buttons().length();i++)
-//    {
-//        m_lay->addWidget(m_listBtn.buttons()[i],i/5,i%5);
+    //    delete  m_lay;
 
-//        m_listBtn.buttons()[i]->setText(m_listKey.at(i));
-//    }
+    //    m_lay = new QGridLayout;
 
-//    ui->wSpace->setLayout(m_lay);
+
+    //    for(int i=0;i<m_listBtn.buttons().length();i++)
+    //    {
+    //        m_lay->addWidget(m_listBtn.buttons()[i],i/5,i%5);
+
+    //        m_listBtn.buttons()[i]->setText(m_listKey.at(i));
+    //    }
+
+    //    ui->wSpace->setLayout(m_lay);
 
 
 
@@ -193,8 +195,6 @@ void StageManager::slotBtnUpload()
             QDir().mkdir(QApplication::applicationDirPath()+"/tmp/upload/model0");
 
 
-        qDebug()<<"DDDG : "<<sTarget;
-
         CDATA.copyDir(sTarget,QApplication::applicationDirPath()+"/tmp/upload/model0");
 
         //
@@ -208,9 +208,9 @@ void StageManager::slotBtnUpload()
 
     };
 
-//    upload(m_sPreIp," -r "+CDATA.m_sPath,"/home/pi/BoardT/bin/data/");
+    //    upload(m_sPreIp," -r "+CDATA.m_sPath,"/home/pi/BoardT/bin/data/");
 
-//    return;
+    //    return;
 
     DialogMsg msg;
 
@@ -244,12 +244,94 @@ void StageManager::slotBtnUpload()
     }
 }
 
+void StageManager::slotBtnDowload()
+{
+    DialogDownload msg;
+
+    msg.setIp(m_sPreIp);
+
+    int iRe = msg.exec();
+
+    if(iRe!=1)
+        return ;
+
+
+
+    CDATA.deleteDirectory(QApplication::applicationDirPath()+"/tmp/download");
+
+    if(!QDir(QApplication::applicationDirPath()+"/tmp").exists())
+        QDir().mkdir(QApplication::applicationDirPath()+"/tmp");
+
+    if(!QDir(QApplication::applicationDirPath()+"/tmp/download").exists())
+        QDir().mkdir(QApplication::applicationDirPath()+"/tmp/download");
+
+
+    QString sCmd;
+    sCmd =QApplication::applicationDirPath()+"/pscp.exe -P 22 -pw \""+msg.pw()+"\" -r "
+            +msg.id()+"@"+msg.ip()+":/home/"+msg.id()+"/BoardT/bin/data/model0 "
+            +QApplication::applicationDirPath()+"/tmp/download";
+
+
+    system(sCmd.toStdString().c_str());
+
+    sCmd =QApplication::applicationDirPath()+"/pscp.exe -P 22 -pw \""+msg.pw()+"\" "
+            +msg.id()+"@"+msg.ip()+":/home/"+msg.id()+"/deviceInfo "
+            +QApplication::applicationDirPath()+"/tmp/download";
+
+    system(sCmd.toStdString().c_str());
+
+
+    m_sPreIp = msg.ip();
+    QFile file(QApplication::applicationDirPath()+"/tmp/download/deviceInfo");
+
+    QString sModelName;
+    if(file.open(QIODevice::ReadOnly))
+    {
+        QString st (file.readLine(0));
+
+        st = st.replace("\r","");
+
+        st = st.replace("\n","");
+
+        sModelName = st;
+
+        file.close();
+    }
+
+    if(sModelName=="")
+        sModelName="unkown";
+
+
+    QString sSn="000";
+
+    for(int i=0;i<999;i++)
+    {
+        QString st= QString("%1").arg(i,3,10,QLatin1Char('0'));
+
+        if(m_listKey.indexOf(sModelName+"_"+st)<0)
+        {
+            sSn = sModelName+"_"+st;
+            break;
+        }
+
+    }
+
+    QDir().mkdir(QApplication::applicationDirPath()+"/bin/data/"+sSn);
+
+    CDATA.copyDir(QApplication::applicationDirPath()+"/tmp/download/model0",
+                  QApplication::applicationDirPath()+"/data/"+sSn);
+
+
+    refresh();
+
+}
+
 
 void StageManager::addModel(QString sName)
 {
-     CDATA.createModel(sName);
+    CDATA.createModel(sName);
 
-     refresh();
+    refresh();
 }
 
 void StageManager::removeModel(QString sName)
@@ -326,9 +408,9 @@ void StageManager::refresh()
 
         t->setFont(font);
 
-        t->setMinimumSize(QSize(120,30));
+        t->setMinimumSize(QSize(220,30));
 
-        t->setMaximumSize(QSize(120,30));
+        t->setMaximumSize(QSize(220,30));
 
         t->setText(m_listKey.at(i));
 
@@ -356,5 +438,5 @@ void StageManager::refresh()
 
 void StageManager::showEvent(QShowEvent *)
 {
-   // refresh();
+    // refresh();
 }
