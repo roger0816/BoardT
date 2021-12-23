@@ -137,7 +137,12 @@ void StageEditArea::showEvent(QShowEvent *)
 
 void StageEditArea::on_btnBack_clicked()
 {
-    emit sendBack();
+    if(ui->wStackWork->currentWidget()==ui->pageWork)
+        emit sendBack();
+    else if(ui->wStackWork->currentWidget()==ui->pageSchedule)
+    {
+        changePage(0);
+    }
 }
 
 void StageEditArea::on_btnSave_clicked()
@@ -178,14 +183,7 @@ void StageEditArea::on_btnSave_clicked()
 void StageEditArea::on_btnUpload_clicked()
 {
 
-    ui->wStackWork->setCurrentWidget(ui->pageSchedule);
-
-    ui->wBottom->setCurrentWidget(ui->wBottomPage2);
-
-    ui->wLayerSelector->setReadOnly(true);
-
-//    ui->wStackWork->setCurrentWidget(ui->pageSchedule);
-
+    changePage(1);
 return;
 
 
@@ -331,5 +329,26 @@ void StageEditArea::on_btnDelLayerBg_clicked()
         CDATA.m_dData[sTarget]->m_sBgPath = "";
 
         ui->wDisplay->refreshItem();
+    }
+}
+
+void StageEditArea::changePage(int iIdx)
+{
+    if(iIdx==0) //page work
+    {
+        ui->wStackWork->setCurrentWidget(ui->pageWork);
+
+        ui->wBottom->setCurrentWidget(ui->wBottomPage1);
+
+        ui->wLayerSelector->setReadOnly(false);
+    }
+    else
+    {
+        ui->wStackWork->setCurrentWidget(ui->pageSchedule);
+
+        ui->wBottom->setCurrentWidget(ui->wBottomPage2);
+
+        ui->wLayerSelector->setReadOnly(true);
+
     }
 }

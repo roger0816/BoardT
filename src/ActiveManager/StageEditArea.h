@@ -43,6 +43,8 @@ private slots:
 
     void on_btnDelLayerBg_clicked();
 
+    void changePage(int iIdx);
+
 private:
     Ui::StageEditArea *ui;
 
