@@ -4,7 +4,7 @@ LayerSelector::LayerSelector(QWidget *parent) : QWidget(parent)
 {
     m_wMask = new QWidget(this);
 
-    m_wMask->setStyleSheet("background-color:rgba(0,0,0,100)");
+    m_wMask->setStyleSheet("background-color:rgba(0,0,0,0)");
 
     m_wMask->hide();
 }
@@ -148,11 +148,11 @@ void LayerSelector::setReadOnly(bool bReadOnly)
 {
     m_bReadOnly = bReadOnly;
 
-    m_wMask->show();
+    m_wMask->setVisible(m_bReadOnly);
 
     m_wMask->raise();
 
-//    foreach(QRadioButton *btn, m_listBtn)
+
 }
 
 void LayerSelector::resizeEvent(QResizeEvent *)

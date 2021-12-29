@@ -6,6 +6,10 @@ DialogDownload::DialogDownload(QWidget *parent) :
     ui(new Ui::DialogDownload)
 {
     ui->setupUi(this);
+
+    setWindowTitle("下載");
+
+    setTabOrder(ui->txtIp,ui->txtId);
 }
 
 DialogDownload::~DialogDownload()
