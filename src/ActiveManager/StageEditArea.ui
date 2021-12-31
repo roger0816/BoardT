@@ -262,7 +262,6 @@
                      <property name="font">
                       <font>
                        <pointsize>-1</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -324,9 +323,7 @@ font: 20px ;</string>
                     <widget class="QPushButton" name="btnLayerBg">
                      <property name="font">
                       <font>
-                       <family>Agency FB</family>
                        <pointsize>12</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -340,9 +337,7 @@ font: 20px ;</string>
                     <widget class="QPushButton" name="btnDelLayerBg">
                      <property name="font">
                       <font>
-                       <family>Agency FB</family>
                        <pointsize>12</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -406,6 +401,9 @@ font: 20px ;</string>
           <height>50</height>
          </size>
         </property>
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
         <widget class="QWidget" name="wBottomPage1">
          <layout class="QHBoxLayout" name="horizontalLayout">
           <property name="spacing">
@@ -448,9 +446,7 @@ font: 20px ;</string>
                </property>
                <property name="font">
                 <font>
-                 <family>Agency FB</family>
                  <pointsize>12</pointsize>
-                 <weight>50</weight>
                  <italic>false</italic>
                  <bold>false</bold>
                 </font>
@@ -482,9 +478,7 @@ font: 20px ;</string>
                </property>
                <property name="font">
                 <font>
-                 <family>Agency FB</family>
                  <pointsize>12</pointsize>
-                 <weight>50</weight>
                  <italic>false</italic>
                  <bold>false</bold>
                 </font>
@@ -632,7 +626,7 @@ font: 20px ;</string>
            <widget class="QPushButton" name="btnToUsb">
             <property name="minimumSize">
              <size>
-              <width>0</width>
+              <width>150</width>
               <height>30</height>
              </size>
             </property>
@@ -648,10 +642,10 @@ font: 20px ;</string>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="btnUpload_2">
+           <widget class="QPushButton" name="btnToNet">
             <property name="minimumSize">
              <size>
-              <width>0</width>
+              <width>150</width>
               <height>30</height>
              </size>
             </property>

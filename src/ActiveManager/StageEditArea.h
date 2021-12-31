@@ -20,6 +20,12 @@ public:
     explicit StageEditArea(QWidget *parent = nullptr);
     ~StageEditArea();
 
+    void changePage(int iIdx);
+
+public slots:
+
+    void on_btnUpload_clicked();
+
 private slots:
     void on_btnBack_clicked();
 
@@ -31,8 +37,6 @@ private slots:
 
     void on_btnSave_clicked();
 
-    void on_btnUpload_clicked();
-
     void on_btnView_clicked();
 
     void slotSelector(QString sName);
@@ -43,7 +47,10 @@ private slots:
 
     void on_btnDelLayerBg_clicked();
 
-    void changePage(int iIdx);
+
+    void on_btnToNet_clicked();
+
+    void on_btnToUsb_clicked();
 
 private:
     Ui::StageEditArea *ui;

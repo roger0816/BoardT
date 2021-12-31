@@ -11,6 +11,9 @@ Widget::Widget(QWidget *parent)
 
     connect(ui->stageManager,&StageManager::sendSelectModel,this,&Widget::loadModel);
 
+    connect(ui->stageManager,&StageManager::sendUploadPage,this,&Widget::goUploadPage);
+
+
     connect(ui->stageEditArea,&StageEditArea::sendBack,this,&Widget::StageEditback);
 
 
@@ -53,6 +56,14 @@ void Widget::loadModel(QString sPath)
 
     ui->stackedWidget->setCurrentWidget(ui->stageEditArea);
 
+
+}
+
+void Widget::goUploadPage(QString sPath)
+{
+    loadModel(sPath);
+
+    ui->stageEditArea->on_btnUpload_clicked();
 
 }
 

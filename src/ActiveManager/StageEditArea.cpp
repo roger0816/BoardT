@@ -352,3 +352,97 @@ void StageEditArea::changePage(int iIdx)
 
     }
 }
+
+void StageEditArea::on_btnToNet_clicked()
+{
+
+    auto upload = [=](QString sIp, QString sTarget, QString sPath)
+    {
+        //putty.exe -ssh -l pi -pw pi -P 22 192.168.0.157 -m mvModel0.txt
+        QString sCmd =QApplication::applicationDirPath()+"/putty.exe -ssh -l pi -pw pi -P 22 "+sIp+" -m mvModel0.txt";
+
+        system(sCmd.toStdString().c_str());
+
+        CDATA.deleteDirectory(QApplication::applicationDirPath()+"/tmp/upload");
+
+        if(!QDir(QApplication::applicationDirPath()+"/tmp").exists())
+            QDir().mkdir(QApplication::applicationDirPath()+"/tmp");
+
+        if(!QDir(QApplication::applicationDirPath()+"/tmp/upload").exists())
+            QDir().mkdir(QApplication::applicationDirPath()+"/tmp/upload");
+
+        if(!QDir(QApplication::applicationDirPath()+"/tmp/upload/model0").exists())
+            QDir().mkdir(QApplication::applicationDirPath()+"/tmp/upload/model0");
+
+
+        CDATA.copyDir(sTarget,QApplication::applicationDirPath()+"/tmp/upload/model0");
+
+        //
+        sCmd = QApplication::applicationDirPath()+"/pscp.exe -P 22 -pw \"pi\" -r %2 pi@%1:%3";
+
+        sCmd = sCmd.arg(sIp).arg(QApplication::applicationDirPath()+"/tmp/upload/model0").arg(sPath);
+
+        qDebug()<<"scmd : "<<sCmd;
+
+        system(sCmd.toStdString().c_str());
+
+    };
+
+    //    upload(m_sPreIp," -r "+CDATA.m_sPath,"/home/pi/BoardT/bin/data/");
+
+    //    return;
+
+    DialogMsg msg;
+
+    msg.setInput("請輸入IP",m_sPreIp,QStringList()<<"取消"<<"確定");
+
+    int iRe = msg.exec();
+
+    if(iRe==1)
+    {
+        m_sPreIp = msg.getInput();
+
+        QString sPath = CDATA.m_sPath;
+
+        //     QSettings conf(sPath+"/conf.ini",QSettings::IniFormat);
+
+
+        QSettings conf(sPath+"/model0.BDM",QSettings::IniFormat);
+
+
+        QDir dir(sPath);
+
+        // conf.setValue("Target",dir.path().split("/").last());
+
+        conf.setValue("DateTime",QDateTime::currentDateTime().toString("yyyyMMddhhmmss"));
+
+        conf.sync();
+
+
+        upload(m_sPreIp,sPath,"/home/pi/BoardT/bin/data/");
+
+    }
+}
+
+
+void StageEditArea::on_btnToUsb_clicked()
+{
+    QString sTarget = QFileDialog::getExistingDirectory(
+    this, "選擇USB根目錄",
+    "/");
+    // /BoardT/upload/model0
+
+    if(!QDir(sTarget+"/BoardT").exists())
+        QDir().mkdir(sTarget+"/BoardT");
+
+
+    if(!QDir(sTarget+"/BoardT/upload").exists())
+        QDir().mkdir(sTarget+"/BoardT/upload/");
+
+    if(!QDir(sTarget+"/BoardT/upload/model0").exists())
+        QDir().mkdir(sTarget+"/BoardT/upload/model0");
+
+    CDATA.copyDir(CDATA.m_sPath,sTarget+"/BoardT/upload/model0");
+
+}
+

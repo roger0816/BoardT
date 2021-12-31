@@ -176,6 +176,14 @@ void StageManager::on_btnEdit_clicked()
 
 void StageManager::slotBtnUpload()
 {
+
+    QString sPath = QApplication::applicationDirPath()+"/data/"+m_listKey.at(m_listBtn.checkedId());
+
+    emit sendUploadPage(sPath);
+
+    return;
+
+
     auto upload = [=](QString sIp, QString sTarget, QString sPath)
     {
         //putty.exe -ssh -l pi -pw pi -P 22 192.168.0.157 -m mvModel0.txt

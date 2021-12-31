@@ -65,6 +65,8 @@ private:
 signals:
     void sendSelectModel(QString sPath);
 
+    void sendUploadPage(QString sPath);
+
 
 };
 

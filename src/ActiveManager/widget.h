@@ -28,6 +28,8 @@ public:
 
     void loadModel(QString sPath);
 
+    void goUploadPage(QString sPath);
+
     QString m_sPreIp="";
 private slots:
 

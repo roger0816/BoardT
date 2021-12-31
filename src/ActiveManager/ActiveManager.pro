@@ -58,13 +58,13 @@ SOURCES += \
     DialogMsg.cpp \
     DialogSelectFile.cpp \
     DialogUploadUsb.cpp \
+    ItemTimeSchedule.cpp \
     LayerAction.cpp \
     LayerAddContent.cpp \
     LayerEditGrid.cpp \
     LayerEditor.cpp \
     LayerSchedule.cpp \
     LayerSelector.cpp \
-    LayerTimeSchedule.cpp \
     StageEditArea.cpp \
     StageManager.cpp \
     cEdit/EditBase.cpp \
@@ -86,13 +86,13 @@ HEADERS += \
     DialogMsg.h \
     DialogSelectFile.h \
     DialogUploadUsb.h \
+    ItemTimeSchedule.h \
     LayerAction.h \
     LayerAddContent.h \
     LayerEditGrid.h \
     LayerEditor.h \
     LayerSchedule.h \
     LayerSelector.h \
-    LayerTimeSchedule.h \
     StageEditArea.h \
     StageManager.h \
     cEdit/EditBase.h \
@@ -113,12 +113,12 @@ FORMS += \
     DialogMsg.ui \
     DialogSelectFile.ui \
     DialogUploadUsb.ui \
+    ItemTimeSchedule.ui \
     LayerAction.ui \
     LayerAddContent.ui \
     LayerEditGrid.ui \
     LayerEditor.ui \
     LayerSchedule.ui \
-    LayerTimeSchedule.ui \
     StageEditArea.ui \
     StageManager.ui \
     cEdit/EditButton.ui \
