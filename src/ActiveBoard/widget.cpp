@@ -7,7 +7,7 @@ Widget::Widget(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QCursor::setPos(1080,1920);
+    QCursor::setPos(1920,1920);
 
 
 
