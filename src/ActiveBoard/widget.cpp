@@ -1,11 +1,15 @@
 #include "widget.h"
 #include "ui_widget.h"
-
+#include <QCursor>
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
+
+    QCursor::setPos(1080,1920);
+
+
 
     if(Global::Instance().m_dialogPop ==nullptr)
         Global::Instance().m_dialogPop = new DialogPop(ui->wBg);
