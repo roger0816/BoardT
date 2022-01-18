@@ -53,9 +53,9 @@ private slots:
     void on_btnAdd_clicked();
     void on_btnDel_clicked();
 
-    void on_rbNone_clicked();
-    void on_rbMuti_clicked();
-    void on_rbOne_clicked();
+    void on_rbNone_clicked(bool bSave =true);
+    void on_rbMuti_clicked(bool bSave =true);
+    void on_rbOne_clicked(bool bSave =true);
 };
 
 #endif // LAYERSCHEDULE_H

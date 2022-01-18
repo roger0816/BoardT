@@ -57,6 +57,7 @@ SOURCES += \
     DialogEditGrid.cpp \
     DialogMsg.cpp \
     DialogSelectFile.cpp \
+    DialogUploadNet.cpp \
     DialogUploadUsb.cpp \
     ItemTimeSchedule.cpp \
     LayerAction.cpp \
@@ -85,6 +86,7 @@ HEADERS += \
     DialogEditGrid.h \
     DialogMsg.h \
     DialogSelectFile.h \
+    DialogUploadNet.h \
     DialogUploadUsb.h \
     ItemTimeSchedule.h \
     LayerAction.h \
@@ -112,6 +114,7 @@ FORMS += \
     DialogEditGrid.ui \
     DialogMsg.ui \
     DialogSelectFile.ui \
+    DialogUploadNet.ui \
     DialogUploadUsb.ui \
     ItemTimeSchedule.ui \
     LayerAction.ui \

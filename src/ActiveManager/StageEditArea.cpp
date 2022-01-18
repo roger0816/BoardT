@@ -356,6 +356,13 @@ void StageEditArea::changePage(int iIdx)
 void StageEditArea::on_btnToNet_clicked()
 {
 
+    DialogUploadNet dialog;
+
+    dialog.exec();
+
+
+    return ;
+
     auto upload = [=](QString sIp, QString sTarget, QString sPath)
     {
         //putty.exe -ssh -l pi -pw pi -P 22 192.168.0.157 -m mvModel0.txt

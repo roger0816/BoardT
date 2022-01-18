@@ -29,6 +29,8 @@ LayerSchedule::LayerSchedule(QWidget *parent) :
 
     ui->tableWidget->horizontalHeader()->setDefaultSectionSize(240);
 
+    on_rbNone_clicked(false);
+
 }
 
 LayerSchedule::~LayerSchedule()
@@ -43,13 +45,20 @@ void LayerSchedule::tbAdd(int iIdxPage, QString sTime, int iIsPlay)
 
     ui->tableWidget->setRowCount(iRow+1);
 
-   // ui->tableWidget->setItem(iRow,0,new QTableWidgetItem(QString::number(iRow+1)));
+    // ui->tableWidget->setItem(iRow,0,new QTableWidgetItem(QString::number(iRow+1)));
 
-  //  ui->tableWidget->setItem(iRow,1,new QTableWidgetItem(m_sCurrentLayerName));
+    //  ui->tableWidget->setItem(iRow,1,new QTableWidgetItem(m_sCurrentLayerName));
 
     QComboBox *comBox = new QComboBox();
 
-    comBox->addItems(CDATA.m_dData.keys());
+    QStringList listLayer = CDATA.m_dData.keys();
+
+    int iDef = listLayer.indexOf("def");
+
+    if(iDef>=0 && iDef < listLayer.length())
+        listLayer.move(iDef,0);
+
+    comBox->addItems(listLayer);
 
     comBox->setCurrentIndex(iIdxPage);
 
@@ -61,7 +70,7 @@ void LayerSchedule::tbAdd(int iIdxPage, QString sTime, int iIsPlay)
 
     edit->setTime(QTime::fromString(sTime,"hh:mm:ss"));
 
- // edit->setTime(QTime(15, 0, 0));
+    // edit->setTime(QTime(15, 0, 0));
     ui->tableWidget->setCellWidget(iRow,1,edit);
 
 
@@ -84,7 +93,7 @@ void LayerSchedule::showEvent(QShowEvent *)
     QTimer::singleShot(50,this,[=]
     {
         read();
-      //  readFile(QApplication::applicationDirPath()+"/data/model0/schedule.txt");
+        //  readFile(QApplication::applicationDirPath()+"/data/model0/schedule.txt");
     });
 
 
@@ -109,42 +118,49 @@ void LayerSchedule::save()
 
         QComboBox *cb1=  dynamic_cast<QComboBox*>(ui->tableWidget->cellWidget(i,2));
 
-        QString st = QString::number(cb->currentIndex())+"_"+time->time().toString("hh:mm:ss")+"_"+QString::number(cb1->currentIndex());
+        QString st = cb->currentText()+"_"+time->time().toString("hh:mm:ss")+"_"+QString::number(cb1->currentIndex());
 
         listMuti.append(st);
     }
 
     conf.setValue("Schedule/Muti",listMuti);
+    //
 
-    QString sWeek="%1_%2_%3";
+    QString sWeek="%1_%2_%3_%4";
 
-    conf.setValue("Schedule/W1",sWeek.arg(QString::number(ui->cbW1->isChecked()))
+    conf.setValue("Schedule/W1",sWeek.arg(QString::number(ui->chW1->isChecked()))
                   .arg(ui->timeS1->dateTime().toString("hh:mm:ss"))
-                  .arg(ui->timeE1->dateTime().toString("hh:mm:ss")));
+                  .arg(ui->timeE1->dateTime().toString("hh:mm:ss"))
+                  .arg(ui->cbW1->currentText()));
 
-    conf.setValue("Schedule/W2",sWeek.arg(QString::number(ui->cbW2->isChecked()))
+    conf.setValue("Schedule/W2",sWeek.arg(QString::number(ui->chW2->isChecked()))
                   .arg(ui->timeS2->dateTime().toString("hh:mm:ss"))
-                  .arg(ui->timeE2->dateTime().toString("hh:mm:ss")));
+                  .arg(ui->timeE2->dateTime().toString("hh:mm:ss"))
+                  .arg(ui->cbW2->currentText()));
 
-    conf.setValue("Schedule/W3",sWeek.arg(QString::number(ui->cbW3->isChecked()))
+    conf.setValue("Schedule/W3",sWeek.arg(QString::number(ui->chW3->isChecked()))
                   .arg(ui->timeS3->dateTime().toString("hh:mm:ss"))
-                  .arg(ui->timeE3->dateTime().toString("hh:mm:ss")));
+                  .arg(ui->timeE3->dateTime().toString("hh:mm:ss"))
+                  .arg(ui->cbW3->currentText()));
 
-    conf.setValue("Schedule/W4",sWeek.arg(QString::number(ui->cbW4->isChecked()))
+    conf.setValue("Schedule/W4",sWeek.arg(QString::number(ui->chW4->isChecked()))
                   .arg(ui->timeS4->dateTime().toString("hh:mm:ss"))
-                  .arg(ui->timeE4->dateTime().toString("hh:mm:ss")));
+                  .arg(ui->timeE4->dateTime().toString("hh:mm:ss"))
+                  .arg(ui->cbW4->currentText()));
 
-    conf.setValue("Schedule/W5",sWeek.arg(QString::number(ui->cbW5->isChecked()))
+    conf.setValue("Schedule/W5",sWeek.arg(QString::number(ui->chW5->isChecked()))
                   .arg(ui->timeS5->dateTime().toString("hh:mm:ss"))
-                  .arg(ui->timeE5->dateTime().toString("hh:mm:ss")));
+                  .arg(ui->timeE5->dateTime().toString("hh:mm:ss"))
+                  .arg(ui->cbW5->currentText()));
 
-    conf.setValue("Schedule/W6",sWeek.arg(QString::number(ui->cbW6->isChecked()))
+    conf.setValue("Schedule/W6",sWeek.arg(QString::number(ui->chW6->isChecked()))
                   .arg(ui->timeS6->dateTime().toString("hh:mm:ss"))
-                  .arg(ui->timeE6->dateTime().toString("hh:mm:ss")));
-
-    conf.setValue("Schedule/W7",sWeek.arg(QString::number(ui->cbW7->isChecked()))
+                  .arg(ui->timeE6->dateTime().toString("hh:mm:ss"))
+                  .arg(ui->cbW6->currentText()));
+    conf.setValue("Schedule/W7",sWeek.arg(QString::number(ui->chW7->isChecked()))
                   .arg(ui->timeS7->dateTime().toString("hh:mm:ss"))
-                  .arg(ui->timeE7->dateTime().toString("hh:mm:ss")));
+                  .arg(ui->timeE7->dateTime().toString("hh:mm:ss"))
+                  .arg(ui->cbW7->currentText()));
 
 
     QString sSleep="%1_%2_%3";
@@ -162,6 +178,32 @@ void LayerSchedule::save()
 void LayerSchedule::read()
 {
 
+    QStringList listLayer = CDATA.m_dData.keys();
+
+
+    int iDef = listLayer.indexOf("def");
+
+    if(iDef>=0 && iDef < listLayer.length())
+        listLayer.move(iDef,0);
+
+
+    ui->cbW1->clear();
+    ui->cbW2->clear();
+    ui->cbW3->clear();
+    ui->cbW4->clear();
+    ui->cbW5->clear();
+    ui->cbW6->clear();
+    ui->cbW7->clear();
+
+    ui->cbW1->addItems(listLayer);
+    ui->cbW2->addItems(listLayer);
+    ui->cbW3->addItems(listLayer);
+    ui->cbW4->addItems(listLayer);
+    ui->cbW5->addItems(listLayer);
+    ui->cbW6->addItems(listLayer);
+    ui->cbW7->addItems(listLayer);
+
+
     QSettings conf(CDATA.m_sPath+"/model0.BDM",QSettings::IniFormat);
 
     setRbIndex(conf.value("Schedule/Type","0").toInt());
@@ -175,7 +217,12 @@ void LayerSchedule::read()
         QStringList list = listMuti.at(i).split("_");
 
         if(list.length()>=3)
-        tbAdd(list.first().toInt(),list.at(1),list.at(2).toInt());
+        {
+            int iIdx = qBound(0,listLayer.indexOf(list.first()),listLayer.length()-1);
+
+
+            tbAdd(iIdx,list.at(1),list.at(2).toInt());
+        }
     }
 
     QStringList list;
@@ -195,80 +242,108 @@ void LayerSchedule::read()
 
     list = conf.value("Schedule/W1").toString().split("_");
 
-    if(list.length()>=3)
+    if(list.length()>=4)
     {
-        ui->cbW1->setChecked(list.at(0).toInt());
+        ui->chW1->setChecked(list.at(0).toInt());
 
         ui->timeS1->setTime(QTime::fromString(list.at(1),"hh:mm:ss"));
 
         ui->timeE1->setTime(QTime::fromString(list.at(2),"hh:mm:ss"));
+
+        int iTmp = listLayer.indexOf(list.at(3));
+
+        ui->cbW1->setCurrentIndex(qBound(0,iTmp,listLayer.length()-1));
     }
 
 
     list = conf.value("Schedule/W2").toString().split("_");
 
-    if(list.length()>=3)
+    if(list.length()>=4)
     {
-        ui->cbW2->setChecked(list.at(0).toInt());
+        ui->chW2->setChecked(list.at(0).toInt());
 
         ui->timeS2->setTime(QTime::fromString(list.at(1),"hh:mm:ss"));
 
         ui->timeE2->setTime(QTime::fromString(list.at(2),"hh:mm:ss"));
+
+        int iTmp = listLayer.indexOf(list.at(3));
+
+        ui->cbW2->setCurrentIndex(qBound(0,iTmp,listLayer.length()-1));
     }
 
     list = conf.value("Schedule/W3").toString().split("_");
 
-    if(list.length()>=3)
+    if(list.length()>=4)
     {
-        ui->cbW3->setChecked(list.at(0).toInt());
+        ui->chW3->setChecked(list.at(0).toInt());
 
         ui->timeS3->setTime(QTime::fromString(list.at(1),"hh:mm:ss"));
 
         ui->timeE3->setTime(QTime::fromString(list.at(2),"hh:mm:ss"));
+
+        int iTmp = listLayer.indexOf(list.at(3));
+
+        ui->cbW3->setCurrentIndex(qBound(0,iTmp,listLayer.length()-1));
     }
 
     list = conf.value("Schedule/W4").toString().split("_");
 
-    if(list.length()>=3)
+    if(list.length()>=4)
     {
-        ui->cbW4->setChecked(list.at(0).toInt());
+        ui->chW4->setChecked(list.at(0).toInt());
 
         ui->timeS4->setTime(QTime::fromString(list.at(1),"hh:mm:ss"));
 
         ui->timeE4->setTime(QTime::fromString(list.at(2),"hh:mm:ss"));
+
+        int iTmp = listLayer.indexOf(list.at(3));
+
+        ui->cbW4->setCurrentIndex(qBound(0,iTmp,listLayer.length()-1));
     }
 
     list = conf.value("Schedule/W5").toString().split("_");
 
-    if(list.length()>=3)
+    if(list.length()>=4)
     {
-        ui->cbW5->setChecked(list.at(0).toInt());
+        ui->chW5->setChecked(list.at(0).toInt());
 
         ui->timeS5->setTime(QTime::fromString(list.at(1),"hh:mm:ss"));
 
         ui->timeE5->setTime(QTime::fromString(list.at(2),"hh:mm:ss"));
+
+        int iTmp = listLayer.indexOf(list.at(3));
+
+        ui->cbW5->setCurrentIndex(qBound(0,iTmp,listLayer.length()-1));
     }
 
     list = conf.value("Schedule/W6").toString().split("_");
 
-    if(list.length()>=3)
+    if(list.length()>=4)
     {
-        ui->cbW6->setChecked(list.at(0).toInt());
+        ui->chW6->setChecked(list.at(0).toInt());
 
         ui->timeS6->setTime(QTime::fromString(list.at(1),"hh:mm:ss"));
 
         ui->timeE6->setTime(QTime::fromString(list.at(2),"hh:mm:ss"));
+
+        int iTmp = listLayer.indexOf(list.at(3));
+
+        ui->cbW6->setCurrentIndex(qBound(0,iTmp,listLayer.length()-1));
     }
 
     list = conf.value("Schedule/W7").toString().split("_");
 
-    if(list.length()>=3)
+    if(list.length()>=4)
     {
-        ui->cbW7->setChecked(list.at(0).toInt());
+        ui->chW7->setChecked(list.at(0).toInt());
 
         ui->timeS7->setTime(QTime::fromString(list.at(1),"hh:mm:ss"));
 
         ui->timeE7->setTime(QTime::fromString(list.at(2),"hh:mm:ss"));
+
+        int iTmp = listLayer.indexOf(list.at(3));
+
+        ui->cbW7->setCurrentIndex(qBound(0,iTmp,listLayer.length()-1));
     }
 
 
@@ -289,6 +364,14 @@ void LayerSchedule::setRbIndex(int idx)
     {
         m_listRb[i]->setChecked(i==idx);
     }
+
+    if(idx==1)
+        on_rbMuti_clicked(false);
+    else if(idx==2)
+        on_rbOne_clicked(false);
+    else
+        on_rbNone_clicked(false);
+
 }
 
 int LayerSchedule::rbIndex()
@@ -312,16 +395,16 @@ void LayerSchedule::slotSelector(QString sName)
 void LayerSchedule::on_btnAdd_clicked()
 {
 
-//    if(m_sCurrentLayerName=="")
-//    {
-//        DialogMsg msg;
+    //    if(m_sCurrentLayerName=="")
+    //    {
+    //        DialogMsg msg;
 
-//        msg.setDialogInfo("請先選擇要新增的版型",QStringList()<<"OK");
+    //        msg.setDialogInfo("請先選擇要新增的版型",QStringList()<<"OK");
 
-//        msg.exec();
+    //        msg.exec();
 
-//        return ;
-//    }
+    //        return ;
+    //    }
 
     tbAdd();
 
@@ -349,29 +432,29 @@ void LayerSchedule::on_btnDel_clicked()
 
 
 
-void LayerSchedule::on_rbNone_clicked()
+void LayerSchedule::on_rbNone_clicked(bool bSave)
 {
     ui->wSpaceOne->setMinimumHeight(0);
     ui->wSpaceOne->setMaximumHeight(0);
-
-    save();
+    if(bSave)
+        save();
 }
 
 
-void LayerSchedule::on_rbMuti_clicked()
+void LayerSchedule::on_rbMuti_clicked(bool bSave)
 {
     ui->wSpaceOne->setMinimumHeight(0);
     ui->wSpaceOne->setMaximumHeight(0);
-
-    save();
+    if(bSave)
+        save();
 }
 
 
-void LayerSchedule::on_rbOne_clicked()
+void LayerSchedule::on_rbOne_clicked(bool bSave)
 {
     ui->wSpaceOne->setMinimumHeight(350);
     ui->wSpaceOne->setMaximumHeight(350);
-
-    save();
+    if(bSave)
+        save();
 }
 

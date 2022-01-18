@@ -7,6 +7,7 @@
 #include "LayerNewModel.h"
 #include "CCtrlFunc.h"
 #include "CData.h"
+#include "DialogUploadNet.h"
 
 namespace Ui {
 class StageEditArea;

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1038</width>
-    <height>748</height>
+    <height>765</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,7 +33,7 @@
        <pointsize>14</pointsize>
       </font>
      </property>
-     <widget class="QWidget" name="wBgPage1" native="true">
+     <widget class="QWidget" name="wBgPage1">
       <layout class="QGridLayout" name="gridLayout_2">
        <property name="leftMargin">
         <number>40</number>
@@ -173,6 +173,9 @@
            <height>300</height>
           </size>
          </property>
+         <property name="styleSheet">
+          <string notr="true">font: 14px &quot;Microsoft JhengHei UI&quot;;</string>
+         </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <property name="spacing">
            <number>0</number>
@@ -205,7 +208,7 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QCheckBox" name="cbW1">
+              <widget class="QCheckBox" name="chW1">
                <property name="minimumSize">
                 <size>
                  <width>100</width>
@@ -273,6 +276,16 @@
               </widget>
              </item>
              <item>
+              <widget class="QComboBox" name="cbW1">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
               <spacer name="horizontalSpacer_2">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -300,8 +313,14 @@
              <property name="leftMargin">
               <number>0</number>
              </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
-              <widget class="QCheckBox" name="cbW2">
+              <widget class="QCheckBox" name="chW2">
                <property name="minimumSize">
                 <size>
                  <width>100</width>
@@ -365,6 +384,16 @@
               </widget>
              </item>
              <item>
+              <widget class="QComboBox" name="cbW2">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
               <spacer name="horizontalSpacer_3">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -392,8 +421,14 @@
              <property name="leftMargin">
               <number>0</number>
              </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
-              <widget class="QCheckBox" name="cbW3">
+              <widget class="QCheckBox" name="chW3">
                <property name="minimumSize">
                 <size>
                  <width>100</width>
@@ -454,6 +489,16 @@
               </widget>
              </item>
              <item>
+              <widget class="QComboBox" name="cbW3">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
               <spacer name="horizontalSpacer_6">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -481,8 +526,14 @@
              <property name="leftMargin">
               <number>0</number>
              </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
-              <widget class="QCheckBox" name="cbW4">
+              <widget class="QCheckBox" name="chW4">
                <property name="minimumSize">
                 <size>
                  <width>100</width>
@@ -543,6 +594,16 @@
               </widget>
              </item>
              <item>
+              <widget class="QComboBox" name="cbW4">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
               <spacer name="horizontalSpacer_7">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -570,8 +631,14 @@
              <property name="leftMargin">
               <number>0</number>
              </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
-              <widget class="QCheckBox" name="cbW5">
+              <widget class="QCheckBox" name="chW5">
                <property name="minimumSize">
                 <size>
                  <width>100</width>
@@ -632,6 +699,16 @@
               </widget>
              </item>
              <item>
+              <widget class="QComboBox" name="cbW5">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
               <spacer name="horizontalSpacer_8">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -659,8 +736,14 @@
              <property name="leftMargin">
               <number>0</number>
              </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
-              <widget class="QCheckBox" name="cbW6">
+              <widget class="QCheckBox" name="chW6">
                <property name="minimumSize">
                 <size>
                  <width>100</width>
@@ -721,6 +804,16 @@
               </widget>
              </item>
              <item>
+              <widget class="QComboBox" name="cbW6">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
               <spacer name="horizontalSpacer_9">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -748,8 +841,14 @@
              <property name="leftMargin">
               <number>0</number>
              </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
-              <widget class="QCheckBox" name="cbW7">
+              <widget class="QCheckBox" name="chW7">
                <property name="minimumSize">
                 <size>
                  <width>100</width>
@@ -806,6 +905,16 @@
                </property>
                <property name="displayFormat">
                 <string>hh:mm:ss</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="cbW7">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
                </property>
               </widget>
              </item>
