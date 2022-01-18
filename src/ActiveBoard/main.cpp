@@ -16,6 +16,10 @@ int main(int argc, char *argv[])
 
     CDATA;
 
+
+    CCTRL.setCtrlSource(&CDATA);
+
+
 //    QDir dir(QApplication::applicationDirPath()+"/../font");
 
 //    QStringList list =dir.entryList(QStringList()<<"*.ttf");

@@ -13,6 +13,7 @@
 #include <QProcess>
 #include "DialogUploadUsb.h"
 #include "CCtrlFunc.h"
+#include "ScheduleManager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -31,6 +32,8 @@ public:
     void goUploadPage(QString sPath);
 
     QString m_sPreIp="";
+
+    ScheduleManager m_schedule;
 private slots:
 
 

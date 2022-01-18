@@ -16,7 +16,16 @@ Widget::Widget(QWidget *parent)
 
     connect(ui->stageEditArea,&StageEditArea::sendBack,this,&Widget::StageEditback);
 
+    QTime t(QTime::fromString("01:02:03","hh:mm:ss"));
 
+    QDateTime a= QDateTime::currentDateTime();
+
+   qDebug()<<a;
+    a = a.addMSecs(t.hour()*60*60*1000 + t.minute()*60*1000 + t.second()*1000);
+    qDebug()<<a;
+
+    qDebug()<<"cc : "<<t.hour()*60*60*1000 + t.minute()*60*1000 + t.second()*1000;
+    qDebug()<<QDateTime::currentDateTime().msecsTo(a);
 
   //  QString sDef = QApplication::applicationDirPath()+"/data/model0";
 

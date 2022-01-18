@@ -19,6 +19,7 @@
 #include "ItemVideoCon.h"
 #include "CCtrlFunc.h"
 #include "LayerUsbUpdate.h"
+#include "ScheduleManager.h"
 
 #ifndef WIN32
 #include "udevmonitor.h"
@@ -38,6 +39,7 @@ public:
     explicit Widget(QWidget *parent = nullptr);
     ~Widget();
 
+    ScheduleManager m_schedule;
     void loadConfig(QString sLayer);
 
     DisplayWidget *m_wDisplay = nullptr;
@@ -81,6 +83,8 @@ private:
     int  m_iVideoStatus = 0;
 
     QTimer m_timer;
+
+    int m_iTimerSec=0;
 
     QTimer m_timerWaitLogin;
 

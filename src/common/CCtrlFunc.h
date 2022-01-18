@@ -17,12 +17,18 @@ public:
 
     void changeLayer(QString sLayerName,bool bStopPlay = true);
 
+    QString layerName();
+
+    QString preLayerName();
+
 private :
     explicit CCtrlFunc(QObject *parent = nullptr);
 
     static CCtrlFunc* m_pInstance;
 
     CData *m_data;
+
+    QString m_sPreLayerName="";
 
 signals:
     void callChangePage(QString ,bool );

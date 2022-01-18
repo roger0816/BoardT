@@ -370,6 +370,11 @@ void Widget::mouseReleaseEvent(QMouseEvent *e)
 void Widget::slotTimer()
 {
 
+    if(m_iTimerSec>=1000000)
+        m_iTimerSec=0;
+
+    m_iTimerSec++;
+
     if(m_bIsPress)
     {
         m_iPressTime++;
@@ -442,6 +447,10 @@ void Widget::slotTimer()
         qDebug()<<"change board :  "<<m_sCurrentBoard;
         launch();
     }
+
+
+  //  if(m_iTimerSec%5==0)
+    m_schedule.check(1000);
 
 }
 
@@ -625,7 +634,6 @@ void Widget::on_btnUpdateData_clicked()
 
 
     QString sUpdatePath = Global::Instance().m_usb.m_sLastUsbPath+"/BoardT/bin/data/model0";
-    qDebug()<<"AAAAAX : on_btnUpdateData_clicked"<<sUpdatePath;
 
     if(m_bLocker || Global::Instance().m_usb.m_sLastUsbPath.trimmed()=="")
     {
@@ -634,7 +642,6 @@ void Widget::on_btnUpdateData_clicked()
 
     m_bLocker = true;
 
-    qDebug()<<"AAAAA0 : on_btnUpdateData_clicked";
 
     QString sCmd = "nohup ./updateFromUsb.sh "+sUpdatePath;
 

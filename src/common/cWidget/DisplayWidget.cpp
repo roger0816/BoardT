@@ -58,8 +58,12 @@ QPixmap DisplayWidget::setLayer(QString sPath, bool bStopVideo)
     m_listItem.clear();
 
     if(layerData==nullptr)
-        return QPixmap();
+    {
 
+        ui->wBg->setStyleSheet("QWidget#"+ui->wBg->objectName()+"{background-color: rgb(0, 0, 0); }");
+
+        return QPixmap();
+    }
 
     refreshBg();
 
@@ -208,6 +212,9 @@ void DisplayWidget::refreshBg()
     LayerData *layerData = CDATA.m_dData[m_layerName] ;
 
     CDATA.m_bIsEdit = m_bEdit;
+
+
+
 
     if(layerData!=nullptr)
     ui->wBg->setStyleSheet("QWidget#"+ui->wBg->objectName()+"{"

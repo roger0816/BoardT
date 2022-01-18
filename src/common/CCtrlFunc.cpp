@@ -25,6 +25,17 @@ CCtrlFunc &CCtrlFunc::Instance()
 
 void CCtrlFunc::changeLayer(QString sLayerName, bool bStopPlay)
 {
-      qDebug()<<"AAA1";
-    emit callChangePage(sLayerName,bStopPlay);
+      m_sPreLayerName = layerName();
+
+      emit callChangePage(sLayerName,bStopPlay);
+}
+
+QString CCtrlFunc::layerName()
+{
+    return m_data->m_sCurrentLayerName;
+}
+
+QString CCtrlFunc::preLayerName()
+{
+    return m_sPreLayerName;
 }
