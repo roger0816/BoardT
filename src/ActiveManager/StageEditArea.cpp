@@ -39,20 +39,20 @@ StageEditArea::~StageEditArea()
 void StageEditArea::on_btnAddLayer_clicked()
 {
 
-        LayerNewModel newLay;
+    LayerNewModel newLay;
 
-        newLay.setPath("新增版型",CDATA.m_sPath);
+    newLay.setPath("新增版型",CDATA.m_sPath);
 
-        int iRe = newLay.exec();
+    int iRe = newLay.exec();
 
-        if(iRe ==1 )
-        {
-            QString defLayer = newLay.m_sModelPath;
+    if(iRe ==1 )
+    {
+        QString defLayer = newLay.m_sModelPath;
 
-            CDATA.addLayer(defLayer);
+        CDATA.addLayer(defLayer);
 
-            refreshSelector();
-        }
+        refreshSelector();
+    }
 
 }
 
@@ -145,13 +145,18 @@ void StageEditArea::on_btnBack_clicked()
     }
 }
 
-void StageEditArea::on_btnSave_clicked()
+void StageEditArea::on_btnSave_clicked(bool bAutoOk)
 {
-    DialogMsg msg;
+    int iRe = 1;
 
-    msg.setDialogInfo("確定要儲存嗎？",QStringList()<<"否"<<"是");
+    if(!bAutoOk)
+    {
+        DialogMsg msg;
 
-    int iRe = msg.exec();
+        msg.setDialogInfo("確定要儲存嗎？",QStringList()<<"否"<<"是");
+
+        iRe = msg.exec();
+    }
 
     if(iRe == 1)
     {
@@ -182,9 +187,9 @@ void StageEditArea::on_btnSave_clicked()
 
 void StageEditArea::on_btnUpload_clicked()
 {
-
+    on_btnSave_clicked(true);
     changePage(1);
-return;
+    return;
 
 
     auto fnSave =[=]()
@@ -355,6 +360,7 @@ void StageEditArea::changePage(int iIdx)
 
 void StageEditArea::on_btnToNet_clicked()
 {
+    ui->pageSchedule->save();
 
     DialogUploadNet dialog;
 
@@ -434,9 +440,11 @@ void StageEditArea::on_btnToNet_clicked()
 
 void StageEditArea::on_btnToUsb_clicked()
 {
+    ui->pageSchedule->save();
+
     QString sTarget = QFileDialog::getExistingDirectory(
-    this, "選擇USB根目錄",
-    "/");
+                this, "選擇USB根目錄",
+                "/");
     // /BoardT/upload/model0
 
     if(!QDir(sTarget+"/BoardT").exists())

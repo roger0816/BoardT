@@ -24,7 +24,7 @@ class LayerSchedule : public QWidget
 public:
     explicit LayerSchedule(QWidget *parent = nullptr);
     ~LayerSchedule();
-
+    void save();
 private:
     Ui::LayerSchedule *ui;
 
@@ -36,7 +36,7 @@ private:
 
     void showEvent(QShowEvent *) override;
 
-    void save();
+
 
     void read();
 

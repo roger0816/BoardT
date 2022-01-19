@@ -36,7 +36,7 @@ private slots:
     void on_btnRemoveLayer_clicked();
 
 
-    void on_btnSave_clicked();
+    void on_btnSave_clicked(bool bAutoOk=false);
 
     void on_btnView_clicked();
 
