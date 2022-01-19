@@ -1,0 +1,260 @@
+cp: 無法 stat '/media/pi/8D7C-367A/BoardT/bin/data/model0': 沒有此一檔案或目錄
+/media/pi/8D7C-367A/BoardT/bin/data/model0
+qt5ct: using qt5ct plugin
+sh: 1: echo: echo: I/O error
+init UdevMonitor
+key :  ("m")
+read model :  "/home/pi/BoardT/bin/../bin/data/model0"
+"active"  ,  10
+"button"  ,  3
+"dateTime"  ,  4
+"function"  ,  6
+"grid"  ,  19
+"logo"  ,  8
+"marquee"  ,  21
+"mediaCent"  ,  17
+"onSale"  ,  14
+"pic"  ,  2
+"qrcode"  ,  11
+"text"  ,  1
+"ticket"  ,  9
+"txValue"  ,  15
+"video"  ,  7
+"web"  ,  5
+layer path :  "" ,video stop :   false
+&&&&& mounted media list:  ("/media/pi/8D7C-367A")
+media mounted:  "/media/pi/8D7C-367A"
+"cp -r /media/pi/8D7C-367A/BoardT/upload/model0 ~/BoardT/bin/data/"
+change board :   "def"
+read model :  "/home/pi/BoardT/bin/../bin/data/model0"
+"active"  ,  10
+"button"  ,  3
+"dateTime"  ,  4
+"function"  ,  6
+"grid"  ,  19
+"logo"  ,  8
+"marquee"  ,  21
+"mediaCent"  ,  17
+"onSale"  ,  14
+"pic"  ,  2
+"qrcode"  ,  11
+"text"  ,  1
+"ticket"  ,  9
+"txValue"  ,  15
+"video"  ,  7
+"web"  ,  5
+obj readData  "/home/pi/BoardT/bin/../bin/data/model0/def/MARQUEE0"
+type  "marquee"
+CC : key : "bgColor"  , data :  QVariant(QString, "#ffff7fff")
+CC : key : "font"  , data :  QVariant(QFont, QFont("Arial,30,-1,5,50,0,0,0,0,0"))
+CC : key : "imagePath"  , data :  QVariant(Invalid)
+CC : key : "listText"  , data :  QVariant(QStringList, ("請配合政府防疫規定 實名制登記", "測量體溫 戴好口罩 手部消毒  勤洗手"))
+CC : key : "speed"  , data :  QVariant(QString, "3")
+CC : key : "txtColor"  , data :  QVariant(QString, "#0055ffff")
+read itemdata :  QMap(("bgColor", QVariant(QString, "#ffff7fff"))("font", QVariant(QFont, QFont("Arial,30,-1,5,50,0,0,0,0,0")))("imagePath", QVariant(Invalid))("listText", QVariant(QStringList, ("請配合政府防疫規定 實名制登記", "測量體溫 戴好口罩 手部消毒  勤洗手")))("speed", QVariant(QString, "3"))("txtColor", QVariant(QString, "#0055ffff")))
+obj readData  "/home/pi/BoardT/bin/../bin/data/model0/def/PIC_0"
+type  "pic"
+CC : key : "imagePath"  , data :  QVariant(Invalid)
+read itemdata :  QMap(("imagePath", QVariant(Invalid)))
+obj readData  "/home/pi/BoardT/bin/../bin/data/model0/def/PIC_1"
+type  "pic"
+CC : key : "imagePath"  , data :  QVariant(Invalid)
+read itemdata :  QMap(("imagePath", QVariant(Invalid)))
+obj readData  "/home/pi/BoardT/bin/../bin/data/model0/def/PIC_2"
+type  "pic"
+CC : key : "imagePath"  , data :  QVariant(Invalid)
+read itemdata :  QMap(("imagePath", QVariant(Invalid)))
+obj readData  "/home/pi/BoardT/bin/../bin/data/model0/def/TxValue_0"
+type  "txValue"
+CC : key : "alignCenter"  , data :  QVariant(QString, "1")
+CC : key : "alignCenterMax"  , data :  QVariant(QString, "1")
+CC : key : "alignCenterMin"  , data :  QVariant(QString, "1")
+CC : key : "bgColor"  , data :  QVariant(QString, "#ffff7fff")
+CC : key : "bgColorMax"  , data :  QVariant(QString, "#cdf7f7ff")
+CC : key : "bgColorMin"  , data :  QVariant(QString, "#e5ffd9ff")
+CC : key : "fontMax"  , data :  QVariant(QFont, QFont("Arial,24,-1,5,50,0,0,0,0,0"))
+CC : key : "fontMin"  , data :  QVariant(QFont, QFont("Arial,24,-1,5,50,0,0,0,0,0"))
+CC : key : "gpioPin"  , data :  QVariant(Invalid)
+CC : key : "gpioPinMax"  , data :  QVariant(Invalid)
+CC : key : "gpioPinMin"  , data :  QVariant(Invalid)
+CC : key : "imagePath"  , data :  QVariant(Invalid)
+CC : key : "imagePathMax"  , data :  QVariant(QString, "C:/work/BoardT/bin/data/model0/def/TxValue_0/source/imagePathMax.png")
+CC : key : "imagePathMin"  , data :  QVariant(QString, "C:/work/BoardT/bin/data/model0/def/TxValue_0/source/imagePathMin.png")
+CC : key : "imagePathNormal"  , data :  QVariant(QString, "C:/work/BoardT/bin/data/model0/def/TxValue_0/source/imagePathNormal.png")
+CC : key : "index"  , data :  QVariant(QString, "0")
+CC : key : "max"  , data :  QVariant(QString, "37")
+CC : key : "min"  , data :  QVariant(QString, "35")
+CC : key : "msg"  , data :  QVariant(QStringList, ("請測量體溫", "溫度正常", "溫度異常"))
+CC : key : "playSpeed"  , data :  QVariant(QString, "1")
+CC : key : "readSpeed"  , data :  QVariant(QString, "1")
+CC : key : "txtColor"  , data :  QVariant(QString, "#00aa00ff")
+CC : key : "txtColorMax"  , data :  QVariant(QString, "#ff0000ff")
+CC : key : "txtColorMin"  , data :  QVariant(QString, "#ff55ffff")
+read itemdata :  QMap(("alignCenter", QVariant(QString, "1"))("alignCenterMax", QVariant(QString, "1"))("alignCenterMin", QVariant(QString, "1"))("bgColor", QVariant(QString, "#ffff7fff"))("bgColorMax", QVariant(QString, "#cdf7f7ff"))("bgColorMin", QVariant(QString, "#e5ffd9ff"))("fontMax", QVariant(QFont, QFont("Arial,24,-1,5,50,0,0,0,0,0")))("fontMin", QVariant(QFont, QFont("Arial,24,-1,5,50,0,0,0,0,0")))("gpioPin", QVariant(Invalid))("gpioPinMax", QVariant(Invalid))("gpioPinMin", QVariant(Invalid))("imagePath", QVariant(Invalid))("imagePathMax", QVariant(QString, "C:/work/BoardT/bin/data/model0/def/TxValue_0/source/imagePathMax.png"))("imagePathMin", QVariant(QString, "C:/work/BoardT/bin/data/model0/def/TxValue_0/source/imagePathMin.png"))("imagePathNormal", QVariant(QString, "C:/work/BoardT/bin/data/model0/def/TxValue_0/source/imagePathNormal.png"))("index", QVariant(QString, "0"))("max", QVariant(QString, "37"))("min", QVariant(QString, "35"))("msg", QVariant(QStringList, ("請測量體溫", "溫度正常", "溫度異常")))("playSpeed", QVariant(QString, "1"))("readSpeed", QVariant(QString, "1"))("txtColor", QVariant(QString, "#00aa00ff"))("txtColorMax", QVariant(QString, "#ff0000ff"))("txtColorMin", QVariant(QString, "#ff55ffff")))
+obj readData  "/home/pi/BoardT/bin/../bin/data/model0/def/VIDEO_0"
+type  "video"
+CC : key : "imagePath"  , data :  QVariant(Invalid)
+read itemdata :  QMap(("imagePath", QVariant(Invalid)))
+setPath OK 
+layer path :  "def" ,video stop :   false
+QFont::setPixelSize: Pixel size <= 0 (-1)
+update item : mar data
+QFont::setPixelSize: Pixel size <= 0 (-1)
+update item : mar data
+video set 
+play : 
+-1
+doRead
+update item
+doRead
+update item
+[92d21230] mmal_codec decoder: VCSM init succeeded: CMA
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+doRead
+change board :   ""
+read model :  "/home/pi/BoardT/bin/../bin/data/model0"
+"active"  ,  10
+"button"  ,  3
+"dateTime"  ,  4
+"function"  ,  6
+"grid"  ,  19
+"logo"  ,  8
+"marquee"  ,  21
+"mediaCent"  ,  17
+"onSale"  ,  14
+"pic"  ,  2
+"qrcode"  ,  11
+"text"  ,  1
+"ticket"  ,  9
+"txValue"  ,  15
+"video"  ,  7
+"web"  ,  5
+layer path :  "" ,video stop :   false
+change board :   "def"
+read model :  "/home/pi/BoardT/bin/../bin/data/model0"
+"active"  ,  10
+"button"  ,  3
+"dateTime"  ,  4
+"function"  ,  6
+"grid"  ,  19
+"logo"  ,  8
+"marquee"  ,  21
+"mediaCent"  ,  17
+"onSale"  ,  14
+"pic"  ,  2
+"qrcode"  ,  11
+"text"  ,  1
+"ticket"  ,  9
+"txValue"  ,  15
+"video"  ,  7
+"web"  ,  5
+obj readData  "/home/pi/BoardT/bin/../bin/data/model0/def/TEXT_0"
+type  "text"
+CC : key : "bgColor"  , data :  QVariant(QString, "#73ff8a00")
+CC : key : "imagePath"  , data :  QVariant(Invalid)
+CC : key : "text"  , data :  QVariant(QString, "12")
+read itemdata :  QMap(("bgColor", QVariant(QString, "#73ff8a00"))("imagePath", QVariant(Invalid))("text", QVariant(QString, "12")))
+setPath OK 
+layer path :  "def" ,video stop :   false
+Text type
+"12"
+update alignCenter :  0
+"12"
+update alignCenter :  0
+./updateFromUsb.sh: 第 15 列：22897 程式記憶體區段錯誤   DISPLAY=:0.0 ./ActiveBoard
