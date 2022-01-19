@@ -59,11 +59,11 @@ SOURCES += \
     DialogSelectFile.cpp \
     DialogUploadNet.cpp \
     DialogUploadUsb.cpp \
-    ItemTimeSchedule.cpp \
     LayerAction.cpp \
     LayerAddContent.cpp \
     LayerEditGrid.cpp \
     LayerEditor.cpp \
+    LayerNewModel.cpp \
     LayerSchedule.cpp \
     LayerSelector.cpp \
     StageEditArea.cpp \
@@ -88,11 +88,11 @@ HEADERS += \
     DialogSelectFile.h \
     DialogUploadNet.h \
     DialogUploadUsb.h \
-    ItemTimeSchedule.h \
     LayerAction.h \
     LayerAddContent.h \
     LayerEditGrid.h \
     LayerEditor.h \
+    LayerNewModel.h \
     LayerSchedule.h \
     LayerSelector.h \
     StageEditArea.h \
@@ -116,11 +116,11 @@ FORMS += \
     DialogSelectFile.ui \
     DialogUploadNet.ui \
     DialogUploadUsb.ui \
-    ItemTimeSchedule.ui \
     LayerAction.ui \
     LayerAddContent.ui \
     LayerEditGrid.ui \
     LayerEditor.ui \
+    LayerNewModel.ui \
     LayerSchedule.ui \
     StageEditArea.ui \
     StageManager.ui \
@@ -145,8 +145,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 include($$PWD/../lib/RpkLib/RpkPlayer.pri)
 
 
-
-include($$PWD/editTool/editTool.pri);
 
 
 include($$PWD/../common/Common.pri);
