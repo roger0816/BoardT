@@ -33,7 +33,7 @@ public:
 
     QString m_sPreIp="";
 
-    ScheduleManager m_schedule;
+
 private slots:
 
 
