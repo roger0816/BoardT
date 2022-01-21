@@ -1,3 +1,4 @@
+#引入所需要的module
 import sys
 import smbus
 import time
@@ -7,6 +8,8 @@ import pygame
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
+
+#設定17號腳位為溫度檢測sensor
 GPIO.setup(17, GPIO.IN)   #IR 1
 #GPIO.setup(27, GPIO.OUT)  #Green LED 1
 #GPIO.setup(22, GPIO.OUT)  #Red LED 1
@@ -71,6 +74,9 @@ if (arg_len > 1) or (arg_len < 7):
                     read_value = i2c.read_byte_data(addr_value,reg)   # read data
                     temp_value = (temp_value + read_value)/100
                     print "sensor temp_value:", temp_value
+		    
+
+		    #當讀取出來的值大於37，執行
                     if (temp_value > 37):
                         #GPIO.output(R_LED_GPIO[idx],1)
                         #GPIO.output(G_LED_GPIO[idx],0)
@@ -80,6 +86,7 @@ if (arg_len > 1) or (arg_len < 7):
                         pygame.mixer.music.play()
                         time.sleep(1.5)
                         pygame.mixer.music.stop()
+		    #當讀取出來的值小於等於30，執行
                     elif (temp_value >= 30):
                         #GPIO.output(R_LED_GPIO[idx],0)
                         #GPIO.output(G_LED_GPIO[idx],1)
@@ -90,7 +97,7 @@ if (arg_len > 1) or (arg_len < 7):
                         time.sleep(1.5)
                         pygame.mixer.music.stop()
 
-
+		    #當讀取出來的值都不是上面兩個條件的值，執行
                     else:
                         temp_value = 0
                         #GPIO.output(G_LED_GPIO[idx],0)
