@@ -75,10 +75,12 @@ void ObjData::readData(QString sPath)
         {
             QString sFilePath = m_dataPic.listPicName.at(i);
 
-            if(!QFileInfo(sFilePath).exists())
+            if(!QFileInfo::exists(sFilePath))
+            {
                 sFilePath = sSourcePath+sFilePath.split("/").last();
-
-            if(QFileInfo(sFilePath).exists())
+                m_dataPic.listPicName[i] = sFilePath;
+            }
+            if(QFileInfo::exists(sFilePath))
             {
                 QPixmap p(sFilePath);
 
@@ -294,9 +296,14 @@ void ObjData::writeData()
 
         for(int i=0;i<listName.length();i++)
         {
-            QPixmap *p = & m_dataPic.listPic[i];
+            //QPixmap *p = & m_dataPic.listPic[i];
 
-            p->save(sSourcePathTmp+listName.at(i).split("/").last());
+        //    p->save(sSourcePathTmp+listName.at(i).split("/").last());
+
+           // m_dataPic.listPic[i].save(sSourcePathTmp+listName.at(i).split("/").last());
+
+            QFile::copy( m_dataPic.listPicName.at(i)  ,sSourcePathTmp+listName.at(i).split("/").last());
+
         }
 
 
@@ -372,9 +379,11 @@ void ObjData::writeData()
                 if(!QDir(sPathG1).exists())
                     QDir().mkdir(sPathG1);
 
-                QPixmap p(m_dataGrid.listG1.at(i));
+               // QPixmap p(m_dataGrid.listG1.at(i));
 
-                p.save(sPathG1+QString("/%1.png").arg(i+1),"PNG");
+              //  p.save(sPathG1+QString("/%1.png").arg(i+1),"PNG");
+
+                QFile::copy(m_dataGrid.listG1.at(i),sPathG1+QString("/%1.png").arg(i+1));
 
                 for(int j=0;j<9;j++)
                 {
@@ -382,13 +391,18 @@ void ObjData::writeData()
                     if(!QDir(sPathG2).exists())
                         QDir().mkdir(sPathG2);
 
-                    QPixmap p2(m_dataGrid.listG2[i].at(j));
+//                    QPixmap p2(m_dataGrid.listG2[i].at(j));
 
-                    p2.save(sPathG2+QString("/%1.png").arg(j+1),"PNG");
+//                    p2.save(sPathG2+QString("/%1.png").arg(j+1),"PNG");
 
-                    QPixmap p3(m_dataGrid.listG3[i].at(j));
+                    QFile::copy(m_dataGrid.listG2[i].at(j),sPathG2+QString("/%1.png").arg(j+1));
 
-                    p3.save(sPathG2+QString("/%1_d.png").arg(j+1),"PNG");
+//                    QPixmap p3(m_dataGrid.listG3[i].at(j));
+
+//                    p3.save(sPathG2+QString("/%1_d.png").arg(j+1),"PNG");
+
+                    QFile::copy(m_dataGrid.listG3[i].at(j),sPathG2+QString("/%1_d.png").arg(j+1));
+
 
                 }
             }
@@ -487,7 +501,7 @@ void ObjData::writeData()
 
 
 
-    qDebug()<<"write itemdata : "<<m_data;
+//    qDebug()<<"write itemdata : "<<m_data;
 
 
     conf.sync();

@@ -238,6 +238,8 @@ void CData::writeModel(QString defLayer)
 
     }
 
+    qDebug()<<"finish write  ";
+
 
 
 
