@@ -433,15 +433,13 @@ void ObjData::writeData()
 
             QString sPath = m_data[sKey].toString();
 
-            QPixmap p(sPath);
-
 
             QString sTarget =sSourcePath+QString("%1.png").arg(sKey);
 
             QString sTargetTmp =sSourcePathTmp+QString("%1.png").arg(sKey);
 
 
-            p.save(sTargetTmp,"PNG");
+            QFile::copy(sPath,sTargetTmp);
 
             qDebug()<<"key : "<<sKey<<" open : "<<sPath<<" ,target : "<<sTarget;
 
@@ -478,9 +476,12 @@ void ObjData::writeData()
     if(m_data[Label::imagePath].toString()!="")
     {
 
-        QImage image(m_data["originImage"].toString());
+        //QImage image(m_data["originImage"].toString());
 
-        image.save(m_sObjPath+"/bg.png");
+       // image.save(m_sObjPath+"/bg.png");
+
+       QFile::copy(m_data["originImage"].toString(),m_sObjPath+"/bg.png");
+
 
         m_data[Label::imagePath] = m_sObjPath.split("bin").last()+"/bg.png";
     }

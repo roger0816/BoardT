@@ -220,9 +220,9 @@ void CData::writeModel(QString defLayer)
         }
         else if(layerData->m_sBgPath!="" && layerData->m_sBgPath !=sPath+"/bg.png")
         {
-            QImage image(layerData->m_sBgPath);
 
-            image.save(sPath+"/bg.png");
+
+            QFile::copy(layerData->m_sBgPath,sPath+"/bg.png");
 
         }
 
