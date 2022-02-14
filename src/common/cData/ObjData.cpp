@@ -67,12 +67,39 @@ void ObjData::readData(QString sPath)
         m_dataPic.listPicName =conf.value("Pic/list","").toStringList();
 
 
-
-
         QStringList listCantFind;
 
         for(int i=0;i<m_dataPic.listPicName.length();i++)
         {
+
+#if 0
+            QString sOriFilePath = m_dataPic.listPicName.at(i);
+
+            QString sRootFilePath = sSourcePath+sOriFilePath.split("/").last();
+
+            bool bHasPic = true;
+
+            if(QFileInfo::exists(sRootFilePath))
+            {
+                m_dataPic.listPicName[i] = sRootFilePath;
+
+            }
+            else if(QFileInfo::exists(sOriFilePath))
+            {
+                QFile::copy(sOriFilePath,sRootFilePath);
+            }
+            else
+            {
+                bHasPic = false;
+            }
+
+            if(!bHasPic)
+            {
+                m_dataPic.listPicName.removeOne(sOriFilePath);
+            }
+
+#else
+
             QString sFilePath = m_dataPic.listPicName.at(i);
 
             if(!QFileInfo::exists(sFilePath))
@@ -90,6 +117,8 @@ void ObjData::readData(QString sPath)
             {
                 listCantFind.append(m_dataPic.listPicName.at(i));
             }
+
+#endif
         }
 
 
@@ -161,34 +190,34 @@ void ObjData::readData(QString sPath)
 
     }
 
-        else if(sType == E_TXVALUE)
-        {
+    else if(sType == E_TXVALUE)
+    {
 
 
-            m_data[TxtValue::imagePath] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePath);
+        m_data[TxtValue::imagePath] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePath);
 
-            m_data[TxtValue::imagePathMin] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePathMin);
+        m_data[TxtValue::imagePathMin] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePathMin);
 
-            m_data[TxtValue::imagePathMax] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePathMax);
-
-
-        }
-
-//    else if(sType == E_BUTTON)
-//    {
+        m_data[TxtValue::imagePathMax] = sSourcePath+QString("/%1.png").arg(TxtValue::imagePathMax);
 
 
-//        m_dataBtn.iType = m_data[Btn::btnType] ;
+    }
 
-//        m_data[Btn::btnTypeNote] = m_dataBtn.sTypeNode;
+    //    else if(sType == E_BUTTON)
+    //    {
 
-//        m_data[Btn::btnText2] = m_dataBtn.sText2;
 
-//        m_data[Btn::btnInput] = m_dataBtn.sInput;
+    //        m_dataBtn.iType = m_data[Btn::btnType] ;
 
-//        m_data[Btn::btnOpuput] = m_dataBtn.sOutPut;
+    //        m_data[Btn::btnTypeNote] = m_dataBtn.sTypeNode;
 
-//    }
+    //        m_data[Btn::btnText2] = m_dataBtn.sText2;
+
+    //        m_data[Btn::btnInput] = m_dataBtn.sInput;
+
+    //        m_data[Btn::btnOpuput] = m_dataBtn.sOutPut;
+
+    //    }
 
 
 
@@ -287,10 +316,6 @@ void ObjData::writeData()
 
         QStringList listName = m_dataPic.listPicName;
 
-
-        conf.setValue("Pic/list",listName);
-
-
         conf.setValue("Pic/changeTimer",m_dataPic.iSec);
 
 
@@ -298,13 +323,37 @@ void ObjData::writeData()
         {
             //QPixmap *p = & m_dataPic.listPic[i];
 
-        //    p->save(sSourcePathTmp+listName.at(i).split("/").last());
+            //    p->save(sSourcePathTmp+listName.at(i).split("/").last());
 
-           // m_dataPic.listPic[i].save(sSourcePathTmp+listName.at(i).split("/").last());
+            //  QFile::copy( m_dataPic.listPicName.at(i)  ,sSourcePathTmp+listName.at(i).split("/").last());
 
-            QFile::copy( m_dataPic.listPicName.at(i)  ,sSourcePathTmp+listName.at(i).split("/").last());
+            QString sOrigin= m_dataPic.listPicName.at(i);
+
+            QString sFileName = "p"+QString::number(i);
+
+            QString sType = listName.at(i).split(".").last();
+
+            QString sPathName = sSourcePathTmp+sFileName+"."+sType;
+            qDebug()<<"path name aa : "<< m_dataPic.listPicName.at(i) << "  , "<<sPathName;
+
+
+
+            if(!QFile::exists(sOrigin))
+            {
+                sOrigin = m_sObjPath+"/source/"+m_dataPic.listPicName.at(i);
+            }
+
+
+            QFile::copy( sOrigin  ,sPathName);
+
+            m_dataPic.listPicName[i] = sFileName+"."+sType;
 
         }
+
+
+        qDebug()<<"AAAAAAAAAAA : "<< m_dataPic.listPicName;
+
+        conf.setValue("Pic/list", m_dataPic.listPicName);
 
 
 
@@ -379,9 +428,9 @@ void ObjData::writeData()
                 if(!QDir(sPathG1).exists())
                     QDir().mkdir(sPathG1);
 
-               // QPixmap p(m_dataGrid.listG1.at(i));
+                // QPixmap p(m_dataGrid.listG1.at(i));
 
-              //  p.save(sPathG1+QString("/%1.png").arg(i+1),"PNG");
+                //  p.save(sPathG1+QString("/%1.png").arg(i+1),"PNG");
 
                 QFile::copy(m_dataGrid.listG1.at(i),sPathG1+QString("/%1.png").arg(i+1));
 
@@ -391,15 +440,15 @@ void ObjData::writeData()
                     if(!QDir(sPathG2).exists())
                         QDir().mkdir(sPathG2);
 
-//                    QPixmap p2(m_dataGrid.listG2[i].at(j));
+                    //                    QPixmap p2(m_dataGrid.listG2[i].at(j));
 
-//                    p2.save(sPathG2+QString("/%1.png").arg(j+1),"PNG");
+                    //                    p2.save(sPathG2+QString("/%1.png").arg(j+1),"PNG");
 
                     QFile::copy(m_dataGrid.listG2[i].at(j),sPathG2+QString("/%1.png").arg(j+1));
 
-//                    QPixmap p3(m_dataGrid.listG3[i].at(j));
+                    //                    QPixmap p3(m_dataGrid.listG3[i].at(j));
 
-//                    p3.save(sPathG2+QString("/%1_d.png").arg(j+1),"PNG");
+                    //                    p3.save(sPathG2+QString("/%1_d.png").arg(j+1),"PNG");
 
                     QFile::copy(m_dataGrid.listG3[i].at(j),sPathG2+QString("/%1_d.png").arg(j+1));
 
@@ -478,9 +527,9 @@ void ObjData::writeData()
 
         //QImage image(m_data["originImage"].toString());
 
-       // image.save(m_sObjPath+"/bg.png");
+        // image.save(m_sObjPath+"/bg.png");
 
-       QFile::copy(m_data["originImage"].toString(),m_sObjPath+"/bg.png");
+        QFile::copy(m_data["originImage"].toString(),m_sObjPath+"/bg.png");
 
 
         m_data[Label::imagePath] = m_sObjPath.split("bin").last()+"/bg.png";
@@ -502,7 +551,7 @@ void ObjData::writeData()
 
 
 
-//    qDebug()<<"write itemdata : "<<m_data;
+    //    qDebug()<<"write itemdata : "<<m_data;
 
 
     conf.sync();
