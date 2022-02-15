@@ -114,6 +114,8 @@ void ObjData::readData(QString sPath)
 
                 QImageReader reader(sFilePath);
 
+                reader.setDecideFormatFromContent(true);
+
                 m_dataPic.listPic.append(QPixmap::fromImageReader(&reader,Qt::AutoColor));
             }
             else
