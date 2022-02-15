@@ -41,7 +41,6 @@ void ItemPicCon::timerEvent(QTimerEvent *)
 
             QPixmap p =m_obj->m_dataPic.listPic.at(m_iIdx);
 
-
             ui->label->setPixmap(p.scaled(ui->label->size(),Qt::KeepAspectRatio,
                                           Qt::SmoothTransformation));
 

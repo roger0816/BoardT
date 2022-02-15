@@ -109,9 +109,12 @@ void ObjData::readData(QString sPath)
             }
             if(QFileInfo::exists(sFilePath))
             {
-                QPixmap p(sFilePath);
 
-                m_dataPic.listPic.append(p);
+                //  QPixmap p(sFilePath);
+
+                QImageReader reader(sFilePath);
+
+                m_dataPic.listPic.append(QPixmap::fromImageReader(&reader,Qt::AutoColor));
             }
             else
             {

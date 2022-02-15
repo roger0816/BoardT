@@ -6,6 +6,7 @@
 #include <QTimerEvent>
 #include <QResizeEvent>
 #include <QShowEvent>
+#include <QImageReader>
 
 namespace Ui {
 class ItemPicCon;

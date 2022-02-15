@@ -2,6 +2,7 @@
 #define OBJDATA_H
 
 #include <QObject>
+#include <QImageReader>
 #include <QApplication>
 #include "Voj.h"
 #include <QDebug>
