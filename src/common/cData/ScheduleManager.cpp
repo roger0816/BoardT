@@ -72,7 +72,7 @@ bool ScheduleManager::multiSchedule(QString &sLayerName)
 {
     sLayerName="";
 
-    qDebug()<<"multi schedule";
+   // qDebug()<<"multi schedule";
 
     if(m_listMulti.length()<0)
         return false;
@@ -176,7 +176,7 @@ void ScheduleManager::check(int iMsec)
 
     m_iDefineSubMsec = iMsec;
 
-    qDebug()<<"schedule ";
+   // qDebug()<<"schedule ";
     readConfig();
 
     QString sCurrent = CCTRL.layerName();

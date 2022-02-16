@@ -56,7 +56,7 @@ void DialogSelectFile::setType(bool bIsPic, QString sFilter)
 
 void DialogSelectFile::setFileList(QStringList list,QString sPath)
 {
-
+    qDebug()<<"BB "<<list;
     m_listFile = list;
 
     if(sPath!="")
@@ -65,7 +65,7 @@ void DialogSelectFile::setFileList(QStringList list,QString sPath)
         {
             if(!QFileInfo(m_listFile.at(i)).exists() || m_listFile.at(i).split("/").length()<=1)
             {
-                m_listFile[i]= sPath+"/"+m_listFile.at(i).split("/").last();
+                m_listFile[i]= sPath+"/source/"+m_listFile.at(i).split("/").last();
             }
         }
     }
@@ -117,11 +117,14 @@ void DialogSelectFile::refreshList()
 
 void DialogSelectFile::on_listView_pressed(const QModelIndex &index)
 {
+
     if(index.row()<0 || index.row()>= m_listFile.length())
     {
         ui->lbPic->clear();
         return;
     }
+
+    qDebug()<<"AA "<<m_listFile;
 
     QPixmap p(m_listFile.at(index.row()));
 

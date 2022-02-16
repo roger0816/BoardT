@@ -48,7 +48,7 @@ void EditPic::refreshTable()
     {
         ui->tb->setRowCount(i+1);
 
-        QTableWidgetItem *item= new QTableWidgetItem(m_obj->m_dataPic.listPicName.at(i));
+        QTableWidgetItem *item= new QTableWidgetItem(m_obj->m_dataPic.listPicName.at(i).split("/").last());
 
         ui->tb->setItem(i,0,item);
 
