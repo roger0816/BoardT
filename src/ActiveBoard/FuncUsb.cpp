@@ -37,15 +37,13 @@ bool FuncUsb::isDevelop(QString sUuid)
     {
     if(m_dData.keys().indexOf("98A9-5243")>=0 ||
             m_dData.keys().indexOf("BC5CDF045CDEB87A")>=0 ||
-            m_dData.keys().indexOf("5282-9D5B")>=0 ||
-            m_dData.keys().indexOf("E6F6-A580")>=0 ||
-            m_dData.keys().indexOf("B4D4-2F94")>=0 ||
+
             m_dData.keys().indexOf("7662D9E862D9ACDD")>=0)
         bRe = true;
      }
     else
     {
-        bRe =(sUuid=="98A9-5243" || sUuid=="BC5CDF045CDEB87A" ||sUuid =="7662D9E862D9ACDD"||sUuid =="5282-9D5B"||sUuid =="E6F6-A580"||sUuid =="B4D4-2F94");
+        bRe =(sUuid=="98A9-5243" || sUuid=="BC5CDF045CDEB87A" ||sUuid =="7662D9E862D9ACDD");
     }
     return bRe;
 }
@@ -54,7 +52,7 @@ bool FuncUsb::differentDevUsb(QString sUuid)
 {
 
     return sUuid!="98A9-5243" && sUuid!="7662D9E862D9ACDD"
-            && sUuid!="BC5CDF045CDEB87A"&& sUuid!="5282-9D5B"&& sUuid!="E6F6-A580"&& sUuid!="B4D4-2F94";
+            && sUuid!="BC5CDF045CDEB87A";
 }
 
 bool FuncUsb::isReg()
