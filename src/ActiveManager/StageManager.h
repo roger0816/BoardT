@@ -12,6 +12,7 @@
 #include "DialogMsg.h"
 #include "DialogDownload.h"
 #include "CData.h"
+#include "DialogCheckMachine.h"
 namespace Ui {
 class StageManager;
 }
@@ -36,6 +37,7 @@ private slots:
 
     void slotBtnDowload();
 
+    void slotBtnCheck();
 
  //   void slotRadioClicked(int);
 

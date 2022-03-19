@@ -11,9 +11,13 @@ StageManager::StageManager(QWidget *parent) :
     ui->btnUpload->setData(QStringList()<<":/button/folder-html-icon.png","上傳專案");
 
     ui->btnDownload->setData(QStringList()<<":/button/folder-downloads-icon.png","下載專案");
+
+    ui->btnCheck->setData(QStringList()<<":/button/th2.png","設備檢測");
     connect(ui->btnUpload,&IconButton::clicked,this,&StageManager::slotBtnUpload);
 
     connect(ui->btnDownload,&IconButton::clicked,this,&StageManager::slotBtnDowload);
+
+    connect(ui->btnCheck,&IconButton::clicked,this,&StageManager::slotBtnCheck);
 
     connect(&m_listBtn,SIGNAL(buttonClicked(QAbstractButton *)),this,SLOT(slotRadioClicked(QAbstractButton *)));
 
@@ -332,6 +336,14 @@ void StageManager::slotBtnDowload()
 
     refresh();
 
+}
+
+void StageManager::slotBtnCheck()
+{
+    DialogCheckMachine dialog;
+
+    dialog.setWindowTitle("設備檢測");
+    dialog.exec();
 }
 
 

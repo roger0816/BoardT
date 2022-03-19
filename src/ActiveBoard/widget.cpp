@@ -92,7 +92,7 @@ void Widget::loadConfig(QString sLayer)
         connect(&CCTRL,&CCtrlFunc::callChangePage,m_wDisplay,&DisplayWidget::slotChangeLayer);
 
     }
- //   CCTRL.setCtrlSource(&CDATA,m_wDisplay);
+    //   CCTRL.setCtrlSource(&CDATA,m_wDisplay);
 
     m_wDisplay->show();
 
@@ -290,21 +290,38 @@ void Widget::checkIpAndName()
 
 
 
-#ifdef Q_OS_WINDOWS
-    m_sDeviceName="Test";
-#else
+    #ifdef Q_OS_WINDOWS
+        m_sDeviceName="Test";
+    #else
     QString sPath = QApplication::applicationDirPath()+"/../../deviceInfo";
+
+    bool bHasFile = QFile(sPath).exists();
+
 
     QFile file(sPath);
 
     if(file.open(QIODevice::ReadWrite))
     {
-        m_sDeviceName = QString(file.readAll()).split("\n").first().trimmed();
+
+
+        if(bHasFile)
+        {
+            m_sDeviceName = QString(file.readAll()).split("\n").first().trimmed();
+        }
+        else
+        {
+            m_sDeviceName = "BoardT";
+
+            QTextStream in(&file);
+            in<<"BoardT";
+
+        }
+
 
         file.close();
     }
 
-#endif
+    #endif
 
     ui->lbName->setText(m_sDeviceName);
 
@@ -402,13 +419,13 @@ void Widget::slotTimer()
         if(st.mid(0,1) == "1")
         {
 
-//            ui->lbUpdateData->show();
+            //            ui->lbUpdateData->show();
 
-//            // m_timerWaitLogin.stop();
+            //            // m_timerWaitLogin.stop();
 
-//            on_btnUpdateData_clicked();
+            //            on_btnUpdateData_clicked();
 
-//            QTimer::singleShot(3000,ui->lbUpdateData,SLOT(hide()));
+            //            QTimer::singleShot(3000,ui->lbUpdateData,SLOT(hide()));
 
 
             m_listUsbUpdate->resize(this->width(),this->height());
@@ -421,7 +438,7 @@ void Widget::slotTimer()
         }
         else
         {
-                m_listUsbUpdate->hide();
+            m_listUsbUpdate->hide();
 
 
         }
@@ -449,7 +466,7 @@ void Widget::slotTimer()
     }
 
 
-  //  if(m_iTimerSec%5==0)
+    //  if(m_iTimerSec%5==0)
     m_schedule.check(1000);
 
 }

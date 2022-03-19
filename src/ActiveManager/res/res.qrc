@@ -12,6 +12,7 @@
         <file>folder-downloads-icon.png</file>
         <file>folder-html-icon.png</file>
         <file>back-icon.png</file>
+        <file>th2.png</file>
     </qresource>
     <qresource prefix="/">
         <file>style.qss</file>

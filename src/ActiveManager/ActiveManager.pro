@@ -13,6 +13,7 @@ OBJECTS_DIR =$$PWD/obj
 UI_DIR =$$PWD/obj
 DESTDIR =$$PWD/../../bin/
 
+CONFIG -= console
 
 win32{
 CONFIG+=DEVELOP
@@ -53,12 +54,15 @@ INCLUDEPATH+= uiItem \
 
 
 SOURCES += \
+    DialogCheckMachine.cpp \
     DialogDownload.cpp \
     DialogEditGrid.cpp \
     DialogMsg.cpp \
+    DialogPicDetail.cpp \
     DialogSelectFile.cpp \
     DialogUploadNet.cpp \
     DialogUploadUsb.cpp \
+    ItemCheckMachine.cpp \
     LayerAction.cpp \
     LayerAddContent.cpp \
     LayerEditGrid.cpp \
@@ -82,12 +86,15 @@ SOURCES += \
     widget.cpp
 
 HEADERS += \
+    DialogCheckMachine.h \
     DialogDownload.h \
     DialogEditGrid.h \
     DialogMsg.h \
+    DialogPicDetail.h \
     DialogSelectFile.h \
     DialogUploadNet.h \
     DialogUploadUsb.h \
+    ItemCheckMachine.h \
     LayerAction.h \
     LayerAddContent.h \
     LayerEditGrid.h \
@@ -110,12 +117,15 @@ HEADERS += \
     widget.h
 
 FORMS += \
+    DialogCheckMachine.ui \
     DialogDownload.ui \
     DialogEditGrid.ui \
     DialogMsg.ui \
+    DialogPicDetail.ui \
     DialogSelectFile.ui \
     DialogUploadNet.ui \
     DialogUploadUsb.ui \
+    ItemCheckMachine.ui \
     LayerAction.ui \
     LayerAddContent.ui \
     LayerEditGrid.ui \
@@ -156,7 +166,10 @@ INCLUDEPATH+=$$PWD/../lib/RpkLib/qrencode/
 RESOURCES += \
     res/res.qrc
 
-DISTFILES +=
+DISTFILES += \
+    ../../bin/mvModel0.txt \
+    ../../bin/reboot.txt \
+    ../../bin/scrot.txt
 
 
 

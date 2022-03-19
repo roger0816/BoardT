@@ -234,6 +234,16 @@
           </rect>
          </property>
         </widget>
+        <widget class="IconButton" name="btnCheck" native="true">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>450</y>
+           <width>121</width>
+           <height>111</height>
+          </rect>
+         </property>
+        </widget>
        </widget>
       </item>
      </layout>
