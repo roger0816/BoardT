@@ -36,6 +36,56 @@ void DialogCheckMachine::timerEvent(QTimerEvent *)
     }
     m_iSec ++;
 
+}
+
+void DialogCheckMachine::showEvent(QShowEvent *)
+{
+    read();
+}
+
+void DialogCheckMachine::read()
+{
+    QSettings conf(CDATA.m_sPath+"/model0.BDM",QSettings::IniFormat);
+
+    for(int i=0;i<m_listItem.length();i++)
+    {
+           QStringList listData =  conf.value("CheckMachine/P"+QString::number(i),QStringList()<<""<<"").toStringList();
+
+           m_listItem[i]->setData(listData);
+    }
+
 
 
 }
+
+void DialogCheckMachine::write()
+{
+    QSettings conf(CDATA.m_sPath+"/model0.BDM",QSettings::IniFormat);
+
+    for(int i=0;i<m_listItem.length();i++)
+    {
+           QStringList listData = m_listItem.at(i)->getData();
+
+           conf.setValue("CheckMachine/P"+QString::number(i),listData);
+
+
+    }
+
+    conf.sync();
+
+
+}
+
+void DialogCheckMachine::on_btnSave_clicked()
+{
+    DialogMsg msg;
+
+    msg.setDialogInfo("確定要儲存IP嗎? " ,QStringList()<<"否"<<"是");
+
+    if(msg.exec()==1)
+    {
+        write();
+    }
+
+}
+

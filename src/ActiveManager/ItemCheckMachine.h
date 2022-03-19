@@ -38,6 +38,10 @@ public:
 
     QString ip();
 
+    void setData(QStringList listData);
+
+    QStringList getData();
+
 public slots:
     void check();
 

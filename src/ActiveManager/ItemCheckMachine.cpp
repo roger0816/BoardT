@@ -33,6 +33,25 @@ QString ItemCheckMachine::ip()
     return ui->txIp->text().trimmed();
 }
 
+void ItemCheckMachine::setData(QStringList listData)
+{
+
+    m_sIp = listData.first();
+
+    ui->txIp->setText(m_sIp);
+
+    m_sUser = listData.last();
+
+    ui->txUser->setText(m_sUser);
+
+
+}
+
+QStringList ItemCheckMachine::getData()
+{
+    return QStringList()<<m_sIp<<m_sUser;
+}
+
 void ItemCheckMachine::check()
 {
 
@@ -309,8 +328,6 @@ void ItemCheckMachine::slotClicked()
         return;
 
     DialogPicDetail dialog;
-
-
 
     dialog.setPicPath(m_sPicPath);
 
