@@ -1,6 +1,14 @@
 #include "DisplayWidget.h"
 #include "ui_DisplayWidget.h"
 
+#define PUSHBACK_DELETE
+
+#ifdef PUSHBACK_DELETE
+
+ItemPlayer *delete_video_Ptr;
+
+#endif
+
 DisplayWidget::DisplayWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::DisplayWidget)
@@ -36,7 +44,17 @@ QPixmap DisplayWidget::setLayer(QString sPath, bool bStopVideo)
         {
             m_video->hide();
 
+#ifdef PUSHBACK_DELETE
+            
+            delete_video_Ptr = m_video;
+
+            delete_video_Ptr->deleteLater();
+            
+ #else
+            
             delete m_video;
+            
+ #endif
 
             m_video =nullptr;
            // m_video->m_player->stop();
