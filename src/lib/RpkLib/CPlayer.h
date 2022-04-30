@@ -25,6 +25,9 @@ public:
 
     ~CPlayer();
 
+#ifdef RX_MODIFY
+    void setShowWidget(QWidget *w);
+#endif
 
     void open(QString sPath);
 
@@ -63,6 +66,10 @@ private:
     QStringList m_listCache;
 
     bool m_bFirst = true;
+    
+#ifdef RX_MODIFY
+    QWidget * m_showWidget;
+#endif    
 
 signals:
     void playing(QString sName);
