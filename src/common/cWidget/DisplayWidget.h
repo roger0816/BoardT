@@ -10,6 +10,10 @@
 #include <QShowEvent>
 #include "ItemVideoCon.h"
 
+#ifdef RX_MODIFY
+#include "CPlayer.h"
+#endif
+
 namespace Ui {
 class DisplayWidget;
 }
@@ -33,6 +37,10 @@ public:
     QString m_layerName;
 
     QString m_sPath;
+   
+#ifdef RX_MODIFY
+    CPlayer * m_cplayer;
+#endif   
 
 private:
     Ui::DisplayWidget *ui;
