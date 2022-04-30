@@ -24,6 +24,10 @@ public:
     void setPlayList(QStringList list);
 
     void setMute(bool bMute);
+    
+#ifdef RX_MODIFY
+    void setCPlayer(CPlayer* player);
+#endif    
 
 private:
 
