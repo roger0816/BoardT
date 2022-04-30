@@ -1,14 +1,6 @@
 #include "DisplayWidget.h"
 #include "ui_DisplayWidget.h"
 
-#define PUSHBACK_DELETE
-
-#ifdef PUSHBACK_DELETE
-
-ItemPlayer *delete_video_Ptr;
-
-#endif
-
 DisplayWidget::DisplayWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::DisplayWidget)
@@ -23,11 +15,16 @@ DisplayWidget::DisplayWidget(QWidget *parent) :
 
     this->resize(baseSize*m_fDiff);
 
-
+#ifdef RX_MODIFY
+    m_cplayer = new CPlayer(this);
+#endif
 }
 
 DisplayWidget::~DisplayWidget()
 {
+#ifdef RX_MODIFY
+    delete m_cplayer;
+#endif
     delete ui;
 }
 
@@ -43,19 +40,9 @@ QPixmap DisplayWidget::setLayer(QString sPath, bool bStopVideo)
         if(m_video!=nullptr)
         {
             m_video->hide();
-
-#ifdef PUSHBACK_DELETE
-            
-            delete_video_Ptr = m_video;
-
-            delete_video_Ptr->deleteLater();
-            
- #else
             
             delete m_video;
             
- #endif
-
             m_video =nullptr;
            // m_video->m_player->stop();
 
@@ -114,8 +101,10 @@ QPixmap DisplayWidget::setLayer(QString sPath, bool bStopVideo)
             qDebug()<<"video set ";
             if(m_video == nullptr)
             {
-                m_video = new ItemPlayer(this);
-
+                m_video = new ItemPlayer(this);              
+#ifdef RX_MODIFY
+                m_video->setCPlayer(m_cplayer);
+#endif
             }
 
             m_video->show();
