@@ -10,13 +10,15 @@ ItemPlayer::ItemPlayer(QWidget *parent) : QWidget(parent)
     m_wBg->setObjectName("m_wBg");
 
     m_wBg->setStyleSheet("QWidget#m_wBg{background-color:black;}");
-
+    
+#ifndef RX_MODIFY    
+    
     m_player = new CPlayer(m_wBg);
 
     m_player->connect(m_player,&CPlayer::playing,this,&ItemPlayer::playing);
 
     m_player->setStyleSheet("background-color:rgb(177,177,177);");
-
+#endif
 
    // connect(&Global::Instance(),&Global::callPlay,m_player,&CPlayer::setPlayAdnPause);
 }
@@ -39,6 +41,19 @@ void ItemPlayer::setMute(bool bMute)
 {
     m_player->setMute(bMute);
 }
+
+#ifdef RX_MODIFY
+void ItemPlayer::setCPlayer(CPlayer *player)
+{
+    m_player = player;
+
+    m_player->setShowWidget(this);
+
+    m_player->connect(m_player,&CPlayer::playing,this,&ItemPlayer::playing);
+
+    m_player->setStyleSheet("background-color:rgb(177,177,177);");
+}
+#endif
 
 void ItemPlayer::reSize()
 {
