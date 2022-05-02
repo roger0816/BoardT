@@ -25,7 +25,7 @@ public:
 
     void setMute(bool bMute);
     
-#ifdef RX_MODIFY
+#ifdef VLC
     void setCPlayer(CPlayer* player);
 #endif    
 
