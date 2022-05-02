@@ -47,12 +47,12 @@ CPlayer::~CPlayer()
         libvlc_release(vlcInstance);
 }
 
-#ifdef RX_MODIFY
+
 void CPlayer::setShowWidget(QWidget *w)
 {
     m_showWidget = w;
 }
-#endif
+
 
 void CPlayer::open(QString sPath)
 {
@@ -86,11 +86,7 @@ void CPlayer::open(QString sPath)
 #if defined(Q_OS_MAC)
     libvlc_media_player_set_nsobject(vlcPlayer, (void *)videoWidget->winId());
 #elif defined(Q_OS_UNIX)
-#ifdef RX_MODIFY
     libvlc_media_player_set_xwindow(vlcPlayer, m_showWidget->winId());
-#else
-    libvlc_media_player_set_xwindow(vlcPlayer, this->winId());
-#endif
 #elif defined(Q_OS_WIN)
     libvlc_media_player_set_hwnd(vlcPlayer, videoWidget->winId());
 #endif
