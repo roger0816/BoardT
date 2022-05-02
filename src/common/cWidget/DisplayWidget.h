@@ -10,7 +10,7 @@
 #include <QShowEvent>
 #include "ItemVideoCon.h"
 
-#ifdef RX_MODIFY
+#ifdef VLC
 #include "CPlayer.h"
 #endif
 
@@ -38,7 +38,7 @@ public:
 
     QString m_sPath;
    
-#ifdef RX_MODIFY
+#ifdef VLC
     CPlayer * m_cplayer;
 #endif   
 
