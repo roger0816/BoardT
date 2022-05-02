@@ -24,10 +24,8 @@ public:
     explicit CPlayer(QWidget *parent = nullptr);
 
     ~CPlayer();
-
-#ifdef RX_MODIFY
+    
     void setShowWidget(QWidget *w);
-#endif
 
     void open(QString sPath);
 
@@ -67,9 +65,7 @@ private:
 
     bool m_bFirst = true;
     
-#ifdef RX_MODIFY
-    QWidget * m_showWidget;
-#endif    
+    QWidget * m_showWidget;   
 
 signals:
     void playing(QString sName);
