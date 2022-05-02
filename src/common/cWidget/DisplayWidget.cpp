@@ -15,14 +15,14 @@ DisplayWidget::DisplayWidget(QWidget *parent) :
 
     this->resize(baseSize*m_fDiff);
 
-#ifdef RX_MODIFY
+#ifdef VLC
     m_cplayer = new CPlayer(this);
 #endif
 }
 
 DisplayWidget::~DisplayWidget()
 {
-#ifdef RX_MODIFY
+#ifdef VLC
     delete m_cplayer;
 #endif
     delete ui;
@@ -102,7 +102,7 @@ QPixmap DisplayWidget::setLayer(QString sPath, bool bStopVideo)
             if(m_video == nullptr)
             {
                 m_video = new ItemPlayer(this);              
-#ifdef RX_MODIFY
+#ifdef VLC
                 m_video->setCPlayer(m_cplayer);
 #endif
             }
