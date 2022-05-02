@@ -11,7 +11,7 @@ ItemPlayer::ItemPlayer(QWidget *parent) : QWidget(parent)
 
     m_wBg->setStyleSheet("QWidget#m_wBg{background-color:black;}");
     
-#ifndef RX_MODIFY    
+#ifndef VLC    
     
     m_player = new CPlayer(m_wBg);
 
@@ -42,7 +42,7 @@ void ItemPlayer::setMute(bool bMute)
     m_player->setMute(bMute);
 }
 
-#ifdef RX_MODIFY
+#ifdef VLC
 void ItemPlayer::setCPlayer(CPlayer *player)
 {
     m_player = player;
