@@ -46,7 +46,6 @@ else {
 QT       += webkitwidgets
 DEFINES +=WEB
 DEFINES +=VLC
-DEFINES += RX_MODIFY
 
 LIBS += -lwiringPi
 
