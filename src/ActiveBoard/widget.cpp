@@ -70,6 +70,8 @@ Widget::Widget(QWidget *parent) :
     m_udev->start();
 
 #endif
+        
+    ui->label_11->setText("ver 1.1.050322");
 
 }
 
