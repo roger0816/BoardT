@@ -204,6 +204,10 @@ void DialogUploadNet::upload(QString sIp, QString sUser, QString sPassword)
     qDebug()<<"scmd : "<<sCmd;
 
     system(sCmd.toStdString().c_str());
+    
+    sCmd =QApplication::applicationDirPath()+"/putty.exe -ssh -l %1 -pw %2 -P 22 "+sIp+" -m sync.txt";
+
+    system(sCmd.arg(sUser).arg(sPassword).toStdString().c_str());
 
 };
 
